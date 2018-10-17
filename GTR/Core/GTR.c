@@ -112,6 +112,12 @@ void gtr_put(
             &on_http_put_request_failure
     );
 }
+
+//---------- 下载文件
+extern void gtr_download(unsigned int *task_id, const char *url, const char *headers, unsigned int time_out) {
+
+}
+
 //----------
 
 static void mcf_curl_log_message_call_back(char *message) {
