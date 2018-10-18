@@ -48,18 +48,6 @@ extension ViewController {
                 break
             }
         }
-//        let taskID = GTR.race(method: .get, url: "https://trainingcamp.hjapi.com/v1/training/0/syllabus", timeOut: 10) { destination in
-//            switch destination {
-//            case .win(let responseData):
-//                if let string = String(data: responseData, encoding: .utf8) {
-//                    print("succeed : \(string)")
-//                }
-//                break
-//            case .lose(let httpResponseCode, let errorCode, let errorMessage):
-////                    GTR.logLose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
-//                break
-//            }
-//        }
     }
 }
 
@@ -93,7 +81,7 @@ extension ViewController: Driver {
 
 extension ViewController: Horn {
     public class func whistle(message: String, filename: String, function: String, line: Int) {
-        print("gtr message : \n" + "\(message)");
+        print("gtr message : " + "\n" + "\(message)" + "\n");
     }
 }
 

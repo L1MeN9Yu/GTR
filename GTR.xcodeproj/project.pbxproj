@@ -26,6 +26,7 @@
 		B2D2A210C7794B9F6AB1139E /* curlver.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2DF63011CFA6581F861 /* curlver.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A256DEFBD6EFE49D36E8 /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */; };
 		B2D2A2586B0FCCFDBE563406 /* GTR.Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF5C9388C2BB3FAAB204 /* GTR.Driver.swift */; };
+		B2D2A29DD062DF021D9E496B /* gtr_core_log.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A97607A814FF3E6C113B /* gtr_core_log.h */; };
 		B2D2A2D286539C35AD1BD9D2 /* unqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE118D9DBA005EC9ECB9 /* unqlite.c */; };
 		B2D2A2E69F5A86DDFAB5CA99 /* gtr_ios_utility.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A99333109680AB041F1C /* gtr_ios_utility.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A3323975D1AB5E0F102A /* multi.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AA9138F7C51FFCAA46B8 /* multi.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -46,6 +47,7 @@
 		B2D2AA47DDDFFC7C173B0904 /* gtr_core_request.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_request.c */; };
 		B2D2AB6C41D6946014980FC4 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
+		B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA86DA38062600F6345F /* gtr_core_log.c */; };
 		B2D2AF1ED090FAFD3191BD13 /* easy.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A1CA4E070C829CFC23EE /* easy.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2AF6943F995C6E1364374 /* GTR.Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4DDB4BAAEF6A3DA2F5B /* GTR.Engine.swift */; };
 		B2D2AFBDC898B35762D951FD /* gtr_core_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */; };
@@ -109,8 +111,10 @@
 		B2D2A87062AEDDA79A61FEAA /* gtr_core_header_helper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_header_helper.c; sourceTree = "<group>"; };
 		B2D2A92CF98064AA0469F777 /* gtr_thread_pool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_thread_pool.c; sourceTree = "<group>"; };
 		B2D2A93B7CBC04B558AAA2DB /* mprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mprintf.h; sourceTree = "<group>"; };
+		B2D2A97607A814FF3E6C113B /* gtr_core_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_log.h; sourceTree = "<group>"; };
 		B2D2A99333109680AB041F1C /* gtr_ios_utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_ios_utility.h; sourceTree = "<group>"; };
 		B2D2AA1BC2EC4FDB41790ACE /* unqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unqlite.h; sourceTree = "<group>"; };
+		B2D2AA86DA38062600F6345F /* gtr_core_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_log.c; sourceTree = "<group>"; };
 		B2D2AA9138F7C51FFCAA46B8 /* multi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = multi.h; sourceTree = "<group>"; };
 		B2D2AC18277C7654BAF43B14 /* stdcheaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdcheaders.h; sourceTree = "<group>"; };
 		B2D2AC7B85A949171304E966 /* typecheck-gcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "typecheck-gcc.h"; sourceTree = "<group>"; };
@@ -263,6 +267,8 @@
 				B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_request.c */,
 				B2D2A87062AEDDA79A61FEAA /* gtr_core_header_helper.c */,
 				B2D2A837AC809BA32AB9C92E /* gtr_core.c */,
+				B2D2AA86DA38062600F6345F /* gtr_core_log.c */,
+				B2D2A97607A814FF3E6C113B /* gtr_core_log.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -361,6 +367,7 @@
 				B2D2A884FD1746CB0CA52BAA /* mprintf.h in Headers */,
 				B2D2A608F43185067BA4A9AD /* stdcheaders.h in Headers */,
 				B2D2A82B1ABF4797EF0915D5 /* typecheck-gcc.h in Headers */,
+				B2D2A29DD062DF021D9E496B /* gtr_core_log.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +500,7 @@
 				B2D2AFC49D6B321A06E20266 /* gtr_core.c in Sources */,
 				B2D2A9BA51EF9099AA29A60B /* gtr_ios_utility.c in Sources */,
 				B2D2A256DEFBD6EFE49D36E8 /* gtr_file_utilty.c in Sources */,
+				B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

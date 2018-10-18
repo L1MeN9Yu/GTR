@@ -19,10 +19,7 @@
 #include "gtr_atomic.h"
 #include "gtr_core_header_helper.h"
 #include "gtr_core_proxy.h"
-
-#define LOG_MAX_BUF_SIZE 512
-
-void (*gtr_core_log_callback)(char *log_message);
+#include "gtr_core_log.h"
 
 /**
  * 请求的线程池
@@ -106,12 +103,6 @@ gtr_core_config_debug(
         CURL *handle
 );
 
-static void
-gtr_core_log(
-        const char *format, ...
-);
-
-
 //--- Call Back
 static int debug_func(
         CURL *__unused handle,
@@ -122,25 +113,25 @@ static int debug_func(
 ) {
     switch (type) {
         case CURLINFO_TEXT:
-            gtr_core_log("Info: %.*s", size, data);
+            gtr_core_log(gtr_log_flag_trace, "Info: %.*s", size, data);
             break;
         case CURLINFO_HEADER_IN:
-            gtr_core_log("Rx header: %.*s", size, data);
+            gtr_core_log(gtr_log_flag_trace, "Rx header: %.*s", size, data);
             break;
         case CURLINFO_HEADER_OUT:
-            gtr_core_log("Tx header: %.*s", size, data);
+            gtr_core_log(gtr_log_flag_trace, "Tx header: %.*s", size, data);
             break;
         case CURLINFO_DATA_IN:
-            gtr_core_log("Rx data: %.*s", size, data);
+            gtr_core_log(gtr_log_flag_trace, "Rx data: %.*s", size, data);
             break;
         case CURLINFO_DATA_OUT:
-            gtr_core_log("Tx data: %.*s", size, data);
+            gtr_core_log(gtr_log_flag_trace, "Tx data: %.*s", size, data);
             break;
         case CURLINFO_SSL_DATA_IN:
-            gtr_core_log("Rx SSL data: %.*s", size, data);
+            gtr_core_log(gtr_log_flag_trace, "Rx SSL data: %.*s", size, data);
             break;
         case CURLINFO_SSL_DATA_OUT:
-            gtr_core_log("Tx SSL data: %.*s", size, data);
+            gtr_core_log(gtr_log_flag_trace, "Tx SSL data: %.*s", size, data);
             break;
         case CURLINFO_END:
             break;
@@ -222,9 +213,11 @@ static int progress_callback(
         curl_off_t upload_total,
         curl_off_t upload_now
 ) {
-    gtr_core_log("UP: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
-                 "  DOWN: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
-                 "\r\n",
+    gtr_core_log(
+            gtr_log_flag_debug,
+            "UP: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
+            "  DOWN: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
+            "\r\n",
             upload_now, upload_total, download_now, download_total);
     return 0;
 }
@@ -304,12 +297,12 @@ request(
 
         /* check for errors */
         if (res != CURLE_OK) {
-            gtr_core_log("curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            gtr_core_log(gtr_log_flag_error, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
             if (easy_request->on_failed) {
                 easy_request->on_failed(easy_request->task_id, http_response_code, res, curl_easy_strerror(res));
             }
         } else {
-            gtr_core_log("%lu bytes retrieved\n", response_data.response_data_size);
+            gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_data.response_data_size);
             if (easy_request->on_succeed) {
                 easy_request->on_succeed(easy_request->task_id, http_response_code, response_data.response_data, response_data.response_data_size);
             }
@@ -344,12 +337,12 @@ gtr_core_init(
         global_user_agent = malloc(user_agent_size);
         memcpy((void *) global_user_agent, "top.limengyu.GTR", user_agent_size);
     }
-    gtr_core_log_callback = log_callback;
+    config_log_callback(log_callback);
     curl_global_init(CURL_GLOBAL_ALL);
     gtr_core_thread_pool = thread_pool_init(10);
     thread_pool_wait(gtr_core_thread_pool);
-    gtr_core_log("gtr : global_user_agent = %s", global_user_agent);
-    gtr_core_log("curl version : %s", curl_version());
+    gtr_core_log(gtr_log_flag_info, "gtr : global_user_agent = %s", global_user_agent);
+    gtr_core_log(gtr_log_flag_info, "curl version : %s", curl_version());
 }
 
 void __unused
@@ -628,18 +621,4 @@ gtr_core_config_debug(
 ) {
     curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, &debug_func);
     curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
-}
-
-static void
-gtr_core_log(
-        const char *format, ...
-) {
-    if (gtr_core_log_callback) {
-        static char buffer[LOG_MAX_BUF_SIZE];
-        va_list args;
-        va_start (args, format);
-        vsnprintf (buffer, LOG_MAX_BUF_SIZE, format, args);
-        va_end (args);
-        gtr_core_log_callback(buffer);
-    }
 }
