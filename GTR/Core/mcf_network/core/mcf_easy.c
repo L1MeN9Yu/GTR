@@ -38,33 +38,88 @@ static const char *global_user_agent;
 
 static mcf_easy_proxy *global_proxy;
 
-static void mcf_easy_config_http_method(CURL *handle, mcf_easy_request *request);
+static void
+mcf_easy_config_http_method(
+        CURL *handle,
+        mcf_easy_request *request
+);
 
-static void mcf_easy_config_url(CURL *handle, const char *url);
+static void
+mcf_easy_config_url(
+        CURL *handle,
+        const char *url
+);
 
-static void mcf_easy_config_accept_encoding(CURL *handle);
+static void
+mcf_easy_config_accept_encoding(
+        CURL *handle
+);
 
-static void mcf_easy_config_keep_alive(CURL *handle);
+static void
+mcf_easy_config_keep_alive(
+        CURL *handle
+);
 
-static void mcf_easy_config_headers(CURL *handle, const char *user_agent, struct curl_slist *header);
+static void
+mcf_easy_config_headers(
+        CURL *handle,
+        const char *user_agent, struct curl_slist *header
+);
 
-static void mcf_easy_config_verify_peer(CURL *handle, bool on);
+static void
+mcf_easy_config_verify_peer(
+        CURL *handle,
+        bool on
+);
 
-static void mcf_easy_config_signal(CURL *handle, bool is_on);
+static void
+mcf_easy_config_signal(
+        CURL *handle,
+        bool is_on
+);
 
-static void mcf_easy_config_time_out(CURL *handle, unsigned int time_out);
+static void
+mcf_easy_config_time_out(
+        CURL *handle,
+        unsigned int time_out
+);
 
-static void mcf_easy_config_write_call_back(CURL *handle, mcf_easy_request_response_data *response_data);
+static void
+mcf_easy_config_write_call_back(
+        CURL *handle,
+        mcf_easy_request_response_data *response_data
+);
 
-static void mcf_easy_config_proxy(CURL *handle);
+static void
+mcf_easy_config_progress(
+        CURL *handle,
+        mcf_easy_request *request
+);
 
-static void mcf_easy_config_debug(CURL *handle);
+static void
+mcf_easy_config_proxy(
+        CURL *handle
+);
 
-static void mcf_easy_log(const char *format, ...);
+static void
+mcf_easy_config_debug(
+        CURL *handle
+);
 
-static int debug_func(CURL *__unused handle, curl_infotype type,
-        char *data, size_t size,
-        void *__unused user_p) {
+static void
+mcf_easy_log(
+        const char *format, ...
+);
+
+
+//--- Call Back
+static int debug_func(
+        CURL *__unused handle,
+        curl_infotype type,
+        char *data,
+        size_t size,
+        void *__unused user_p
+) {
     switch (type) {
         case CURLINFO_TEXT:
             mcf_easy_log("Info: %.*s", size, data);
@@ -107,7 +162,8 @@ read_callback(
         void *ptr,
         size_t size,
         size_t nmemb,
-        void *userp) {
+        void *userp
+) {
     mcf_easy_request_request_data *request_data = (mcf_easy_request_request_data *) userp;
     unsigned long bytes_read = 0;
     if (size * nmemb < 1)
@@ -127,12 +183,21 @@ read_callback(
     return (size_t) bytes_read;
 }
 
+/**
+ * 写入回调
+ * @param contents 内容
+ * @param size 内容大小
+ * @param nmemb nmemb
+ * @param userp userp
+ * @return size_t
+ */
 static size_t
 mcf_curl_write_callback(
         void *contents,
         size_t size,
         size_t nmemb,
-        void *userp) {
+        void *userp
+) {
     size_t real_size = size * nmemb;
     mcf_easy_request_response_data *response_data = (mcf_easy_request_response_data *) userp;
 
@@ -150,8 +215,23 @@ mcf_curl_write_callback(
     return real_size;
 }
 
-static
-void request(mcf_easy_request *easy_request) {
+static int progress_callback(
+        void *p,
+        curl_off_t download_total,
+        curl_off_t download_now,
+        curl_off_t upload_total,
+        curl_off_t upload_now
+) {
+    mcf_easy_log("UP: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
+                 "  DOWN: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
+                 "\r\n",
+            upload_now, upload_total, download_now, download_total);
+    return 0;
+}
+
+//--- Core
+static void
+request(mcf_easy_request *easy_request) {
 
     CURL *curl_handle;
     CURLcode res;
@@ -198,16 +278,15 @@ void request(mcf_easy_request *easy_request) {
     }
 
     {
+        mcf_easy_config_progress(curl_handle, easy_request);
+    }
+
+    {
         mcf_easy_config_proxy(curl_handle);
     }
 
     {
         mcf_easy_config_debug(curl_handle);
-    }
-
-    {
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, mcf_curl_write_callback);
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void *) &response_data);
     }
 
     struct curl_slist *header = mcf_easy_add_custom_headers(easy_request->header);
@@ -249,7 +328,11 @@ void request(mcf_easy_request *easy_request) {
 }
 
 //--- Public
-void mcf_easy_init(const char *user_agent, void *log_callback) {
+void
+mcf_easy_init(
+        const char *user_agent,
+        void *log_callback
+) {
     if (user_agent) {
         size_t user_agent_size = strlen(user_agent) + 1;
         global_user_agent = malloc(user_agent_size);
@@ -267,12 +350,17 @@ void mcf_easy_init(const char *user_agent, void *log_callback) {
     mcf_easy_log("curl version : %s", curl_version());
 }
 
-void __unused mcf_easy_dispose(void) {
+void __unused
+mcf_easy_dispose(void) {
     curl_global_cleanup();
     thread_pool_destroy(mcf_easy_thread_pool);
 }
 
-void mcf_easy_open_proxy(const char *url, unsigned int port) {
+void
+mcf_easy_open_proxy(
+        const char *url,
+        unsigned int port
+) {
     assert(url);
     assert(port > 0);
     global_proxy = (mcf_easy_proxy *) calloc(1, sizeof(mcf_easy_proxy));
@@ -282,7 +370,8 @@ void mcf_easy_open_proxy(const char *url, unsigned int port) {
     global_proxy->port = port;
 }
 
-void mcf_easy_close_proxy(void) {
+void
+mcf_easy_close_proxy(void) {
     if (global_proxy) {
         if (global_proxy->url) {
             free(global_proxy->url);
@@ -291,7 +380,18 @@ void mcf_easy_close_proxy(void) {
     }
 }
 
-void mcf_easy_add_request(unsigned int *task_id, mcf_easy_request_type type, const char *url, const char *header, unsigned int time_out, const void *request_data, unsigned long request_data_size, void *succeed_callback, void *failure_callback) {
+void
+mcf_easy_add_request(
+        unsigned int *task_id,
+        mcf_easy_request_type type,
+        const char *url,
+        const char *header,
+        unsigned int time_out,
+        const void *request_data,
+        unsigned long request_data_size,
+        void *succeed_callback,
+        void *failure_callback
+) {
     mcf_easy_request *easy_request = (mcf_easy_request *) calloc(1, sizeof(mcf_easy_request));
     *task_id = atomic_unsigned_int_add_and_fetch(&mcf_easy_request_global_task_id, 1);
     easy_request->task_id = *task_id;
@@ -343,7 +443,11 @@ void mcf_easy_add_request(unsigned int *task_id, mcf_easy_request_type type, con
 }
 
 //---Private Config
-static void mcf_easy_config_http_method(CURL *handle, mcf_easy_request *request) {
+static void
+mcf_easy_config_http_method(
+        CURL *handle,
+        mcf_easy_request *request
+) {
     if (!request) {
         assert(request != NULL);
         return;
@@ -373,18 +477,28 @@ static void mcf_easy_config_http_method(CURL *handle, mcf_easy_request *request)
     }
 }
 
-static void mcf_easy_config_url(CURL *handle, const char *url) {
+static void
+mcf_easy_config_url(
+        CURL *handle,
+        const char *url
+) {
     curl_easy_setopt(handle, CURLOPT_URL, url);
     curl_easy_setopt(handle, CURLOPT_TIMEOUT, 10);
     curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L);
 }
 
-static void mcf_easy_config_accept_encoding(CURL *handle) {
+static void
+mcf_easy_config_accept_encoding(
+        CURL *handle
+) {
     //设置CURLOPT_ACCEPT_ENCODING
     curl_easy_setopt(handle, CURLOPT_ACCEPT_ENCODING, "");
 }
 
-static void mcf_easy_config_keep_alive(CURL *handle) {
+static void
+mcf_easy_config_keep_alive(
+        CURL *handle
+) {
     /* enable TCP keep-alive for this transfer */
     curl_easy_setopt(handle, CURLOPT_TCP_KEEPALIVE, 1L);
     /* keep-alive idle time to 120 seconds */
@@ -393,7 +507,12 @@ static void mcf_easy_config_keep_alive(CURL *handle) {
     curl_easy_setopt(handle, CURLOPT_TCP_KEEPINTVL, 60L);
 }
 
-static void mcf_easy_config_headers(CURL *handle, const char *user_agent, struct curl_slist *header) {
+static void
+mcf_easy_config_headers(
+        CURL *handle,
+        const char *user_agent,
+        struct curl_slist *header
+) {
     curl_easy_setopt(handle, CURLOPT_USERAGENT, user_agent);
     if (header) {
         CURLcode res = curl_easy_setopt(handle, CURLOPT_HTTPHEADER, header);
@@ -405,13 +524,21 @@ static void mcf_easy_config_headers(CURL *handle, const char *user_agent, struct
     }
 }
 
-static void mcf_easy_config_verify_peer(CURL *handle, bool on) {
+static void
+mcf_easy_config_verify_peer(
+        CURL *handle,
+        bool on
+) {
     curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, on ? 1L : 0L);
     curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, on ? 1L : 0L);
 }
 
 //TODO ETag/If_Modified_since
-static void mcf_easy_config_time_condition(CURL *handle, unsigned long time) {
+static void
+mcf_easy_config_time_condition(
+        CURL *handle,
+        unsigned long time
+) {
     /* January 1, 2020 is 1577833200 */
     curl_easy_setopt(handle, CURLOPT_TIMEVALUE, time);
 
@@ -419,18 +546,61 @@ static void mcf_easy_config_time_condition(CURL *handle, unsigned long time) {
     curl_easy_setopt(handle, CURLOPT_TIMECONDITION, CURL_TIMECOND_IFMODSINCE);
 }
 
-static void mcf_easy_config_time_out(CURL *handle, unsigned int time_out) {
+static void
+mcf_easy_config_progress(
+        CURL *handle,
+        mcf_easy_request *request
+) {
+    assert(request != NULL);
+    curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
+    curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
+    curl_easy_setopt(handle, CURLOPT_XFERINFODATA, NULL);
+    return;
+    //上传和下载才需要进度回掉方法
+    switch (request->request_type) {
+        case mcf_easy_request_type_get:
+            curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 1L);
+            break;
+        case mcf_easy_request_type_post:
+            curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 1L);
+            break;
+        case mcf_easy_request_type_put:
+            curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 1L);
+            break;
+        case mcf_easy_request_type_download:
+            curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
+            curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
+            curl_easy_setopt(handle, CURLOPT_XFERINFODATA, NULL);
+            break;
+        case mcf_easy_request_type_upload:
+            curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
+            break;
+    }
+}
+
+static void
+mcf_easy_config_time_out(
+        CURL *handle,
+        unsigned int time_out
+) {
     long t_o = (long) (time_out > 0 ? time_out : 10L);
     curl_easy_setopt(handle, CURLOPT_TIMEOUT, t_o);
     curl_easy_setopt(handle, CURLOPT_CONNECTTIMEOUT, t_o);
 }
 
-static void mcf_easy_config_signal(CURL *handle, bool is_on) {
+static void
+mcf_easy_config_signal(
+        CURL *handle,
+        bool is_on
+) {
     long value = is_on ? 1L : 0L;
     curl_easy_setopt(handle, CURLOPT_NOSIGNAL, value);
 }
 
-static void mcf_easy_config_proxy(CURL *handle) {
+static void
+mcf_easy_config_proxy(
+        CURL *handle
+) {
     if (global_proxy) {
         if (strlen(global_proxy->url) > 0 && global_proxy->port > 0) {
             curl_easy_setopt(handle, CURLOPT_PROXY, global_proxy->url);
@@ -439,16 +609,27 @@ static void mcf_easy_config_proxy(CURL *handle) {
     }
 }
 
-static void mcf_easy_config_write_call_back(CURL *handle, mcf_easy_request_response_data *response_data) {
-
+static void
+mcf_easy_config_write_call_back(
+        CURL *handle,
+        mcf_easy_request_response_data *response_data
+) {
+    curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, mcf_curl_write_callback);
+    curl_easy_setopt(handle, CURLOPT_WRITEDATA, (void *) response_data);
 }
 
-static void mcf_easy_config_debug(CURL *handle) {
+static void
+mcf_easy_config_debug(
+        CURL *handle
+) {
     curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, &debug_func);
     curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
 }
 
-static void mcf_easy_log(const char *format, ...) {
+static void
+mcf_easy_log(
+        const char *format, ...
+) {
     if (mcf_easy_log_callback) {
         static char buffer[LOG_MAX_BUF_SIZE];
         va_list args;

@@ -41,7 +41,7 @@ extension ViewController {
             switch destination {
             case .win(let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string)")
+                    print("succeed : \(string.count)")
                 }
                 break
             case .lose(let httpResponseCode, let errorCode, let errorMessage):
@@ -74,7 +74,7 @@ extension ViewController {
     }
 
     private func setupGTR() {
-        GTR.setup(driver: self, horn: self)
+        GTR.setup(driver: self, hornType: ViewController.self)
     }
 }
 
@@ -92,11 +92,9 @@ extension ViewController: Driver {
 }
 
 extension ViewController: Horn {
-    public func whistle(message: String, filename: String, function: String, line: Int) {
-        print("\(message)");
+    public class func whistle(message: String, filename: String, function: String, line: Int) {
+        print("gtr message : \n" + "\(message)");
     }
-
-    public class func whistle(message: String, filename: String, function: String, line: Int) {}
 }
 
 

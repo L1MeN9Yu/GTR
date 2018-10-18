@@ -33,6 +33,10 @@ typedef struct {
 } mcf_easy_request_response_data;
 
 typedef struct {
+
+} mcf_easy_request_download_data;
+
+typedef struct {
     unsigned int task_id;
     bool is_cancel;
     mcf_easy_request_type request_type;

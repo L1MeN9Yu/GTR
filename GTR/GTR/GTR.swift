@@ -18,8 +18,6 @@ public class GTR {
 
     private static var driver: Driver?
 
-    private static var horn: Horn?
-
     private static var hornType: Horn.Type?
 
     @discardableResult
@@ -62,9 +60,8 @@ public class GTR {
 
 // MARK: - Config
 extension GTR {
-    public class func setup(driver: Driver? = nil, horn: Horn? = nil, hornType: Horn.Type? = nil) {
+    public class func setup(driver: Driver? = nil, hornType: Horn.Type? = nil) {
         self.driver = driver
-        self.horn = horn
         self.hornType = hornType
         self.engine.fire(engineNumber: self.driver?.userAgent())
         self.gearbox.start()
