@@ -231,7 +231,9 @@ static int progress_callback(
 
 //--- Core
 static void
-request(mcf_easy_request *easy_request) {
+request(
+        mcf_easy_request *easy_request
+) {
 
     CURL *curl_handle;
     CURLcode res;
@@ -351,7 +353,9 @@ mcf_easy_init(
 }
 
 void __unused
-mcf_easy_dispose(void) {
+mcf_easy_dispose(
+        void
+) {
     curl_global_cleanup();
     thread_pool_destroy(mcf_easy_thread_pool);
 }
