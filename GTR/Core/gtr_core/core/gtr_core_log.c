@@ -9,7 +9,7 @@
 
 #define LOG_MAX_BUF_SIZE 512
 
-void (*global_gtr_core_log_callback)(char *log_message);
+void (*global_gtr_core_log_callback)(unsigned int flag, char *log_message);
 
 void
 config_log_callback(
@@ -25,6 +25,6 @@ void gtr_core_log(gtr_log_flag flag, const char *format, ...) {
         va_start(args, format);
         vsnprintf(buffer, LOG_MAX_BUF_SIZE, format, args);
         va_end(args);
-        global_gtr_core_log_callback(buffer);
+        global_gtr_core_log_callback(flag, buffer);
     }
 }

@@ -126,13 +126,11 @@ extension GTR {
     public class func logLose(httpResponseCode: Int, errorCode: Int32, errorMessage: String,
                               filename: String = #file, function: String = #function, line: Int = #line) {
         let message = "response code = \(httpResponseCode)\n errorCode = \(errorCode)\n errorMessage = \(errorMessage)\n"
-        self.hornType?.whistle(message: message, filename: filename, function: function, line: line)
+        self.hornType?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
     }
 
-    public class func whistle(message: String, filename: String = #file,
+    public class func whistle(type: HornType, message: String, filename: String = #file,
                               function: String = #function, line: Int = #line) {
-        if let hornType = self.hornType {
-            hornType.whistle(message: message, filename: filename, function: function, line: line)
-        }
+        self.hornType?.whistle(type: type, message: message, filename: filename, function: function, line: line)
     }
 }

@@ -15,11 +15,11 @@ extern void swift_put_request_succeed(unsigned int task_id, void *c_data, unsign
 
 extern void swift_put_request_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
 
-extern void swift_log_callback(char *message);
+extern void swift_log_callback(unsigned int flag, char *message);
 
 
 //---------- 前置定义
-static void gtr_log_message_call_back(char *message);
+static void gtr_log_message_call_back(unsigned int flag, char *message);
 
 static void on_http_get_request_succeed(unsigned int task_id, long http_response_code, void *data, unsigned long data_size);
 
@@ -120,8 +120,8 @@ extern void gtr_download(unsigned int *task_id, const char *url, const char *hea
 
 //----------
 
-static void gtr_log_message_call_back(char *message) {
-    swift_log_callback(message);
+static void gtr_log_message_call_back(unsigned int flag, char *message) {
+    swift_log_callback(flag, message);
 }
 
 static void on_http_get_request_succeed(unsigned int task_id, long http_response_code, void *data, unsigned long data_size) {

@@ -104,7 +104,8 @@ gtr_core_config_debug(
 );
 
 //--- Call Back
-static int debug_func(
+static int
+debug_func(
         CURL *__unused handle,
         curl_infotype type,
         char *data,

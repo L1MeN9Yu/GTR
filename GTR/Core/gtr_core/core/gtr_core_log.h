@@ -7,8 +7,7 @@
 #define GTR_CORE_LOG_H
 
 typedef enum {
-    gtr_log_flag_trace,
-    gtr_log_flag_verbose,
+    gtr_log_flag_trace = 0,
     gtr_log_flag_debug,
     gtr_log_flag_info,
     gtr_log_flag_warning,
