@@ -1,10 +1,10 @@
 //
-//  mcf_ios_utility.h
+//  gtr_ios_utility.h
 //
 //  Created L1MeN9Yu on 2017/12/13.
 
-#ifndef mcf_ios_utility_h
-#define mcf_ios_utility_h
+#ifndef gtr_ios_utility_h
+#define gtr_ios_utility_h
 
 /**
  * 获取iOS Application沙盒的tmp目录
@@ -12,4 +12,4 @@
  */
 char *get_app_temp_directory(void);
 
-#endif /* mcf_ios_utility_h */
+#endif /* gtr_ios_utility_h */

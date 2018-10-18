@@ -1,5 +1,5 @@
 //
-//  mcf_easy.c
+//  gtr_core.c
 //  GTR
 //
 //  Created L1MeN9Yu on 2018/9/1.
@@ -13,101 +13,101 @@
 #include <zconf.h>
 #include <assert.h>
 #include "curl.h"
-#include "mcf_easy.h"
-#include "mcf_easy_request.h"
-#include "mcf_thread_pool.h"
-#include "mcf_atomic.h"
-#include "mcf_easy_header_helper.h"
-#include "mcf_easy_proxy.h"
+#include "gtr_core.h"
+#include "gtr_core_request.h"
+#include "gtr_thread_pool.h"
+#include "gtr_atomic.h"
+#include "gtr_core_header_helper.h"
+#include "gtr_core_proxy.h"
 
 #define LOG_MAX_BUF_SIZE 512
 
-void (*mcf_easy_log_callback)(char *log_message);
+void (*gtr_core_log_callback)(char *log_message);
 
 /**
  * 请求的线程池
  */
-static thread_pool mcf_easy_thread_pool;
+static thread_pool gtr_core_thread_pool;
 
 /**
  * 全局唯一当前请求id
  */
-static volatile unsigned int mcf_easy_request_global_task_id = 0;
+static volatile unsigned int gtr_core_request_global_task_id = 0;
 
 static const char *global_user_agent;
 
-static mcf_easy_proxy *global_proxy;
+static gtr_core_proxy *global_proxy;
 
 static void
-mcf_easy_config_http_method(
+gtr_core_config_http_method(
         CURL *handle,
-        mcf_easy_request *request
+        gtr_core_request *request
 );
 
 static void
-mcf_easy_config_url(
+gtr_core_config_url(
         CURL *handle,
         const char *url
 );
 
 static void
-mcf_easy_config_accept_encoding(
+gtr_core_config_accept_encoding(
         CURL *handle
 );
 
 static void
-mcf_easy_config_keep_alive(
+gtr_core_config_keep_alive(
         CURL *handle
 );
 
 static void
-mcf_easy_config_headers(
+gtr_core_config_headers(
         CURL *handle,
         const char *user_agent, struct curl_slist *header
 );
 
 static void
-mcf_easy_config_verify_peer(
+gtr_core_config_verify_peer(
         CURL *handle,
         bool on
 );
 
 static void
-mcf_easy_config_signal(
+gtr_core_config_signal(
         CURL *handle,
         bool is_on
 );
 
 static void
-mcf_easy_config_time_out(
+gtr_core_config_time_out(
         CURL *handle,
         unsigned int time_out
 );
 
 static void
-mcf_easy_config_write_call_back(
+gtr_core_config_write_call_back(
         CURL *handle,
-        mcf_easy_request_response_data *response_data
+        gtr_core_request_response_data *response_data
 );
 
 static void
-mcf_easy_config_progress(
+gtr_core_config_progress(
         CURL *handle,
-        mcf_easy_request *request
+        gtr_core_request *request
 );
 
 static void
-mcf_easy_config_proxy(
+gtr_core_config_proxy(
         CURL *handle
 );
 
 static void
-mcf_easy_config_debug(
+gtr_core_config_debug(
         CURL *handle
 );
 
 static void
-mcf_easy_log(
+gtr_core_log(
         const char *format, ...
 );
 
@@ -122,25 +122,25 @@ static int debug_func(
 ) {
     switch (type) {
         case CURLINFO_TEXT:
-            mcf_easy_log("Info: %.*s", size, data);
+            gtr_core_log("Info: %.*s", size, data);
             break;
         case CURLINFO_HEADER_IN:
-            mcf_easy_log("Rx header: %.*s", size, data);
+            gtr_core_log("Rx header: %.*s", size, data);
             break;
         case CURLINFO_HEADER_OUT:
-            mcf_easy_log("Tx header: %.*s", size, data);
+            gtr_core_log("Tx header: %.*s", size, data);
             break;
         case CURLINFO_DATA_IN:
-            mcf_easy_log("Rx data: %.*s", size, data);
+            gtr_core_log("Rx data: %.*s", size, data);
             break;
         case CURLINFO_DATA_OUT:
-            mcf_easy_log("Tx data: %.*s", size, data);
+            gtr_core_log("Tx data: %.*s", size, data);
             break;
         case CURLINFO_SSL_DATA_IN:
-            mcf_easy_log("Rx SSL data: %.*s", size, data);
+            gtr_core_log("Rx SSL data: %.*s", size, data);
             break;
         case CURLINFO_SSL_DATA_OUT:
-            mcf_easy_log("Tx SSL data: %.*s", size, data);
+            gtr_core_log("Tx SSL data: %.*s", size, data);
             break;
         case CURLINFO_END:
             break;
@@ -164,7 +164,7 @@ read_callback(
         size_t nmemb,
         void *userp
 ) {
-    mcf_easy_request_request_data *request_data = (mcf_easy_request_request_data *) userp;
+    gtr_core_request_request_data *request_data = (gtr_core_request_request_data *) userp;
     unsigned long bytes_read = 0;
     if (size * nmemb < 1)
         return (size_t) bytes_read;
@@ -192,14 +192,14 @@ read_callback(
  * @return size_t
  */
 static size_t
-mcf_curl_write_callback(
+write_callback(
         void *contents,
         size_t size,
         size_t nmemb,
         void *userp
 ) {
     size_t real_size = size * nmemb;
-    mcf_easy_request_response_data *response_data = (mcf_easy_request_response_data *) userp;
+    gtr_core_request_response_data *response_data = (gtr_core_request_response_data *) userp;
 
     response_data->response_data = realloc(response_data->response_data, response_data->response_data_size + real_size + 1);
     if (response_data->response_data == NULL) {
@@ -222,7 +222,7 @@ static int progress_callback(
         curl_off_t upload_total,
         curl_off_t upload_now
 ) {
-    mcf_easy_log("UP: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
+    gtr_core_log("UP: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
                  "  DOWN: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
                  "\r\n",
             upload_now, upload_total, download_now, download_total);
@@ -232,13 +232,13 @@ static int progress_callback(
 //--- Core
 static void
 request(
-        mcf_easy_request *easy_request
+        gtr_core_request *easy_request
 ) {
 
     CURL *curl_handle;
     CURLcode res;
 
-    mcf_easy_request_response_data response_data;
+    gtr_core_request_response_data response_data;
 
     response_data.response_data = malloc(1);
     response_data.response_data_size = 0;
@@ -246,53 +246,53 @@ request(
     curl_handle = curl_easy_init();
 
     {
-        mcf_easy_config_http_method(curl_handle, easy_request);
+        gtr_core_config_http_method(curl_handle, easy_request);
     }
 
     {
-        mcf_easy_config_url(curl_handle, easy_request->url);
+        gtr_core_config_url(curl_handle, easy_request->url);
     }
 
     {
-        mcf_easy_config_accept_encoding(curl_handle);
+        gtr_core_config_accept_encoding(curl_handle);
     }
 
     {
-        mcf_easy_config_keep_alive(curl_handle);
+        gtr_core_config_keep_alive(curl_handle);
     }
 
     {
-        mcf_easy_config_verify_peer(curl_handle, true);
+        gtr_core_config_verify_peer(curl_handle, true);
     }
 
     {
-        mcf_easy_config_time_out(curl_handle, easy_request->time_out);
+        gtr_core_config_time_out(curl_handle, easy_request->time_out);
     }
 
     {
         //如果不使用threaded resolver或者c-ares,需要no_signal=1,否则在dns解析超时情况下crash
         //详见:https://curl.haxx.se/libcurl/c/CURLOPT_NOSIGNAL.html https://curl.haxx.se/libcurl/c/threadsafe.html
-        mcf_easy_config_signal(curl_handle, true);
+        gtr_core_config_signal(curl_handle, true);
     }
 
     {
-        mcf_easy_config_write_call_back(curl_handle, &response_data);
+        gtr_core_config_write_call_back(curl_handle, &response_data);
     }
 
     {
-        mcf_easy_config_progress(curl_handle, easy_request);
+        gtr_core_config_progress(curl_handle, easy_request);
     }
 
     {
-        mcf_easy_config_proxy(curl_handle);
+        gtr_core_config_proxy(curl_handle);
     }
 
     {
-        mcf_easy_config_debug(curl_handle);
+        gtr_core_config_debug(curl_handle);
     }
 
-    struct curl_slist *header = mcf_easy_add_custom_headers(easy_request->header);
-    mcf_easy_config_headers(curl_handle, global_user_agent, header);
+    struct curl_slist *header = gtr_core_add_custom_headers(easy_request->header);
+    gtr_core_config_headers(curl_handle, global_user_agent, header);
 
     {
         res = curl_easy_perform(curl_handle);
@@ -304,12 +304,12 @@ request(
 
         /* check for errors */
         if (res != CURLE_OK) {
-            mcf_easy_log("curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            gtr_core_log("curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
             if (easy_request->on_failed) {
                 easy_request->on_failed(easy_request->task_id, http_response_code, res, curl_easy_strerror(res));
             }
         } else {
-            mcf_easy_log("%lu bytes retrieved\n", response_data.response_data_size);
+            gtr_core_log("%lu bytes retrieved\n", response_data.response_data_size);
             if (easy_request->on_succeed) {
                 easy_request->on_succeed(easy_request->task_id, http_response_code, response_data.response_data, response_data.response_data_size);
             }
@@ -331,7 +331,7 @@ request(
 
 //--- Public
 void
-mcf_easy_init(
+gtr_core_init(
         const char *user_agent,
         void *log_callback
 ) {
@@ -344,30 +344,30 @@ mcf_easy_init(
         global_user_agent = malloc(user_agent_size);
         memcpy((void *) global_user_agent, "top.limengyu.GTR", user_agent_size);
     }
-    mcf_easy_log_callback = log_callback;
+    gtr_core_log_callback = log_callback;
     curl_global_init(CURL_GLOBAL_ALL);
-    mcf_easy_thread_pool = thread_pool_init(10);
-    thread_pool_wait(mcf_easy_thread_pool);
-    mcf_easy_log("mcf : global_user_agent = %s", global_user_agent);
-    mcf_easy_log("curl version : %s", curl_version());
+    gtr_core_thread_pool = thread_pool_init(10);
+    thread_pool_wait(gtr_core_thread_pool);
+    gtr_core_log("gtr : global_user_agent = %s", global_user_agent);
+    gtr_core_log("curl version : %s", curl_version());
 }
 
 void __unused
-mcf_easy_dispose(
+gtr_core_dispose(
         void
 ) {
     curl_global_cleanup();
-    thread_pool_destroy(mcf_easy_thread_pool);
+    thread_pool_destroy(gtr_core_thread_pool);
 }
 
 void
-mcf_easy_open_proxy(
+gtr_core_open_proxy(
         const char *url,
         unsigned int port
 ) {
     assert(url);
     assert(port > 0);
-    global_proxy = (mcf_easy_proxy *) calloc(1, sizeof(mcf_easy_proxy));
+    global_proxy = (gtr_core_proxy *) calloc(1, sizeof(gtr_core_proxy));
     size_t url_size = strlen(url) + 1;
     global_proxy->url = malloc(url_size);
     memcpy(global_proxy->url, url, url_size);
@@ -375,7 +375,7 @@ mcf_easy_open_proxy(
 }
 
 void
-mcf_easy_close_proxy(void) {
+gtr_core_close_proxy(void) {
     if (global_proxy) {
         if (global_proxy->url) {
             free(global_proxy->url);
@@ -385,9 +385,9 @@ mcf_easy_close_proxy(void) {
 }
 
 void
-mcf_easy_add_request(
+gtr_core_add_request(
         unsigned int *task_id,
-        mcf_easy_request_type type,
+        gtr_core_request_type type,
         const char *url,
         const char *header,
         unsigned int time_out,
@@ -396,8 +396,8 @@ mcf_easy_add_request(
         void *succeed_callback,
         void *failure_callback
 ) {
-    mcf_easy_request *easy_request = (mcf_easy_request *) calloc(1, sizeof(mcf_easy_request));
-    *task_id = atomic_unsigned_int_add_and_fetch(&mcf_easy_request_global_task_id, 1);
+    gtr_core_request *easy_request = (gtr_core_request *) calloc(1, sizeof(gtr_core_request));
+    *task_id = gtr_atomic_unsigned_int_add_and_fetch(&gtr_core_request_global_task_id, 1);
     easy_request->task_id = *task_id;
     easy_request->is_cancel = false;
     easy_request->request_type = type;
@@ -420,7 +420,7 @@ mcf_easy_add_request(
     {
         //data
         if (request_data_size > 0 && request_data != NULL) {
-            easy_request->request_data = (mcf_easy_request_request_data *) calloc(1, sizeof(mcf_easy_request_request_data));
+            easy_request->request_data = (gtr_core_request_request_data *) calloc(1, sizeof(gtr_core_request_request_data));
             easy_request->request_data->data = malloc((size_t) request_data_size);
             easy_request->request_data->size_left = request_data_size;
             easy_request->request_data->size = request_data_size;
@@ -443,46 +443,46 @@ mcf_easy_add_request(
         easy_request->on_failed = failure_callback;
     }
 
-    thread_pool_add_work(mcf_easy_thread_pool, (void *) request, easy_request);
+    thread_pool_add_work(gtr_core_thread_pool, (void *) request, easy_request);
 }
 
 //---Private Config
 static void
-mcf_easy_config_http_method(
+gtr_core_config_http_method(
         CURL *handle,
-        mcf_easy_request *request
+        gtr_core_request *request
 ) {
     if (!request) {
         assert(request != NULL);
         return;
     }
     switch (request->request_type) {
-        case mcf_easy_request_type_get:
+        case gtr_core_request_type_get:
             curl_easy_setopt(handle, CURLOPT_HTTPGET, 1L);
             break;
-        case mcf_easy_request_type_post:
+        case gtr_core_request_type_post:
             curl_easy_setopt(handle, CURLOPT_POST, 1L);
             curl_easy_setopt(handle, CURLOPT_READFUNCTION, read_callback);
             curl_easy_setopt(handle, CURLOPT_READDATA, request->request_data);
             curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, request->request_data->size);
             curl_easy_setopt(handle, CURLOPT_INFILESIZE, request->request_data->size);
             break;
-        case mcf_easy_request_type_put:
+        case gtr_core_request_type_put:
             curl_easy_setopt(handle, CURLOPT_PUT, 1L);
             curl_easy_setopt(handle, CURLOPT_READFUNCTION, read_callback);
             curl_easy_setopt(handle, CURLOPT_READDATA, request->request_data);
             break;
-        case mcf_easy_request_type_download:
+        case gtr_core_request_type_download:
             curl_easy_setopt(handle, CURLOPT_HTTPGET, 1L);
             break;
-        case mcf_easy_request_type_upload:
+        case gtr_core_request_type_upload:
             curl_easy_setopt(handle, CURLOPT_UPLOAD, 1L);
             break;
     }
 }
 
 static void
-mcf_easy_config_url(
+gtr_core_config_url(
         CURL *handle,
         const char *url
 ) {
@@ -492,7 +492,7 @@ mcf_easy_config_url(
 }
 
 static void
-mcf_easy_config_accept_encoding(
+gtr_core_config_accept_encoding(
         CURL *handle
 ) {
     //设置CURLOPT_ACCEPT_ENCODING
@@ -500,7 +500,7 @@ mcf_easy_config_accept_encoding(
 }
 
 static void
-mcf_easy_config_keep_alive(
+gtr_core_config_keep_alive(
         CURL *handle
 ) {
     /* enable TCP keep-alive for this transfer */
@@ -512,7 +512,7 @@ mcf_easy_config_keep_alive(
 }
 
 static void
-mcf_easy_config_headers(
+gtr_core_config_headers(
         CURL *handle,
         const char *user_agent,
         struct curl_slist *header
@@ -529,7 +529,7 @@ mcf_easy_config_headers(
 }
 
 static void
-mcf_easy_config_verify_peer(
+gtr_core_config_verify_peer(
         CURL *handle,
         bool on
 ) {
@@ -539,7 +539,7 @@ mcf_easy_config_verify_peer(
 
 //TODO ETag/If_Modified_since
 static void
-mcf_easy_config_time_condition(
+gtr_core_config_time_condition(
         CURL *handle,
         unsigned long time
 ) {
@@ -551,9 +551,9 @@ mcf_easy_config_time_condition(
 }
 
 static void
-mcf_easy_config_progress(
+gtr_core_config_progress(
         CURL *handle,
-        mcf_easy_request *request
+        gtr_core_request *request
 ) {
     assert(request != NULL);
     curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
@@ -562,28 +562,28 @@ mcf_easy_config_progress(
     return;
     //上传和下载才需要进度回掉方法
     switch (request->request_type) {
-        case mcf_easy_request_type_get:
+        case gtr_core_request_type_get:
             curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 1L);
             break;
-        case mcf_easy_request_type_post:
+        case gtr_core_request_type_post:
             curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 1L);
             break;
-        case mcf_easy_request_type_put:
+        case gtr_core_request_type_put:
             curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 1L);
             break;
-        case mcf_easy_request_type_download:
+        case gtr_core_request_type_download:
             curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
             curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
             curl_easy_setopt(handle, CURLOPT_XFERINFODATA, NULL);
             break;
-        case mcf_easy_request_type_upload:
+        case gtr_core_request_type_upload:
             curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
             break;
     }
 }
 
 static void
-mcf_easy_config_time_out(
+gtr_core_config_time_out(
         CURL *handle,
         unsigned int time_out
 ) {
@@ -593,7 +593,7 @@ mcf_easy_config_time_out(
 }
 
 static void
-mcf_easy_config_signal(
+gtr_core_config_signal(
         CURL *handle,
         bool is_on
 ) {
@@ -602,7 +602,7 @@ mcf_easy_config_signal(
 }
 
 static void
-mcf_easy_config_proxy(
+gtr_core_config_proxy(
         CURL *handle
 ) {
     if (global_proxy) {
@@ -614,16 +614,16 @@ mcf_easy_config_proxy(
 }
 
 static void
-mcf_easy_config_write_call_back(
+gtr_core_config_write_call_back(
         CURL *handle,
-        mcf_easy_request_response_data *response_data
+        gtr_core_request_response_data *response_data
 ) {
-    curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, mcf_curl_write_callback);
+    curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, write_callback);
     curl_easy_setopt(handle, CURLOPT_WRITEDATA, (void *) response_data);
 }
 
 static void
-mcf_easy_config_debug(
+gtr_core_config_debug(
         CURL *handle
 ) {
     curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, &debug_func);
@@ -631,15 +631,15 @@ mcf_easy_config_debug(
 }
 
 static void
-mcf_easy_log(
+gtr_core_log(
         const char *format, ...
 ) {
-    if (mcf_easy_log_callback) {
+    if (gtr_core_log_callback) {
         static char buffer[LOG_MAX_BUF_SIZE];
         va_list args;
         va_start (args, format);
         vsnprintf (buffer, LOG_MAX_BUF_SIZE, format, args);
         va_end (args);
-        mcf_easy_log_callback(buffer);
+        gtr_core_log_callback(buffer);
     }
 }

@@ -1,5 +1,5 @@
 //
-//  mcf_easy_header_helper.c
+//  gtr_core_header_helper.c
 //  GTR
 //
 //  Created L1MeN9Yu on 2018/9/2.
@@ -7,9 +7,9 @@
 //
 
 #include <string.h>
-#include "mcf_easy_header_helper.h"
+#include "gtr_core_header_helper.h"
 
-struct curl_slist *mcf_easy_add_custom_headers(const char *headers_json) {
+struct curl_slist *gtr_core_add_custom_headers(const char *headers_json) {
     struct curl_slist *header = NULL;
     if (headers_json != NULL && strlen(headers_json) > 2) {
         char *walker_p = (char *) headers_json;

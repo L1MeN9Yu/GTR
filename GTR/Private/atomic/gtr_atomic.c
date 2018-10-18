@@ -6,11 +6,11 @@
 //
 
 #include <pthread.h>
-#include "mcf_atomic.h"
+#include "gtr_atomic.h"
 
 static pthread_mutex_t atomic_lock = PTHREAD_MUTEX_INITIALIZER;
 
-int atomic_int_get(volatile int *ptr) {
+int gtr_atomic_int_get(volatile int *ptr) {
     int res;
 
     pthread_mutex_lock(&atomic_lock);
@@ -20,13 +20,13 @@ int atomic_int_get(volatile int *ptr) {
     return res;
 }
 
-void atomic_int_set(volatile int *ptr, int val) {
+void gtr_atomic_int_set(volatile int *ptr, int val) {
     pthread_mutex_lock(&atomic_lock);
     *ptr = val;
     pthread_mutex_unlock(&atomic_lock);
 }
 
-int atomic_int_add_and_fetch(volatile int *ptr, int inc) {
+int gtr_atomic_int_add_and_fetch(volatile int *ptr, int inc) {
     int res;
 
     pthread_mutex_lock(&atomic_lock);
@@ -37,7 +37,7 @@ int atomic_int_add_and_fetch(volatile int *ptr, int inc) {
     return res;
 }
 
-unsigned int atomic_unsigned_int_add_and_fetch(volatile unsigned int *ptr, unsigned int inc) {
+unsigned int gtr_atomic_unsigned_int_add_and_fetch(volatile unsigned int *ptr, unsigned int inc) {
     unsigned int res;
     pthread_mutex_lock(&atomic_lock);
     *ptr += inc;
@@ -46,7 +46,7 @@ unsigned int atomic_unsigned_int_add_and_fetch(volatile unsigned int *ptr, unsig
     return res;
 }
 
-void *atomic_ptr_cas(void *volatile *ptr, void *old_value, void *new_value) {
+void *gtr_atomic_ptr_cas(void *volatile *ptr, void *old_value, void *new_value) {
     void *ret;
     pthread_mutex_lock(&atomic_lock);
     ret = *ptr;

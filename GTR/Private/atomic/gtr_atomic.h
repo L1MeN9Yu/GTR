@@ -4,8 +4,8 @@
 //  Created by L1MeN9Yu on 2017/11/29.
 //
 //
-#ifndef mcf_atomic_h
-#define mcf_atomic_h
+#ifndef gtr_atomic_h
+#define gtr_atomic_h
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,7 +18,7 @@ extern "C" {
  * @return the current value of the atomic integer
  * @note This acts as a memory barrier.
  */
-int atomic_int_get(volatile int *ptr);
+int gtr_atomic_int_get(volatile int *ptr);
 
 /**
  * Store a new value in an atomic integer.
@@ -27,7 +27,7 @@ int atomic_int_get(volatile int *ptr);
  * @param val the value to store in the atomic integer
  * @note This acts as a memory barrier.
  */
-void atomic_int_set(volatile int *ptr, int val);
+void gtr_atomic_int_set(volatile int *ptr, int val);
 
 /**
  * Add a value to an atomic integer.
@@ -38,7 +38,7 @@ void atomic_int_set(volatile int *ptr, int val);
  * @note This does NOT act as a memory barrier. This is primarily
  *       intended for reference counting.
  */
-int atomic_int_add_and_fetch(volatile int *ptr, int inc);
+int gtr_atomic_int_add_and_fetch(volatile int *ptr, int inc);
 
 /**
  * Add a value to an atomic unsigned integer.
@@ -49,7 +49,7 @@ int atomic_int_add_and_fetch(volatile int *ptr, int inc);
  * @note This does NOT act as a memory barrier. This is primarily
  *       intended for reference counting.
  */
-unsigned int atomic_unsigned_int_add_and_fetch(volatile unsigned int *ptr, unsigned int inc);
+unsigned int gtr_atomic_unsigned_int_add_and_fetch(volatile unsigned int *ptr, unsigned int inc);
 
 /**
  * Atomic pointer compare and swap.
@@ -59,9 +59,9 @@ unsigned int atomic_unsigned_int_add_and_fetch(volatile unsigned int *ptr, unsig
  * @param new_value value to replace *ptr with
  * @return the value of *ptr before comparison
  */
-void *atomic_ptr_cas(void *volatile *ptr, void *old_value, void *new_value);
+void *gtr_atomic_ptr_cas(void *volatile *ptr, void *old_value, void *new_value);
 
-#endif /* HAVE_ATOMICS_NATIVE */
+#endif /* gtr_atomic_h */
 
 
 #ifdef __cplusplus

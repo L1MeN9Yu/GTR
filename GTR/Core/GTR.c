@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "mcf_easy.h"
+#include "gtr_core.h"
 
 //---------- Export
 extern void swift_get_request_succeed(unsigned int task_id, void *c_data, unsigned long c_date_size);
@@ -19,7 +19,7 @@ extern void swift_log_callback(char *message);
 
 
 //---------- 前置定义
-static void mcf_curl_log_message_call_back(char *message);
+static void gtr_log_message_call_back(char *message);
 
 static void on_http_get_request_succeed(unsigned int task_id, long http_response_code, void *data, unsigned long data_size);
 
@@ -36,16 +36,16 @@ static void on_http_put_request_failure(unsigned int task_id, long http_response
 
 //---------- 初始化
 void gtr_init(const char *user_agent) {
-    mcf_easy_init(user_agent, &mcf_curl_log_message_call_back);
+    gtr_core_init(user_agent, &gtr_log_message_call_back);
 }
 //----------
 
 //---------- 设置代理
 void gtr_proxy(bool enable, const char *url, unsigned int port) {
     if (enable) {
-        mcf_easy_open_proxy(url, port);
+        gtr_core_open_proxy(url, port);
     } else {
-        mcf_easy_close_proxy();
+        gtr_core_close_proxy();
     }
 }
 
@@ -56,9 +56,9 @@ void gtr_get(
         const char *headers,
         unsigned int time_out
 ) {
-    mcf_easy_add_request(
+    gtr_core_add_request(
             task_id,
-            mcf_easy_request_type_get,
+            gtr_core_request_type_get,
             url,
             headers,
             time_out,
@@ -78,9 +78,9 @@ void gtr_post(
         const void *param_data,
         unsigned long param_size
 ) {
-    mcf_easy_add_request(
+    gtr_core_add_request(
             task_id,
-            mcf_easy_request_type_post,
+            gtr_core_request_type_post,
             url,
             headers,
             time_out,
@@ -100,9 +100,9 @@ void gtr_put(
         const void *param_data,
         unsigned long param_size
 ) {
-    mcf_easy_add_request(
+    gtr_core_add_request(
             task_id,
-            mcf_easy_request_type_put,
+            gtr_core_request_type_put,
             url,
             headers,
             time_out,
@@ -120,7 +120,7 @@ extern void gtr_download(unsigned int *task_id, const char *url, const char *hea
 
 //----------
 
-static void mcf_curl_log_message_call_back(char *message) {
+static void gtr_log_message_call_back(char *message) {
     swift_log_callback(message);
 }
 
