@@ -45,6 +45,7 @@ extension ViewController {
                 }
                 break
             case .lose(let httpResponseCode, let errorCode, let errorMessage):
+                GTR.logLose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
                 break
             }
         }

@@ -27,7 +27,7 @@ public class GTR {
                            headers: [String: Encodable]? = nil,
                            timeOut: UInt32,
                            param: [String: Any]? = nil,
-                           complete: @escaping GTR.Complete) -> UInt32 {
+                           complete: GTR.Complete?) -> UInt32 {
         var allHeaders = contentType.toHeader()
 
         if let globalHeader = self.driver?.identity() {
@@ -50,10 +50,10 @@ public class GTR {
                 timeOut: timeOut,
                 param: param,
                 succeed: { data in
-                    complete(GTR.Destination.win(responseData: data))
+                    complete?(GTR.Destination.win(responseData: data))
                 },
                 failure: { (httpResponseCode, errorCode, errorMessage) in
-                    complete(GTR.Destination.lose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage))
+                    complete?(GTR.Destination.lose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage))
                 })
     }
 }
