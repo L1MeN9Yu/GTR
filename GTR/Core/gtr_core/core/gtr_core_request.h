@@ -33,7 +33,10 @@ typedef struct {
 } gtr_core_request_response_data;
 
 typedef struct {
+    const char *file_path;
+    unsigned int task_id;
 
+    void (*on_progress)(unsigned int task_id, unsigned long long now, unsigned long long total);
 } gtr_core_request_download_data;
 
 typedef struct {
@@ -44,6 +47,7 @@ typedef struct {
     char *header;
     unsigned int time_out;
     gtr_core_request_request_data *request_data;
+    gtr_core_request_download_data *download_data;
 
     void (*on_succeed)(unsigned int task_id, long http_response_code, void *data, unsigned long data_size);
 

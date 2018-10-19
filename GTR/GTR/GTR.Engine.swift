@@ -7,6 +7,7 @@ import Foundation
 
 typealias GTRSucceedBlock = (_ responseData: Foundation.Data) -> Void
 typealias GTRFailureBlock = (_ httpResponseCode: Swift.Int, _ errorCode: Swift.Int32, _ errorMessage: Swift.String) -> Void
+typealias GTRProgressClosure = (_ now: UInt64, _ total: UInt64) -> Void
 typealias GTRHttpHeaderClosure = () -> [Swift.String: Swift.String]
 
 extension GTR {
@@ -14,6 +15,9 @@ extension GTR {
         private(set) var responseQueue = DispatchQueue.main
         private(set) var succeedContainer: [Swift.UInt32: GTRSucceedBlock] = [Swift.UInt32: GTRSucceedBlock]()
         private(set) var failureContainer: [Swift.UInt32: GTRFailureBlock] = [Swift.UInt32: GTRFailureBlock]()
+        private(set) var downloadProgressContainer: [Swift.UInt32: GTRProgressClosure] = [Swift.UInt32: GTRProgressClosure]()
+        private(set) var uploadProgressContainer: [Swift.UInt32: GTRProgressClosure] = [Swift.UInt32: GTRProgressClosure]()
+
         private var httpHeaderClosure: GTRHttpHeaderClosure?
     }
 }
@@ -247,6 +251,37 @@ func c_put_request_failure(task_id: CUnsignedInt,
                            http_response_code: CLong,
                            error_code: CInt,
                            error_message: UnsafePointer<CChar>) {
+    if let failure = GTR.engine.failureContainer[task_id] {
+        GTR.engine.responseQueue.async {
+            failure(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
+            GTR.engine.cleanResponseHandler(taskID: task_id)
+        }
+    }
+}
+
+@_silgen_name("swift_download_progress")
+func c_download_progress(task_id: CUnsignedInt, download_now: CUnsignedLongLong, download_total: CUnsignedLongLong) {
+
+}
+
+@_silgen_name("swift_download_request_succeed")
+func c_download_request_succeed(task_id: CUnsignedInt,
+                                c_data: UnsafeRawPointer,
+                                c_data_size: CUnsignedLong) {
+    let swiftData = Data(bytes: c_data, count: Int(c_data_size))
+    if let succeed = GTR.engine.succeedContainer[task_id] {
+        GTR.engine.responseQueue.async {
+            succeed(swiftData)
+            GTR.engine.cleanResponseHandler(taskID: task_id)
+        }
+    }
+}
+
+@_silgen_name("swift_download_request_failure")
+func c_download_request_failure(task_id: CUnsignedInt,
+                                http_response_code: CLong,
+                                error_code: CInt,
+                                error_message: UnsafePointer<CChar>) {
     if let failure = GTR.engine.failureContainer[task_id] {
         GTR.engine.responseQueue.async {
             failure(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")

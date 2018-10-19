@@ -18,7 +18,11 @@ config_log_callback(
     global_gtr_core_log_callback = log_callback;
 }
 
-void gtr_core_log(gtr_log_flag flag, const char *format, ...) {
+void
+gtr_core_log(
+        gtr_log_flag flag,
+        const char *format, ...
+) {
     if (global_gtr_core_log_callback) {
         static char buffer[LOG_MAX_BUF_SIZE];
         va_list args = NULL;

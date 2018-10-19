@@ -78,6 +78,7 @@ void gtr_core_add_download_request(
         unsigned int *task_id,
         const char *url,
         const char *file_path,
+        const char *header,
         unsigned int time_out,
         void *progress_callback,
         void *succeed_callback,

@@ -381,8 +381,8 @@ gtr_core_close_proxy(
     }
 }
 
-void
-gtr_core_add_request(
+static void
+gtr_core_go_request(
         unsigned int *task_id,
         gtr_core_request_type type,
         const char *url,
@@ -391,7 +391,9 @@ gtr_core_add_request(
         const void *request_data,
         unsigned long request_data_size,
         void *succeed_callback,
-        void *failure_callback
+        void *failure_callback,
+        const char *file_path,
+        void *progress_callback
 ) {
     gtr_core_request *core_request = (gtr_core_request *) calloc(1, sizeof(gtr_core_request));
 
@@ -449,7 +451,68 @@ gtr_core_add_request(
         core_request->on_failed = failure_callback;
     }
 
+    {
+        if (file_path) {
+            core_request->download_data = calloc(1, sizeof(gtr_core_request_download_data));
+            size_t file_path_size = strlen(file_path) + 1;
+            core_request->download_data->file_path = malloc(file_path_size);
+            memcpy(core_request->download_data->file_path, file_path, file_path_size);
+            core_request->download_data->on_progress = progress_callback;
+            core_request->download_data->task_id = *task_id;
+        }
+    }
+
     thread_pool_add_work(gtr_core_thread_pool, (void *) request, core_request);
+}
+
+void
+gtr_core_add_request(
+        unsigned int *task_id,
+        gtr_core_request_type type,
+        const char *url,
+        const char *header,
+        unsigned int time_out,
+        const void *request_data,
+        unsigned long request_data_size,
+        void *succeed_callback,
+        void *failure_callback
+) {
+    gtr_core_go_request(
+            task_id,
+            type,
+            url,
+            header,
+            time_out,
+            request_data,
+            request_data_size,
+            succeed_callback,
+            failure_callback,
+            NULL,
+            NULL);
+}
+
+void gtr_core_add_download_request(
+        unsigned int *task_id,
+        const char *url,
+        const char *file_path,
+        const char *header,
+        unsigned int time_out,
+        void *progress_callback,
+        void *succeed_callback,
+        void *failure_callback
+) {
+    gtr_core_go_request(
+            task_id,
+            gtr_core_request_type_download,
+            url,
+            header,
+            time_out,
+            NULL,
+            0,
+            succeed_callback,
+            failure_callback,
+            file_path,
+            progress_callback);
 }
 
 //---Private Config
@@ -561,11 +624,7 @@ gtr_core_config_progress(
         CURL *handle,
         gtr_core_request *request
 ) {
-    assert(request != NULL);
-    curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
-    curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
-    curl_easy_setopt(handle, CURLOPT_XFERINFODATA, NULL);
-    return;
+    assert(request);
     //上传和下载才需要进度回掉方法
     switch (request->request_type) {
         case gtr_core_request_type_get:
@@ -580,10 +639,12 @@ gtr_core_config_progress(
         case gtr_core_request_type_download:
             curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
             curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
-            curl_easy_setopt(handle, CURLOPT_XFERINFODATA, NULL);
+            curl_easy_setopt(handle, CURLOPT_XFERINFODATA, &request->download_data);
             break;
         case gtr_core_request_type_upload:
             curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
+            curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
+            curl_easy_setopt(handle, CURLOPT_XFERINFODATA, NULL);
             break;
     }
 }

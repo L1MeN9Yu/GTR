@@ -15,6 +15,12 @@ extern void swift_put_request_succeed(unsigned int task_id, void *c_data, unsign
 
 extern void swift_put_request_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
 
+extern void swift_download_progress(unsigned int task_id, unsigned long long now, unsigned long long total);
+
+extern void swift_download_request_succeed(unsigned int task_id, void *c_data, unsigned long c_date_size);
+
+extern void swift_download_request_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
+
 extern void swift_log_callback(unsigned int flag, char *message);
 
 
@@ -33,6 +39,12 @@ static void on_http_put_request_completed(unsigned int task_id, long http_respon
 
 static void on_http_put_request_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
 //----------
+
+static void on_http_download_file_progress(unsigned int task_id, unsigned long long downloaded_size, unsigned long long total_size);
+
+static void on_http_download_file_success(unsigned int task_id, long http_response_code, void *data, unsigned long size);
+
+static void on_http_download_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
 
 //---------- 初始化
 void gtr_init(const char *user_agent) {
@@ -114,8 +126,8 @@ void gtr_put(
 }
 
 //---------- 下载文件
-extern void gtr_download(unsigned int *task_id, const char *url, const char *headers, unsigned int time_out) {
-
+extern void gtr_download(unsigned int *task_id, const char *url, const char *file_path, const char *headers, unsigned int time_out) {
+    gtr_core_add_download_request(task_id, url, file_path, headers, time_out, &on_http_download_file_progress, &on_http_download_file_success, &on_http_download_failure);
 }
 
 //----------
@@ -148,14 +160,14 @@ static void on_http_post_request_failure(unsigned int task_id, long http_respons
     swift_post_request_failure(task_id, http_response_code, error_code, error_message);
 }
 
-static void on_http_download_file_progress(unsigned int task_id, size_t downloaded_size) {
-
+static void on_http_download_file_progress(unsigned int task_id, unsigned long long downloaded_size, unsigned long long total_size) {
+    swift_download_progress(task_id, downloaded_size, total_size);
 }
 
-static void on_http_download_file_success(unsigned int task_id, long http_response_code, void *data) {
-
+static void on_http_download_file_success(unsigned int task_id, long http_response_code, void *data, unsigned long size) {
+    swift_download_request_succeed(task_id, data, size);
 }
 
 static void on_http_download_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message) {
-
+    swift_download_request_failure(task_id, http_response_code, error_code, error_message);
 }
