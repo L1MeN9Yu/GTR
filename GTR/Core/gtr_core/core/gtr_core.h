@@ -17,21 +17,38 @@
  * @param user_agent user_agent
  * @param log_callback log回调函数
  */
-void gtr_core_init(const char *user_agent, void *log_callback);
+void
+gtr_core_init(
+        const char *user_agent,
+        void *log_callback
+);
 
-void __unused gtr_core_dispose(void);
+/**
+ * dispose
+ */
+void __unused
+gtr_core_dispose(
+        void
+);
 
 /**
  * 开启代理
  * @param url url
  * @param port 端口
  */
-void gtr_core_open_proxy(const char *url, unsigned int port);
+void
+gtr_core_open_proxy(
+        const char *url,
+        unsigned int port
+);
 
 /**
  * 关闭代理
  */
-void gtr_core_close_proxy(void);
+void
+gtr_core_close_proxy(
+        void
+);
 
 /**
  * 发起一个请求
@@ -53,6 +70,16 @@ void gtr_core_add_request(
         unsigned int time_out,
         const void *request_data,
         unsigned long request_data_size,
+        void *succeed_callback,
+        void *failure_callback
+);
+
+void gtr_core_add_download_request(
+        unsigned int *task_id,
+        const char *url,
+        const char *file_path,
+        unsigned int time_out,
+        void *progress_callback,
         void *succeed_callback,
         void *failure_callback
 );

@@ -207,7 +207,8 @@ write_callback(
     return real_size;
 }
 
-static int progress_callback(
+static int
+progress_callback(
         void *p,
         curl_off_t download_total,
         curl_off_t download_now,
@@ -226,7 +227,7 @@ static int progress_callback(
 //--- Core
 static void
 request(
-        gtr_core_request *easy_request
+        gtr_core_request *core_request
 ) {
 
     CURL *curl_handle;
@@ -240,11 +241,11 @@ request(
     curl_handle = curl_easy_init();
 
     {
-        gtr_core_config_http_method(curl_handle, easy_request);
+        gtr_core_config_http_method(curl_handle, core_request);
     }
 
     {
-        gtr_core_config_url(curl_handle, easy_request->url);
+        gtr_core_config_url(curl_handle, core_request->url);
     }
 
     {
@@ -260,7 +261,7 @@ request(
     }
 
     {
-        gtr_core_config_time_out(curl_handle, easy_request->time_out);
+        gtr_core_config_time_out(curl_handle, core_request->time_out);
     }
 
     {
@@ -274,7 +275,7 @@ request(
     }
 
     {
-        gtr_core_config_progress(curl_handle, easy_request);
+        gtr_core_config_progress(curl_handle, core_request);
     }
 
     {
@@ -285,7 +286,7 @@ request(
         gtr_core_config_debug(curl_handle);
     }
 
-    struct curl_slist *header = gtr_core_add_custom_headers(easy_request->header);
+    struct curl_slist *header = gtr_core_add_custom_headers(core_request->header);
     gtr_core_config_headers(curl_handle, global_user_agent, header);
 
     {
@@ -299,13 +300,13 @@ request(
         /* check for errors */
         if (res != CURLE_OK) {
             gtr_core_log(gtr_log_flag_error, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-            if (easy_request->on_failed) {
-                easy_request->on_failed(easy_request->task_id, http_response_code, res, curl_easy_strerror(res));
+            if (core_request->on_failed) {
+                core_request->on_failed(core_request->task_id, http_response_code, res, curl_easy_strerror(res));
             }
         } else {
             gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_data.response_data_size);
-            if (easy_request->on_succeed) {
-                easy_request->on_succeed(easy_request->task_id, http_response_code, response_data.response_data, response_data.response_data_size);
+            if (core_request->on_succeed) {
+                core_request->on_succeed(core_request->task_id, http_response_code, response_data.response_data, response_data.response_data_size);
             }
         }
     }
@@ -317,8 +318,8 @@ request(
 
     {
         curl_easy_cleanup(curl_handle);
-        free(easy_request->url);
-        free(easy_request);
+        free(core_request->url);
+        free(core_request);
         free(response_data.response_data);
     }
 }
@@ -369,7 +370,9 @@ gtr_core_open_proxy(
 }
 
 void
-gtr_core_close_proxy(void) {
+gtr_core_close_proxy(
+        void
+) {
     if (global_proxy) {
         if (global_proxy->url) {
             free(global_proxy->url);
@@ -390,54 +393,63 @@ gtr_core_add_request(
         void *succeed_callback,
         void *failure_callback
 ) {
-    gtr_core_request *easy_request = (gtr_core_request *) calloc(1, sizeof(gtr_core_request));
-    *task_id = gtr_atomic_unsigned_int_add_and_fetch(&gtr_core_request_global_task_id, 1);
-    easy_request->task_id = *task_id;
-    easy_request->is_cancel = false;
-    easy_request->request_type = type;
+    gtr_core_request *core_request = (gtr_core_request *) calloc(1, sizeof(gtr_core_request));
+
+    {
+        *task_id = gtr_atomic_unsigned_int_add_and_fetch(&gtr_core_request_global_task_id, 1);
+        core_request->task_id = *task_id;
+    }
+
+    {
+        core_request->is_cancel = false;
+        core_request->request_type = type;
+    }
+
     {
         //url
+        assert(url);
         if (url) {
             size_t url_size = strlen(url) + 1;
-            easy_request->url = malloc(url_size);
-            memcpy(easy_request->url, url, url_size);
+            core_request->url = malloc(url_size);
+            memcpy(core_request->url, url, url_size);
         }
     }
     {
         //header
         if (header) {
             size_t header_size = strlen(header) + 1;
-            easy_request->header = malloc(header_size);
-            memcpy(easy_request->header, header, header_size);
+            core_request->header = malloc(header_size);
+            memcpy(core_request->header, header, header_size);
         }
     }
+
     {
         //data
         if (request_data_size > 0 && request_data != NULL) {
-            easy_request->request_data = (gtr_core_request_request_data *) calloc(1, sizeof(gtr_core_request_request_data));
-            easy_request->request_data->data = malloc((size_t) request_data_size);
-            easy_request->request_data->size_left = request_data_size;
-            easy_request->request_data->size = request_data_size;
-            if (easy_request->request_data->data == NULL) {
+            core_request->request_data = (gtr_core_request_request_data *) calloc(1, sizeof(gtr_core_request_request_data));
+            core_request->request_data->data = malloc((size_t) request_data_size);
+            core_request->request_data->size_left = request_data_size;
+            core_request->request_data->size = request_data_size;
+            if (core_request->request_data->data == NULL) {
                 //error
             } else {
-                memcpy(easy_request->request_data->data, request_data, request_data_size);
+                memcpy(core_request->request_data->data, request_data, request_data_size);
             }
         } else {
-            easy_request->request_data = NULL;
+            core_request->request_data = NULL;
         }
     }
     {
         //time out
-        easy_request->time_out = time_out;
+        core_request->time_out = time_out;
     }
     {
         //call_back
-        easy_request->on_succeed = succeed_callback;
-        easy_request->on_failed = failure_callback;
+        core_request->on_succeed = succeed_callback;
+        core_request->on_failed = failure_callback;
     }
 
-    thread_pool_add_work(gtr_core_thread_pool, (void *) request, easy_request);
+    thread_pool_add_work(gtr_core_thread_pool, (void *) request, core_request);
 }
 
 //---Private Config
