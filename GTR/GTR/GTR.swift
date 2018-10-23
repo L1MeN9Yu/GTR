@@ -27,7 +27,7 @@ public class GTR {
                            headers: [String: Encodable]? = nil,
                            timeOut: UInt32,
                            param: [String: Any]? = nil,
-                           complete: GTR.Complete?) -> UInt32 {
+                           complete: Complete?) -> UInt32 {
         var allHeaders = contentType.toHeader()
 
         if let globalHeader = self.driver?.identity() {
@@ -67,6 +67,15 @@ extension GTR {
         self.gearbox.start()
     }
 
+    public class func config(responseQueue: DispatchQueue?) {
+        guard let q = responseQueue else {
+            self.engine.config(responseQueue: DispatchQueue.main)
+            return
+        }
+
+        self.engine.config(responseQueue: q)
+    }
+
     public class func configProxy(isEnable: Bool, url: String, port: UInt32) {
         self.gearbox.config(proxy: isEnable, url: url, port: port)
     }
@@ -77,50 +86,6 @@ extension GTR {
         }
         return nil
     }
-}
-
-// MARK: - Http Method
-extension GTR {
-    public enum Method: UInt {
-        case get
-        case post
-        case put
-        case download
-        case upload
-    }
-}
-
-// MARK: - Content Type
-extension GTR {
-    public enum ContentType: UInt {
-        case json
-        case formURLEncoded
-        case propertyList
-
-        fileprivate func toHeader() -> [String: Encodable] {
-            switch self {
-            case .json:
-                return ["Content-Type": "application/json; charset=utf-8"]
-            case .formURLEncoded:
-                return ["Content-Type": "application/x-www-form-urlencoded; charset=utf-8"]
-            case .propertyList:
-                return ["Content-Type": "application/x-plist; charset=utf-8"]
-            }
-        }
-    }
-}
-
-// MARK: - Destination
-extension GTR {
-    public enum Destination {
-        case win(responseData: Foundation.Data)
-        case lose(httpResponseCode: Int, errorCode: Int32, errorMessage: String)
-    }
-}
-
-// MARK: - Typealias
-extension GTR {
-    public typealias Complete = (GTR.Destination) -> Void
 }
 
 // MARK: - Extern

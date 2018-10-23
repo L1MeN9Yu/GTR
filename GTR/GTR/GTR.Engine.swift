@@ -27,20 +27,17 @@ extension GTR.Engine {
     func fire(engineNumber: String? = nil) {
         gtr_init(engineNumber?.cString(using: .utf8))
     }
-}
 
-// MARK: - Public
-extension GTR.Engine {
     // MARK: Request
     @discardableResult
-    public func request(httpMethod: GTR.Method,
-                        url: String,
-                        headers: [String: Encodable]? = nil,
-                        contentType: GTR.ContentType = .json,
-                        timeOut: UInt32,
-                        param: [String: Any]? = nil,
-                        succeed: GTRSucceedClosure?,
-                        failure: GTRFailureClosure?) -> UInt32 {
+    func request(httpMethod: GTR.Method,
+                 url: String,
+                 headers: [String: Encodable]? = nil,
+                 contentType: GTR.ContentType = .json,
+                 timeOut: UInt32,
+                 param: [String: Any]? = nil,
+                 succeed: GTRSucceedClosure?,
+                 failure: GTRFailureClosure?) -> UInt32 {
         switch httpMethod {
         case .get:
             return self.getRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, succeed: succeed, failure: failure)
@@ -50,7 +47,7 @@ extension GTR.Engine {
             return self.putRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, param: param, succeed: succeed, failure: failure)
         case .download:
             //TODO
-            return 0
+            return self.downloadRequest(url: url, filePath: "", headers: headers, contentType: contentType, timeOut: timeOut, progress: nil, succeed: succeed, failure: failure)
         case .upload:
             //TODO
             return 0
@@ -58,11 +55,11 @@ extension GTR.Engine {
     }
 
     // MARK: Config
-    public func config(httpHeaderClosure: GTRHttpHeaderClosure?) {
+    func config(httpHeaderClosure: GTRHttpHeaderClosure?) {
         self.httpHeaderClosure = httpHeaderClosure
     }
 
-    public func config(responseQueue: DispatchQueue) {
+    func config(responseQueue: DispatchQueue) {
         self.responseQueue = responseQueue
     }
 }
