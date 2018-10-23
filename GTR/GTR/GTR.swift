@@ -85,6 +85,8 @@ extension GTR {
         case get
         case post
         case put
+        case download
+        case upload
     }
 }
 

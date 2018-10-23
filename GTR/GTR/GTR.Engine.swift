@@ -48,6 +48,12 @@ extension GTR.Engine {
             return self.postRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, param: param, succeed: succeed, failure: failure)
         case .put:
             return self.putRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, param: param, succeed: succeed, failure: failure)
+        case .download:
+            //TODO
+            return 0
+        case .upload:
+            //TODO
+            return 0
         }
     }
 
@@ -66,6 +72,14 @@ extension GTR.Engine {
     fileprivate func cleanResponseHandler(taskID: UInt32) {
         self.succeedContainer.removeValue(forKey: taskID)
         self.failureContainer.removeValue(forKey: taskID)
+    }
+
+    fileprivate func cleanDownloadProgress(taskID: UInt32) {
+        self.downloadProgressContainer.removeValue(forKey: taskID)
+    }
+
+    fileprivate func cleanUploadProgress(taskID: UInt32) {
+        self.uploadProgressContainer.removeValue(forKey: taskID)
     }
 }
 
@@ -206,7 +220,6 @@ func c_get_request_failure(task_id: CUnsignedInt,
         failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
         GTR.engine.cleanResponseHandler(taskID: task_id)
     }
-
 }
 
 @_silgen_name("swift_post_request_succeed")
@@ -259,7 +272,10 @@ func c_put_request_failure(task_id: CUnsignedInt,
 
 @_silgen_name("swift_download_progress")
 func c_download_progress(task_id: CUnsignedInt, download_now: CUnsignedLongLong, download_total: CUnsignedLongLong) {
-
+    let progress = GTR.engine.downloadProgressContainer[task_id]
+    GTR.engine.responseQueue.async {
+        progress??(download_now, download_total)
+    }
 }
 
 @_silgen_name("swift_download_request_succeed")
