@@ -27,6 +27,8 @@ public class GTR {
                            headers: [String: Encodable]? = nil,
                            timeOut: UInt32,
                            param: [String: Any]? = nil,
+                           downloadPath: String? = nil,
+                           progress: ((_ now: UInt64, _ total: UInt64) -> Void)? = nil,
                            complete: Complete?) -> UInt32 {
         var allHeaders = contentType.toHeader()
 
@@ -49,6 +51,8 @@ public class GTR {
                 contentType: contentType,
                 timeOut: timeOut,
                 param: param,
+                downloadPath: downloadPath,
+                progress: progress,
                 succeed: { data in
                     complete?(GTR.Destination.win(responseData: data))
                 },
