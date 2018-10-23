@@ -36,6 +36,8 @@ extension GTR.Engine {
                  contentType: GTR.ContentType = .json,
                  timeOut: UInt32,
                  param: [String: Any]? = nil,
+                 downloadPath: String? = nil,
+                 progress: GTRProgressClosure? = nil,
                  succeed: GTRSucceedClosure?,
                  failure: GTRFailureClosure?) -> UInt32 {
         switch httpMethod {
@@ -46,10 +48,11 @@ extension GTR.Engine {
         case .put:
             return self.putRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, param: param, succeed: succeed, failure: failure)
         case .download:
-            //TODO
-            return self.downloadRequest(url: url, filePath: "", headers: headers, contentType: contentType, timeOut: timeOut, progress: nil, succeed: succeed, failure: failure)
+            guard let downloadPath = downloadPath else { fatalError("must use download path") }
+            return self.downloadRequest(url: url, filePath: downloadPath, headers: headers, contentType: contentType, timeOut: timeOut, progress: progress, succeed: succeed, failure: failure)
         case .upload:
             //TODO
+            fatalError("not implement yet")
             return 0
         }
     }
