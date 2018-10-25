@@ -63,17 +63,17 @@ extension ViewController {
     }
 
     private func setupGTR() {
-        GTR.setup(driver: self, hornType: ViewController.self)
+        GTR.setup(driver: type(of: self), horn: type(of: self))
     }
 }
 
 extension ViewController: Driver {
-    public var identity: () -> [String: Encodable]? {
+    public static var identity: () -> [String: Encodable]? {
         return {
             return nil
         }
     }
-    public var userAgent: () -> String? {
+    public static var userAgent: () -> String? {
         return {
             return "GTRDemo/1.0.0"
         }
@@ -81,9 +81,9 @@ extension ViewController: Driver {
 }
 
 extension ViewController: Horn {
-//    public class func whistle(message: String, filename: String, function: String, line: Int) {
-//        print("gtr message : " + "\n" + "\(message)" + "\n");
-//    }
+    public class func whistle(message: String, filename: String, function: String, line: Int) {
+        print("gtr message : " + "\n" + "\(message)" + "\n");
+    }
 }
 
 

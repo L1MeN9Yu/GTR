@@ -16,9 +16,9 @@ public class GTR {
         return engine
     }()
 
-    private static var driver: Driver?
+    private static var driver: Driver.Type?
 
-    private static var hornType: Horn.Type?
+    private static var horn: Horn.Type?
 
     @discardableResult
     public class func race(method: GTR.Method = .get,
@@ -64,9 +64,9 @@ public class GTR {
 
 // MARK: - Config
 extension GTR {
-    public class func setup(driver: Driver? = nil, hornType: Horn.Type? = nil) {
+    public class func setup(driver: Driver.Type? = nil, horn: Horn.Type? = nil) {
         self.driver = driver
-        self.hornType = hornType
+        self.horn = horn
         self.engine.fire(engineNumber: self.driver?.userAgent())
         self.gearbox.start()
     }
@@ -97,11 +97,11 @@ extension GTR {
     public class func logLose(httpResponseCode: Int, errorCode: Int32, errorMessage: String,
                               filename: String = #file, function: String = #function, line: Int = #line) {
         let message = "response code = \(httpResponseCode)\n errorCode = \(errorCode)\n errorMessage = \(errorMessage)\n"
-        self.hornType?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
+        self.horn?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
     }
 
     public class func whistle(type: HornType, message: String, filename: String = #file,
                               function: String = #function, line: Int = #line) {
-        self.hornType?.whistle(type: type, message: message, filename: filename, function: function, line: line)
+        self.horn?.whistle(type: type, message: message, filename: filename, function: function, line: line)
     }
 }
