@@ -353,7 +353,7 @@ void mcf_easy_add_request(unsigned int *task_id, mcf_easy_request_type type, con
 
 static
 void gtr_core_config_http_version(CURL *handle) {
-    curl_easy_setopt(handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+    curl_easy_setopt(handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_NONE);
 }
 
 static void mcf_easy_config_http_method(CURL *handle, mcf_easy_request *request) {
