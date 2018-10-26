@@ -537,9 +537,10 @@ gtr_core_config_http_method(
             curl_easy_setopt(handle, CURLOPT_INFILESIZE, request->request_data->size);
             break;
         case gtr_core_request_type_put:
-            curl_easy_setopt(handle, CURLOPT_PUT, 1L);
+            curl_easy_setopt(handle, CURLOPT_UPLOAD, 1L);
             curl_easy_setopt(handle, CURLOPT_READFUNCTION, read_callback);
-            curl_easy_setopt(handle, CURLOPT_READDATA, request->request_data);
+            curl_easy_setopt(handle, CURLOPT_READDATA, request->request_data->data);
+            curl_easy_setopt(handle, CURLOPT_INFILESIZE, request->request_data->size);
             break;
         case gtr_core_request_type_download:
             curl_easy_setopt(handle, CURLOPT_HTTPGET, 1L);
