@@ -38,6 +38,8 @@ static const char *global_user_agent;
 
 static mcf_easy_proxy *global_proxy;
 
+static void gtr_core_config_http_version(CURL *handle);
+
 static void mcf_easy_config_http_method(CURL *handle, mcf_easy_request *request);
 
 static void mcf_easy_config_url(CURL *handle, const char *url);
@@ -61,6 +63,8 @@ static void mcf_easy_config_proxy(CURL *handle);
 static void mcf_easy_config_debug(CURL *handle);
 
 static void mcf_easy_log(const char *format, ...);
+
+//---Private Config
 
 static int debug_func(CURL *__unused handle, curl_infotype type,
         char *data, size_t size,
@@ -162,6 +166,9 @@ void request(mcf_easy_request *easy_request) {
     response_data.response_data_size = 0;
 
     curl_handle = curl_easy_init();
+    {
+        gtr_core_config_http_version(curl_handle);
+    }
 
     {
         mcf_easy_config_http_method(curl_handle, easy_request);
@@ -343,6 +350,12 @@ void mcf_easy_add_request(unsigned int *task_id, mcf_easy_request_type type, con
 }
 
 //---Private Config
+
+static
+void gtr_core_config_http_version(CURL *handle) {
+    curl_easy_setopt(handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_NONE);
+}
+
 static void mcf_easy_config_http_method(CURL *handle, mcf_easy_request *request) {
     if (!request) {
         assert(request != NULL);
