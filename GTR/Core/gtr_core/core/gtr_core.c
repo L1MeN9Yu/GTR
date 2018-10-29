@@ -20,6 +20,8 @@
 #include "gtr_core_header_helper.h"
 #include "gtr_core_proxy.h"
 #include "gtr_core_log.h"
+#include "gtr_ios_utility.h"
+#include "gtr_file_utilty.h"
 
 /**
  * 请求的线程池
@@ -32,6 +34,8 @@ static thread_pool gtr_core_thread_pool;
 static volatile unsigned int gtr_core_request_global_task_id = 0;
 
 static const char *global_user_agent;
+
+static const char *temp_directory;
 
 static gtr_core_proxy *global_proxy;
 
@@ -102,6 +106,10 @@ static void
 gtr_core_config_debug(
         CURL *handle
 );
+
+//---Private Utility
+static void
+gtr_core_create_temp_dir(void);
 
 //--- Call Back
 static int
@@ -343,6 +351,7 @@ gtr_core_init(
     curl_global_init(CURL_GLOBAL_ALL);
     gtr_core_thread_pool = thread_pool_init(10);
     thread_pool_wait(gtr_core_thread_pool);
+    gtr_core_create_temp_dir();
     gtr_core_log(gtr_log_flag_info, "gtr : global_user_agent = %s", global_user_agent);
     gtr_core_log(gtr_log_flag_info, "curl version : %s", curl_version());
 }
@@ -697,3 +706,10 @@ gtr_core_config_debug(
     curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, &debug_func);
     curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
 }
+
+//---Private Utility
+static void
+gtr_core_create_temp_dir(void) {
+    temp_directory = get_app_temp_directory();
+    gtr_create_directory_if_not_exist(temp_directory);
+};
