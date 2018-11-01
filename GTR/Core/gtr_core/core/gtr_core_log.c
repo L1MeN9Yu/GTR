@@ -25,7 +25,7 @@ gtr_core_log(
 ) {
     if (global_gtr_core_log_callback) {
         static char buffer[LOG_MAX_BUF_SIZE];
-        va_list args = NULL;
+        va_list args;
         va_start(args, format);
         vsnprintf(buffer, LOG_MAX_BUF_SIZE, format, args);
         va_end(args);
