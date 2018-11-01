@@ -5,8 +5,8 @@
 
 public protocol Driver {
     ///全局Header
-    var identity: () -> [String: Encodable]? { get }
+    static var identity: () -> [String: Encodable]? { get }
 
     ///UserAgent
-    var userAgent: () -> String? { get }
+    static var userAgent: () -> String? { get }
 }

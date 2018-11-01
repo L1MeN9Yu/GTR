@@ -16,11 +16,9 @@ public class GTR {
         return engine
     }()
 
-    private static var driver: Driver?
+    private static var driver: Driver.Type?
 
-    private static var horn: Horn?
-
-    private static var hornType: Horn.Type?
+    private static var horn: Horn.Type?
 
     @discardableResult
     public class func race(method: GTR.Method = .get,
@@ -29,7 +27,9 @@ public class GTR {
                            headers: [String: Encodable]? = nil,
                            timeOut: UInt32,
                            param: [String: Any]? = nil,
-                           complete: @escaping GTR.Complete) -> UInt32 {
+                           downloadPath: String? = nil,
+                           progress: ((_ now: UInt64, _ total: UInt64) -> Void)? = nil,
+                           complete: Complete?) -> UInt32 {
         var allHeaders = contentType.toHeader()
 
         if let globalHeader = self.driver?.identity() {
@@ -51,23 +51,33 @@ public class GTR {
                 contentType: contentType,
                 timeOut: timeOut,
                 param: param,
+                downloadPath: downloadPath,
+                progress: progress,
                 succeed: { data in
-                    complete(GTR.Destination.win(responseData: data))
+                    complete?(GTR.Destination.win(responseData: data))
                 },
                 failure: { (httpResponseCode, errorCode, errorMessage) in
-                    complete(GTR.Destination.lose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage))
+                    complete?(GTR.Destination.lose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage))
                 })
     }
 }
 
 // MARK: - Config
 extension GTR {
-    public class func setup(driver: Driver? = nil, horn: Horn? = nil, hornType: Horn.Type? = nil) {
+    public class func setup(driver: Driver.Type? = nil, horn: Horn.Type? = nil) {
         self.driver = driver
         self.horn = horn
-        self.hornType = hornType
         self.engine.fire(engineNumber: self.driver?.userAgent())
         self.gearbox.start()
+    }
+
+    public class func config(responseQueue: DispatchQueue?) {
+        guard let q = responseQueue else {
+            self.engine.config(responseQueue: DispatchQueue.main)
+            return
+        }
+
+        self.engine.config(responseQueue: q)
     }
 
     public class func configProxy(isEnable: Bool, url: String, port: UInt32) {
@@ -82,60 +92,16 @@ extension GTR {
     }
 }
 
-// MARK: - Http Method
-extension GTR {
-    public enum Method: UInt {
-        case get
-        case post
-        case put
-    }
-}
-
-// MARK: - Content Type
-extension GTR {
-    public enum ContentType: UInt {
-        case json
-        case formURLEncoded
-        case propertyList
-
-        fileprivate func toHeader() -> [String: Encodable] {
-            switch self {
-            case .json:
-                return ["Content-Type": "application/json; charset=utf-8"]
-            case .formURLEncoded:
-                return ["Content-Type": "application/x-www-form-urlencoded; charset=utf-8"]
-            case .propertyList:
-                return ["Content-Type": "application/x-plist; charset=utf-8"]
-            }
-        }
-    }
-}
-
-// MARK: - Destination
-extension GTR {
-    public enum Destination {
-        case win(responseData: Foundation.Data)
-        case lose(httpResponseCode: Int, errorCode: Int32, errorMessage: String)
-    }
-}
-
-// MARK: - Typealias
-extension GTR {
-    public typealias Complete = (GTR.Destination) -> Void
-}
-
 // MARK: - Extern
 extension GTR {
     public class func logLose(httpResponseCode: Int, errorCode: Int32, errorMessage: String,
                               filename: String = #file, function: String = #function, line: Int = #line) {
         let message = "response code = \(httpResponseCode)\n errorCode = \(errorCode)\n errorMessage = \(errorMessage)\n"
-        self.hornType?.whistle(message: message, filename: filename, function: function, line: line)
+        self.horn?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
     }
 
-    public class func whistle(message: String, filename: String = #file,
+    public class func whistle(type: HornType, message: String, filename: String = #file,
                               function: String = #function, line: Int = #line) {
-        if let hornType = self.hornType {
-            hornType.whistle(message: message, filename: filename, function: function, line: line)
-        }
+        self.horn?.whistle(type: type, message: message, filename: filename, function: function, line: line)
     }
 }

@@ -1,5 +1,5 @@
-#ifndef MCF_THREAD_POOL_H
-#define MCF_THREAD_POOL_H
+#ifndef GTR_THREAD_POOL_H
+#define GTR_THREAD_POOL_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -8,7 +8,7 @@ extern "C" {
 /* =================================== API ======================================= */
 
 
-typedef struct mcf_thread_pool_ *thread_pool;
+typedef struct gtr_thread_pool_ *thread_pool;
 
 
 /**

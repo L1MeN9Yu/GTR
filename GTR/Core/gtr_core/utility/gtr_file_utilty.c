@@ -6,9 +6,9 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <stdio.h>
-#include "mcf_curl_file_utilty.h"
+#include "gtr_file_utilty.h"
 
-off_t mcf_curl_get_file_size(const char *file_path) {
+off_t gtr_get_file_size(const char *file_path) {
     struct stat st;
 
     if (stat(file_path, &st) == 0) {
@@ -20,7 +20,7 @@ off_t mcf_curl_get_file_size(const char *file_path) {
     return 0;
 }
 
-void mcf_create_directory_if_not_exist(const char *directory_path) {
+void gtr_create_directory_if_not_exist(const char *directory_path) {
     struct stat st = {0};
 
     if (stat(directory_path, &st) == -1) {

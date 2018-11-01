@@ -41,25 +41,14 @@ extension ViewController {
             switch destination {
             case .win(let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string)")
+                    print("succeed : \(string.count)")
                 }
                 break
             case .lose(let httpResponseCode, let errorCode, let errorMessage):
+                GTR.logLose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
                 break
             }
         }
-//        let taskID = GTR.race(method: .get, url: "https://trainingcamp.hjapi.com/v1/training/0/syllabus", timeOut: 10) { destination in
-//            switch destination {
-//            case .win(let responseData):
-//                if let string = String(data: responseData, encoding: .utf8) {
-//                    print("succeed : \(string)")
-//                }
-//                break
-//            case .lose(let httpResponseCode, let errorCode, let errorMessage):
-////                    GTR.logLose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
-//                break
-//            }
-//        }
     }
 }
 
@@ -74,17 +63,17 @@ extension ViewController {
     }
 
     private func setupGTR() {
-        GTR.setup(driver: self, horn: self)
+        GTR.setup(driver: type(of: self), horn: type(of: self))
     }
 }
 
 extension ViewController: Driver {
-    public var identity: () -> [String: Encodable]? {
+    public static var identity: () -> [String: Encodable]? {
         return {
             return nil
         }
     }
-    public var userAgent: () -> String? {
+    public static var userAgent: () -> String? {
         return {
             return "GTRDemo/1.0.0"
         }
@@ -92,11 +81,9 @@ extension ViewController: Driver {
 }
 
 extension ViewController: Horn {
-    public func whistle(message: String, filename: String, function: String, line: Int) {
-        print("\(message)");
+    public class func whistle(type: HornType, message: String, filename: String, function: String, line: Int) {
+        print("[\(type.name)] => \(message)")
     }
-
-    public class func whistle(message: String, filename: String, function: String, line: Int) {}
 }
 
 

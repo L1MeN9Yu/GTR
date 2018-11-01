@@ -1,5 +1,3 @@
-#define _POSIX_C_SOURCE 200809L
-
 #include <unistd.h>
 #include <signal.h>
 #include <stdio.h>
@@ -13,15 +11,15 @@
 #include <sys/prctl.h>
 #endif
 
-#include "mcf_thread_pool.h"
+#include "gtr_thread_pool.h"
 
-#ifdef MCF_THREAD_POOL_DEBUG
-#define MCF_THREAD_POOL_DEBUG 1
+#ifdef GTR_THREAD_POOL_DEBUG
+#define GTR_THREAD_POOL_DEBUG 1
 #else
-#define MCF_THREAD_POOL_DEBUG 0
+#define GTR_THREAD_POOL_DEBUG 0
 #endif
 
-#if !defined(DISABLE_PRINT) || defined(MCF_THREAD_POOL_DEBUG)
+#if !defined(DISABLE_PRINT) || defined(GTR_THREAD_POOL_DEBUG)
 #define err(str) fprintf(stderr, str)
 #else
 #define err(str)
@@ -36,11 +34,11 @@ static volatile int threads_on_hold;
 
 
 /* Binary semaphore */
-typedef struct mcf_binary_semaphore {
+typedef struct gtr_binary_semaphore {
     pthread_mutex_t mutex;
     pthread_cond_t cond;
     int v;
-} mcf_binary_semaphore;
+} gtr_binary_semaphore;
 
 
 /* Job */
@@ -56,7 +54,7 @@ typedef struct job_queue {
     pthread_mutex_t rwmutex;             /* used for queue r/w access */
     job *front;                         /* pointer to front of queue */
     job *rear;                          /* pointer to rear  of queue */
-    mcf_binary_semaphore *has_jobs;      /* flag as binary semaphore  */
+    gtr_binary_semaphore *has_jobs;      /* flag as binary semaphore  */
     int length;                        /* number of jobs in queue   */
 } job_queue;
 
@@ -65,25 +63,25 @@ typedef struct job_queue {
 typedef struct thread {
     int id;                                        /* friendly id               */
     pthread_t pthread;                                /* pointer to actual thread  */
-    struct mcf_thread_pool_ *thread_pool_p;                /* access to thread_pool          */
+    struct gtr_thread_pool_ *thread_pool_p;                /* access to thread_pool          */
 } thread;
 
 
 /* Thread_pool */
-typedef struct mcf_thread_pool_ {
+typedef struct gtr_thread_pool_ {
     thread **threads;                        /* pointer to threads        */
     volatile int num_threads_alive;            /* threads currently alive   */
     volatile int num_threads_working;            /* threads currently working */
     pthread_mutex_t thread_count_lock;        /* used for thread count etc */
     pthread_cond_t threads_all_idle;            /* signal to thread_pool_wait     */
     job_queue job_queue;                        /* job queue                 */
-} mcf_thread_pool_;
+} gtr_thread_pool_;
 
 
 /* ========================== PROTOTYPES ============================ */
 
 
-static int thread_init(mcf_thread_pool_ *thread_pool_p, struct thread **thread_p, int id);
+static int thread_init(gtr_thread_pool_ *thread_pool_p, struct thread **thread_p, int id);
 
 static void *thread_do(struct thread *thread_p);
 
@@ -101,22 +99,22 @@ static struct job *job_queue_pull(job_queue *job_queue_p);
 
 static void job_queue_destroy(job_queue *job_queue_p);
 
-static void binary_semaphore_init(struct mcf_binary_semaphore *binary_semaphore_p, int value);
+static void binary_semaphore_init(struct gtr_binary_semaphore *binary_semaphore_p, int value);
 
-static void binary_semaphore_reset(struct mcf_binary_semaphore *binary_semaphore_p);
+static void binary_semaphore_reset(struct gtr_binary_semaphore *binary_semaphore_p);
 
-static void binary_semaphore_post(struct mcf_binary_semaphore *binary_semaphore_p);
+static void binary_semaphore_post(struct gtr_binary_semaphore *binary_semaphore_p);
 
-static void binary_semaphore_post_all(struct mcf_binary_semaphore *binary_semaphore_p);
+static void binary_semaphore_post_all(struct gtr_binary_semaphore *binary_semaphore_p);
 
-static void binary_semaphore_wait(struct mcf_binary_semaphore *binary_semaphore_p);
+static void binary_semaphore_wait(struct gtr_binary_semaphore *binary_semaphore_p);
 
 
 /* ========================== THREAD_POOL ============================ */
 
 
 /* Initialise thread pool */
-struct mcf_thread_pool_ *thread_pool_init(int num_threads) {
+struct gtr_thread_pool_ *thread_pool_init(int num_threads) {
 
     threads_on_hold = 0;
     threads_keepalive = 1;
@@ -126,8 +124,8 @@ struct mcf_thread_pool_ *thread_pool_init(int num_threads) {
     }
 
     /* Make new thread pool */
-    mcf_thread_pool_ *thread_pool_p;
-    thread_pool_p = (struct mcf_thread_pool_ *) malloc(sizeof(struct mcf_thread_pool_));
+    gtr_thread_pool_ *thread_pool_p;
+    thread_pool_p = (struct gtr_thread_pool_ *) malloc(sizeof(struct gtr_thread_pool_));
     if (thread_pool_p == NULL) {
         err("thread_pool_init(): Could not allocate memory for thread pool\n");
         return NULL;
@@ -158,8 +156,8 @@ struct mcf_thread_pool_ *thread_pool_init(int num_threads) {
     int n;
     for (n = 0; n < num_threads; n++) {
         thread_init(thread_pool_p, &thread_pool_p->threads[n], n);
-#if MCF_THREAD_POOL_DEBUG
-        printf("MCF_THREAD_POOL_DEBUG: Created thread %d in pool \n", n);
+#if GTR_THREAD_POOL_DEBUG
+        printf("GTR_THREAD_POOL_DEBUG: Created thread %d in pool \n", n);
 #endif
     }
 
@@ -192,7 +190,7 @@ int thread_pool_add_work(thread_pool thread_pool_p, void (*function_p)(void *), 
 
 
 /* Wait until all jobs have finished */
-void thread_pool_wait(mcf_thread_pool_ *thread_pool_p) {
+void thread_pool_wait(gtr_thread_pool_ *thread_pool_p) {
     pthread_mutex_lock(&thread_pool_p->thread_count_lock);
     while (thread_pool_p->job_queue.length || thread_pool_p->num_threads_working) {
         pthread_cond_wait(&thread_pool_p->threads_all_idle, &thread_pool_p->thread_count_lock);
@@ -202,7 +200,7 @@ void thread_pool_wait(mcf_thread_pool_ *thread_pool_p) {
 
 
 /* Destroy the thread_pool */
-void thread_pool_destroy(mcf_thread_pool_ *thread_pool_p) {
+void thread_pool_destroy(gtr_thread_pool_ *thread_pool_p) {
     /* No need to destroy if it's NULL */
     if (thread_pool_p == NULL) return;
 
@@ -241,7 +239,7 @@ void thread_pool_destroy(mcf_thread_pool_ *thread_pool_p) {
 
 
 /* Pause all threads in thread_pool */
-void thread_pool_pause(mcf_thread_pool_ *thread_pool_p) {
+void thread_pool_pause(gtr_thread_pool_ *thread_pool_p) {
     int n;
     for (n = 0; n < thread_pool_p->num_threads_alive; n++) {
         pthread_kill(thread_pool_p->threads[n]->pthread, SIGUSR1);
@@ -250,7 +248,7 @@ void thread_pool_pause(mcf_thread_pool_ *thread_pool_p) {
 
 
 /* Resume all threads in thread_pool */
-void thread_pool_resume(mcf_thread_pool_ *thread_pool_p) {
+void thread_pool_resume(gtr_thread_pool_ *thread_pool_p) {
     // resuming a single thread_pool hasn't been
     // implemented yet, meanwhile this supresses
     // the warnings
@@ -260,7 +258,7 @@ void thread_pool_resume(mcf_thread_pool_ *thread_pool_p) {
 }
 
 
-int thread_pool_num_threads_working(mcf_thread_pool_ *thread_pool_p) {
+int thread_pool_num_threads_working(gtr_thread_pool_ *thread_pool_p) {
     return thread_pool_p->num_threads_working;
 }
 
@@ -277,7 +275,7 @@ int thread_pool_num_threads_working(mcf_thread_pool_ *thread_pool_p) {
  * @param id            id to be given to the thread
  * @return 0 on success, -1 otherwise.
  */
-static int thread_init(mcf_thread_pool_ *thread_pool_p, struct thread **thread_p, int id) {
+static int thread_init(gtr_thread_pool_ *thread_pool_p, struct thread **thread_p, int id) {
 
     *thread_p = (struct thread *) malloc(sizeof(struct thread));
     if (thread_p == NULL) {
@@ -316,7 +314,7 @@ static void *thread_do(struct thread *thread_p) {
 
     /* Set thread name for profiling and debuging */
     char thread_name[128] = {0};
-    sprintf(thread_name, "top.limengyu.mcf_thread_pool.thread_%d", thread_p->id);
+    sprintf(thread_name, "top.limengyu.gtr_thread_pool.thread_%d", thread_p->id);
 
 #if defined(__linux__)
     /* Use prctl instead to prevent using _GNU_SOURCE flag and implicit declaration */
@@ -328,7 +326,7 @@ static void *thread_do(struct thread *thread_p) {
 #endif
 
     /* Assure all threads have been created before starting serving */
-    mcf_thread_pool_ *thread_pool_p = thread_p->thread_pool_p;
+    gtr_thread_pool_ *thread_pool_p = thread_p->thread_pool_p;
 
     /* Register signal handler */
     struct sigaction act;
@@ -400,7 +398,7 @@ static int job_queue_init(job_queue *job_queue_p) {
     job_queue_p->front = NULL;
     job_queue_p->rear = NULL;
 
-    job_queue_p->has_jobs = (struct mcf_binary_semaphore *) malloc(sizeof(struct mcf_binary_semaphore));
+    job_queue_p->has_jobs = (struct gtr_binary_semaphore *) malloc(sizeof(struct gtr_binary_semaphore));
     if (job_queue_p->has_jobs == NULL) {
         return -1;
     }
@@ -503,7 +501,7 @@ static void job_queue_destroy(job_queue *job_queue_p) {
 
 
 /* Init semaphore to 1 or 0 */
-static void binary_semaphore_init(mcf_binary_semaphore *binary_semaphore_p, int value) {
+static void binary_semaphore_init(gtr_binary_semaphore *binary_semaphore_p, int value) {
     if (value < 0 || value > 1) {
         err("binary_semaphore_init(): Binary semaphore can take only values 1 or 0");
         exit(1);
@@ -515,13 +513,13 @@ static void binary_semaphore_init(mcf_binary_semaphore *binary_semaphore_p, int 
 
 
 /* Reset semaphore to 0 */
-static void binary_semaphore_reset(mcf_binary_semaphore *binary_semaphore_p) {
+static void binary_semaphore_reset(gtr_binary_semaphore *binary_semaphore_p) {
     binary_semaphore_init(binary_semaphore_p, 0);
 }
 
 
 /* Post to at least one thread */
-static void binary_semaphore_post(mcf_binary_semaphore *binary_semaphore_p) {
+static void binary_semaphore_post(gtr_binary_semaphore *binary_semaphore_p) {
     pthread_mutex_lock(&binary_semaphore_p->mutex);
     binary_semaphore_p->v = 1;
     pthread_cond_signal(&binary_semaphore_p->cond);
@@ -530,7 +528,7 @@ static void binary_semaphore_post(mcf_binary_semaphore *binary_semaphore_p) {
 
 
 /* Post to all threads */
-static void binary_semaphore_post_all(mcf_binary_semaphore *binary_semaphore_p) {
+static void binary_semaphore_post_all(gtr_binary_semaphore *binary_semaphore_p) {
     pthread_mutex_lock(&binary_semaphore_p->mutex);
     binary_semaphore_p->v = 1;
     pthread_cond_broadcast(&binary_semaphore_p->cond);
@@ -539,7 +537,7 @@ static void binary_semaphore_post_all(mcf_binary_semaphore *binary_semaphore_p) 
 
 
 /* Wait on semaphore until semaphore has value 0 */
-static void binary_semaphore_wait(mcf_binary_semaphore *binary_semaphore_p) {
+static void binary_semaphore_wait(gtr_binary_semaphore *binary_semaphore_p) {
     pthread_mutex_lock(&binary_semaphore_p->mutex);
     while (binary_semaphore_p->v != 1) {
         pthread_cond_wait(&binary_semaphore_p->cond, &binary_semaphore_p->mutex);
