@@ -81,8 +81,8 @@ extension ViewController: Driver {
 }
 
 extension ViewController: Horn {
-    public class func whistle(message: String, filename: String, function: String, line: Int) {
-        print("gtr message : " + "\n" + "\(message)" + "\n");
+    public class func whistle(type: HornType, message: String, filename: String, function: String, line: Int) {
+        print("[\(type.name)] => \(message)")
     }
 }
 

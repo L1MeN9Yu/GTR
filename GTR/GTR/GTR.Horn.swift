@@ -55,7 +55,7 @@ public enum HornType {
         }
     }
 
-    var name: String {
+    public var name: String {
         switch self {
         case .trace:
             return "trace:"
