@@ -34,6 +34,7 @@
 		B2D2A4955B3EA1C9E7D6A350 /* gtr_file_utilty.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2BDD4B1B3DA0EB45914 /* gtr_file_utilty.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A608F43185067BA4A9AD /* stdcheaders.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AC18277C7654BAF43B14 /* stdcheaders.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A645319ED3F4CF2F4476 /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AEB9DF57C656DED22A14 /* gtr_core.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		B2D2A65D2BEE3C5F05E9D78A /* urlapi.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A514E33AC3486FC67749 /* urlapi.h */; };
 		B2D2A6A3E200D7095DD39717 /* GTR.ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A79F5D15A7C37F65BC0B /* GTR.ContentType.swift */; };
 		B2D2A73BDD3AC4DB369B4D4F /* gtr_core_request.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A6BA1BD7071E077D8555 /* gtr_core_request.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A7455E628509E3CF98A4 /* gtr_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE7237C26F0FDC915ADB /* gtr_atomic.c */; };
@@ -108,6 +109,7 @@
 		B2D2A324D196A2CEAE3D76E8 /* GTR.Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Method.swift; sourceTree = "<group>"; };
 		B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_atomic.h; sourceTree = "<group>"; };
 		B2D2A4DDB4BAAEF6A3DA2F5B /* GTR.Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Engine.swift; sourceTree = "<group>"; };
+		B2D2A514E33AC3486FC67749 /* urlapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = urlapi.h; sourceTree = "<group>"; };
 		B2D2A66D6341CB9D098269B0 /* GTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.swift; sourceTree = "<group>"; };
 		B2D2A6BA1BD7071E077D8555 /* gtr_core_request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_request.h; sourceTree = "<group>"; };
 		B2D2A79F5D15A7C37F65BC0B /* GTR.ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.ContentType.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				B2D2A93B7CBC04B558AAA2DB /* mprintf.h */,
 				B2D2AC18277C7654BAF43B14 /* stdcheaders.h */,
 				B2D2AC7B85A949171304E966 /* typecheck-gcc.h */,
+				B2D2A514E33AC3486FC67749 /* urlapi.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				B2D2A608F43185067BA4A9AD /* stdcheaders.h in Headers */,
 				B2D2A82B1ABF4797EF0915D5 /* typecheck-gcc.h in Headers */,
 				B2D2A29DD062DF021D9E496B /* gtr_core_log.h in Headers */,
+				B2D2A65D2BEE3C5F05E9D78A /* urlapi.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
