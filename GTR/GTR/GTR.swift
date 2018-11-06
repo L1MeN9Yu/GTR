@@ -16,6 +16,11 @@ public class GTR {
         return engine
     }()
 
+    private(set) static var hud = { () -> GTR.HUD in
+        let hud = GTR.HUD()
+        return hud
+    }()
+
     private static var driver: Driver.Type?
 
     private static var horn: Horn.Type?

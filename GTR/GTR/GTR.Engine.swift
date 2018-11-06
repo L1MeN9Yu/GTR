@@ -196,6 +196,16 @@ extension GTR.Engine {
 
         return string
     }
+
+    private func notifyRequestStart(taskID: UInt32, method: GTR.Method) {
+        let center = NotificationCenter.default
+        center.post(name: GTR.Notification.requestStart, object: nil, userInfo: [:])
+    }
+
+    private func notifyRequestComplete(taskID: UInt32, method: GTR.Method) {
+        let center = NotificationCenter.default
+        center.post(name: GTR.Notification.requestComplete, object: nil, userInfo: [:])
+    }
 }
 
 @_silgen_name("swift_get_request_succeed")

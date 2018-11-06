@@ -51,6 +51,7 @@
 		B2D2AB6C41D6946014980FC4 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
 		B2D2AE1FFACBE0355A3E8B1C /* GTR.HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA45760ED5D528DC4C1B /* GTR.HUD.swift */; };
+		B2D2AE3EAD1474BCA6B825D2 /* GTR.NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA4F6CFEE54E5F48DC8E /* GTR.NotificationName.swift */; };
 		B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA86DA38062600F6345F /* gtr_core_log.c */; };
 		B2D2AF1ED090FAFD3191BD13 /* easy.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A1CA4E070C829CFC23EE /* easy.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2AF6943F995C6E1364374 /* GTR.Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4DDB4BAAEF6A3DA2F5B /* GTR.Engine.swift */; };
@@ -124,6 +125,7 @@
 		B2D2A99333109680AB041F1C /* gtr_ios_utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_ios_utility.h; sourceTree = "<group>"; };
 		B2D2AA1BC2EC4FDB41790ACE /* unqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unqlite.h; sourceTree = "<group>"; };
 		B2D2AA45760ED5D528DC4C1B /* GTR.HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.HUD.swift; sourceTree = "<group>"; };
+		B2D2AA4F6CFEE54E5F48DC8E /* GTR.NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.NotificationName.swift; sourceTree = "<group>"; };
 		B2D2AA86DA38062600F6345F /* gtr_core_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_log.c; sourceTree = "<group>"; };
 		B2D2AA9138F7C51FFCAA46B8 /* multi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = multi.h; sourceTree = "<group>"; };
 		B2D2AC18277C7654BAF43B14 /* stdcheaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdcheaders.h; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				B2D2A79F5D15A7C37F65BC0B /* GTR.ContentType.swift */,
 				B2D2A93504887D10507AE9FE /* GTR.Destination.swift */,
 				B2D2AA45760ED5D528DC4C1B /* GTR.HUD.swift */,
+				B2D2AA4F6CFEE54E5F48DC8E /* GTR.NotificationName.swift */,
 			);
 			path = GTR;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				B2D2A6A3E200D7095DD39717 /* GTR.ContentType.swift in Sources */,
 				B2D2AF89CE011EDD0F488B36 /* GTR.Destination.swift in Sources */,
 				B2D2AE1FFACBE0355A3E8B1C /* GTR.HUD.swift in Sources */,
+				B2D2AE3EAD1474BCA6B825D2 /* GTR.NotificationName.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

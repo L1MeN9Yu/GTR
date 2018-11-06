@@ -66,28 +66,26 @@ extension GTR.HUD {
     private func registerNotifications() {
         let notificationCenter = NotificationCenter.default
 
-        /*
         notificationCenter.addObserver(
                 self,
-                selector: #selector(NetworkActivityIndicatorManager.networkRequestDidStart),
-                name: Notification.Name.Task.DidResume,
+                selector: #selector(GTR.HUD.networkRequestDidStart),
+                name: GTR.Notification.requestStart,
                 object: nil
         )
 
         notificationCenter.addObserver(
                 self,
-                selector: #selector(NetworkActivityIndicatorManager.networkRequestDidComplete),
-                name: Notification.Name.Task.DidSuspend,
+                selector: #selector(GTR.HUD.networkRequestDidComplete),
+                name: GTR.Notification.requestCanceled,
                 object: nil
         )
 
         notificationCenter.addObserver(
                 self,
-                selector: #selector(NetworkActivityIndicatorManager.networkRequestDidComplete),
-                name: Notification.Name.Task.DidComplete,
+                selector: #selector(GTR.HUD.networkRequestDidComplete),
+                name: GTR.Notification.requestComplete,
                 object: nil
         )
-        */
     }
 
     private func unregisterNotifications() {
@@ -185,6 +183,16 @@ extension GTR.HUD {
         defer { lock.unlock() }
 
         activityIndicatorState = .notActive
+    }
+
+    @objc
+    private func networkRequestDidStart() {
+        incrementActivityCount()
+    }
+
+    @objc
+    private func networkRequestDidComplete() {
+        decrementActivityCount()
     }
 }
 

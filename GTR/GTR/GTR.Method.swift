@@ -12,5 +12,7 @@ extension GTR {
         case put
         case download
         case upload
+
+        static let userInfoKey = "GTR.Method"
     }
 }
