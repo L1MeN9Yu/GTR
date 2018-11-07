@@ -69,21 +69,21 @@ extension GTR.HUD {
         notificationCenter.addObserver(
                 self,
                 selector: #selector(GTR.HUD.networkRequestDidStart),
-                name: GTR.Notification.requestStart,
+                name: GTR.Notification.RequestStatusType.start.notificationName,
                 object: nil
         )
 
         notificationCenter.addObserver(
                 self,
                 selector: #selector(GTR.HUD.networkRequestDidComplete),
-                name: GTR.Notification.requestCanceled,
+                name: GTR.Notification.RequestStatusType.canceled.notificationName,
                 object: nil
         )
 
         notificationCenter.addObserver(
                 self,
                 selector: #selector(GTR.HUD.networkRequestDidComplete),
-                name: GTR.Notification.requestComplete,
+                name: GTR.Notification.RequestStatusType.complete.notificationName,
                 object: nil
         )
     }

@@ -7,11 +7,26 @@ import Foundation
 
 extension GTR {
     public struct Notification {
-        public static let requestStart = Foundation.Notification.Name("top.limengyu.GTR.Request.Start")
-        public static let requestComplete = Foundation.Notification.Name("top.limengyu.GTR.Request.Complete")
-        public static let requestCanceled = Foundation.Notification.Name("top.limengyu.GTR.Request.Canceled")
+        private static let requestStart = Foundation.Notification.Name("top.limengyu.GTR.Request.Start")
+        private static let requestComplete = Foundation.Notification.Name("top.limengyu.GTR.Request.Complete")
+        private static let requestCanceled = Foundation.Notification.Name("top.limengyu.GTR.Request.Canceled")
 
         public static let userInfoMethodKey = GTR.Method.userInfoKey
         public static let userInfoTaskIDKey = "GTR.TaskID"
+
+        public enum RequestStatusType {
+            case start, complete, canceled
+
+            public var notificationName: Foundation.Notification.Name {
+                switch self {
+                case .start:
+                    return requestStart
+                case .complete:
+                    return requestComplete
+                case .canceled:
+                    return requestCanceled
+                }
+            }
+        }
     }
 }

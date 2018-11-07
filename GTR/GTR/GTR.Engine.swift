@@ -13,6 +13,7 @@ typealias GTRHttpHeaderClosure = () -> [Swift.String: Swift.String]
 extension GTR {
     class Engine {
         private(set) var responseQueue = DispatchQueue.main
+        private(set) var notificationQueue = DispatchQueue.main
         private(set) var succeedContainer: [Swift.UInt32: GTRSucceedClosure?] = [Swift.UInt32: GTRSucceedClosure?]()
         private(set) var failureContainer: [Swift.UInt32: GTRFailureClosure?] = [Swift.UInt32: GTRFailureClosure?]()
         private(set) var downloadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
@@ -197,14 +198,17 @@ extension GTR.Engine {
         return string
     }
 
-    private func notifyRequestStart(taskID: UInt32, method: GTR.Method) {
+    // MARK: 发送通知
+    private func notifyRequestStatus(status: GTR.Notification.RequestStatusType,
+                                     taskID: UInt32,
+                                     method: GTR.Method) {
         let center = NotificationCenter.default
-        center.post(name: GTR.Notification.requestStart, object: nil, userInfo: [:])
-    }
-
-    private func notifyRequestComplete(taskID: UInt32, method: GTR.Method) {
-        let center = NotificationCenter.default
-        center.post(name: GTR.Notification.requestComplete, object: nil, userInfo: [:])
+        let notificationName = status.notificationName
+        var userInfo: [String: Any] = [
+            GTR.Notification.userInfoTaskIDKey: taskID,
+            GTR.Notification.userInfoMethodKey: method
+        ]
+        center.post(name: notificationName, object: nil, userInfo: userInfo)
     }
 }
 
