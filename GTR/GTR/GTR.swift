@@ -63,6 +63,7 @@ public class GTR {
                 },
                 failure: { (httpResponseCode, errorCode, errorMessage) in
                     complete?(GTR.Destination.lose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage))
+                    self.notifyFailure(url: url, headers: allHeaders, contentType: contentType, param: param, httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
                 })
     }
 }
@@ -99,10 +100,18 @@ extension GTR {
 
 // MARK: - Extern
 extension GTR {
-    public class func logLose(httpResponseCode: Int, errorCode: Int32, errorMessage: String,
-                              filename: String = #file, function: String = #function, line: Int = #line) {
+    class func notifyFailure(url: String, headers: [String: Encodable]?, contentType: GTR.ContentType, param: [String: Any]?,
+                             httpResponseCode: Int, errorCode: Int32, errorMessage: String,
+                             filename: String = #file, function: String = #function, line: Int = #line) {
         let message = "response code = \(httpResponseCode)\n errorCode = \(errorCode)\n errorMessage = \(errorMessage)\n"
         self.horn?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
+    }
+
+    @available(iOS, deprecated: 0.3.0, message: "func does noting now")
+    public class func logLose(httpResponseCode: Int, errorCode: Int32, errorMessage: String,
+                              filename: String = #file, function: String = #function, line: Int = #line) {
+//        let message = "response code = \(httpResponseCode)\n errorCode = \(errorCode)\n errorMessage = \(errorMessage)\n"
+//        self.horn?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
     }
 
     public class func whistle(type: HornType, message: String, filename: String = #file,

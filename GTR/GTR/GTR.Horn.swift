@@ -3,8 +3,13 @@
 // Copyright (c) 2018 limengyu.top. All rights reserved.
 //
 
+import Foundation
+
 public protocol Horn {
     static func whistle(type: HornType, message: String, filename: String, function: String, line: Int)
+
+    static func raceDidLost(url: String, headers: [String: Encodable]?, contentType: GTR.ContentType, param: [String: Any]?,
+                            httpResponseCode: Int, errorCode: Int32, errorMessage: String)
 }
 
 extension Horn {
@@ -12,6 +17,8 @@ extension Horn {
         let allMessage = "[\(type.name)] ======>>>[\(URL(fileURLWithPath: filename).lastPathComponent):\(line)] \(function) - \(message)"
         print(allMessage)
     }
+
+    public static func raceDidLost(url: String, headers: [String: Encodable]?, contentType: GTR.ContentType, param: [String: Any]?, httpResponseCode: Int, errorCode: Int32, errorMessage: String) {}
 }
 
 // MARK: - C Bridge
