@@ -105,6 +105,7 @@ extension GTR {
                              filename: String = #file, function: String = #function, line: Int = #line) {
         let message = "response code = \(httpResponseCode)\n errorCode = \(errorCode)\n errorMessage = \(errorMessage)\n"
         self.horn?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
+        self.horn?.raceDidLost(url: url, headers: headers, contentType: contentType, param: param, httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
     }
 
     @available(iOS, deprecated: 0.3.0, message: "func does noting now")
