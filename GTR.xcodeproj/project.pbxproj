@@ -49,7 +49,9 @@
 		B2D2A9BA51EF9099AA29A60B /* gtr_ios_utility.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */; };
 		B2D2AA47DDDFFC7C173B0904 /* gtr_core_request.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_request.c */; };
 		B2D2AB6C41D6946014980FC4 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		B2D2AC49B4B57F78641195BF /* RaceDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AFA417FBB367C4C3C1FE /* RaceDemo.swift */; };
 		B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
+		B2D2AE01135DAC924C77BADE /* GTR.Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* GTR.Race.swift */; };
 		B2D2AE1FFACBE0355A3E8B1C /* GTR.HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA45760ED5D528DC4C1B /* GTR.HUD.swift */; };
 		B2D2AE3EAD1474BCA6B825D2 /* GTR.NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA4F6CFEE54E5F48DC8E /* GTR.NotificationName.swift */; };
 		B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA86DA38062600F6345F /* gtr_core_log.c */; };
@@ -109,6 +111,7 @@
 		B2D2A2E6359680E3E556337F /* GTR.Gearbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Gearbox.swift; sourceTree = "<group>"; };
 		B2D2A324D196A2CEAE3D76E8 /* GTR.Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Method.swift; sourceTree = "<group>"; };
 		B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_atomic.h; sourceTree = "<group>"; };
+		B2D2A3F728E82ED3509187B1 /* GTR.Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Race.swift; sourceTree = "<group>"; };
 		B2D2A4DDB4BAAEF6A3DA2F5B /* GTR.Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Engine.swift; sourceTree = "<group>"; };
 		B2D2A514E33AC3486FC67749 /* urlapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = urlapi.h; sourceTree = "<group>"; };
 		B2D2A66D6341CB9D098269B0 /* GTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.swift; sourceTree = "<group>"; };
@@ -140,6 +143,7 @@
 		B2D2AEE6E80C2CD98C4D3644 /* GTR.Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Horn.swift; sourceTree = "<group>"; };
 		B2D2AF5C9388C2BB3FAAB204 /* GTR.Driver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Driver.swift; sourceTree = "<group>"; };
 		B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_file_utilty.c; sourceTree = "<group>"; };
+		B2D2AFA417FBB367C4C3C1FE /* RaceDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceDemo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +185,7 @@
 				4290D62F2137F49200ED45E2 /* Assets.xcassets */,
 				4290D6312137F49200ED45E2 /* LaunchScreen.storyboard */,
 				4290D6342137F49200ED45E2 /* Info.plist */,
+				B2D2AFA417FBB367C4C3C1FE /* RaceDemo.swift */,
 			);
 			path = GTRDemo;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				B2D2A93504887D10507AE9FE /* GTR.Destination.swift */,
 				B2D2AA45760ED5D528DC4C1B /* GTR.HUD.swift */,
 				B2D2AA4F6CFEE54E5F48DC8E /* GTR.NotificationName.swift */,
+				B2D2A3F728E82ED3509187B1 /* GTR.Race.swift */,
 			);
 			path = GTR;
 			sourceTree = "<group>";
@@ -496,6 +502,7 @@
 			files = (
 				4290D62B2137F49200ED45E2 /* ViewController.swift in Sources */,
 				4290D6292137F49200ED45E2 /* AppDelegate.swift in Sources */,
+				B2D2AC49B4B57F78641195BF /* RaceDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +532,7 @@
 				B2D2AF89CE011EDD0F488B36 /* GTR.Destination.swift in Sources */,
 				B2D2AE1FFACBE0355A3E8B1C /* GTR.HUD.swift in Sources */,
 				B2D2AE3EAD1474BCA6B825D2 /* GTR.NotificationName.swift in Sources */,
+				B2D2AE01135DAC924C77BADE /* GTR.Race.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

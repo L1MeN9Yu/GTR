@@ -35,9 +35,9 @@ class ViewController: UIViewController {
 
 // MARK: - Actions
 extension ViewController {
-    @objc private func getAction(button: UIButton) {
-        GTR.race(method: .post, url: "http://dict.hjapi.com/v10/read/news/listByPage", timeOut: 10,
-                param: ["language": "en", "pageNo": 1, "pageSize": 20]) { destination in
+    @objc
+    private func getAction(button: UIButton) {
+        RaceDemo.fetch(language: "en") { destination in
             switch destination {
             case .win(let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {

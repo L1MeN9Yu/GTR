@@ -26,15 +26,15 @@ public class GTR {
     private static var horn: Horn.Type?
 
     @discardableResult
-    public class func race(method: GTR.Method = .get,
-                           url: String,
-                           contentType: GTR.ContentType = .json,
-                           headers: [String: Encodable]? = nil,
-                           timeOut: UInt32,
-                           param: [String: Any]? = nil,
-                           downloadPath: String? = nil,
-                           progress: ((_ now: UInt64, _ total: UInt64) -> Void)? = nil,
-                           complete: Complete?) -> UInt32 {
+    class func request(method: GTR.Method = .get,
+                       url: String,
+                       contentType: GTR.ContentType = .json,
+                       headers: [String: Encodable]? = nil,
+                       timeOut: UInt32,
+                       param: [String: Any]? = nil,
+                       downloadPath: String? = nil,
+                       progress: ((_ now: UInt64, _ total: UInt64) -> Void)? = nil,
+                       complete: Result?) -> UInt32 {
         var allHeaders = contentType.toHeader()
 
         if let globalHeader = self.driver?.identity() {

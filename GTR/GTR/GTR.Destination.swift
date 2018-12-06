@@ -16,5 +16,5 @@ extension GTR {
 
 // MARK: - Typealias
 extension GTR {
-    public typealias Complete = (GTR.Destination) -> Void
+    public typealias Result = (GTR.Destination) -> Void
 }
