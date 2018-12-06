@@ -16,8 +16,7 @@
 		4290D6332137F49200ED45E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4290D6312137F49200ED45E2 /* LaunchScreen.storyboard */; };
 		4290D6382137F49B00ED45E2 /* GTR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0B0982119EF8A00D01CC4 /* GTR.framework */; };
 		4290D6392137F49B00ED45E2 /* GTR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0B0982119EF8A00D01CC4 /* GTR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		42F0B09D2119EF8A00D01CC4 /* GTR.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F0B09B2119EF8A00D01CC4 /* GTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4530496CB7B66057B5AAFED6 /* GTR.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304850E2A52EA9FD4CF561 /* GTR.c */; };
+		4530496CB7B66057B5AAFED6 /* GTR.External.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304850E2A52EA9FD4CF561 /* GTR.External.c */; };
 		45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445B651AB97564ABE56C /* GTR.External.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45304E27E0E3E66A29C2F05B /* Dictionary+NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530407A138ED07408B9DB82 /* Dictionary+NetworkJSON.swift */; };
 		B2D2A09B9401A6BF6ED07EF3 /* gtr_core_header_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -26,7 +25,7 @@
 		B2D2A210C7794B9F6AB1139E /* curlver.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2DF63011CFA6581F861 /* curlver.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A256DEFBD6EFE49D36E8 /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */; };
 		B2D2A2586B0FCCFDBE563406 /* GTR.Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF5C9388C2BB3FAAB204 /* GTR.Driver.swift */; };
-		B2D2A29DD062DF021D9E496B /* gtr_core_log.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A97607A814FF3E6C113B /* gtr_core_log.h */; };
+		B2D2A29DD062DF021D9E496B /* gtr_core_log.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A97607A814FF3E6C113B /* gtr_core_log.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A2D286539C35AD1BD9D2 /* unqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE118D9DBA005EC9ECB9 /* unqlite.c */; };
 		B2D2A2E69F5A86DDFAB5CA99 /* gtr_ios_utility.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A99333109680AB041F1C /* gtr_ios_utility.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A3323975D1AB5E0F102A /* multi.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AA9138F7C51FFCAA46B8 /* multi.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -34,7 +33,8 @@
 		B2D2A4955B3EA1C9E7D6A350 /* gtr_file_utilty.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2BDD4B1B3DA0EB45914 /* gtr_file_utilty.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A608F43185067BA4A9AD /* stdcheaders.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AC18277C7654BAF43B14 /* stdcheaders.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A645319ED3F4CF2F4476 /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AEB9DF57C656DED22A14 /* gtr_core.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B2D2A65D2BEE3C5F05E9D78A /* urlapi.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A514E33AC3486FC67749 /* urlapi.h */; };
+		B2D2A65D2BEE3C5F05E9D78A /* urlapi.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A514E33AC3486FC67749 /* urlapi.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		B2D2A65E39A12F7FA30D41FA /* GTR.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ACA7D124F6573FF09579 /* GTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2D2A6A3E200D7095DD39717 /* GTR.ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A79F5D15A7C37F65BC0B /* GTR.ContentType.swift */; };
 		B2D2A73BDD3AC4DB369B4D4F /* gtr_core_request.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A6BA1BD7071E077D8555 /* gtr_core_request.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A7455E628509E3CF98A4 /* gtr_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE7237C26F0FDC915ADB /* gtr_atomic.c */; };
@@ -96,11 +96,10 @@
 		4290D6322137F49200ED45E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4290D6342137F49200ED45E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F0B0982119EF8A00D01CC4 /* GTR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42F0B09B2119EF8A00D01CC4 /* GTR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTR.h; sourceTree = "<group>"; };
 		42F0B09C2119EF8A00D01CC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4530407A138ED07408B9DB82 /* Dictionary+NetworkJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+NetworkJSON.swift"; sourceTree = "<group>"; };
 		4530445B651AB97564ABE56C /* GTR.External.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTR.External.h; sourceTree = "<group>"; };
-		45304850E2A52EA9FD4CF561 /* GTR.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GTR.c; sourceTree = "<group>"; };
+		45304850E2A52EA9FD4CF561 /* GTR.External.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GTR.External.c; sourceTree = "<group>"; };
 		B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_proxy.c; sourceTree = "<group>"; };
 		B2D2A1CA4E070C829CFC23EE /* easy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easy.h; sourceTree = "<group>"; };
 		B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_request.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_request.c; sourceTree = "<group>"; };
@@ -130,6 +129,7 @@
 		B2D2AA9138F7C51FFCAA46B8 /* multi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = multi.h; sourceTree = "<group>"; };
 		B2D2AC18277C7654BAF43B14 /* stdcheaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdcheaders.h; sourceTree = "<group>"; };
 		B2D2AC7B85A949171304E966 /* typecheck-gcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "typecheck-gcc.h"; sourceTree = "<group>"; };
+		B2D2ACA7D124F6573FF09579 /* GTR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTR.h; sourceTree = "<group>"; };
 		B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_ios_utility.c; sourceTree = "<group>"; };
 		B2D2AD6D516A4F85DDCCDB55 /* curl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curl.h; sourceTree = "<group>"; };
 		B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_header_helper.h; sourceTree = "<group>"; };
@@ -207,12 +207,12 @@
 		42F0B09A2119EF8A00D01CC4 /* GTR */ = {
 			isa = PBXGroup;
 			children = (
-				42F0B09B2119EF8A00D01CC4 /* GTR.h */,
-				42F0B09C2119EF8A00D01CC4 /* Info.plist */,
 				453046D2720EF6530D08D345 /* Extension */,
 				45304E707DAAA9CE5B6C65A8 /* Core */,
 				B2D2A43C582960401B2E45CA /* Private */,
 				B2D2AC4CF2F2BD3D5AA1CB66 /* GTR */,
+				B2D2ACA7D124F6573FF09579 /* GTR.h */,
+				42F0B09C2119EF8A00D01CC4 /* Info.plist */,
 			);
 			path = GTR;
 			sourceTree = "<group>";
@@ -228,7 +228,7 @@
 		45304E707DAAA9CE5B6C65A8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				45304850E2A52EA9FD4CF561 /* GTR.c */,
+				45304850E2A52EA9FD4CF561 /* GTR.External.c */,
 				4530445B651AB97564ABE56C /* GTR.External.h */,
 				B2D2A2920DF46B0427FF62B4 /* gtr_core */,
 			);
@@ -366,7 +366,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42F0B09D2119EF8A00D01CC4 /* GTR.h in Headers */,
+				B2D2A65E39A12F7FA30D41FA /* GTR.h in Headers */,
 				45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */,
 				B2D2A77B25B9F827ED8F029E /* unqlite.h in Headers */,
 				B2D2A976E33BE36728663A76 /* gtr_thread_pool.h in Headers */,
@@ -504,7 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45304E27E0E3E66A29C2F05B /* Dictionary+NetworkJSON.swift in Sources */,
-				4530496CB7B66057B5AAFED6 /* GTR.c in Sources */,
+				4530496CB7B66057B5AAFED6 /* GTR.External.c in Sources */,
 				B2D2A2D286539C35AD1BD9D2 /* unqlite.c in Sources */,
 				B2D2A7E2090D47010200A05A /* gtr_thread_pool.c in Sources */,
 				B2D2A7455E628509E3CF98A4 /* gtr_atomic.c in Sources */,
