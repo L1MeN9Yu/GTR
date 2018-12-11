@@ -35,3 +35,30 @@ extension RaceDemo {
         return GTR.race(request: race, complete: complete)
     }
 }
+
+struct CompleteLearning: Race {
+    let trainingCampID: UInt
+    let lessonId: UInt
+    let learningSeconds: TimeInterval
+
+    var url: String {
+        return "https://trainingcamp.hjapi.com" + "/v1/training/\(trainingCampID)/lesson/finished"
+    }
+
+    var method: GTR.Method {
+        return .put
+    }
+
+    var parameters: [String: Encodable]? {
+        return [
+            "lessonId": self.lessonId,
+            "studySeconds": self.learningSeconds
+        ]
+    }
+
+    @discardableResult
+    static func put(courseID: UInt, lessonId: UInt, learningSeconds: TimeInterval, complete: @escaping GTR.Result) -> UInt32 {
+        let request = self.init(trainingCampID: courseID, lessonId: lessonId, learningSeconds: learningSeconds)
+        return GTR.race(request: request, complete: complete)
+    }
+}

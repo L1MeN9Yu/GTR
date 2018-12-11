@@ -50,6 +50,7 @@
 		B2D2AA47DDDFFC7C173B0904 /* gtr_core_request.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_request.c */; };
 		B2D2AB6C41D6946014980FC4 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2AC49B4B57F78641195BF /* RaceDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AFA417FBB367C4C3C1FE /* RaceDemo.swift */; };
+		B2D2ACDB3A0259A88C9B9995 /* GTR.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* GTR.Error.swift */; };
 		B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
 		B2D2AE01135DAC924C77BADE /* GTR.Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* GTR.Race.swift */; };
 		B2D2AE1FFACBE0355A3E8B1C /* GTR.HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA45760ED5D528DC4C1B /* GTR.HUD.swift */; };
@@ -111,6 +112,7 @@
 		B2D2A2E6359680E3E556337F /* GTR.Gearbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Gearbox.swift; sourceTree = "<group>"; };
 		B2D2A324D196A2CEAE3D76E8 /* GTR.Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Method.swift; sourceTree = "<group>"; };
 		B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_atomic.h; sourceTree = "<group>"; };
+		B2D2A3AB95F258E1382B16AE /* GTR.Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Error.swift; sourceTree = "<group>"; };
 		B2D2A3F728E82ED3509187B1 /* GTR.Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Race.swift; sourceTree = "<group>"; };
 		B2D2A4DDB4BAAEF6A3DA2F5B /* GTR.Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Engine.swift; sourceTree = "<group>"; };
 		B2D2A514E33AC3486FC67749 /* urlapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = urlapi.h; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				B2D2AA45760ED5D528DC4C1B /* GTR.HUD.swift */,
 				B2D2AA4F6CFEE54E5F48DC8E /* GTR.NotificationName.swift */,
 				B2D2A3F728E82ED3509187B1 /* GTR.Race.swift */,
+				B2D2A3AB95F258E1382B16AE /* GTR.Error.swift */,
 			);
 			path = GTR;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 				4290D62B2137F49200ED45E2 /* ViewController.swift in Sources */,
 				4290D6292137F49200ED45E2 /* AppDelegate.swift in Sources */,
 				B2D2AC49B4B57F78641195BF /* RaceDemo.swift in Sources */,
+				B2D2ACDB3A0259A88C9B9995 /* GTR.Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

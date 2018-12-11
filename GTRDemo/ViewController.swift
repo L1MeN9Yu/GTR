@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         actionButton.setTitle("Go", for: .normal)
         actionButton.setTitleColor(.black, for: .normal)
         actionButton.addTarget(self, action: #selector(ViewController.getAction), for: .touchUpInside)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
         return actionButton
     }()
 
@@ -37,29 +38,44 @@ class ViewController: UIViewController {
 extension ViewController {
     @objc
     private func getAction(button: UIButton) {
+        /*
+        CompleteLearning.put(courseID: 37, lessonId: 8832301, learningSeconds: 106) { destination in
+            switch destination {
+            case .win(let responseData):
+                if let string = String(data: responseData, encoding: .utf8) {
+                    print("succeed : \(string)")
+                }
+                break
+            case .lose(let httpResponseCode, let errorCode, let errorMessage):
+                break
+            }
+        }
+        */
+
+//        /*
         RaceDemo.fetch(language: "en") { destination in
             switch destination {
             case .win(let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string.count)")
+                    print("succeed : \(string)")
                 }
                 break
             case .lose(let httpResponseCode, let errorCode, let errorMessage):
-                GTR.logLose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
                 break
             }
         }
+//        */
     }
 }
 
 // MARK: - Private
 extension ViewController {
     private func setupUI() {
-        let screenHeight = UIScreen.main.bounds.size.height
-        let screenWidth = UIScreen.main.bounds.size.width
-        let buttonHeight = CGFloat(60)
-        self.actionButton.frame = CGRect(x: 0, y: screenHeight - 60, width: screenWidth, height: buttonHeight)
         self.view.addSubview(self.actionButton)
+        self.actionButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        self.actionButton.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor).isActive = true
+        self.actionButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        self.actionButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
 
     private func setupGTR() {
