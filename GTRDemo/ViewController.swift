@@ -38,7 +38,7 @@ class ViewController: UIViewController {
 extension ViewController {
     @objc
     private func getAction(button: UIButton) {
-//        /*
+        /*
         CompleteLearning.put(courseID: 37, lessonId: 8832301, learningSeconds: 106) { destination in
             switch destination {
             case .win(let responseData):
@@ -50,9 +50,9 @@ extension ViewController {
                 break
             }
         }
-//        */
+        */
 
-        /*
+//        /*
         RaceDemo.fetch(language: "en") { destination in
             switch destination {
             case .win(let responseData):
@@ -64,7 +64,7 @@ extension ViewController {
                 break
             }
         }
-        */
+//        */
     }
 }
 
@@ -86,7 +86,7 @@ extension ViewController {
 extension ViewController: Driver {
     public static var identity: () -> [String: Encodable]? {
         return {
-            return nil
+            return ["Access-Token":"0003d0a097.bc6bb51579cb1e1643d4b2d69b37c0dd"]
         }
     }
     public static var userAgent: () -> String? {

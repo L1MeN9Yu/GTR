@@ -12,7 +12,7 @@ struct RaceDemo: Race {
     let pageSize: Int = 20
 
     var url: String {
-        return "http://dict.hjapi.com/v10/read/news/listByPage"
+        return "http://qacichang.hjapi.com/v3/user/me/book/16787/share"
     }
 
     var timeout: UInt32 {
@@ -20,12 +20,12 @@ struct RaceDemo: Race {
     }
 
     var method: GTR.Method {
-        return .post
+        return .put
     }
 
-    var parameters: [String: Encodable]? {
-        return ["language": self.language, "pageNo": self.pageNo, "pageSize": self.pageSize]
-    }
+//    var parameters: [String: Encodable]? {
+//        return ["language": self.language, "pageNo": self.pageNo, "pageSize": self.pageSize]
+//    }
 }
 
 extension RaceDemo {
