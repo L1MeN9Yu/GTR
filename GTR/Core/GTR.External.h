@@ -9,6 +9,8 @@
 #ifndef GTR_External_h
 #define GTR_External_h
 
+#include <stdbool.h>
+
 /**
  * 初始化GIR,生命周期内只执行一次
  * @param user_agent 全局user agent

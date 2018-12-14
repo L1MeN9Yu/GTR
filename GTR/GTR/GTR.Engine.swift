@@ -26,7 +26,7 @@ extension GTR {
 // MARK: - Internal
 extension GTR.Engine {
     func fire(engineNumber: String? = nil) {
-        gtr_init(engineNumber?.cString(using: .utf8))
+        c_gtr_init(engineNumber?.cString(using: .utf8))
     }
 
     // MARK: Request
@@ -95,7 +95,7 @@ extension GTR.Engine {
         var taskID: CUnsignedInt = 0
         let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
 
-        gtr_get(&taskID, url.cString(using: .utf8), cHeaders, timeOut)
+        c_gtr_get(&taskID, url.cString(using: .utf8), cHeaders, timeOut)
         self.succeedContainer[taskID] = succeed
         self.failureContainer[taskID] = failure
 
@@ -138,7 +138,7 @@ extension GTR.Engine {
             }
         }
 
-        gtr_post(&taskID, url.cString(using: .utf8),
+        c_gtr_post(&taskID, url.cString(using: .utf8),
                 cHeaders, timeOut, c_param, c_param_size)
         self.succeedContainer[taskID] = succeed
         self.failureContainer[taskID] = failure
@@ -163,7 +163,7 @@ extension GTR.Engine {
             }
             c_param_size = CUnsignedLong(data.count)
         }
-        gtr_put(&taskID, url.cString(using: .utf8), cHeaders, timeOut, c_param, c_param_size)
+        c_gtr_put(&taskID, url.cString(using: .utf8), cHeaders, timeOut, c_param, c_param_size)
         self.succeedContainer[taskID] = succeed
         self.failureContainer[taskID] = failure
 
@@ -180,7 +180,7 @@ extension GTR.Engine {
                                  failure: GTRFailureClosure?) -> UInt32 {
         var taskID: CUnsignedInt = 0
         let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
-        gtr_download(&taskID, url.cString(using: .utf8), filePath.cString(using: .utf8), cHeaders, timeOut)
+        c_gtr_download(&taskID, url.cString(using: .utf8), filePath.cString(using: .utf8), cHeaders, timeOut)
         return taskID
     }
 
@@ -211,6 +211,24 @@ extension GTR.Engine {
         center.post(name: notificationName, object: nil, userInfo: userInfo)
     }
 }
+
+// MARK: - C Bridge
+@_silgen_name("gtr_init")
+func c_gtr_init(_ user_agent: UnsafePointer<Int8>?)
+
+@_silgen_name("gtr_get")
+func c_gtr_get(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32)
+
+@_silgen_name("gtr_post")
+func c_gtr_post(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ param_data: UnsafeRawPointer?, _ param_size: UInt)
+
+@_silgen_name("gtr_put")
+func c_gtr_put(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ param_data: UnsafeRawPointer?, _ param_size: UInt)
+
+@_silgen_name("gtr_download")
+func c_gtr_download(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ filePath: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32)
+
+// MARK: - C CallBack
 
 @_silgen_name("swift_get_request_succeed")
 func c_get_request_succeed(task_id: CUnsignedInt,

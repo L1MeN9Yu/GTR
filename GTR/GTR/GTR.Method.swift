@@ -9,6 +9,7 @@ extension GTR {
     public enum Method: UInt {
         case get
         case post
+        /// 像Post一样请求,对服务端而言PUT是幂等的,如需上传文件,用upload
         case put
         case download
         case upload

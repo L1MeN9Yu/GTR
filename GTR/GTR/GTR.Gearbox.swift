@@ -30,9 +30,9 @@ extension GTR.Gearbox {
 extension GTR.Gearbox {
     private func updateGTR() {
         if let proxyInfo = self.proxyInfo {
-            gtr_proxy(true, proxyInfo.url.cString(using: .utf8), proxyInfo.port)
+            c_gtr_proxy(true, proxyInfo.url.cString(using: .utf8), proxyInfo.port)
         } else {
-            gtr_proxy(false, "".cString(using: .utf8), 0)
+            c_gtr_proxy(false, "".cString(using: .utf8), 0)
         }
     }
 }
@@ -62,3 +62,6 @@ extension GTR.Gearbox {
         self.updateGTR()
     }
 }
+
+@_silgen_name("gtr_proxy")
+func c_gtr_proxy(_ enable: Bool, _ url: UnsafePointer<Int8>?, _ port: UInt32)

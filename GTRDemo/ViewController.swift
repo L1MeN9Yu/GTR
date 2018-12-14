@@ -38,7 +38,7 @@ class ViewController: UIViewController {
 extension ViewController {
     @objc
     private func getAction(button: UIButton) {
-        /*
+//        /*
         CompleteLearning.put(courseID: 37, lessonId: 8832301, learningSeconds: 106) { destination in
             switch destination {
             case .win(let responseData):
@@ -50,9 +50,9 @@ extension ViewController {
                 break
             }
         }
-        */
+//        */
 
-//        /*
+        /*
         RaceDemo.fetch(language: "en") { destination in
             switch destination {
             case .win(let responseData):
@@ -64,7 +64,7 @@ extension ViewController {
                 break
             }
         }
-//        */
+        */
     }
 }
 
