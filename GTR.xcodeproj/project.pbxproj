@@ -17,7 +17,7 @@
 		4290D6382137F49B00ED45E2 /* GTR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0B0982119EF8A00D01CC4 /* GTR.framework */; };
 		4290D6392137F49B00ED45E2 /* GTR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0B0982119EF8A00D01CC4 /* GTR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4530496CB7B66057B5AAFED6 /* GTR.External.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304850E2A52EA9FD4CF561 /* GTR.External.c */; };
-		45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445B651AB97564ABE56C /* GTR.External.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445B651AB97564ABE56C /* GTR.External.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		45304E27E0E3E66A29C2F05B /* Dictionary+NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530407A138ED07408B9DB82 /* Dictionary+NetworkJSON.swift */; };
 		B2D2A09B9401A6BF6ED07EF3 /* gtr_core_header_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A1A80A1FEA69E1B05889 /* GTR.Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AEE6E80C2CD98C4D3644 /* GTR.Horn.swift */; };
@@ -376,7 +376,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2D2A65E39A12F7FA30D41FA /* GTR.h in Headers */,
-				45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */,
 				B2D2A77B25B9F827ED8F029E /* unqlite.h in Headers */,
 				B2D2A976E33BE36728663A76 /* gtr_thread_pool.h in Headers */,
 				B2D2AB6C41D6946014980FC4 /* gtr_atomic.h in Headers */,
@@ -394,6 +393,7 @@
 				B2D2A884FD1746CB0CA52BAA /* mprintf.h in Headers */,
 				B2D2A608F43185067BA4A9AD /* stdcheaders.h in Headers */,
 				B2D2A82B1ABF4797EF0915D5 /* typecheck-gcc.h in Headers */,
+				45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */,
 				B2D2A29DD062DF021D9E496B /* gtr_core_log.h in Headers */,
 				B2D2A65D2BEE3C5F05E9D78A /* urlapi.h in Headers */,
 			);
