@@ -7,12 +7,12 @@ import Foundation
 import GTR
 
 struct RaceDemo: Race {
-    let language: String
-    let pageNo: Int = 1
-    let pageSize: Int = 20
+//    let language: String
+//    let pageNo: Int = 1
+//    let pageSize: Int = 20
 
     var url: String {
-        return "http://qacichang.hjapi.com/v3/user/me/book/16787/share"
+        return "https://cichang.hjapi.com/v3/user/me/book/12254/share"
     }
 
     var timeout: UInt32 {
@@ -30,8 +30,8 @@ struct RaceDemo: Race {
 
 extension RaceDemo {
     @discardableResult
-    static func fetch(language: String, complete: @escaping GTR.Result) -> UInt32 {
-        let race = RaceDemo(language: language)
+    static func fetch(complete: @escaping GTR.Result) -> UInt32 {
+        let race = RaceDemo()
         return GTR.race(request: race, complete: complete)
     }
 }
