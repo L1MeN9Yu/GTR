@@ -46,10 +46,11 @@
 		B2D2A884FD1746CB0CA52BAA /* mprintf.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A93B7CBC04B558AAA2DB /* mprintf.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A9138675B2B81D7E393D /* system.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ADF9DD6B608A7C07A38F /* system.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A976E33BE36728663A76 /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		B2D2A9B719173B6CB7608AA3 /* DownloadDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AD1B0E33EAA4250B06E4 /* DownloadDemo.swift */; };
 		B2D2A9BA51EF9099AA29A60B /* gtr_ios_utility.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */; };
 		B2D2AA47DDDFFC7C173B0904 /* gtr_core_request.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_request.c */; };
 		B2D2AB6C41D6946014980FC4 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B2D2AC49B4B57F78641195BF /* RaceDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AFA417FBB367C4C3C1FE /* RaceDemo.swift */; };
+		B2D2ACB4A0D838837E57BBC6 /* RaceDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A75B5BE6A302E19D81C0 /* RaceDemo.swift */; };
 		B2D2ACDB3A0259A88C9B9995 /* GTR.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* GTR.Error.swift */; };
 		B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
 		B2D2AE01135DAC924C77BADE /* GTR.Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* GTR.Race.swift */; };
@@ -118,6 +119,7 @@
 		B2D2A514E33AC3486FC67749 /* urlapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = urlapi.h; sourceTree = "<group>"; };
 		B2D2A66D6341CB9D098269B0 /* GTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.swift; sourceTree = "<group>"; };
 		B2D2A6BA1BD7071E077D8555 /* gtr_core_request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_request.h; sourceTree = "<group>"; };
+		B2D2A75B5BE6A302E19D81C0 /* RaceDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceDemo.swift; sourceTree = "<group>"; };
 		B2D2A79F5D15A7C37F65BC0B /* GTR.ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.ContentType.swift; sourceTree = "<group>"; };
 		B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_thread_pool.h; sourceTree = "<group>"; };
 		B2D2A837AC809BA32AB9C92E /* gtr_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core.c; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		B2D2AC18277C7654BAF43B14 /* stdcheaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdcheaders.h; sourceTree = "<group>"; };
 		B2D2AC7B85A949171304E966 /* typecheck-gcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "typecheck-gcc.h"; sourceTree = "<group>"; };
 		B2D2ACA7D124F6573FF09579 /* GTR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTR.h; sourceTree = "<group>"; };
+		B2D2AD1B0E33EAA4250B06E4 /* DownloadDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDemo.swift; sourceTree = "<group>"; };
 		B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_ios_utility.c; sourceTree = "<group>"; };
 		B2D2AD6D516A4F85DDCCDB55 /* curl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curl.h; sourceTree = "<group>"; };
 		B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_header_helper.h; sourceTree = "<group>"; };
@@ -145,7 +148,6 @@
 		B2D2AEE6E80C2CD98C4D3644 /* GTR.Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Horn.swift; sourceTree = "<group>"; };
 		B2D2AF5C9388C2BB3FAAB204 /* GTR.Driver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Driver.swift; sourceTree = "<group>"; };
 		B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_file_utilty.c; sourceTree = "<group>"; };
-		B2D2AFA417FBB367C4C3C1FE /* RaceDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceDemo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,7 +189,7 @@
 				4290D62F2137F49200ED45E2 /* Assets.xcassets */,
 				4290D6312137F49200ED45E2 /* LaunchScreen.storyboard */,
 				4290D6342137F49200ED45E2 /* Info.plist */,
-				B2D2AFA417FBB367C4C3C1FE /* RaceDemo.swift */,
+				B2D2A24A2EAF119D14A997AB /* RaceDemos */,
 			);
 			path = GTRDemo;
 			sourceTree = "<group>";
@@ -265,6 +267,15 @@
 				B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */,
 			);
 			path = atomic;
+			sourceTree = "<group>";
+		};
+		B2D2A24A2EAF119D14A997AB /* RaceDemos */ = {
+			isa = PBXGroup;
+			children = (
+				B2D2A75B5BE6A302E19D81C0 /* RaceDemo.swift */,
+				B2D2AD1B0E33EAA4250B06E4 /* DownloadDemo.swift */,
+			);
+			path = RaceDemos;
 			sourceTree = "<group>";
 		};
 		B2D2A2920DF46B0427FF62B4 /* gtr_core */ = {
@@ -505,8 +516,9 @@
 			files = (
 				4290D62B2137F49200ED45E2 /* ViewController.swift in Sources */,
 				4290D6292137F49200ED45E2 /* AppDelegate.swift in Sources */,
-				B2D2AC49B4B57F78641195BF /* RaceDemo.swift in Sources */,
 				B2D2ACDB3A0259A88C9B9995 /* GTR.Error.swift in Sources */,
+				B2D2ACB4A0D838837E57BBC6 /* RaceDemo.swift in Sources */,
+				B2D2A9B719173B6CB7608AA3 /* DownloadDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

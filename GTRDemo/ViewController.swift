@@ -52,7 +52,7 @@ extension ViewController {
         }
         */
 
-//        /*
+        /*
         RaceDemo.fetch() { destination in
             switch destination {
             case .win(let responseData):
@@ -64,7 +64,8 @@ extension ViewController {
                 break
             }
         }
-//        */
+        */
+        self.download()
     }
 }
 
@@ -81,12 +82,25 @@ extension ViewController {
     private func setupGTR() {
         GTR.setup(driver: type(of: self), horn: type(of: self))
     }
+
+    private func download() {
+        DownloadDemo.request(progress: { now, total in
+            print("now = \(now) || total = \(total)")
+        }, complete: { destination in
+            switch destination {
+            case .win(let responseData):
+                return
+            case .lose(let httpResponseCode, let errorCode, let errorMessage):
+                return
+            }
+        })
+    }
 }
 
 extension ViewController: Driver {
     public static var identity: () -> [String: Encodable]? {
         return {
-            return ["Access-Token":"000347174c.db8743c66094ff2964a2b4b6791cf5db"]
+            return ["Access-Token": "000347174c.db8743c66094ff2964a2b4b6791cf5db"]
         }
     }
     public static var userAgent: () -> String? {

@@ -32,7 +32,7 @@ extension RaceDemo {
     @discardableResult
     static func fetch(complete: @escaping GTR.Result) -> UInt32 {
         let race = RaceDemo()
-        return GTR.race(request: race, complete: complete)
+        return GTR.race(race: race, complete: complete)
     }
 }
 
@@ -59,6 +59,6 @@ struct CompleteLearning: Race {
     @discardableResult
     static func put(courseID: UInt, lessonId: UInt, learningSeconds: TimeInterval, complete: @escaping GTR.Result) -> UInt32 {
         let request = self.init(trainingCampID: courseID, lessonId: lessonId, learningSeconds: learningSeconds)
-        return GTR.race(request: request, complete: complete)
+        return GTR.race(race: request, complete: complete)
     }
 }

@@ -36,15 +36,38 @@ extension Race {
     }
 }
 
+public protocol LongDistanceRace: Race {
+    var filePath: String { get }
+    var progress: ((_ now: UInt64, _ total: UInt64) -> Void)? { get }
+}
+
+extension LongDistanceRace {
+    public var progress: ((UInt64, UInt64) -> Void)? { return nil }
+}
+
 extension GTR {
-    public class func race(request: Race, complete: @escaping (GTR.Result)) -> UInt32 {
+    public class func race(race: Race, complete: @escaping (GTR.Result)) -> UInt32 {
         return GTR.request(
-                method: request.method,
-                url: request.url,
-                contentType: request.contentType,
-                headers: request.headers,
-                timeOut: request.timeout,
-                param: request.parameters,
+                method: race.method,
+                url: race.url,
+                contentType: race.contentType,
+                headers: race.headers,
+                timeOut: race.timeout,
+                param: race.parameters,
+                complete: complete)
+    }
+
+    public class func longDistanceRace(race: LongDistanceRace, complete: @escaping (GTR.Result)) -> UInt32 {
+        assert((race.method == GTR.Method.download || race.method == GTR.Method.upload), "method must be download or upload")
+        return GTR.request(
+                method: race.method,
+                url: race.url,
+                contentType: race.contentType,
+                headers: race.headers,
+                timeOut: race.timeout,
+                param: race.parameters,
+                downloadPath: race.filePath,
+                progress: race.progress,
                 complete: complete)
     }
 }
