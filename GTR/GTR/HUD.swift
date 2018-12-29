@@ -5,59 +5,57 @@
 
 import Foundation
 
-extension GTR {
-    class HUD {
-        private let lock = NSLock()
+class HUD {
+    private let lock = NSLock()
 
-        private var startTimer: Timer?
-        private var completeTimer: Timer?
+    private var startTimer: Timer?
+    private var completeTimer: Timer?
 
-        private var activityCount: Int = 0
-        private var enabled: Bool = true
+    private var activityCount: Int = 0
+    private var enabled: Bool = true
 
-        var startDelay: TimeInterval = 1.0
+    var startDelay: TimeInterval = 1.0
 
-        var completionDelay: TimeInterval = 0.2
+    var completionDelay: TimeInterval = 0.2
 
-        private var activityIndicatorState: ActivityIndicatorState = .notActive {
-            didSet {
-                switch activityIndicatorState {
-                case .notActive:
-                    isNetworkActivityIndicatorVisible = false
-                    invalidateTimers()
-                case .delayingStart:
-                    scheduleStartDelayTimer()
-                case .active:
-                    invalidateTimers(timerType: TimerType.Complete)
-                    isNetworkActivityIndicatorVisible = true
-                case .delayingCompletion:
-                    scheduleCompletionDelayTimer()
-                }
+    private var activityIndicatorState: ActivityIndicatorState = .notActive {
+        didSet {
+            switch activityIndicatorState {
+            case .notActive:
+                isNetworkActivityIndicatorVisible = false
+                invalidateTimers()
+            case .delayingStart:
+                scheduleStartDelayTimer()
+            case .active:
+                invalidateTimers(timerType: TimerType.Complete)
+                isNetworkActivityIndicatorVisible = true
+            case .delayingCompletion:
+                scheduleCompletionDelayTimer()
             }
         }
+    }
 
-        /// A boolean value indicating whether the network activity indicator is currently visible.
-        public private(set) var isNetworkActivityIndicatorVisible: Bool = false {
-            didSet {
-                guard isNetworkActivityIndicatorVisible != oldValue else { return }
+    /// A boolean value indicating whether the network activity indicator is currently visible.
+    public private(set) var isNetworkActivityIndicatorVisible: Bool = false {
+        didSet {
+            guard isNetworkActivityIndicatorVisible != oldValue else { return }
 
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible
-                    self.networkActivityIndicatorVisibilityChanged?(self.isNetworkActivityIndicatorVisible)
-                }
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible
+                self.networkActivityIndicatorVisibilityChanged?(self.isNetworkActivityIndicatorVisible)
             }
         }
+    }
 
-        var networkActivityIndicatorVisibilityChanged: ((Bool) -> Void)?
+    var networkActivityIndicatorVisibilityChanged: ((Bool) -> Void)?
 
-        init() {
-            registerNotifications()
-        }
+    init() {
+        registerNotifications()
+    }
 
-        deinit {
-            unregisterNotifications()
-            invalidateTimers()
-        }
+    deinit {
+        unregisterNotifications()
+        invalidateTimers()
     }
 }
 

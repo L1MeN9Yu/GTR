@@ -10,23 +10,21 @@ typealias GTRFailureClosure = (_ httpResponseCode: Swift.Int, _ errorCode: Swift
 typealias GTRProgressClosure = (_ now: UInt64, _ total: UInt64) -> Void
 typealias GTRHttpHeaderClosure = () -> [Swift.String: Swift.String]
 
-extension GTR {
-    class Engine {
-        private(set) var responseQueue = DispatchQueue.main
-        private(set) var notificationQueue = DispatchQueue.main
-        private(set) var succeedContainer: [Swift.UInt32: GTRSucceedClosure?] = [Swift.UInt32: GTRSucceedClosure?]()
-        private(set) var failureContainer: [Swift.UInt32: GTRFailureClosure?] = [Swift.UInt32: GTRFailureClosure?]()
-        private(set) var downloadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
-        private(set) var uploadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
+class Engine {
+    private(set) var responseQueue = DispatchQueue.main
+    private(set) var notificationQueue = DispatchQueue.main
+    private(set) var succeedContainer: [Swift.UInt32: GTRSucceedClosure?] = [Swift.UInt32: GTRSucceedClosure?]()
+    private(set) var failureContainer: [Swift.UInt32: GTRFailureClosure?] = [Swift.UInt32: GTRFailureClosure?]()
+    private(set) var downloadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
+    private(set) var uploadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
 
-        private var httpHeaderClosure: GTRHttpHeaderClosure?
-    }
+    private var httpHeaderClosure: GTRHttpHeaderClosure?
 }
 
 // MARK: - Internal
 extension GTR.Engine {
-    func fire(engineNumber: String? = nil) {
-        c_gtr_init(engineNumber?.cString(using: .utf8))
+    func fire(engineNumber: String? = nil, cylinderCount: UInt32) {
+        c_gtr_init(engineNumber?.cString(using: .utf8), cylinderCount)
     }
 
     // MARK: Request
@@ -214,26 +212,26 @@ extension GTR.Engine {
 
 // MARK: - C Bridge
 @_silgen_name("gtr_init")
-func c_gtr_init(_ user_agent: UnsafePointer<Int8>?)
+private func c_gtr_init(_ user_agent: UnsafePointer<Int8>?, _ cylinder_count: UInt32)
 
 @_silgen_name("gtr_get")
-func c_gtr_get(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32)
+private func c_gtr_get(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32)
 
 @_silgen_name("gtr_post")
-func c_gtr_post(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ param_data: UnsafeRawPointer?, _ param_size: UInt)
+private func c_gtr_post(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ param_data: UnsafeRawPointer?, _ param_size: UInt)
 
 @_silgen_name("gtr_put")
-func c_gtr_put(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ param_data: UnsafeRawPointer?, _ param_size: UInt)
+private func c_gtr_put(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ param_data: UnsafeRawPointer?, _ param_size: UInt)
 
 @_silgen_name("gtr_download")
-func c_gtr_download(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ filePath: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32)
+private func c_gtr_download(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ filePath: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32)
 
 // MARK: - C CallBack
 
 @_silgen_name("swift_get_request_succeed")
 func c_get_request_succeed(task_id: CUnsignedInt,
-                           c_data: UnsafeRawPointer,
-                           c_data_size: CUnsignedLong) {
+                                   c_data: UnsafeRawPointer,
+                                   c_data_size: CUnsignedLong) {
     let swiftData = Data.init(bytes: c_data, count: Int(c_data_size))
     let succeed = GTR.engine.succeedContainer[task_id]
     GTR.engine.responseQueue.async {

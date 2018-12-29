@@ -20,11 +20,11 @@
 		45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445B651AB97564ABE56C /* GTR.External.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		45304E27E0E3E66A29C2F05B /* Dictionary+NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530407A138ED07408B9DB82 /* Dictionary+NetworkJSON.swift */; };
 		B2D2A09B9401A6BF6ED07EF3 /* gtr_core_header_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B2D2A1A80A1FEA69E1B05889 /* GTR.Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AEE6E80C2CD98C4D3644 /* GTR.Horn.swift */; };
+		B2D2A1A80A1FEA69E1B05889 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AEE6E80C2CD98C4D3644 /* Horn.swift */; };
 		B2D2A20A2778BEA763EFCD80 /* gtr_core_header_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A87062AEDDA79A61FEAA /* gtr_core_header_helper.c */; };
 		B2D2A210C7794B9F6AB1139E /* curlver.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2DF63011CFA6581F861 /* curlver.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A256DEFBD6EFE49D36E8 /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */; };
-		B2D2A2586B0FCCFDBE563406 /* GTR.Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF5C9388C2BB3FAAB204 /* GTR.Driver.swift */; };
+		B2D2A2586B0FCCFDBE563406 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF5C9388C2BB3FAAB204 /* Driver.swift */; };
 		B2D2A29DD062DF021D9E496B /* gtr_core_log.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A97607A814FF3E6C113B /* gtr_core_log.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A2D286539C35AD1BD9D2 /* unqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE118D9DBA005EC9ECB9 /* unqlite.c */; };
 		B2D2A2E69F5A86DDFAB5CA99 /* gtr_ios_utility.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A99333109680AB041F1C /* gtr_ios_utility.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -35,12 +35,12 @@
 		B2D2A645319ED3F4CF2F4476 /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AEB9DF57C656DED22A14 /* gtr_core.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A65D2BEE3C5F05E9D78A /* urlapi.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A514E33AC3486FC67749 /* urlapi.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A65E39A12F7FA30D41FA /* GTR.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ACA7D124F6573FF09579 /* GTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B2D2A6A3E200D7095DD39717 /* GTR.ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A79F5D15A7C37F65BC0B /* GTR.ContentType.swift */; };
+		B2D2A6A3E200D7095DD39717 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */; };
 		B2D2A73BDD3AC4DB369B4D4F /* gtr_core_request.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A6BA1BD7071E077D8555 /* gtr_core_request.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A7455E628509E3CF98A4 /* gtr_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE7237C26F0FDC915ADB /* gtr_atomic.c */; };
-		B2D2A74AE57967404805704F /* GTR.Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A324D196A2CEAE3D76E8 /* GTR.Method.swift */; };
+		B2D2A74AE57967404805704F /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A324D196A2CEAE3D76E8 /* Method.swift */; };
 		B2D2A77B25B9F827ED8F029E /* unqlite.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AA1BC2EC4FDB41790ACE /* unqlite.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B2D2A7D3C1BA520918B671B5 /* GTR.Gearbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2E6359680E3E556337F /* GTR.Gearbox.swift */; };
+		B2D2A7D3C1BA520918B671B5 /* Gearbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2E6359680E3E556337F /* Gearbox.swift */; };
 		B2D2A7E2090D47010200A05A /* gtr_thread_pool.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A92CF98064AA0469F777 /* gtr_thread_pool.c */; };
 		B2D2A82B1ABF4797EF0915D5 /* typecheck-gcc.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AC7B85A949171304E966 /* typecheck-gcc.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A884FD1746CB0CA52BAA /* mprintf.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A93B7CBC04B558AAA2DB /* mprintf.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -51,15 +51,15 @@
 		B2D2AA47DDDFFC7C173B0904 /* gtr_core_request.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_request.c */; };
 		B2D2AB6C41D6946014980FC4 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2ACB4A0D838837E57BBC6 /* RaceDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A75B5BE6A302E19D81C0 /* RaceDemo.swift */; };
-		B2D2ACDB3A0259A88C9B9995 /* GTR.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* GTR.Error.swift */; };
+		B2D2ACDB3A0259A88C9B9995 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* Error.swift */; };
 		B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
-		B2D2AE01135DAC924C77BADE /* GTR.Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* GTR.Race.swift */; };
-		B2D2AE1FFACBE0355A3E8B1C /* GTR.HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA45760ED5D528DC4C1B /* GTR.HUD.swift */; };
-		B2D2AE3EAD1474BCA6B825D2 /* GTR.NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA4F6CFEE54E5F48DC8E /* GTR.NotificationName.swift */; };
+		B2D2AE01135DAC924C77BADE /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* Race.swift */; };
+		B2D2AE1FFACBE0355A3E8B1C /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA45760ED5D528DC4C1B /* HUD.swift */; };
+		B2D2AE3EAD1474BCA6B825D2 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */; };
 		B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA86DA38062600F6345F /* gtr_core_log.c */; };
 		B2D2AF1ED090FAFD3191BD13 /* easy.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A1CA4E070C829CFC23EE /* easy.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B2D2AF6943F995C6E1364374 /* GTR.Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4DDB4BAAEF6A3DA2F5B /* GTR.Engine.swift */; };
-		B2D2AF89CE011EDD0F488B36 /* GTR.Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A93504887D10507AE9FE /* GTR.Destination.swift */; };
+		B2D2AF6943F995C6E1364374 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */; };
+		B2D2AF89CE011EDD0F488B36 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A93504887D10507AE9FE /* Destination.swift */; };
 		B2D2AFBDC898B35762D951FD /* gtr_core_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */; };
 		B2D2AFC49D6B321A06E20266 /* gtr_core.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A837AC809BA32AB9C92E /* gtr_core.c */; };
 		B2D2AFC953EBC5C6072E8A94 /* gtr_core_proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2D8BFFA713174DBF04F /* gtr_core_proxy.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -110,28 +110,28 @@
 		B2D2A2BDD4B1B3DA0EB45914 /* gtr_file_utilty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_file_utilty.h; sourceTree = "<group>"; };
 		B2D2A2D8BFFA713174DBF04F /* gtr_core_proxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_proxy.h; sourceTree = "<group>"; };
 		B2D2A2DF63011CFA6581F861 /* curlver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlver.h; sourceTree = "<group>"; };
-		B2D2A2E6359680E3E556337F /* GTR.Gearbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Gearbox.swift; sourceTree = "<group>"; };
-		B2D2A324D196A2CEAE3D76E8 /* GTR.Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Method.swift; sourceTree = "<group>"; };
+		B2D2A2E6359680E3E556337F /* Gearbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gearbox.swift; sourceTree = "<group>"; };
+		B2D2A324D196A2CEAE3D76E8 /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_atomic.h; sourceTree = "<group>"; };
-		B2D2A3AB95F258E1382B16AE /* GTR.Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Error.swift; sourceTree = "<group>"; };
-		B2D2A3F728E82ED3509187B1 /* GTR.Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Race.swift; sourceTree = "<group>"; };
-		B2D2A4DDB4BAAEF6A3DA2F5B /* GTR.Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Engine.swift; sourceTree = "<group>"; };
+		B2D2A3AB95F258E1382B16AE /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		B2D2A3F728E82ED3509187B1 /* Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
+		B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		B2D2A514E33AC3486FC67749 /* urlapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = urlapi.h; sourceTree = "<group>"; };
 		B2D2A66D6341CB9D098269B0 /* GTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.swift; sourceTree = "<group>"; };
 		B2D2A6BA1BD7071E077D8555 /* gtr_core_request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_request.h; sourceTree = "<group>"; };
 		B2D2A75B5BE6A302E19D81C0 /* RaceDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceDemo.swift; sourceTree = "<group>"; };
-		B2D2A79F5D15A7C37F65BC0B /* GTR.ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.ContentType.swift; sourceTree = "<group>"; };
+		B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_thread_pool.h; sourceTree = "<group>"; };
 		B2D2A837AC809BA32AB9C92E /* gtr_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core.c; sourceTree = "<group>"; };
 		B2D2A87062AEDDA79A61FEAA /* gtr_core_header_helper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_header_helper.c; sourceTree = "<group>"; };
 		B2D2A92CF98064AA0469F777 /* gtr_thread_pool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_thread_pool.c; sourceTree = "<group>"; };
-		B2D2A93504887D10507AE9FE /* GTR.Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Destination.swift; sourceTree = "<group>"; };
+		B2D2A93504887D10507AE9FE /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		B2D2A93B7CBC04B558AAA2DB /* mprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mprintf.h; sourceTree = "<group>"; };
 		B2D2A97607A814FF3E6C113B /* gtr_core_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_log.h; sourceTree = "<group>"; };
 		B2D2A99333109680AB041F1C /* gtr_ios_utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_ios_utility.h; sourceTree = "<group>"; };
 		B2D2AA1BC2EC4FDB41790ACE /* unqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unqlite.h; sourceTree = "<group>"; };
-		B2D2AA45760ED5D528DC4C1B /* GTR.HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.HUD.swift; sourceTree = "<group>"; };
-		B2D2AA4F6CFEE54E5F48DC8E /* GTR.NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.NotificationName.swift; sourceTree = "<group>"; };
+		B2D2AA45760ED5D528DC4C1B /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		B2D2AA86DA38062600F6345F /* gtr_core_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_log.c; sourceTree = "<group>"; };
 		B2D2AA9138F7C51FFCAA46B8 /* multi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = multi.h; sourceTree = "<group>"; };
 		B2D2AC18277C7654BAF43B14 /* stdcheaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdcheaders.h; sourceTree = "<group>"; };
@@ -145,8 +145,8 @@
 		B2D2AE118D9DBA005EC9ECB9 /* unqlite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unqlite.c; sourceTree = "<group>"; };
 		B2D2AE7237C26F0FDC915ADB /* gtr_atomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_atomic.c; sourceTree = "<group>"; };
 		B2D2AEB9DF57C656DED22A14 /* gtr_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core.h; sourceTree = "<group>"; };
-		B2D2AEE6E80C2CD98C4D3644 /* GTR.Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Horn.swift; sourceTree = "<group>"; };
-		B2D2AF5C9388C2BB3FAAB204 /* GTR.Driver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.Driver.swift; sourceTree = "<group>"; };
+		B2D2AEE6E80C2CD98C4D3644 /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
+		B2D2AF5C9388C2BB3FAAB204 /* Driver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_file_utilty.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -355,18 +355,18 @@
 		B2D2AC4CF2F2BD3D5AA1CB66 /* GTR */ = {
 			isa = PBXGroup;
 			children = (
-				B2D2A2E6359680E3E556337F /* GTR.Gearbox.swift */,
-				B2D2AF5C9388C2BB3FAAB204 /* GTR.Driver.swift */,
-				B2D2AEE6E80C2CD98C4D3644 /* GTR.Horn.swift */,
-				B2D2A4DDB4BAAEF6A3DA2F5B /* GTR.Engine.swift */,
+				B2D2A2E6359680E3E556337F /* Gearbox.swift */,
+				B2D2AF5C9388C2BB3FAAB204 /* Driver.swift */,
+				B2D2AEE6E80C2CD98C4D3644 /* Horn.swift */,
+				B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */,
 				B2D2A66D6341CB9D098269B0 /* GTR.swift */,
-				B2D2A324D196A2CEAE3D76E8 /* GTR.Method.swift */,
-				B2D2A79F5D15A7C37F65BC0B /* GTR.ContentType.swift */,
-				B2D2A93504887D10507AE9FE /* GTR.Destination.swift */,
-				B2D2AA45760ED5D528DC4C1B /* GTR.HUD.swift */,
-				B2D2AA4F6CFEE54E5F48DC8E /* GTR.NotificationName.swift */,
-				B2D2A3F728E82ED3509187B1 /* GTR.Race.swift */,
-				B2D2A3AB95F258E1382B16AE /* GTR.Error.swift */,
+				B2D2A324D196A2CEAE3D76E8 /* Method.swift */,
+				B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */,
+				B2D2A93504887D10507AE9FE /* Destination.swift */,
+				B2D2AA45760ED5D528DC4C1B /* HUD.swift */,
+				B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */,
+				B2D2A3F728E82ED3509187B1 /* Race.swift */,
+				B2D2A3AB95F258E1382B16AE /* Error.swift */,
 			);
 			path = GTR;
 			sourceTree = "<group>";
@@ -516,7 +516,7 @@
 			files = (
 				4290D62B2137F49200ED45E2 /* ViewController.swift in Sources */,
 				4290D6292137F49200ED45E2 /* AppDelegate.swift in Sources */,
-				B2D2ACDB3A0259A88C9B9995 /* GTR.Error.swift in Sources */,
+				B2D2ACDB3A0259A88C9B9995 /* Error.swift in Sources */,
 				B2D2ACB4A0D838837E57BBC6 /* RaceDemo.swift in Sources */,
 				B2D2A9B719173B6CB7608AA3 /* DownloadDemo.swift in Sources */,
 			);
@@ -531,10 +531,10 @@
 				B2D2A2D286539C35AD1BD9D2 /* unqlite.c in Sources */,
 				B2D2A7E2090D47010200A05A /* gtr_thread_pool.c in Sources */,
 				B2D2A7455E628509E3CF98A4 /* gtr_atomic.c in Sources */,
-				B2D2A7D3C1BA520918B671B5 /* GTR.Gearbox.swift in Sources */,
-				B2D2A2586B0FCCFDBE563406 /* GTR.Driver.swift in Sources */,
-				B2D2A1A80A1FEA69E1B05889 /* GTR.Horn.swift in Sources */,
-				B2D2AF6943F995C6E1364374 /* GTR.Engine.swift in Sources */,
+				B2D2A7D3C1BA520918B671B5 /* Gearbox.swift in Sources */,
+				B2D2A2586B0FCCFDBE563406 /* Driver.swift in Sources */,
+				B2D2A1A80A1FEA69E1B05889 /* Horn.swift in Sources */,
+				B2D2AF6943F995C6E1364374 /* Engine.swift in Sources */,
 				B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */,
 				B2D2AFBDC898B35762D951FD /* gtr_core_proxy.c in Sources */,
 				B2D2AA47DDDFFC7C173B0904 /* gtr_core_request.c in Sources */,
@@ -543,12 +543,12 @@
 				B2D2A9BA51EF9099AA29A60B /* gtr_ios_utility.c in Sources */,
 				B2D2A256DEFBD6EFE49D36E8 /* gtr_file_utilty.c in Sources */,
 				B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */,
-				B2D2A74AE57967404805704F /* GTR.Method.swift in Sources */,
-				B2D2A6A3E200D7095DD39717 /* GTR.ContentType.swift in Sources */,
-				B2D2AF89CE011EDD0F488B36 /* GTR.Destination.swift in Sources */,
-				B2D2AE1FFACBE0355A3E8B1C /* GTR.HUD.swift in Sources */,
-				B2D2AE3EAD1474BCA6B825D2 /* GTR.NotificationName.swift in Sources */,
-				B2D2AE01135DAC924C77BADE /* GTR.Race.swift in Sources */,
+				B2D2A74AE57967404805704F /* Method.swift in Sources */,
+				B2D2A6A3E200D7095DD39717 /* ContentType.swift in Sources */,
+				B2D2AF89CE011EDD0F488B36 /* Destination.swift in Sources */,
+				B2D2AE1FFACBE0355A3E8B1C /* HUD.swift in Sources */,
+				B2D2AE3EAD1474BCA6B825D2 /* Notification.swift in Sources */,
+				B2D2AE01135DAC924C77BADE /* Race.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

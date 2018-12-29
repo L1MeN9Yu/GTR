@@ -47,8 +47,8 @@ static void on_http_download_file_success(unsigned int task_id, long http_respon
 static void on_http_download_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
 
 //---------- 初始化
-void gtr_init(const char *user_agent) {
-    gtr_core_init(user_agent, &gtr_log_message_call_back);
+void gtr_init(const char *user_agent, unsigned int cylinder_count) {
+    gtr_core_init(user_agent, &gtr_log_message_call_back, cylinder_count);
 }
 //----------
 

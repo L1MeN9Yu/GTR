@@ -334,10 +334,7 @@ request(
 
 //--- Public
 void
-gtr_core_init(
-        const char *user_agent,
-        void *log_callback
-) {
+gtr_core_init(const char *user_agent, void *log_callback, unsigned int cylinder_count) {
     if (user_agent) {
         size_t user_agent_size = strlen(user_agent) + 1;
         global_user_agent = malloc(user_agent_size);
@@ -349,7 +346,7 @@ gtr_core_init(
     }
     config_log_callback(log_callback);
     curl_global_init(CURL_GLOBAL_ALL);
-    gtr_core_thread_pool = thread_pool_init(10);
+    gtr_core_thread_pool = thread_pool_init(cylinder_count);
     thread_pool_wait(gtr_core_thread_pool);
     gtr_core_create_temp_dir();
     gtr_core_log(gtr_log_flag_info, "gtr : global_user_agent = %s", global_user_agent);

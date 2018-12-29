@@ -12,10 +12,10 @@
 #include <stdbool.h>
 
 /**
- * 初始化GIR,生命周期内只执行一次
+ * 初始化GTR,生命周期内只执行一次
  * @param user_agent 全局user agent
  */
-extern void gtr_init(const char *user_agent);
+extern void gtr_init(const char *user_agent, unsigned int cylinder_count);
 
 /**
  * 配置代理

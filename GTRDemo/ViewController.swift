@@ -38,34 +38,10 @@ class ViewController: UIViewController {
 extension ViewController {
     @objc
     private func getAction(button: UIButton) {
-        /*
-        CompleteLearning.put(courseID: 37, lessonId: 8832301, learningSeconds: 106) { destination in
-            switch destination {
-            case .win(let responseData):
-                if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string)")
-                }
-                break
-            case .lose(let httpResponseCode, let errorCode, let errorMessage):
-                break
-            }
-        }
-        */
+        self.get()
+        self.put()
 
-        /*
-        RaceDemo.fetch() { destination in
-            switch destination {
-            case .win(let responseData):
-                if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string)")
-                }
-                break
-            case .lose(let httpResponseCode, let errorCode, let errorMessage):
-                break
-            }
-        }
-        */
-        self.download()
+//        self.download()
     }
 }
 
@@ -81,6 +57,34 @@ extension ViewController {
 
     private func setupGTR() {
         GTR.setup(driver: type(of: self), horn: type(of: self))
+    }
+
+    private func get() {
+        RaceDemo.fetch() { destination in
+            switch destination {
+            case .win(let responseData):
+                if let string = String(data: responseData, encoding: .utf8) {
+                    print("succeed : \(string)")
+                }
+                break
+            case .lose(let httpResponseCode, let errorCode, let errorMessage):
+                break
+            }
+        }
+    }
+
+    private func put() {
+        CompleteLearning.put(courseID: 37, lessonId: 8832301, learningSeconds: 106) { destination in
+            switch destination {
+            case .win(let responseData):
+                if let string = String(data: responseData, encoding: .utf8) {
+                    print("succeed : \(string)")
+                }
+                break
+            case .lose(let httpResponseCode, let errorCode, let errorMessage):
+                break
+            }
+        }
     }
 
     private func download() {

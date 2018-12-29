@@ -5,118 +5,106 @@
 
 import Foundation
 
-public class GTR {
-    private(set) static var gearbox = { () -> GTR.Gearbox in
-        let gearbox = GTR.Gearbox()
-        return gearbox
-    }()
+private(set) var gearbox = { () -> GTR.Gearbox in
+    let gearbox = GTR.Gearbox()
+    return gearbox
+}()
 
-    private(set) static var engine = { () -> GTR.Engine in
-        let engine = GTR.Engine()
-        return engine
-    }()
+private(set) var engine = { () -> GTR.Engine in
+    let engine = GTR.Engine()
+    return engine
+}()
 
-    private(set) static var hud = { () -> GTR.HUD in
-        let hud = GTR.HUD()
-        return hud
-    }()
+private(set) var hud = { () -> GTR.HUD in
+    let hud = GTR.HUD()
+    return hud
+}()
 
-    private static var driver: Driver.Type?
+private var driver: Driver.Type?
 
-    private static var horn: Horn.Type?
+private var horn: Horn.Type?
 
-    @discardableResult
-    class func request(method: GTR.Method = .get,
-                       url: String,
-                       contentType: GTR.ContentType = .json,
-                       headers: [String: Encodable]? = nil,
-                       timeOut: UInt32,
-                       param: [String: Any]? = nil,
-                       downloadPath: String? = nil,
-                       progress: ((_ now: UInt64, _ total: UInt64) -> Void)? = nil,
-                       complete: Result?) -> UInt32 {
-        var allHeaders = contentType.toHeader()
+@discardableResult
+func request(method: GTR.Method = .get,
+             url: String,
+             contentType: GTR.ContentType = .json,
+             headers: [String: Encodable]? = nil,
+             timeOut: UInt32,
+             param: [String: Any]? = nil,
+             downloadPath: String? = nil,
+             progress: ((_ now: UInt64, _ total: UInt64) -> Void)? = nil,
+             complete: Result?) -> UInt32 {
+    var allHeaders = contentType.toHeader()
 
-        if let globalHeader = self.driver?.identity() {
-            allHeaders.merge(globalHeader) { (value_old: Encodable, value_new: Encodable) -> Encodable in
-                return value_new
-            }
+    if let globalHeader = GTR.driver?.identity() {
+        allHeaders.merge(globalHeader) { (value_old: Encodable, value_new: Encodable) -> Encodable in
+            return value_new
         }
-
-        if let h = headers {
-            allHeaders.merge(h) { (value_old: Encodable, value_new: Encodable) -> Encodable in
-                return value_new
-            }
-        }
-
-        return self.engine.request(
-                httpMethod: method,
-                url: url,
-                headers: allHeaders,
-                contentType: contentType,
-                timeOut: timeOut,
-                param: param,
-                downloadPath: downloadPath,
-                progress: progress,
-                succeed: { data in
-                    complete?(GTR.Destination.win(responseData: data))
-                },
-                failure: { (httpResponseCode, errorCode, errorMessage) in
-                    complete?(GTR.Destination.lose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage))
-                    self.notifyFailure(url: url, headers: allHeaders, contentType: contentType, param: param, httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
-                })
     }
+
+    if let h = headers {
+        allHeaders.merge(h) { (value_old: Encodable, value_new: Encodable) -> Encodable in
+            return value_new
+        }
+    }
+
+    return GTR.engine.request(
+            httpMethod: method,
+            url: url,
+            headers: allHeaders,
+            contentType: contentType,
+            timeOut: timeOut,
+            param: param,
+            downloadPath: downloadPath,
+            progress: progress,
+            succeed: { data in
+                complete?(GTR.Destination.win(responseData: data))
+            },
+            failure: { (httpResponseCode, errorCode, errorMessage) in
+                complete?(GTR.Destination.lose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage))
+                GTR.notifyFailure(url: url, headers: allHeaders, contentType: contentType, param: param, httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
+            })
 }
 
+
 // MARK: - Config
-extension GTR {
-    public class func setup(driver: Driver.Type? = nil, horn: Horn.Type? = nil) {
-        self.driver = driver
-        self.horn = horn
-        self.engine.fire(engineNumber: self.driver?.userAgent())
-        self.gearbox.start()
+public func setup(driver: Driver.Type? = nil, horn: Horn.Type? = nil, cylinderCount: UInt32 = 8) {
+    GTR.driver = driver
+    GTR.horn = horn
+    GTR.engine.fire(engineNumber: GTR.driver?.userAgent(), cylinderCount: cylinderCount)
+    GTR.gearbox.start()
+}
+
+public func config(responseQueue: DispatchQueue?) {
+    guard let q = responseQueue else {
+        GTR.engine.config(responseQueue: DispatchQueue.main)
+        return
     }
 
-    public class func config(responseQueue: DispatchQueue?) {
-        guard let q = responseQueue else {
-            self.engine.config(responseQueue: DispatchQueue.main)
-            return
-        }
+    GTR.engine.config(responseQueue: q)
+}
 
-        self.engine.config(responseQueue: q)
-    }
+public func configProxy(isEnable: Bool, url: String, port: UInt32) {
+    GTR.gearbox.config(proxy: isEnable, url: url, port: port)
+}
 
-    public class func configProxy(isEnable: Bool, url: String, port: UInt32) {
-        self.gearbox.config(proxy: isEnable, url: url, port: port)
+public func fetchProxyInfo() -> (String, UInt32)? {
+    if let proxyInfo = Gearbox.proxyInfo {
+        return (proxyInfo.url, proxyInfo.port)
     }
-
-    public class func fetchProxyInfo() -> (String, UInt32)? {
-        if let proxyInfo = self.proxyInfo {
-            return (proxyInfo.url, proxyInfo.port)
-        }
-        return nil
-    }
+    return nil
 }
 
 // MARK: - Extern
-extension GTR {
-    class func notifyFailure(url: String, headers: [String: Encodable]?, contentType: GTR.ContentType, param: [String: Any]?,
-                             httpResponseCode: Int, errorCode: Int32, errorMessage: String,
-                             filename: String = #file, function: String = #function, line: Int = #line) {
-        let message = "response code = \(httpResponseCode)\n errorCode = \(errorCode)\n errorMessage = \(errorMessage)\n"
-        self.horn?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
-        self.horn?.raceDidLost(url: url, headers: headers, contentType: contentType, param: param, httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
-    }
+func notifyFailure(url: String, headers: [String: Encodable]?, contentType: GTR.ContentType, param: [String: Any]?,
+                   httpResponseCode: Int, errorCode: Int32, errorMessage: String,
+                   filename: String = #file, function: String = #function, line: Int = #line) {
+    let message = "response code = \(httpResponseCode)\n errorCode = \(errorCode)\n errorMessage = \(errorMessage)\n"
+    GTR.horn?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
+    GTR.horn?.raceDidLost(url: url, headers: headers, contentType: contentType, param: param, httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
+}
 
-    @available(iOS, deprecated: 0.3.0, message: "func does noting now")
-    public class func logLose(httpResponseCode: Int, errorCode: Int32, errorMessage: String,
-                              filename: String = #file, function: String = #function, line: Int = #line) {
-//        let message = "response code = \(httpResponseCode)\n errorCode = \(errorCode)\n errorMessage = \(errorMessage)\n"
-//        self.horn?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
-    }
-
-    public class func whistle(type: HornType, message: String, filename: String = #file,
-                              function: String = #function, line: Int = #line) {
-        self.horn?.whistle(type: type, message: message, filename: filename, function: function, line: line)
-    }
+public func whistle(type: HornType, message: String, filename: String = #file,
+                    function: String = #function, line: Int = #line) {
+    GTR.horn?.whistle(type: type, message: message, filename: filename, function: function, line: line)
 }

@@ -20,7 +20,8 @@
 void
 gtr_core_init(
         const char *user_agent,
-        void *log_callback
+        void *log_callback,
+        unsigned int cylinder_count
 );
 
 /**

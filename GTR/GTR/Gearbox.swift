@@ -5,17 +5,15 @@
 
 import Foundation
 
-extension GTR {
-    class Gearbox {
-        private(set) var proxyInfo: ProxyInfo?
+class Gearbox {
+    private(set) var proxyInfo: ProxyInfo?
 
-        private let userDefaults = UserDefaults(suiteName: "top.limengyu.GTR.GearBox")
+    private let userDefaults = UserDefaults(suiteName: "top.limengyu.GTR.GearBox")
 
-        private let proxyKey = "GTR.GearBox.Proxy.Key"
-    }
+    private let proxyKey = "GTR.GearBox.Proxy.Key"
 
     class var proxyInfo: Gearbox.ProxyInfo? {
-        return self.gearbox.proxyInfo
+        return GTR.gearbox.proxyInfo
     }
 }
 
