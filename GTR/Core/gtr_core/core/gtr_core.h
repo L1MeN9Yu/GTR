@@ -10,7 +10,7 @@
 #define gtr_core_h
 
 #include <stdio.h>
-#include "gtr_core_request.h"
+#include "gtr_core_race.h"
 
 /**
  * 初始化,!!!非线程安全!!!,全局应该只执行一次

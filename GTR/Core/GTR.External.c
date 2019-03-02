@@ -130,6 +130,11 @@ extern void gtr_download(unsigned int *task_id, const char *url, const char *fil
     gtr_core_add_download_request(task_id, url, file_path, headers, time_out, &on_http_download_file_progress, &on_http_download_file_success, &on_http_download_failure);
 }
 
+//---------- 取消请求
+extern void gtr_cancel(unsigned int task_id) {
+
+}
+
 //----------
 
 static void gtr_log_message_call_back(unsigned int flag, char *message) {

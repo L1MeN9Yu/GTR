@@ -66,4 +66,10 @@ extern void gtr_put(unsigned int *task_id, const char *url, const char *headers,
  */
 extern void gtr_download(unsigned int *task_id, const char *url, const char *filePath, const char *headers, unsigned int time_out);
 
+/**
+ * 取消请求
+ * @param task_id
+ */
+extern void gtr_cancel(unsigned int task_id);
+
 #endif /* GTR_External_h */

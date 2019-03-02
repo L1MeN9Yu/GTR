@@ -7,12 +7,13 @@ import Foundation
 import GTR
 
 struct RaceDemo: Race {
-//    let language: String
-//    let pageNo: Int = 1
-//    let pageSize: Int = 20
+    let language: String
+    let pageNo: Int = 1
+    let pageSize: Int = 20
 
     var url: String {
-        return "https://cichang.hjapi.com/v3/user/me/book/12254/share"
+//        return "https://cichang.hjapi.com/v3/user/me/book/12254/share"
+        return "http://dict.hjapi.com/v10/read/news/listByPage"
     }
 
     var timeout: UInt32 {
@@ -20,18 +21,18 @@ struct RaceDemo: Race {
     }
 
     var method: GTR.Method {
-        return .put
+        return .get
     }
 
-//    var parameters: [String: Encodable]? {
-//        return ["language": self.language, "pageNo": self.pageNo, "pageSize": self.pageSize]
-//    }
+    var parameters: [String: Encodable]? {
+        return ["language": self.language, "pageNo": self.pageNo, "pageSize": self.pageSize]
+    }
 }
 
 extension RaceDemo {
     @discardableResult
     static func fetch(complete: @escaping GTR.Result) -> UInt32 {
-        let race = RaceDemo()
+        let race = RaceDemo(language: "en")
         return GTR.race(race: race, complete: complete)
     }
 }

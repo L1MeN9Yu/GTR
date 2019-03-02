@@ -39,7 +39,7 @@ extension ViewController {
     @objc
     private func getAction(button: UIButton) {
         self.get()
-        self.put()
+//        self.put()
 
 //        self.download()
     }

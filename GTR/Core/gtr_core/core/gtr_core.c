@@ -14,7 +14,7 @@
 #include <assert.h>
 #include "curl.h"
 #include "gtr_core.h"
-#include "gtr_core_request.h"
+#include "gtr_core_race.h"
 #include "gtr_thread_pool.h"
 #include "gtr_atomic.h"
 #include "gtr_core_header_helper.h"
@@ -42,7 +42,7 @@ static gtr_core_proxy *global_proxy;
 static void
 gtr_core_config_http_method(
         CURL *handle,
-        gtr_core_request *request
+        gtr_core_race *request
 );
 
 static void
@@ -86,15 +86,20 @@ gtr_core_config_time_out(
 );
 
 static void
+gtr_core_config_header_call_back(
+        CURL *handle
+);
+
+static void
 gtr_core_config_write_call_back(
         CURL *handle,
-        gtr_core_request_response_data *response_data
+        gtr_core_race_response_body *response_data
 );
 
 static void
 gtr_core_config_progress(
         CURL *handle,
-        gtr_core_request *request
+        gtr_core_race *request
 );
 
 static void
@@ -164,7 +169,7 @@ read_callback(
         size_t nmemb,
         void *userp
 ) {
-    gtr_core_request_request_data *request_data = (gtr_core_request_request_data *) userp;
+    gtr_core_race_request_body *request_data = (gtr_core_race_request_body *) userp;
     unsigned long bytes_read = 0;
     if (size * nmemb < 1)
         return (size_t) bytes_read;
@@ -183,12 +188,23 @@ read_callback(
     return (size_t) bytes_read;
 }
 
+static size_t header_callback(
+        char *buffer,
+        size_t size,
+        size_t nmemb,
+        void *userdata
+) {
+    size_t real_size = size * nmemb;
+
+    return real_size;
+}
+
 /**
  * 写入回调
  * @param contents 内容
  * @param size 内容大小
  * @param nmemb nmemb
- * @param userp userp
+ * @param user_data user_data
  * @return size_t
  */
 static size_t
@@ -196,28 +212,28 @@ write_callback(
         void *contents,
         size_t size,
         size_t nmemb,
-        void *userp
+        void *user_data
 ) {
     size_t real_size = size * nmemb;
-    gtr_core_request_response_data *response_data = (gtr_core_request_response_data *) userp;
+    gtr_core_race_response_body *response_data = (gtr_core_race_response_body *) user_data;
 
-    response_data->response_data = realloc(response_data->response_data, response_data->response_data_size + real_size + 1);
-    if (response_data->response_data == NULL) {
+    response_data->response_body_data = realloc(response_data->response_body_data, response_data->response_body_data_size + real_size + 1);
+    if (response_data->response_body_data == NULL) {
         /* out of memory! */
         printf("not enough memory (realloc returned NULL)\n");
         return 0;
     }
 
-    memcpy(&(response_data->response_data[response_data->response_data_size]), contents, real_size);
-    response_data->response_data_size += real_size;
-    response_data->response_data[response_data->response_data_size] = 0;
+    memcpy(&(response_data->response_body_data[response_data->response_body_data_size]), contents, real_size);
+    response_data->response_body_data_size += real_size;
+    response_data->response_body_data[response_data->response_body_data_size] = 0;
 
     return real_size;
 }
 
 static int
 progress_callback(
-        void *p,
+        void *__unused p,
         curl_off_t download_total,
         curl_off_t download_now,
         curl_off_t upload_total,
@@ -235,16 +251,17 @@ progress_callback(
 //--- Core
 static void
 request(
-        gtr_core_request *core_request
+        gtr_core_race *core_request
 ) {
 
     CURL *curl_handle;
     CURLcode res;
 
-    gtr_core_request_response_data response_data;
+    gtr_core_race_response_header response_header;
 
-    response_data.response_data = malloc(1);
-    response_data.response_data_size = 0;
+    gtr_core_race_response_body response_body;
+    response_body.response_body_data = malloc(1);
+    response_body.response_body_data_size = 0;
 
     curl_handle = curl_easy_init();
 
@@ -279,7 +296,11 @@ request(
     }
 
     {
-        gtr_core_config_write_call_back(curl_handle, &response_data);
+        gtr_core_config_header_call_back(curl_handle);
+    }
+
+    {
+        gtr_core_config_write_call_back(curl_handle, &response_body);
     }
 
     {
@@ -312,9 +333,9 @@ request(
                 core_request->on_failed(core_request->task_id, http_response_code, res, curl_easy_strerror(res));
             }
         } else {
-            gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_data.response_data_size);
+            gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_body.response_body_data_size);
             if (core_request->on_succeed) {
-                core_request->on_succeed(core_request->task_id, http_response_code, response_data.response_data, response_data.response_data_size);
+                core_request->on_succeed(core_request->task_id, http_response_code, response_body.response_body_data, response_body.response_body_data_size);
             }
         }
     }
@@ -327,8 +348,9 @@ request(
     {
         curl_easy_cleanup(curl_handle);
         free(core_request->url);
+        free(core_request->header);
         free(core_request);
-        free(response_data.response_data);
+        free(response_body.response_body_data);
     }
 }
 
@@ -401,7 +423,7 @@ gtr_core_go_request(
         const char *file_path,
         void *progress_callback
 ) {
-    gtr_core_request *core_request = (gtr_core_request *) calloc(1, sizeof(gtr_core_request));
+    gtr_core_race *core_request = (gtr_core_race *) calloc(1, sizeof(gtr_core_race));
 
     {
         *task_id = gtr_atomic_unsigned_int_add_and_fetch(&gtr_core_request_global_task_id, 1);
@@ -434,7 +456,7 @@ gtr_core_go_request(
     {
         //data
         if (request_data_size > 0 && request_data != NULL) {
-            core_request->request_data = (gtr_core_request_request_data *) calloc(1, sizeof(gtr_core_request_request_data));
+            core_request->request_data = (gtr_core_race_request_body *) calloc(1, sizeof(gtr_core_race_request_body));
             core_request->request_data->data = malloc((size_t) request_data_size);
             core_request->request_data->size_left = request_data_size;
             core_request->request_data->size = request_data_size;
@@ -459,7 +481,7 @@ gtr_core_go_request(
 
     {
         if (file_path) {
-            core_request->download_data = calloc(1, sizeof(gtr_core_request_download_data));
+            core_request->download_data = calloc(1, sizeof(gtr_core_race_download_data));
             size_t file_path_size = strlen(file_path) + 1;
             core_request->download_data->file_path = malloc(file_path_size);
             memcpy(core_request->download_data->file_path, file_path, file_path_size);
@@ -525,7 +547,7 @@ void gtr_core_add_download_request(
 static void
 gtr_core_config_http_method(
         CURL *handle,
-        gtr_core_request *request
+        gtr_core_race *request
 ) {
     if (!request) {
         assert(request != NULL);
@@ -641,7 +663,7 @@ gtr_core_config_time_condition(
 static void
 gtr_core_config_progress(
         CURL *handle,
-        gtr_core_request *request
+        gtr_core_race *request
 ) {
     assert(request);
     //上传和下载才需要进度回掉方法
@@ -700,9 +722,16 @@ gtr_core_config_proxy(
 }
 
 static void
+gtr_core_config_header_call_back(
+        CURL *handle
+) {
+    curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, header_callback);
+}
+
+static void
 gtr_core_config_write_call_back(
         CURL *handle,
-        gtr_core_request_response_data *response_data
+        gtr_core_race_response_body *response_data
 ) {
     curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, write_callback);
     curl_easy_setopt(handle, CURLOPT_WRITEDATA, (void *) response_data);
