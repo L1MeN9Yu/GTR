@@ -65,7 +65,7 @@ gtr_core_close_proxy(
  */
 void gtr_core_add_request(
         unsigned int *task_id,
-        gtr_core_request_type type,
+        gtr_core_race_type type,
         const char *url,
         const char *header,
         unsigned int time_out,

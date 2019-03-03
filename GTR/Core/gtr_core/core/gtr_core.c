@@ -86,14 +86,12 @@ gtr_core_config_time_out(
 );
 
 static void
-gtr_core_config_header_call_back(
-        CURL *handle
-);
+gtr_core_config_header_call_back(CURL *handle, gtr_core_race_response_header *response_header);
 
 static void
 gtr_core_config_write_call_back(
         CURL *handle,
-        gtr_core_race_response_body *response_data
+        gtr_core_race_response_body *response_body
 );
 
 static void
@@ -112,7 +110,7 @@ gtr_core_config_debug(
         CURL *handle
 );
 
-//---Private Utility
+//--- Private Utility
 static void
 gtr_core_create_temp_dir(void);
 
@@ -189,12 +187,24 @@ read_callback(
 }
 
 static size_t header_callback(
-        char *buffer,
+        char *contents,
         size_t size,
         size_t nmemb,
-        void *userdata
+        void *user_data
 ) {
     size_t real_size = size * nmemb;
+    gtr_core_race_response_header *response_header = (gtr_core_race_response_header *) user_data;
+
+    response_header->response_header_data = realloc(response_header->response_header_data, response_header->response_header_data_size + real_size + 1);
+    if (response_header->response_header_data == NULL) {
+        /* out of memory! */
+        gtr_core_log(gtr_log_flag_error, "not enough memory (realloc returned NULL)\n");
+        return 0;
+    }
+
+    memcpy(&(response_header->response_header_data[response_header->response_header_data_size]), contents, real_size);
+    response_header->response_header_data_size += real_size;
+    response_header->response_header_data[response_header->response_header_data_size] = 0;
 
     return real_size;
 }
@@ -215,18 +225,18 @@ write_callback(
         void *user_data
 ) {
     size_t real_size = size * nmemb;
-    gtr_core_race_response_body *response_data = (gtr_core_race_response_body *) user_data;
+    gtr_core_race_response_body *response_body = (gtr_core_race_response_body *) user_data;
 
-    response_data->response_body_data = realloc(response_data->response_body_data, response_data->response_body_data_size + real_size + 1);
-    if (response_data->response_body_data == NULL) {
+    response_body->response_body_data = realloc(response_body->response_body_data, response_body->response_body_data_size + real_size + 1);
+    if (response_body->response_body_data == NULL) {
         /* out of memory! */
-        printf("not enough memory (realloc returned NULL)\n");
+        gtr_core_log(gtr_log_flag_error, "not enough memory (realloc returned NULL)\n");
         return 0;
     }
 
-    memcpy(&(response_data->response_body_data[response_data->response_body_data_size]), contents, real_size);
-    response_data->response_body_data_size += real_size;
-    response_data->response_body_data[response_data->response_body_data_size] = 0;
+    memcpy(&(response_body->response_body_data[response_body->response_body_data_size]), contents, real_size);
+    response_body->response_body_data_size += real_size;
+    response_body->response_body_data[response_body->response_body_data_size] = 0;
 
     return real_size;
 }
@@ -251,26 +261,33 @@ progress_callback(
 //--- Core
 static void
 request(
-        gtr_core_race *core_request
+        gtr_core_race *core_race
 ) {
 
     CURL *curl_handle;
     CURLcode res;
 
     gtr_core_race_response_header response_header;
+    {
+        response_header.response_header_data = malloc(1);
+        response_header.response_header_data_size = 0;
+    }
 
     gtr_core_race_response_body response_body;
-    response_body.response_body_data = malloc(1);
-    response_body.response_body_data_size = 0;
+
+    {
+        response_body.response_body_data = malloc(1);
+        response_body.response_body_data_size = 0;
+    }
 
     curl_handle = curl_easy_init();
 
     {
-        gtr_core_config_http_method(curl_handle, core_request);
+        gtr_core_config_http_method(curl_handle, core_race);
     }
 
     {
-        gtr_core_config_url(curl_handle, core_request->url);
+        gtr_core_config_url(curl_handle, core_race->url);
     }
 
     {
@@ -286,7 +303,7 @@ request(
     }
 
     {
-        gtr_core_config_time_out(curl_handle, core_request->time_out);
+        gtr_core_config_time_out(curl_handle, core_race->time_out);
     }
 
     {
@@ -296,7 +313,7 @@ request(
     }
 
     {
-        gtr_core_config_header_call_back(curl_handle);
+        gtr_core_config_header_call_back(curl_handle, &response_header);
     }
 
     {
@@ -304,7 +321,7 @@ request(
     }
 
     {
-        gtr_core_config_progress(curl_handle, core_request);
+        gtr_core_config_progress(curl_handle, core_race);
     }
 
     {
@@ -315,7 +332,7 @@ request(
         gtr_core_config_debug(curl_handle);
     }
 
-    struct curl_slist *header = gtr_core_add_custom_headers(core_request->header);
+    struct curl_slist *header = gtr_core_add_custom_headers(core_race->header);
     gtr_core_config_headers(curl_handle, global_user_agent, header);
 
     {
@@ -329,13 +346,16 @@ request(
         /* check for errors */
         if (res != CURLE_OK) {
             gtr_core_log(gtr_log_flag_error, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-            if (core_request->on_failed) {
-                core_request->on_failed(core_request->task_id, http_response_code, res, curl_easy_strerror(res));
+            if (core_race->on_failed) {
+                core_race->on_failed(core_race->task_id, http_response_code, res, curl_easy_strerror(res));
             }
         } else {
             gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_body.response_body_data_size);
-            if (core_request->on_succeed) {
-                core_request->on_succeed(core_request->task_id, http_response_code, response_body.response_body_data, response_body.response_body_data_size);
+            if (core_race->on_succeed_header) {
+                core_race->on_succeed_header(core_race->task_id, response_header.response_header_data, response_header.response_header_data_size);
+            }
+            if (core_race->on_succeed_body) {
+                core_race->on_succeed_body(core_race->task_id, http_response_code, response_body.response_body_data, response_body.response_body_data_size);
             }
         }
     }
@@ -347,9 +367,10 @@ request(
 
     {
         curl_easy_cleanup(curl_handle);
-        free(core_request->url);
-        free(core_request->header);
-        free(core_request);
+        free(core_race->url);
+        free(core_race->header);
+        free(core_race);
+        free(response_header.response_header_data);
         free(response_body.response_body_data);
     }
 }
@@ -412,7 +433,7 @@ gtr_core_close_proxy(
 static void
 gtr_core_go_request(
         unsigned int *task_id,
-        gtr_core_request_type type,
+        gtr_core_race_type type,
         const char *url,
         const char *header,
         unsigned int time_out,
@@ -475,7 +496,7 @@ gtr_core_go_request(
     }
     {
         //call_back
-        core_request->on_succeed = succeed_callback;
+        core_request->on_succeed_body = succeed_callback;
         core_request->on_failed = failure_callback;
     }
 
@@ -496,7 +517,7 @@ gtr_core_go_request(
 void
 gtr_core_add_request(
         unsigned int *task_id,
-        gtr_core_request_type type,
+        gtr_core_race_type type,
         const char *url,
         const char *header,
         unsigned int time_out,
@@ -723,18 +744,20 @@ gtr_core_config_proxy(
 
 static void
 gtr_core_config_header_call_back(
-        CURL *handle
+        CURL *handle,
+        gtr_core_race_response_header *response_header
 ) {
     curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, header_callback);
+    curl_easy_setopt(handle, CURLOPT_HEADERDATA, response_header);
 }
 
 static void
 gtr_core_config_write_call_back(
         CURL *handle,
-        gtr_core_race_response_body *response_data
+        gtr_core_race_response_body *response_body
 ) {
     curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, write_callback);
-    curl_easy_setopt(handle, CURLOPT_WRITEDATA, (void *) response_data);
+    curl_easy_setopt(handle, CURLOPT_WRITEDATA, response_body);
 }
 
 static void

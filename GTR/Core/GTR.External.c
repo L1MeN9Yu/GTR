@@ -3,6 +3,8 @@
 #include "gtr_core.h"
 
 //---------- Export
+extern void swift_on_http_response_succeed_header(unsigned int task_id, void *c_data, unsigned long c_date_size);
+
 extern void swift_get_request_succeed(unsigned int task_id, void *c_data, unsigned long c_date_size);
 
 extern void swift_get_request_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
@@ -139,6 +141,10 @@ extern void gtr_cancel(unsigned int task_id) {
 
 static void gtr_log_message_call_back(unsigned int flag, char *message) {
     swift_log_callback(flag, message);
+}
+
+static void on_http_response_succeed_header(unsigned int task_id, void *data, unsigned long data_size) {
+    swift_on_http_response_succeed_header(task_id, data, data_size);
 }
 
 static void on_http_get_request_succeed(unsigned int task_id, long http_response_code, void *data, unsigned long data_size) {

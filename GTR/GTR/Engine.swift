@@ -228,10 +228,17 @@ private func c_gtr_download(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: Uns
 
 // MARK: - C CallBack
 
+@_silgen_name("swift_on_http_response_succeed_header")
+func c_on_http_response_succeed_header(task_id: CUnsignedInt,
+                                       c_data: UnsafeRawPointer,
+                                       c_data_size: CUnsignedLong) {
+    //todo
+}
+
 @_silgen_name("swift_get_request_succeed")
 func c_get_request_succeed(task_id: CUnsignedInt,
-                                   c_data: UnsafeRawPointer,
-                                   c_data_size: CUnsignedLong) {
+                           c_data: UnsafeRawPointer,
+                           c_data_size: CUnsignedLong) {
     let swiftData = Data.init(bytes: c_data, count: Int(c_data_size))
     let succeed = GTR.engine.succeedContainer[task_id]
     GTR.engine.responseQueue.async {
