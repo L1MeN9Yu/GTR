@@ -29,6 +29,8 @@ extern void swift_log_callback(unsigned int flag, char *message);
 //---------- 前置定义
 static void gtr_log_message_call_back(unsigned int flag, char *message);
 
+static void on_http_response_succeed_header(unsigned int task_id, void *data, unsigned long data_size);
+
 static void on_http_get_request_succeed(unsigned int task_id, long http_response_code, void *data, unsigned long data_size);
 
 static void on_http_get_request_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
@@ -78,6 +80,7 @@ void gtr_get(
             time_out,
             NULL,
             0,
+            &on_http_response_succeed_header,
             &on_http_get_request_succeed,
             &on_http_get_request_failure);
 }
@@ -100,6 +103,7 @@ void gtr_post(
             time_out,
             param_data,
             param_size,
+            &on_http_response_succeed_header,
             &on_http_post_request_succeed,
             &on_http_post_request_failure);
 }
@@ -122,6 +126,7 @@ void gtr_put(
             time_out,
             param_data,
             param_size,
+            &on_http_response_succeed_header,
             &on_http_put_request_completed,
             &on_http_put_request_failure
     );
@@ -129,7 +134,7 @@ void gtr_put(
 
 //---------- 下载文件
 extern void gtr_download(unsigned int *task_id, const char *url, const char *file_path, const char *headers, unsigned int time_out) {
-    gtr_core_add_download_request(task_id, url, file_path, headers, time_out, &on_http_download_file_progress, &on_http_download_file_success, &on_http_download_failure);
+    gtr_core_add_download_request(task_id, url, file_path, headers, time_out, &on_http_download_file_progress, NULL, &on_http_download_file_success, &on_http_download_failure);
 }
 
 //---------- 取消请求

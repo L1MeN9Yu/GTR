@@ -439,11 +439,11 @@ gtr_core_go_request(
         unsigned int time_out,
         const void *request_data,
         unsigned long request_data_size,
-        void *succeed_callback,
+        void *succeed_header_callback,
+        void *succeed_body_callback,
         void *failure_callback,
         const char *file_path,
-        void *progress_callback
-) {
+        void *progress_callback) {
     gtr_core_race *core_request = (gtr_core_race *) calloc(1, sizeof(gtr_core_race));
 
     {
@@ -496,7 +496,8 @@ gtr_core_go_request(
     }
     {
         //call_back
-        core_request->on_succeed_body = succeed_callback;
+        core_request->on_succeed_header = succeed_header_callback;
+        core_request->on_succeed_body = succeed_body_callback;
         core_request->on_failed = failure_callback;
     }
 
@@ -523,9 +524,9 @@ gtr_core_add_request(
         unsigned int time_out,
         const void *request_data,
         unsigned long request_data_size,
-        void *succeed_callback,
-        void *failure_callback
-) {
+        void *succeed_header_callback,
+        void *succeed_body_callback,
+        void *failure_callback) {
     gtr_core_go_request(
             task_id,
             type,
@@ -534,7 +535,8 @@ gtr_core_add_request(
             time_out,
             request_data,
             request_data_size,
-            succeed_callback,
+            succeed_header_callback,
+            succeed_body_callback,
             failure_callback,
             NULL,
             NULL);
@@ -547,7 +549,8 @@ void gtr_core_add_download_request(
         const char *header,
         unsigned int time_out,
         void *progress_callback,
-        void *succeed_callback,
+        void *succeed_header_callback,
+        void *succeed_body_callback,
         void *failure_callback
 ) {
     gtr_core_go_request(
@@ -558,7 +561,8 @@ void gtr_core_add_download_request(
             time_out,
             NULL,
             0,
-            succeed_callback,
+            succeed_header_callback,
+            succeed_body_callback,
             failure_callback,
             file_path,
             progress_callback);

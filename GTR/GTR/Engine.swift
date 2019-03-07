@@ -233,13 +233,16 @@ func c_on_http_response_succeed_header(task_id: CUnsignedInt,
                                        c_data: UnsafeRawPointer,
                                        c_data_size: CUnsignedLong) {
     //todo
+    let swiftData = Data(bytes: c_data, count: Int(c_data_size))
+    let string = String(data: swiftData, encoding: .utf8)
+    print(string)
 }
 
 @_silgen_name("swift_get_request_succeed")
 func c_get_request_succeed(task_id: CUnsignedInt,
                            c_data: UnsafeRawPointer,
                            c_data_size: CUnsignedLong) {
-    let swiftData = Data.init(bytes: c_data, count: Int(c_data_size))
+    let swiftData = Data(bytes: c_data, count: Int(c_data_size))
     let succeed = GTR.engine.succeedContainer[task_id]
     GTR.engine.responseQueue.async {
         succeed??(swiftData)
