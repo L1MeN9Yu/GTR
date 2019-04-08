@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "gtr_core.h"
+#include "gtr_tbox_main.h"
 
 //---------- Export
 extern void swift_on_http_response_succeed_header(unsigned int task_id, void *c_data, unsigned long c_date_size);
@@ -53,6 +54,7 @@ static void on_http_download_failure(unsigned int task_id, long http_response_co
 //---------- 初始化
 void gtr_init(const char *user_agent, unsigned int cylinder_count) {
     gtr_core_init(user_agent, &gtr_log_message_call_back, cylinder_count);
+    gtr_tbox_setup();
 }
 //----------
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10345A6C2258F54400DFC594 /* libtbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10345A6B2258F54400DFC594 /* libtbox.a */; };
 		427D2AEE2119FA1D00314C23 /* libcurl_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 427D2AEB2119FA1D00314C23 /* libcurl_iOS.a */; };
 		427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 427D2AF32119FCEA00314C23 /* libz.tbd */; };
 		4290D6292137F49200ED45E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4290D6282137F49200ED45E2 /* AppDelegate.swift */; };
@@ -35,6 +36,7 @@
 		B2D2A65D2BEE3C5F05E9D78A /* urlapi.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A514E33AC3486FC67749 /* urlapi.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A65E39A12F7FA30D41FA /* GTR.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ACA7D124F6573FF09579 /* GTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2D2A6A3E200D7095DD39717 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */; };
+		B2D2A713943EC124CBEC65B5 /* gtr_tbox_main.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4B1ED096430C8E9CDBD /* gtr_tbox_main.c */; };
 		B2D2A73BDD3AC4DB369B4D4F /* gtr_core_race.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A6BA1BD7071E077D8555 /* gtr_core_race.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2A7455E628509E3CF98A4 /* gtr_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE7237C26F0FDC915ADB /* gtr_atomic.c */; };
 		B2D2A74AE57967404805704F /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A324D196A2CEAE3D76E8 /* Method.swift */; };
@@ -55,6 +57,7 @@
 		B2D2AE1FFACBE0355A3E8B1C /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA45760ED5D528DC4C1B /* HUD.swift */; };
 		B2D2AE3EAD1474BCA6B825D2 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */; };
 		B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA86DA38062600F6345F /* gtr_core_log.c */; };
+		B2D2AF0D3BC7410A04246C38 /* gtr_tbox_main.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AA25F8F949E952A45EDF /* gtr_tbox_main.h */; };
 		B2D2AF1ED090FAFD3191BD13 /* easy.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A1CA4E070C829CFC23EE /* easy.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2D2AF6943F995C6E1364374 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */; };
 		B2D2AF89CE011EDD0F488B36 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A93504887D10507AE9FE /* Destination.swift */; };
@@ -88,6 +91,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		10345A6B2258F54400DFC594 /* libtbox.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtbox.a; path = GTR/Private/tbox/libtbox.a; sourceTree = "<group>"; };
 		427D2AEB2119FA1D00314C23 /* libcurl_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl_iOS.a; path = GTR/Private/cURL/libcurl_iOS.a; sourceTree = "<group>"; };
 		427D2AF32119FCEA00314C23 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		4290D6262137F49200ED45E2 /* GTRDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTRDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +117,7 @@
 		B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_atomic.h; sourceTree = "<group>"; };
 		B2D2A3AB95F258E1382B16AE /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		B2D2A3F728E82ED3509187B1 /* Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
+		B2D2A4B1ED096430C8E9CDBD /* gtr_tbox_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_tbox_main.c; sourceTree = "<group>"; };
 		B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		B2D2A514E33AC3486FC67749 /* urlapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = urlapi.h; sourceTree = "<group>"; };
 		B2D2A66D6341CB9D098269B0 /* GTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.swift; sourceTree = "<group>"; };
@@ -127,6 +132,7 @@
 		B2D2A93B7CBC04B558AAA2DB /* mprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mprintf.h; sourceTree = "<group>"; };
 		B2D2A97607A814FF3E6C113B /* gtr_core_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_log.h; sourceTree = "<group>"; };
 		B2D2A99333109680AB041F1C /* gtr_ios_utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_ios_utility.h; sourceTree = "<group>"; };
+		B2D2AA25F8F949E952A45EDF /* gtr_tbox_main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_tbox_main.h; sourceTree = "<group>"; };
 		B2D2AA45760ED5D528DC4C1B /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		B2D2AA86DA38062600F6345F /* gtr_core_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_log.c; sourceTree = "<group>"; };
@@ -159,6 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10345A6C2258F54400DFC594 /* libtbox.a in Frameworks */,
 				427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */,
 				427D2AEE2119FA1D00314C23 /* libcurl_iOS.a in Frameworks */,
 			);
@@ -170,6 +177,7 @@
 		427D2AEA2119FA1D00314C23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10345A6B2258F54400DFC594 /* libtbox.a */,
 				427D2AF32119FCEA00314C23 /* libz.tbd */,
 				427D2AEB2119FA1D00314C23 /* libcurl_iOS.a */,
 			);
@@ -325,6 +333,7 @@
 				B2D2A738773BEA4FCC73F1C9 /* ios */,
 				B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */,
 				B2D2A2BDD4B1B3DA0EB45914 /* gtr_file_utilty.h */,
+				B2D2ACC799D2B856118E62E7 /* tbox */,
 			);
 			path = utility;
 			sourceTree = "<group>";
@@ -355,6 +364,15 @@
 				B2D2A3AB95F258E1382B16AE /* Error.swift */,
 			);
 			path = GTR;
+			sourceTree = "<group>";
+		};
+		B2D2ACC799D2B856118E62E7 /* tbox */ = {
+			isa = PBXGroup;
+			children = (
+				B2D2AA25F8F949E952A45EDF /* gtr_tbox_main.h */,
+				B2D2A4B1ED096430C8E9CDBD /* gtr_tbox_main.c */,
+			);
+			path = tbox;
 			sourceTree = "<group>";
 		};
 		B2D2ADB85E275B14E43980C7 /* cURL */ = {
@@ -392,6 +410,7 @@
 				45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */,
 				B2D2A29DD062DF021D9E496B /* gtr_core_log.h in Headers */,
 				B2D2A65D2BEE3C5F05E9D78A /* urlapi.h in Headers */,
+				B2D2AF0D3BC7410A04246C38 /* gtr_tbox_main.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +552,7 @@
 				B2D2AE1FFACBE0355A3E8B1C /* HUD.swift in Sources */,
 				B2D2AE3EAD1474BCA6B825D2 /* Notification.swift in Sources */,
 				B2D2AE01135DAC924C77BADE /* Race.swift in Sources */,
+				B2D2A713943EC124CBEC65B5 /* gtr_tbox_main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,7 +592,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4S5ZWGJSPN;
+				DEVELOPMENT_TEAM = HMEN575QY4;
 				INFOPLIST_FILE = GTRDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -592,7 +612,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4S5ZWGJSPN;
+				DEVELOPMENT_TEAM = HMEN575QY4;
 				INFOPLIST_FILE = GTRDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -732,10 +752,11 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4S5ZWGJSPN;
+				DEVELOPMENT_TEAM = HMEN575QY4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/GTR/Private/tbox/include";
 				INFOPLIST_FILE = GTR/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -744,7 +765,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/GTR/Private/cURL";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/GTR/Private/cURL",
+					"$(PROJECT_DIR)/GTR/Private/tbox",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -759,10 +783,11 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4S5ZWGJSPN;
+				DEVELOPMENT_TEAM = HMEN575QY4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/GTR/Private/tbox/include";
 				INFOPLIST_FILE = GTR/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -771,7 +796,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/GTR/Private/cURL";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/GTR/Private/cURL",
+					"$(PROJECT_DIR)/GTR/Private/tbox",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
