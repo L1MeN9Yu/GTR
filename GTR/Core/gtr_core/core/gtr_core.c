@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include <zconf.h>
 #include <assert.h>
-#include "curl.h"
+#include <curl.h>
 #include "gtr_core.h"
 #include "gtr_core_race.h"
 #include "gtr_thread_pool.h"

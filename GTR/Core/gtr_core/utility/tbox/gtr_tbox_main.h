@@ -9,8 +9,6 @@
 #ifndef gtr_tbox_main_h
 #define gtr_tbox_main_h
 
-#define TB_CONFIG_INFO_HAVE_VERSION
-
 #include <stdio.h>
 
 void gtr_tbox_setup(void);
