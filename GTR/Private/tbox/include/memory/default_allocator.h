@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        default_allocator.h
@@ -74,7 +74,9 @@ tb_allocator_ref_t          tb_default_allocator(tb_byte_t* data, tb_size_t size
  * |-----------------------------------------------------------------------------|
  * |                              default allocator                              |
  *  -----------------------------------------------------------------------------
- * 
+ *
+ * </pre>
+ *
  * @param large_allocator   the large allocator, cannot be null
  *
  * @return                  the allocator 

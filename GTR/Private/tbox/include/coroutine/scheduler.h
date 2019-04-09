@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        scheduler.h
@@ -67,7 +67,7 @@ tb_void_t               tb_co_scheduler_kill(tb_co_scheduler_ref_t scheduler);
 
 /*! run the scheduler loop
  *
- * @param scheduler     the scheduler
+ * @param schedule      the scheduler
  * @param exclusive     enable exclusive mode, we need ensure only one loop() be called at the same time, 
  *                      but it will be faster using thr global scheduler instead of TLS storage
  */

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        compiler.h
@@ -131,6 +131,9 @@
 // gnu c/c++ 
 #elif defined(__GNUC__)
 #   define TB_COMPILER_IS_GCC
+#   if defined(__MINGW32__) || defined(__MINGW64__) 
+#       define TB_COMPILER_IS_MINGW
+#   endif
 #   define TB_COMPILER_VERSION_BT(major, minor)     ((__GNUC__ * 100 + __GNUC_MINOR__) > ((major) * 100 + (minor)))
 #   define TB_COMPILER_VERSION_BE(major, minor)     ((__GNUC__ * 100 + __GNUC_MINOR__) >= ((major) * 100 + (minor)))
 #   define TB_COMPILER_VERSION_EQ(major, minor)     ((__GNUC__ * 100 + __GNUC_MINOR__) == ((major) * 100 + (minor)))
@@ -305,10 +308,10 @@
 #       define TB_COMPILER_VERSION_STRING           "visual c++ .net 2015 (14.0)"
 #   elif (_MSC_VER == 1910 || _MSC_VER == 1911)
 #       define TB_COMPILER_VERSION_STRING           "visual c++ .net 2017 (14.1)"
-#   elif (_MSC_VER > 1911)
-#       define TB_COMPILER_VERSION_STRING           "visual c++ .net >= 2017 (14.1)"
+#   elif (_MSC_VER == 1920)
+#       define TB_COMPILER_VERSION_STRING           "visual c++ .net 2019 (16.0)"
 #   else
-#       error Unknown visual c++ Compiler Version
+#       define TB_COMPILER_VERSION_STRING           "unknown visual c++ compiler"
 #   endif
 
 // suppress warning

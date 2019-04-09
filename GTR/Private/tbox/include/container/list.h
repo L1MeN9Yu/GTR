@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        list.h
@@ -214,14 +214,14 @@ tb_void_t           tb_list_moveto_next(tb_list_ref_t list, tb_size_t itor, tb_s
 /*! moveto the head item
  *
  * @param list      the list
- * @param itor      the item itor
+ * @param move      the move itor
  */
 tb_void_t           tb_list_moveto_head(tb_list_ref_t list, tb_size_t move);
 
 /*! moveto the tail item
  *
  * @param list      the list
- * @param itor      the item itor
+ * @param move      the move itor
  */
 tb_void_t           tb_list_moveto_tail(tb_list_ref_t list, tb_size_t move);
 

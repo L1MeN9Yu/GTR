@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        file.h
@@ -254,7 +254,7 @@ tb_hong_t               tb_file_offset(tb_file_ref_t file);
 
 /*! the file info for file or directory
  * 
- * @param file          the file handle
+ * @param path          the file path
  * @param info          the file info
  *
  * @return              tb_true or tb_false

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        iterator.h
@@ -219,8 +219,8 @@ tb_void_t           tb_iterator_copy(tb_iterator_ref_t iterator, tb_size_t itor,
 /*! compare the iterator item
  * 
  * @param iterator  the iterator
- * @param itor      the item 
- * @param item      the compared item 
+ * @param litem     the item
+ * @param ritem     the compared item
  *
  * @return          =: 0, >: 1, <: -1
  */

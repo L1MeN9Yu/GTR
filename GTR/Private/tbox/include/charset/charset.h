@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        charset.h
@@ -140,7 +140,7 @@ tb_size_t           tb_charset_type(tb_char_t const* name);
  *
  * @return          the charset pointer
  */
-tb_charset_ref_t tb_charset_find(tb_size_t type);
+tb_charset_ref_t    tb_charset_find(tb_size_t type);
 
 /*! convert charset from static stream
  *
@@ -159,7 +159,7 @@ tb_long_t           tb_charset_conv_bst(tb_size_t ftype, tb_size_t ttype, tb_sta
  * @param ttype     the to charset
  * @param cstr      the cstr
  * @param data      the data
- * @param maxn      the size
+ * @param size      the size
  *
  * @return          the converted bytes for output or -1
  */

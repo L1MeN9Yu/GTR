@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        arch.h
@@ -108,6 +108,10 @@
 #       define TB_ARCH_ARM_VERSION          (4)
 #       define TB_ARCH_ARM_v4t
 #       define  TB_ARCH_STRING              "armv4t"
+#   elif defined(__ARM_ARCH_3__)
+#       define TB_ARCH_ARM_VERSION          (3)
+#       define TB_ARCH_ARM_v3
+#       define  TB_ARCH_STRING              "armv3"
 #   elif defined(__ARM_ARCH)
 #       define TB_ARCH_ARM_VERSION          __ARM_ARCH
 #       if __ARM_ARCH >= 8

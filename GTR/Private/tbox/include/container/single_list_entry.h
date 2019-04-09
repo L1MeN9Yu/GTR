@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        single_list_entry.h
@@ -399,7 +399,7 @@ static __tb_inline__ tb_void_t                  tb_single_list_entry_remove_safe
 /*! remove the next entry
  *
  * @param list                                  the list
- * @param entry                                 the prev entry
+ * @param prev                                  the prev entry
  */
 static __tb_inline__ tb_void_t                  tb_single_list_entry_remove_next(tb_single_list_entry_head_ref_t list, tb_single_list_entry_ref_t prev)
 {

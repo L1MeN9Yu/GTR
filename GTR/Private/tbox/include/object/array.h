@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        array.h
@@ -101,7 +101,7 @@ tb_void_t           tb_oc_array_remove(tb_object_ref_t array, tb_size_t index);
 /*! append item to array
  *
  * @param array     the array object
- * @param index     the array index
+ * @param item      the array item
  */
 tb_void_t           tb_oc_array_append(tb_object_ref_t array, tb_object_ref_t item);
 

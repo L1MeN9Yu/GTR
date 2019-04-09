@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        data.h
@@ -42,8 +42,7 @@ __tb_extern_c_enter__
 
 /*! init data from url
  *
- * @param data      the data
- * @param size      the size
+ * @param url       the url
  *
  * @return          the data object
  */

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        backtrace.h
@@ -64,7 +64,7 @@ tb_handle_t             tb_backtrace_symbols_init(tb_pointer_t* frames, tb_size_
  * @param symbols       the symbols handle
  * @param frames        the backtrace frames
  * @param nframe        the backtrace frame count
- * @param frame         the backtrace frame index
+ * @param iframe        the backtrace frame index
  *
  * @return              the symbol name
  */

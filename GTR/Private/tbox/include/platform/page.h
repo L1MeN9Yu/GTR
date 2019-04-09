@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        page.h
@@ -51,7 +51,6 @@ tb_bool_t               tb_page_init(tb_noarg_t);
 
 /*! exit page 
  *
- * @return              the page size
  */
 tb_void_t               tb_page_exit(tb_noarg_t);
 

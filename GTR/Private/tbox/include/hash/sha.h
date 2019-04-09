@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        sha.h
@@ -89,8 +89,9 @@ tb_void_t               tb_sha_spak(tb_sha_t* sha, tb_byte_t const* data, tb_siz
 
 /*! make sha 
  *
+ * @param mode          the mode
  * @param ib            the input data
- * @param in            the input size
+ * @param ip            the input size
  * @param ob            the output data
  * @param on            the output size
  *

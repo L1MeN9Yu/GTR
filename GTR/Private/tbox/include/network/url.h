@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        url.h
@@ -170,7 +170,7 @@ tb_size_t           tb_url_protocol(tb_url_ref_t url);
 /*! set the protocol to the url
  *
  * @param url       the url
- * @param poto      the url protocol
+ * @param protocol  the url protocol
  */
 tb_void_t           tb_url_protocol_set(tb_url_ref_t url, tb_size_t protocol);
 

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        ltimer.h
@@ -143,7 +143,6 @@ tb_bool_t               tb_ltimer_spak(tb_ltimer_ref_t timer);
  *
  * @param timer         the timer 
  *
- * @return              tb_true or tb_false
  */
 tb_void_t               tb_ltimer_loop(tb_ltimer_ref_t timer);
 

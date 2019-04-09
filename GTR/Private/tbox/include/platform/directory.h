@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        directory.h
@@ -112,7 +112,7 @@ tb_size_t               tb_directory_temporary(tb_char_t* path, tb_size_t maxn);
  * @param recursion     the recursion level, 0, 1, 2, .. or -1 (infinite)
  * @param prefix        is prefix recursion? directory is the first item
  * @param func          the callback func
- * @param data          the callback data
+ * @param priv          the callback priv
  * 
  */
 tb_void_t               tb_directory_walk(tb_char_t const* path, tb_long_t recursion, tb_bool_t prefix, tb_directory_walk_func_t func, tb_cpointer_t priv);

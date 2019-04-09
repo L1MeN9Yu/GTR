@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Copyright (C) 2009 - 2018, TBOOX Open Source Group.
+ * Copyright (C) 2009 - 2019, TBOOX Open Source Group.
  *
  * @author      ruki
  * @file        value.h
@@ -214,7 +214,6 @@ tb_double_t         tb_database_sql_value_double(tb_database_sql_value_t const* 
 /*! set the null value
  *
  * @param value     the value
- * @param number    the number
  */
 tb_void_t           tb_database_sql_value_set_null(tb_database_sql_value_t* value);
 
