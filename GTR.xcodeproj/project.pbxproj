@@ -45,6 +45,7 @@
 		B2D2ACB4A0D838837E57BBC6 /* RaceDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A75B5BE6A302E19D81C0 /* RaceDemo.swift */; };
 		B2D2ACDB3A0259A88C9B9995 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* Error.swift */; };
 		B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
+		B2D2AD1D4E3244C26C3CE5F6 /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */; };
 		B2D2AE01135DAC924C77BADE /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* Race.swift */; };
 		B2D2AE1FFACBE0355A3E8B1C /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA45760ED5D528DC4C1B /* HUD.swift */; };
 		B2D2AE3EAD1474BCA6B825D2 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */; };
@@ -98,6 +99,7 @@
 		4530445B651AB97564ABE56C /* GTR.External.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTR.External.h; sourceTree = "<group>"; };
 		45304850E2A52EA9FD4CF561 /* GTR.External.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GTR.External.c; sourceTree = "<group>"; };
 		B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_proxy.c; sourceTree = "<group>"; };
+		B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.UnsafePointer.swift; sourceTree = "<group>"; };
 		B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_race.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_race.c; sourceTree = "<group>"; };
 		B2D2A2BDD4B1B3DA0EB45914 /* gtr_file_utilty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_file_utilty.h; sourceTree = "<group>"; };
 		B2D2A2D8BFFA713174DBF04F /* gtr_core_proxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_proxy.h; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				4530407A138ED07408B9DB82 /* Dictionary.NetworkJSON.swift */,
+				B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				B2D2AE3EAD1474BCA6B825D2 /* Notification.swift in Sources */,
 				B2D2AE01135DAC924C77BADE /* Race.swift in Sources */,
 				B2D2A713943EC124CBEC65B5 /* gtr_tbox_main.c in Sources */,
+				B2D2AD1D4E3244C26C3CE5F6 /* Data.UnsafePointer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

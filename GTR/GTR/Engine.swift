@@ -115,21 +115,21 @@ extension GTR.Engine {
         switch contentType {
         case .json:
             if let `param` = param, let data = param.toData() {
-                c_param = data.withUnsafeBytes { (unsafePointer: UnsafePointer<UInt8>) in
+                c_param = data.withUnsafePointer { unsafePointer -> UnsafeRawPointer in
                     return UnsafeRawPointer(unsafePointer)
                 }
                 c_param_size = CUnsignedLong(data.count)
             }
         case .formURLEncoded:
             if let `param` = param, let data = param.queryString.data(using: .utf8) {
-                c_param = data.withUnsafeBytes { (unsafePointer: UnsafePointer<UInt8>) in
+                c_param = data.withUnsafePointer { unsafePointer -> UnsafeRawPointer in
                     return UnsafeRawPointer(unsafePointer)
                 }
                 c_param_size = CUnsignedLong(data.count)
             }
         case .propertyList:
             if let `param` = param, let data = param.toData() {
-                c_param = data.withUnsafeBytes { (unsafePointer: UnsafePointer<UInt8>) in
+                c_param = data.withUnsafePointer { unsafePointer -> UnsafeRawPointer in
                     return UnsafeRawPointer(unsafePointer)
                 }
                 c_param_size = CUnsignedLong(data.count)
@@ -156,7 +156,7 @@ extension GTR.Engine {
         var c_param: UnsafeRawPointer? = nil
         var c_param_size: CUnsignedLong = 0
         if let `param` = param, let data = param.toData() {
-            c_param = data.withUnsafeBytes { (unsafePointer: UnsafePointer<UInt8>) in
+            c_param = data.withUnsafePointer { unsafePointer -> UnsafeRawPointer in
                 return UnsafeRawPointer(unsafePointer)
             }
             c_param_size = CUnsignedLong(data.count)
