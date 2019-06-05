@@ -10,7 +10,7 @@
 #define gtr_core_header_helper_h
 
 #include <stdio.h>
-#include "curl.h"
+#include <curl/curl.h>
 
 struct curl_slist *gtr_core_add_custom_headers(const char *headers_json);
 
