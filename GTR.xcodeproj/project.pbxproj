@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10E0A3F622A7F54A00389DE0 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E0A3F522A7F54A00389DE0 /* libcurl.a */; };
+		10EEAA1522F95AAD00F950A1 /* libbrotlidec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EEAA1422F95AAD00F950A1 /* libbrotlidec.a */; };
+		10EEAA1722F95AB900F950A1 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EEAA1622F95AB900F950A1 /* libcurl.a */; };
 		427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 427D2AF32119FCEA00314C23 /* libz.tbd */; };
 		4290D6292137F49200ED45E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4290D6282137F49200ED45E2 /* AppDelegate.swift */; };
 		4290D62B2137F49200ED45E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4290D62A2137F49200ED45E2 /* ViewController.swift */; };
@@ -25,6 +26,7 @@
 		B2D2A256DEFBD6EFE49D36E8 /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */; };
 		B2D2A2586B0FCCFDBE563406 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF5C9388C2BB3FAAB204 /* Driver.swift */; };
 		B2D2A29DD062DF021D9E496B /* gtr_core_log.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A97607A814FF3E6C113B /* gtr_core_log.h */; };
+		B2D2A2C7DFFD65E55DB9B28A /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A117D2CF190520B48B58 /* Lock.swift */; };
 		B2D2A2E69F5A86DDFAB5CA99 /* gtr_ios_utility.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A99333109680AB041F1C /* gtr_ios_utility.h */; };
 		B2D2A4955B3EA1C9E7D6A350 /* gtr_file_utilty.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2BDD4B1B3DA0EB45914 /* gtr_file_utilty.h */; };
 		B2D2A645319ED3F4CF2F4476 /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AEB9DF57C656DED22A14 /* gtr_core.h */; };
@@ -39,8 +41,9 @@
 		B2D2A9B719173B6CB7608AA3 /* DownloadDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AD1B0E33EAA4250B06E4 /* DownloadDemo.swift */; };
 		B2D2A9BA51EF9099AA29A60B /* gtr_ios_utility.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */; };
 		B2D2AA47DDDFFC7C173B0904 /* gtr_core_race.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_race.c */; };
+		B2D2AB0C39317AC4E640F1BF /* URLSessionDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2ABDE7CA1FFE3D5E6528B /* URLSessionDemo.swift */; };
 		B2D2AB6C41D6946014980FC4 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */; };
-		B2D2ACB4A0D838837E57BBC6 /* RaceDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A75B5BE6A302E19D81C0 /* RaceDemo.swift */; };
+		B2D2ACB4A0D838837E57BBC6 /* GetDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A75B5BE6A302E19D81C0 /* GetDemo.swift */; };
 		B2D2ACDB3A0259A88C9B9995 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* Error.swift */; };
 		B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
 		B2D2AD1D4E3244C26C3CE5F6 /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */; };
@@ -53,6 +56,7 @@
 		B2D2AFBDC898B35762D951FD /* gtr_core_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */; };
 		B2D2AFC49D6B321A06E20266 /* gtr_core.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A837AC809BA32AB9C92E /* gtr_core.c */; };
 		B2D2AFC953EBC5C6072E8A94 /* gtr_core_proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2D8BFFA713174DBF04F /* gtr_core_proxy.h */; };
+		B2D2AFD2A8141F2B80889C11 /* BrotliDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A9FAAA09E1B0C76D2851 /* BrotliDemo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +87,8 @@
 		10345A6B2258F54400DFC594 /* libtbox.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtbox.a; path = GTR/Private/tbox/libtbox.a; sourceTree = "<group>"; };
 		10E0A3F322A7F35E00389DE0 /* libcurl_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl_iOS.a; path = ExternalLibrary/libcurl/libcurl_iOS.a; sourceTree = "<group>"; };
 		10E0A3F522A7F54A00389DE0 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ExternalLibrary/libcurl/libcurl.a; sourceTree = "<group>"; };
+		10EEAA1422F95AAD00F950A1 /* libbrotlidec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotlidec.a; path = ExternalLibrary/libbrotli/lib/libbrotlidec.a; sourceTree = "<group>"; };
+		10EEAA1622F95AB900F950A1 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ExternalLibrary/libcurl/lib/libcurl.a; sourceTree = "<group>"; };
 		427D2AEB2119FA1D00314C23 /* libcurl_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl_iOS.a; path = GTR/Private/cURL/libcurl_iOS.a; sourceTree = "<group>"; };
 		427D2AF32119FCEA00314C23 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		4290D6262137F49200ED45E2 /* GTRDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTRDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +103,7 @@
 		4530407A138ED07408B9DB82 /* Dictionary.NetworkJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.NetworkJSON.swift; sourceTree = "<group>"; };
 		4530445B651AB97564ABE56C /* GTR.External.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTR.External.h; sourceTree = "<group>"; };
 		45304850E2A52EA9FD4CF561 /* GTR.External.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GTR.External.c; sourceTree = "<group>"; };
+		B2D2A117D2CF190520B48B58 /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_proxy.c; sourceTree = "<group>"; };
 		B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.UnsafePointer.swift; sourceTree = "<group>"; };
 		B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_race.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_race.c; sourceTree = "<group>"; };
@@ -110,7 +117,7 @@
 		B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		B2D2A66D6341CB9D098269B0 /* GTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.swift; sourceTree = "<group>"; };
 		B2D2A6BA1BD7071E077D8555 /* gtr_core_race.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_race.h; sourceTree = "<group>"; };
-		B2D2A75B5BE6A302E19D81C0 /* RaceDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceDemo.swift; sourceTree = "<group>"; };
+		B2D2A75B5BE6A302E19D81C0 /* GetDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDemo.swift; sourceTree = "<group>"; };
 		B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_thread_pool.h; sourceTree = "<group>"; };
 		B2D2A837AC809BA32AB9C92E /* gtr_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core.c; sourceTree = "<group>"; };
@@ -119,9 +126,11 @@
 		B2D2A93504887D10507AE9FE /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		B2D2A97607A814FF3E6C113B /* gtr_core_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_log.h; sourceTree = "<group>"; };
 		B2D2A99333109680AB041F1C /* gtr_ios_utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_ios_utility.h; sourceTree = "<group>"; };
+		B2D2A9FAAA09E1B0C76D2851 /* BrotliDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrotliDemo.swift; sourceTree = "<group>"; };
 		B2D2AA45760ED5D528DC4C1B /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		B2D2AA86DA38062600F6345F /* gtr_core_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_log.c; sourceTree = "<group>"; };
+		B2D2ABDE7CA1FFE3D5E6528B /* URLSessionDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDemo.swift; sourceTree = "<group>"; };
 		B2D2ACA7D124F6573FF09579 /* GTR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTR.h; sourceTree = "<group>"; };
 		B2D2AD1B0E33EAA4250B06E4 /* DownloadDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDemo.swift; sourceTree = "<group>"; };
 		B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_ios_utility.c; sourceTree = "<group>"; };
@@ -146,7 +155,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10E0A3F622A7F54A00389DE0 /* libcurl.a in Frameworks */,
+				10EEAA1722F95AB900F950A1 /* libcurl.a in Frameworks */,
+				10EEAA1522F95AAD00F950A1 /* libbrotlidec.a in Frameworks */,
 				427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +167,8 @@
 		427D2AEA2119FA1D00314C23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10EEAA1622F95AB900F950A1 /* libcurl.a */,
+				10EEAA1422F95AAD00F950A1 /* libbrotlidec.a */,
 				10E0A3F522A7F54A00389DE0 /* libcurl.a */,
 				10E0A3F322A7F35E00389DE0 /* libcurl_iOS.a */,
 				10345A6B2258F54400DFC594 /* libtbox.a */,
@@ -243,8 +255,10 @@
 		B2D2A24A2EAF119D14A997AB /* RaceDemos */ = {
 			isa = PBXGroup;
 			children = (
-				B2D2A75B5BE6A302E19D81C0 /* RaceDemo.swift */,
+				B2D2A75B5BE6A302E19D81C0 /* GetDemo.swift */,
 				B2D2AD1B0E33EAA4250B06E4 /* DownloadDemo.swift */,
+				B2D2A9FAAA09E1B0C76D2851 /* BrotliDemo.swift */,
+				B2D2ABDE7CA1FFE3D5E6528B /* URLSessionDemo.swift */,
 			);
 			path = RaceDemos;
 			sourceTree = "<group>";
@@ -327,6 +341,7 @@
 				B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */,
 				B2D2A3F728E82ED3509187B1 /* Race.swift */,
 				B2D2A3AB95F258E1382B16AE /* Error.swift */,
+				B2D2A117D2CF190520B48B58 /* Lock.swift */,
 			);
 			path = GTR;
 			sourceTree = "<group>";
@@ -459,8 +474,10 @@
 				4290D62B2137F49200ED45E2 /* ViewController.swift in Sources */,
 				4290D6292137F49200ED45E2 /* AppDelegate.swift in Sources */,
 				B2D2ACDB3A0259A88C9B9995 /* Error.swift in Sources */,
-				B2D2ACB4A0D838837E57BBC6 /* RaceDemo.swift in Sources */,
+				B2D2ACB4A0D838837E57BBC6 /* GetDemo.swift in Sources */,
 				B2D2A9B719173B6CB7608AA3 /* DownloadDemo.swift in Sources */,
+				B2D2AFD2A8141F2B80889C11 /* BrotliDemo.swift in Sources */,
+				B2D2AB0C39317AC4E640F1BF /* URLSessionDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +508,7 @@
 				B2D2AE3EAD1474BCA6B825D2 /* Notification.swift in Sources */,
 				B2D2AE01135DAC924C77BADE /* Race.swift in Sources */,
 				B2D2AD1D4E3244C26C3CE5F6 /* Data.UnsafePointer.swift in Sources */,
+				B2D2A2C7DFFD65E55DB9B28A /* Lock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,7 +712,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ExternalLibrary/libcurl/include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/ExternalLibrary/libcurl/include",
+					"$(PROJECT_DIR)/ExternalLibrary/libbrotli/include",
+				);
 				INFOPLIST_FILE = GTR/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -703,7 +724,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ExternalLibrary/libcurl";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/ExternalLibrary/libbrotli/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/libcurl/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -722,7 +746,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ExternalLibrary/libcurl/include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/ExternalLibrary/libcurl/include",
+					"$(PROJECT_DIR)/ExternalLibrary/libbrotli/include",
+				);
 				INFOPLIST_FILE = GTR/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -731,7 +758,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ExternalLibrary/libcurl";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/ExternalLibrary/libbrotli/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/libcurl/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

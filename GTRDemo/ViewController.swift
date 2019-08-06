@@ -38,10 +38,14 @@ class ViewController: UIViewController {
 extension ViewController {
     @objc
     private func getAction(button: UIButton) {
-        self.get()
+//        self.get()
 //        self.put()
-
+//        self.brotli()
 //        self.download()
+        for _ in 0...10000 {
+//            URLSessionDemo.fetch()
+            self.brotli()
+        }
     }
 }
 
@@ -60,7 +64,7 @@ extension ViewController {
     }
 
     private func get() {
-        RaceDemo.fetch() { destination in
+        GetDemo.fetch() { destination in
             switch destination {
             case .win(let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
@@ -74,13 +78,16 @@ extension ViewController {
     }
 
     private func put() {
-        CompleteLearning.put(courseID: 37, lessonId: 8832301, learningSeconds: 106) { destination in
+
+    }
+
+    private func brotli() {
+        BrotliDemo.fetch() { destination in
             switch destination {
             case .win(let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
                 }
-                break
             case .lose(let httpResponseCode, let errorCode, let errorMessage):
                 break
             }
@@ -104,12 +111,12 @@ extension ViewController {
 extension ViewController: Driver {
     public static var identity: () -> [String: Encodable]? {
         return {
-            return ["Access-Token": "000347174c.db8743c66094ff2964a2b4b6791cf5db"]
+            ["Access-Token": "000347174c.db8743c66094ff2964a2b4b6791cf5db"]
         }
     }
     public static var userAgent: () -> String? {
         return {
-            return "GTRDemo/1.0.0"
+            "GTRDemo/1.0.0"
         }
     }
 }

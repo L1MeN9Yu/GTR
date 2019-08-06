@@ -1,5 +1,5 @@
 //
-//  mcf_atomic.h
+//  gtr_atomic.h
 //
 //  Created by L1MeN9Yu on 2017/11/29.
 //

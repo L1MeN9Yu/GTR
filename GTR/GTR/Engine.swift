@@ -10,7 +10,7 @@ typealias GTRFailureClosure = (_ httpResponseCode: Swift.Int, _ errorCode: Swift
 typealias GTRProgressClosure = (_ now: UInt64, _ total: UInt64) -> Void
 typealias GTRHttpHeaderClosure = () -> [Swift.String: Swift.String]
 
-class Engine {
+final class Engine {
     private(set) var responseQueue = DispatchQueue.main
     private(set) var notificationQueue = DispatchQueue.main
     private(set) var succeedContainer: [Swift.UInt32: GTRSucceedClosure?] = [Swift.UInt32: GTRSucceedClosure?]()
@@ -19,6 +19,8 @@ class Engine {
     private(set) var uploadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
 
     private var httpHeaderClosure: GTRHttpHeaderClosure?
+
+    fileprivate let rwLock = ReadWriteLock()
 }
 
 // MARK: - Internal
@@ -52,7 +54,6 @@ extension GTR.Engine {
         case .upload:
             //TODO
             fatalError("not implement yet")
-            return 0
         }
     }
 
@@ -94,8 +95,11 @@ extension GTR.Engine {
         let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
 
         c_gtr_get(&taskID, url.cString(using: .utf8), cHeaders, timeOut)
-        self.succeedContainer[taskID] = succeed
-        self.failureContainer[taskID] = failure
+
+        self.rwLock.withWriterLock { () -> Void in
+            self.succeedContainer[taskID] = succeed
+            self.failureContainer[taskID] = failure
+        }
 
         return taskID
     }
@@ -116,21 +120,21 @@ extension GTR.Engine {
         case .json:
             if let `param` = param, let data = param.toData() {
                 c_param = data.withUnsafePointer { unsafePointer -> UnsafeRawPointer in
-                    return UnsafeRawPointer(unsafePointer)
+                    UnsafeRawPointer(unsafePointer)
                 }
                 c_param_size = CUnsignedLong(data.count)
             }
         case .formURLEncoded:
             if let `param` = param, let data = param.queryString.data(using: .utf8) {
                 c_param = data.withUnsafePointer { unsafePointer -> UnsafeRawPointer in
-                    return UnsafeRawPointer(unsafePointer)
+                    UnsafeRawPointer(unsafePointer)
                 }
                 c_param_size = CUnsignedLong(data.count)
             }
         case .propertyList:
             if let `param` = param, let data = param.toData() {
                 c_param = data.withUnsafePointer { unsafePointer -> UnsafeRawPointer in
-                    return UnsafeRawPointer(unsafePointer)
+                    UnsafeRawPointer(unsafePointer)
                 }
                 c_param_size = CUnsignedLong(data.count)
             }
@@ -138,8 +142,12 @@ extension GTR.Engine {
 
         c_gtr_post(&taskID, url.cString(using: .utf8),
                 cHeaders, timeOut, c_param, c_param_size)
-        self.succeedContainer[taskID] = succeed
-        self.failureContainer[taskID] = failure
+
+        self.rwLock.withWriterLock { () -> Void in
+            self.succeedContainer[taskID] = succeed
+            self.failureContainer[taskID] = failure
+        }
+
         return taskID
     }
 
@@ -162,8 +170,11 @@ extension GTR.Engine {
             c_param_size = CUnsignedLong(data.count)
         }
         c_gtr_put(&taskID, url.cString(using: .utf8), cHeaders, timeOut, c_param, c_param_size)
-        self.succeedContainer[taskID] = succeed
-        self.failureContainer[taskID] = failure
+
+        self.rwLock.withWriterLock { () -> Void in
+            self.succeedContainer[taskID] = succeed
+            self.failureContainer[taskID] = failure
+        }
 
         return taskID
     }
@@ -234,7 +245,7 @@ func c_on_http_response_succeed_header(task_id: CUnsignedInt,
                                        c_data_size: CUnsignedLong) {
     //todo
     let swiftData = Data(bytes: c_data, count: Int(c_data_size))
-    let string = String(data: swiftData, encoding: .utf8)
+    let string = String(data: swiftData, encoding: .utf8) ?? ""
     print(string)
 }
 
@@ -243,10 +254,17 @@ func c_get_request_succeed(task_id: CUnsignedInt,
                            c_data: UnsafeRawPointer,
                            c_data_size: CUnsignedLong) {
     let swiftData = Data(bytes: c_data, count: Int(c_data_size))
+
+    GTR.engine.rwLock.lockRead()
     let succeed = GTR.engine.succeedContainer[task_id]
+    GTR.engine.rwLock.unlock()
+
+    GTR.engine.rwLock.lockWrite()
+    GTR.engine.cleanResponseHandler(taskID: task_id)
+    GTR.engine.rwLock.unlock()
+
     GTR.engine.responseQueue.async {
         succeed??(swiftData)
-        GTR.engine.cleanResponseHandler(taskID: task_id)
     }
 }
 
@@ -255,10 +273,16 @@ func c_get_request_failure(task_id: CUnsignedInt,
                            http_response_code: CLong,
                            error_code: CInt,
                            error_message: UnsafePointer<CChar>) {
+    GTR.engine.rwLock.lockRead()
     let failure = GTR.engine.failureContainer[task_id]
+    GTR.engine.rwLock.unlock()
+
+    GTR.engine.rwLock.lockWrite()
+    GTR.engine.cleanResponseHandler(taskID: task_id)
+    GTR.engine.rwLock.unlock()
+
     GTR.engine.responseQueue.async {
         failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
-        GTR.engine.cleanResponseHandler(taskID: task_id)
     }
 }
 
@@ -267,10 +291,17 @@ func c_post_request_succeed(task_id: CUnsignedInt,
                             c_data: UnsafeRawPointer,
                             c_data_size: CUnsignedLong) {
     let swiftData = Data(bytes: c_data, count: Int(c_data_size))
+
+    GTR.engine.rwLock.lockRead()
     let succeed = GTR.engine.succeedContainer[task_id]
+    GTR.engine.rwLock.unlock()
+
+    GTR.engine.rwLock.lockWrite()
+    GTR.engine.cleanResponseHandler(taskID: task_id)
+    GTR.engine.rwLock.unlock()
+
     GTR.engine.responseQueue.async {
         succeed??(swiftData)
-        GTR.engine.cleanResponseHandler(taskID: task_id)
     }
 }
 
@@ -279,10 +310,16 @@ func c_post_request_failure(task_id: CUnsignedInt,
                             http_response_code: CLong,
                             error_code: CInt,
                             error_message: UnsafePointer<CChar>) {
+    GTR.engine.rwLock.lockRead()
     let failure = GTR.engine.failureContainer[task_id]
+    GTR.engine.rwLock.unlock()
+
+    GTR.engine.rwLock.lockWrite()
+    GTR.engine.cleanResponseHandler(taskID: task_id)
+    GTR.engine.rwLock.unlock()
+
     GTR.engine.responseQueue.async {
         failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
-        GTR.engine.cleanResponseHandler(taskID: task_id)
     }
 }
 
@@ -291,10 +328,16 @@ func c_put_request_succeed(task_id: CUnsignedInt,
                            c_data: UnsafeRawPointer,
                            c_data_size: CUnsignedLong) {
     let swiftData = Data(bytes: c_data, count: Int(c_data_size))
+    GTR.engine.rwLock.lockRead()
     let succeed = GTR.engine.succeedContainer[task_id]
+    GTR.engine.rwLock.unlock()
+
+    GTR.engine.rwLock.lockWrite()
+    GTR.engine.cleanResponseHandler(taskID: task_id)
+    GTR.engine.rwLock.unlock()
+
     GTR.engine.responseQueue.async {
         succeed??(swiftData)
-        GTR.engine.cleanResponseHandler(taskID: task_id)
     }
 }
 
@@ -303,16 +346,29 @@ func c_put_request_failure(task_id: CUnsignedInt,
                            http_response_code: CLong,
                            error_code: CInt,
                            error_message: UnsafePointer<CChar>) {
+    GTR.engine.rwLock.lockRead()
     let failure = GTR.engine.failureContainer[task_id]
+    GTR.engine.rwLock.unlock()
+
+    GTR.engine.rwLock.lockWrite()
+    GTR.engine.cleanResponseHandler(taskID: task_id)
+    GTR.engine.rwLock.unlock()
+
     GTR.engine.responseQueue.async {
         failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
-        GTR.engine.cleanResponseHandler(taskID: task_id)
     }
 }
 
 @_silgen_name("swift_download_progress")
 func c_download_progress(task_id: CUnsignedInt, download_now: CUnsignedLongLong, download_total: CUnsignedLongLong) {
+    GTR.engine.rwLock.lockRead()
     let progress = GTR.engine.downloadProgressContainer[task_id]
+    GTR.engine.rwLock.unlock()
+
+    GTR.engine.rwLock.lockWrite()
+    GTR.engine.cleanDownloadProgress(taskID: task_id)
+    GTR.engine.rwLock.unlock()
+
     GTR.engine.responseQueue.async {
         progress??(download_now, download_total)
     }
@@ -323,10 +379,17 @@ func c_download_request_succeed(task_id: CUnsignedInt,
                                 c_data: UnsafeRawPointer,
                                 c_data_size: CUnsignedLong) {
     let swiftData = Data(bytes: c_data, count: Int(c_data_size))
+
+    GTR.engine.rwLock.lockRead()
     let succeed = GTR.engine.succeedContainer[task_id]
+    GTR.engine.rwLock.unlock()
+
+    GTR.engine.rwLock.lockWrite()
+    GTR.engine.cleanResponseHandler(taskID: task_id)
+    GTR.engine.rwLock.unlock()
+
     GTR.engine.responseQueue.async {
         succeed??(swiftData)
-        GTR.engine.cleanResponseHandler(taskID: task_id)
     }
 }
 
@@ -335,9 +398,15 @@ func c_download_request_failure(task_id: CUnsignedInt,
                                 http_response_code: CLong,
                                 error_code: CInt,
                                 error_message: UnsafePointer<CChar>) {
+    GTR.engine.rwLock.lockRead()
     let failure = GTR.engine.failureContainer[task_id]
+    GTR.engine.rwLock.unlock()
+
+    GTR.engine.rwLock.lockWrite()
+    GTR.engine.cleanResponseHandler(taskID: task_id)
+    GTR.engine.rwLock.unlock()
+
     GTR.engine.responseQueue.async {
         failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
-        GTR.engine.cleanResponseHandler(taskID: task_id)
     }
 }

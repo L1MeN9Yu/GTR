@@ -6,7 +6,7 @@
 import Foundation
 
 extension Dictionary {
-    public func jsonStringEncoded() -> String? {
+    func jsonStringEncoded() -> String? {
         if JSONSerialization.isValidJSONObject(self) {
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: self)
@@ -20,7 +20,7 @@ extension Dictionary {
         return nil
     }
 
-    public func jsonPrettyStringEncoded() -> String? {
+    func jsonPrettyStringEncoded() -> String? {
         if JSONSerialization.isValidJSONObject(self) {
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
@@ -34,7 +34,7 @@ extension Dictionary {
         return nil
     }
 
-    public func toData() -> Data? {
+    func toData() -> Data? {
         if JSONSerialization.isValidJSONObject(self) {
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: self)

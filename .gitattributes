@@ -1,2 +1,2 @@
-GTR/Private/cURL/* linguist-vendored
-GTR/Private/tbox/* linguist-vendored
+ExternalLibrary/libbrotli/include/brotli/* linguist-vendored
+ExternalLibrary/libcurl/include/curl/* linguist-vendored
