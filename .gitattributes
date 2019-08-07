@@ -1,2 +1,2 @@
-ExternalLibrary/libbrotli/include/brotli/* linguist-vendored
-ExternalLibrary/libcurl/include/curl/* linguist-vendored
+ExternalLibrary/iOS/* linguist-vendored
+ExternalLibrary/macOS/* linguist-vendored

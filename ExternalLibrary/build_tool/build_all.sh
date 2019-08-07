@@ -4,7 +4,7 @@ echo "Remove build folder"
 rm -rf build
 
 echo "Build Brotli for iOS"
-xmake m package -p iphoneos -f "--target_minver=8 --cxflags=\"-fembed-bitcode\" --mxflags=\"-fembed-bitcode\" --asflags=\"-fembed-bitcode\""
+xmake m package -p iphoneos -f "--target_minver=9 --cxflags=\"-fembed-bitcode\" --mxflags=\"-fembed-bitcode\" --asflags=\"-fembed-bitcode\""
 
 echo "Build Brotli for macOS"
 xmake m package -p macosx -f "--target_minver=10.12 --cxflags=\"-fembed-bitcode\" --mxflags=\"-fembed-bitcode\" --asflags=\"-fembed-bitcode\""
