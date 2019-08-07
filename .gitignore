@@ -63,6 +63,7 @@ playground.xcworkspace
 # Carthage/Checkouts
 
 Carthage
+GTR.framework.zip
 
 # fastlane
 #
@@ -75,5 +76,4 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
-GTRDemo/Carthage
-/GTR.framework.zip
+
