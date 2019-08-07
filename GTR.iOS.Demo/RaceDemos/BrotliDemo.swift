@@ -5,8 +5,8 @@
 
 import Foundation
 import protocol GTR.Race
-import typealias GTR.Result;
-import func GTR.race;
+import typealias GTR.Result
+import func GTR.race
 
 struct BrotliDemo: Race {
     let url: String = "https://httpbin.org/brotli"
