@@ -7,16 +7,67 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10EEAA1522F95AAD00F950A1 /* libbrotlidec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EEAA1422F95AAD00F950A1 /* libbrotlidec.a */; };
-		10EEAA1722F95AB900F950A1 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EEAA1622F95AB900F950A1 /* libcurl.a */; };
+		101443F122FA877500275DA2 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 101443F022FA877500275DA2 /* libcurl.a */; };
+		101443F922FA883A00275DA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101443F822FA883A00275DA2 /* AppDelegate.swift */; };
+		101443FB22FA883A00275DA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101443FA22FA883A00275DA2 /* ViewController.swift */; };
+		101443FD22FA883B00275DA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101443FC22FA883B00275DA2 /* Assets.xcassets */; };
+		1014440022FA883B00275DA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 101443FE22FA883B00275DA2 /* Main.storyboard */; };
+		1014440D22FA8A0800275DA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1014440C22FA8A0800275DA2 /* AppDelegate.swift */; };
+		1014440F22FA8A0800275DA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1014440E22FA8A0800275DA2 /* ViewController.swift */; };
+		1014441222FA8A0800275DA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1014441022FA8A0800275DA2 /* Main.storyboard */; };
+		1014441422FA8A0900275DA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1014441322FA8A0900275DA2 /* Assets.xcassets */; };
+		1014441722FA8A0900275DA2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1014441522FA8A0900275DA2 /* LaunchScreen.storyboard */; };
+		1014441C22FA8A5400275DA2 /* GTR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0B0982119EF8A00D01CC4 /* GTR.framework */; };
+		1014441D22FA8A5400275DA2 /* GTR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0B0982119EF8A00D01CC4 /* GTR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1014442222FA8A9D00275DA2 /* GetDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A75B5BE6A302E19D81C0 /* GetDemo.swift */; };
+		1014442322FA8A9D00275DA2 /* DownloadDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AD1B0E33EAA4250B06E4 /* DownloadDemo.swift */; };
+		1014442422FA8A9D00275DA2 /* BrotliDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A9FAAA09E1B0C76D2851 /* BrotliDemo.swift */; };
+		1014442522FA8A9D00275DA2 /* URLSessionDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2ABDE7CA1FFE3D5E6528B /* URLSessionDemo.swift */; };
+		1014443222FAA46500275DA2 /* GTR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014442B22FAA46500275DA2 /* GTR.framework */; };
+		1014443322FAA46500275DA2 /* GTR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1014442B22FAA46500275DA2 /* GTR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1014443922FAA4EA00275DA2 /* Dictionary.NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530407A138ED07408B9DB82 /* Dictionary.NetworkJSON.swift */; };
+		1014443A22FAA4EB00275DA2 /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */; };
+		1014443B22FAA4EF00275DA2 /* GTR.External.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304850E2A52EA9FD4CF561 /* GTR.External.c */; };
+		1014443C22FAA4EF00275DA2 /* GTR.External.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445B651AB97564ABE56C /* GTR.External.h */; };
+		1014443D22FAA50600275DA2 /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AEB9DF57C656DED22A14 /* gtr_core.h */; };
+		1014443E22FAA50600275DA2 /* gtr_core.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A837AC809BA32AB9C92E /* gtr_core.c */; };
+		1014443F22FAA50600275DA2 /* gtr_core_race.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A6BA1BD7071E077D8555 /* gtr_core_race.h */; };
+		1014444022FAA50600275DA2 /* gtr_core_race.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_race.c */; };
+		1014444122FAA50600275DA2 /* gtr_core_header_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */; };
+		1014444222FAA50600275DA2 /* gtr_core_header_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A87062AEDDA79A61FEAA /* gtr_core_header_helper.c */; };
+		1014444322FAA50600275DA2 /* gtr_core_proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2D8BFFA713174DBF04F /* gtr_core_proxy.h */; };
+		1014444422FAA50600275DA2 /* gtr_core_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */; };
+		1014444522FAA50600275DA2 /* gtr_core_log.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A97607A814FF3E6C113B /* gtr_core_log.h */; };
+		1014444622FAA50600275DA2 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA86DA38062600F6345F /* gtr_core_log.c */; };
+		1014444722FAA50E00275DA2 /* gtr_ios_utility.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */; };
+		1014444822FAA50E00275DA2 /* gtr_ios_utility.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A99333109680AB041F1C /* gtr_ios_utility.h */; };
+		1014444922FAA50E00275DA2 /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */; };
+		1014444A22FAA50E00275DA2 /* gtr_file_utilty.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2BDD4B1B3DA0EB45914 /* gtr_file_utilty.h */; };
+		1014444B22FAA50E00275DA2 /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */; };
+		1014444C22FAA50E00275DA2 /* gtr_thread_pool.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A92CF98064AA0469F777 /* gtr_thread_pool.c */; };
+		1014444D22FAA50E00275DA2 /* gtr_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE7237C26F0FDC915ADB /* gtr_atomic.c */; };
+		1014444E22FAA50E00275DA2 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */; };
+		1014444F22FAA52000275DA2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* Error.swift */; };
+		1014445022FAA52500275DA2 /* Gearbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2E6359680E3E556337F /* Gearbox.swift */; };
+		1014445122FAA52500275DA2 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF5C9388C2BB3FAAB204 /* Driver.swift */; };
+		1014445222FAA52500275DA2 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AEE6E80C2CD98C4D3644 /* Horn.swift */; };
+		1014445322FAA52500275DA2 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */; };
+		1014445422FAA52500275DA2 /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
+		1014445522FAA52500275DA2 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A324D196A2CEAE3D76E8 /* Method.swift */; };
+		1014445622FAA52500275DA2 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */; };
+		1014445722FAA52500275DA2 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A93504887D10507AE9FE /* Destination.swift */; };
+		1014445822FAA52500275DA2 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA45760ED5D528DC4C1B /* HUD.swift */; };
+		1014445922FAA52500275DA2 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */; };
+		1014445A22FAA52500275DA2 /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* Race.swift */; };
+		1014445B22FAA52500275DA2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* Error.swift */; };
+		1014445C22FAA52500275DA2 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A117D2CF190520B48B58 /* Lock.swift */; };
+		1014445E22FAAFBF00275DA2 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014445D22FAAFBF00275DA2 /* libbrotli.a */; };
+		1014446022FAE2F900275DA2 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014445F22FAE2F900275DA2 /* libbrotli.a */; };
+		1014446222FAE31000275DA2 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446122FAE31000275DA2 /* libcurl.a */; };
+		1014446422FAE4B700275DA2 /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446322FAE4B700275DA2 /* LDAP.framework */; };
+		1014446622FAE4D900275DA2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446522FAE4D900275DA2 /* libz.tbd */; };
+		1014446722FAEAB700275DA2 /* GTR.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ACA7D124F6573FF09579 /* GTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 427D2AF32119FCEA00314C23 /* libz.tbd */; };
-		4290D6292137F49200ED45E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4290D6282137F49200ED45E2 /* AppDelegate.swift */; };
-		4290D62B2137F49200ED45E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4290D62A2137F49200ED45E2 /* ViewController.swift */; };
-		4290D62E2137F49200ED45E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4290D62C2137F49200ED45E2 /* Main.storyboard */; };
-		4290D6302137F49200ED45E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4290D62F2137F49200ED45E2 /* Assets.xcassets */; };
-		4290D6332137F49200ED45E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4290D6312137F49200ED45E2 /* LaunchScreen.storyboard */; };
-		4290D6382137F49B00ED45E2 /* GTR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0B0982119EF8A00D01CC4 /* GTR.framework */; };
-		4290D6392137F49B00ED45E2 /* GTR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0B0982119EF8A00D01CC4 /* GTR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4530496CB7B66057B5AAFED6 /* GTR.External.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304850E2A52EA9FD4CF561 /* GTR.External.c */; };
 		45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445B651AB97564ABE56C /* GTR.External.h */; };
 		45304E27E0E3E66A29C2F05B /* Dictionary.NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530407A138ED07408B9DB82 /* Dictionary.NetworkJSON.swift */; };
@@ -37,14 +88,13 @@
 		B2D2A74AE57967404805704F /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A324D196A2CEAE3D76E8 /* Method.swift */; };
 		B2D2A7D3C1BA520918B671B5 /* Gearbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2E6359680E3E556337F /* Gearbox.swift */; };
 		B2D2A7E2090D47010200A05A /* gtr_thread_pool.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A92CF98064AA0469F777 /* gtr_thread_pool.c */; };
+		B2D2A839A82F7891E8125890 /* BrotliDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE96645DF01C2B54B99E /* BrotliDemo.swift */; };
 		B2D2A976E33BE36728663A76 /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */; };
-		B2D2A9B719173B6CB7608AA3 /* DownloadDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AD1B0E33EAA4250B06E4 /* DownloadDemo.swift */; };
 		B2D2A9BA51EF9099AA29A60B /* gtr_ios_utility.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */; };
 		B2D2AA47DDDFFC7C173B0904 /* gtr_core_race.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_race.c */; };
-		B2D2AB0C39317AC4E640F1BF /* URLSessionDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2ABDE7CA1FFE3D5E6528B /* URLSessionDemo.swift */; };
+		B2D2AAEA915B5FA65F0978BC /* URLSessionDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF2B4BE0A9F3E7EF79E9 /* URLSessionDemo.swift */; };
 		B2D2AB6C41D6946014980FC4 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */; };
-		B2D2ACB4A0D838837E57BBC6 /* GetDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A75B5BE6A302E19D81C0 /* GetDemo.swift */; };
-		B2D2ACDB3A0259A88C9B9995 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* Error.swift */; };
+		B2D2ACC346DFFCDD86115663 /* DownloadDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A70F0C6C9CD9BFD550BB /* DownloadDemo.swift */; };
 		B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
 		B2D2AD1D4E3244C26C3CE5F6 /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */; };
 		B2D2AE01135DAC924C77BADE /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* Race.swift */; };
@@ -53,30 +103,48 @@
 		B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA86DA38062600F6345F /* gtr_core_log.c */; };
 		B2D2AF6943F995C6E1364374 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */; };
 		B2D2AF89CE011EDD0F488B36 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A93504887D10507AE9FE /* Destination.swift */; };
+		B2D2AF99B0E744004AFF110F /* GetDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */; };
 		B2D2AFBDC898B35762D951FD /* gtr_core_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */; };
 		B2D2AFC49D6B321A06E20266 /* gtr_core.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A837AC809BA32AB9C92E /* gtr_core.c */; };
 		B2D2AFC953EBC5C6072E8A94 /* gtr_core_proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2D8BFFA713174DBF04F /* gtr_core_proxy.h */; };
-		B2D2AFD2A8141F2B80889C11 /* BrotliDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A9FAAA09E1B0C76D2851 /* BrotliDemo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4290D63A2137F49B00ED45E2 /* PBXContainerItemProxy */ = {
+		1014441E22FA8A5400275DA2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 42F0B08F2119EF8A00D01CC4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 42F0B0972119EF8A00D01CC4;
 			remoteInfo = GTR;
 		};
+		1014443022FAA46500275DA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42F0B08F2119EF8A00D01CC4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1014442A22FAA46500275DA2;
+			remoteInfo = GTR.Mac;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		4290D63C2137F49B00ED45E2 /* Embed Frameworks */ = {
+		1014442022FA8A5400275DA2 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4290D6392137F49B00ED45E2 /* GTR.framework in Embed Frameworks */,
+				1014441D22FA8A5400275DA2 /* GTR.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1014443722FAA46500275DA2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1014443322FAA46500275DA2 /* GTR.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,20 +152,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		10345A6B2258F54400DFC594 /* libtbox.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtbox.a; path = GTR/Private/tbox/libtbox.a; sourceTree = "<group>"; };
-		10E0A3F322A7F35E00389DE0 /* libcurl_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl_iOS.a; path = ExternalLibrary/libcurl/libcurl_iOS.a; sourceTree = "<group>"; };
-		10E0A3F522A7F54A00389DE0 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ExternalLibrary/libcurl/libcurl.a; sourceTree = "<group>"; };
-		10EEAA1422F95AAD00F950A1 /* libbrotlidec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotlidec.a; path = ExternalLibrary/libbrotli/lib/libbrotlidec.a; sourceTree = "<group>"; };
-		10EEAA1622F95AB900F950A1 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ExternalLibrary/libcurl/lib/libcurl.a; sourceTree = "<group>"; };
-		427D2AEB2119FA1D00314C23 /* libcurl_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl_iOS.a; path = GTR/Private/cURL/libcurl_iOS.a; sourceTree = "<group>"; };
+		101443F022FA877500275DA2 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ExternalLibrary/iOS/libcurl/lib/libcurl.a; sourceTree = "<group>"; };
+		101443F622FA883A00275DA2 /* GTR.Mac.Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTR.Mac.Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		101443F822FA883A00275DA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		101443FA22FA883A00275DA2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		101443FC22FA883B00275DA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		101443FF22FA883B00275DA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1014440122FA883B00275DA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1014440A22FA8A0800275DA2 /* GTR.iOS.Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTR.iOS.Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1014440C22FA8A0800275DA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1014440E22FA8A0800275DA2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1014441122FA8A0800275DA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1014441322FA8A0900275DA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1014441622FA8A0900275DA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1014441822FA8A0900275DA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1014442B22FAA46500275DA2 /* GTR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1014445D22FAAFBF00275DA2 /* libbrotli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.a; path = ExternalLibrary/iOS/libbrotli/lib/libbrotli.a; sourceTree = "<group>"; };
+		1014445F22FAE2F900275DA2 /* libbrotli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.a; path = ExternalLibrary/macOS/libbrotli/lib/libbrotli.a; sourceTree = "<group>"; };
+		1014446122FAE31000275DA2 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ExternalLibrary/macOS/libcurl/lib/libcurl.a; sourceTree = "<group>"; };
+		1014446322FAE4B700275DA2 /* LDAP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LDAP.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/LDAP.framework; sourceTree = DEVELOPER_DIR; };
+		1014446522FAE4D900275DA2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		1014446822FAEE1A00275DA2 /* GTR.Mac.Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GTR.Mac.Demo.entitlements; sourceTree = "<group>"; };
 		427D2AF32119FCEA00314C23 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		4290D6262137F49200ED45E2 /* GTRDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTRDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4290D6282137F49200ED45E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4290D62A2137F49200ED45E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4290D62D2137F49200ED45E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4290D62F2137F49200ED45E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4290D6322137F49200ED45E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		4290D6342137F49200ED45E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F0B0982119EF8A00D01CC4 /* GTR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0B09C2119EF8A00D01CC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4530407A138ED07408B9DB82 /* Dictionary.NetworkJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.NetworkJSON.swift; sourceTree = "<group>"; };
@@ -115,8 +191,10 @@
 		B2D2A3AB95F258E1382B16AE /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		B2D2A3F728E82ED3509187B1 /* Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
 		B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDemo.swift; sourceTree = "<group>"; };
 		B2D2A66D6341CB9D098269B0 /* GTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.swift; sourceTree = "<group>"; };
 		B2D2A6BA1BD7071E077D8555 /* gtr_core_race.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_race.h; sourceTree = "<group>"; };
+		B2D2A70F0C6C9CD9BFD550BB /* DownloadDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDemo.swift; sourceTree = "<group>"; };
 		B2D2A75B5BE6A302E19D81C0 /* GetDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDemo.swift; sourceTree = "<group>"; };
 		B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_thread_pool.h; sourceTree = "<group>"; };
@@ -136,18 +214,39 @@
 		B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_ios_utility.c; sourceTree = "<group>"; };
 		B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_header_helper.h; sourceTree = "<group>"; };
 		B2D2AE7237C26F0FDC915ADB /* gtr_atomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_atomic.c; sourceTree = "<group>"; };
+		B2D2AE96645DF01C2B54B99E /* BrotliDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrotliDemo.swift; sourceTree = "<group>"; };
 		B2D2AEB9DF57C656DED22A14 /* gtr_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core.h; sourceTree = "<group>"; };
 		B2D2AEE6E80C2CD98C4D3644 /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
+		B2D2AF2B4BE0A9F3E7EF79E9 /* URLSessionDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDemo.swift; sourceTree = "<group>"; };
 		B2D2AF5C9388C2BB3FAAB204 /* Driver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_file_utilty.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4290D6232137F49200ED45E2 /* Frameworks */ = {
+		101443F322FA883A00275DA2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4290D6382137F49B00ED45E2 /* GTR.framework in Frameworks */,
+				1014443222FAA46500275DA2 /* GTR.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1014440722FA8A0800275DA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1014441C22FA8A5400275DA2 /* GTR.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1014442822FAA46500275DA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1014446622FAE4D900275DA2 /* libz.tbd in Frameworks */,
+				1014446422FAE4B700275DA2 /* LDAP.framework in Frameworks */,
+				1014446222FAE31000275DA2 /* libcurl.a in Frameworks */,
+				1014446022FAE2F900275DA2 /* libbrotli.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,8 +254,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10EEAA1722F95AB900F950A1 /* libcurl.a in Frameworks */,
-				10EEAA1522F95AAD00F950A1 /* libbrotlidec.a in Frameworks */,
+				1014445E22FAAFBF00275DA2 /* libbrotli.a in Frameworks */,
+				101443F122FA877500275DA2 /* libcurl.a in Frameworks */,
 				427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,39 +263,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		101443F722FA883A00275DA2 /* GTR.Mac.Demo */ = {
+			isa = PBXGroup;
+			children = (
+				1014446822FAEE1A00275DA2 /* GTR.Mac.Demo.entitlements */,
+				101443F822FA883A00275DA2 /* AppDelegate.swift */,
+				101443FA22FA883A00275DA2 /* ViewController.swift */,
+				101443FC22FA883B00275DA2 /* Assets.xcassets */,
+				101443FE22FA883B00275DA2 /* Main.storyboard */,
+				1014440122FA883B00275DA2 /* Info.plist */,
+				B2D2A731B73EB91162A1EFEF /* RaceDemos */,
+			);
+			path = GTR.Mac.Demo;
+			sourceTree = "<group>";
+		};
+		1014440B22FA8A0800275DA2 /* GTR.iOS.Demo */ = {
+			isa = PBXGroup;
+			children = (
+				B2D2A24A2EAF119D14A997AB /* RaceDemos */,
+				1014440C22FA8A0800275DA2 /* AppDelegate.swift */,
+				1014440E22FA8A0800275DA2 /* ViewController.swift */,
+				1014441022FA8A0800275DA2 /* Main.storyboard */,
+				1014441322FA8A0900275DA2 /* Assets.xcassets */,
+				1014441522FA8A0900275DA2 /* LaunchScreen.storyboard */,
+				1014441822FA8A0900275DA2 /* Info.plist */,
+			);
+			path = GTR.iOS.Demo;
+			sourceTree = "<group>";
+		};
+		1014443822FAA48600275DA2 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				B2D2ACA7D124F6573FF09579 /* GTR.h */,
+				42F0B09C2119EF8A00D01CC4 /* Info.plist */,
+				453046D2720EF6530D08D345 /* Extension */,
+				45304E707DAAA9CE5B6C65A8 /* Core */,
+				B2D2A43C582960401B2E45CA /* Private */,
+				B2D2AC4CF2F2BD3D5AA1CB66 /* GTR */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		427D2AEA2119FA1D00314C23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				10EEAA1622F95AB900F950A1 /* libcurl.a */,
-				10EEAA1422F95AAD00F950A1 /* libbrotlidec.a */,
-				10E0A3F522A7F54A00389DE0 /* libcurl.a */,
-				10E0A3F322A7F35E00389DE0 /* libcurl_iOS.a */,
-				10345A6B2258F54400DFC594 /* libtbox.a */,
+				1014446522FAE4D900275DA2 /* libz.tbd */,
+				1014446322FAE4B700275DA2 /* LDAP.framework */,
+				1014446122FAE31000275DA2 /* libcurl.a */,
+				1014445D22FAAFBF00275DA2 /* libbrotli.a */,
+				1014445F22FAE2F900275DA2 /* libbrotli.a */,
+				101443F022FA877500275DA2 /* libcurl.a */,
 				427D2AF32119FCEA00314C23 /* libz.tbd */,
-				427D2AEB2119FA1D00314C23 /* libcurl_iOS.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4290D6272137F49200ED45E2 /* GTRDemo */ = {
-			isa = PBXGroup;
-			children = (
-				4290D6282137F49200ED45E2 /* AppDelegate.swift */,
-				4290D62A2137F49200ED45E2 /* ViewController.swift */,
-				4290D62C2137F49200ED45E2 /* Main.storyboard */,
-				4290D62F2137F49200ED45E2 /* Assets.xcassets */,
-				4290D6312137F49200ED45E2 /* LaunchScreen.storyboard */,
-				4290D6342137F49200ED45E2 /* Info.plist */,
-				B2D2A24A2EAF119D14A997AB /* RaceDemos */,
-			);
-			path = GTRDemo;
 			sourceTree = "<group>";
 		};
 		42F0B08E2119EF8A00D01CC4 = {
 			isa = PBXGroup;
 			children = (
-				42F0B09A2119EF8A00D01CC4 /* GTR */,
-				4290D6272137F49200ED45E2 /* GTRDemo */,
+				1014443822FAA48600275DA2 /* Source */,
+				101443F722FA883A00275DA2 /* GTR.Mac.Demo */,
+				1014440B22FA8A0800275DA2 /* GTR.iOS.Demo */,
 				42F0B0992119EF8A00D01CC4 /* Products */,
 				427D2AEA2119FA1D00314C23 /* Frameworks */,
 			);
@@ -206,22 +333,11 @@
 			isa = PBXGroup;
 			children = (
 				42F0B0982119EF8A00D01CC4 /* GTR.framework */,
-				4290D6262137F49200ED45E2 /* GTRDemo.app */,
+				101443F622FA883A00275DA2 /* GTR.Mac.Demo.app */,
+				1014440A22FA8A0800275DA2 /* GTR.iOS.Demo.app */,
+				1014442B22FAA46500275DA2 /* GTR.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		42F0B09A2119EF8A00D01CC4 /* GTR */ = {
-			isa = PBXGroup;
-			children = (
-				453046D2720EF6530D08D345 /* Extension */,
-				45304E707DAAA9CE5B6C65A8 /* Core */,
-				B2D2A43C582960401B2E45CA /* Private */,
-				B2D2AC4CF2F2BD3D5AA1CB66 /* GTR */,
-				B2D2ACA7D124F6573FF09579 /* GTR.h */,
-				42F0B09C2119EF8A00D01CC4 /* Info.plist */,
-			);
-			path = GTR;
 			sourceTree = "<group>";
 		};
 		453046D2720EF6530D08D345 /* Extension */ = {
@@ -298,6 +414,17 @@
 			path = Private;
 			sourceTree = "<group>";
 		};
+		B2D2A731B73EB91162A1EFEF /* RaceDemos */ = {
+			isa = PBXGroup;
+			children = (
+				B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */,
+				B2D2AE96645DF01C2B54B99E /* BrotliDemo.swift */,
+				B2D2A70F0C6C9CD9BFD550BB /* DownloadDemo.swift */,
+				B2D2AF2B4BE0A9F3E7EF79E9 /* URLSessionDemo.swift */,
+			);
+			path = RaceDemos;
+			sourceTree = "<group>";
+		};
 		B2D2A738773BEA4FCC73F1C9 /* ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +476,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		1014442622FAA46500275DA2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1014446722FAEAB700275DA2 /* GTR.h in Headers */,
+				1014444E22FAA50E00275DA2 /* gtr_atomic.h in Headers */,
+				1014443F22FAA50600275DA2 /* gtr_core_race.h in Headers */,
+				1014444822FAA50E00275DA2 /* gtr_ios_utility.h in Headers */,
+				1014444B22FAA50E00275DA2 /* gtr_thread_pool.h in Headers */,
+				1014444122FAA50600275DA2 /* gtr_core_header_helper.h in Headers */,
+				1014444322FAA50600275DA2 /* gtr_core_proxy.h in Headers */,
+				1014443C22FAA4EF00275DA2 /* GTR.External.h in Headers */,
+				1014443D22FAA50600275DA2 /* gtr_core.h in Headers */,
+				1014444A22FAA50E00275DA2 /* gtr_file_utilty.h in Headers */,
+				1014444522FAA50600275DA2 /* gtr_core_log.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		42F0B0952119EF8A00D01CC4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -370,24 +515,61 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4290D6252137F49200ED45E2 /* GTRDemo */ = {
+		101443F522FA883A00275DA2 /* GTR.Mac.Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4290D6372137F49200ED45E2 /* Build configuration list for PBXNativeTarget "GTRDemo" */;
+			buildConfigurationList = 1014440322FA883B00275DA2 /* Build configuration list for PBXNativeTarget "GTR.Mac.Demo" */;
 			buildPhases = (
-				4290D6222137F49200ED45E2 /* Sources */,
-				4290D6232137F49200ED45E2 /* Frameworks */,
-				4290D6242137F49200ED45E2 /* Resources */,
-				4290D63C2137F49B00ED45E2 /* Embed Frameworks */,
+				101443F222FA883A00275DA2 /* Sources */,
+				101443F322FA883A00275DA2 /* Frameworks */,
+				101443F422FA883A00275DA2 /* Resources */,
+				1014443722FAA46500275DA2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4290D63B2137F49B00ED45E2 /* PBXTargetDependency */,
+				1014443122FAA46500275DA2 /* PBXTargetDependency */,
 			);
-			name = GTRDemo;
-			productName = GTRDemo;
-			productReference = 4290D6262137F49200ED45E2 /* GTRDemo.app */;
+			name = GTR.Mac.Demo;
+			productName = GTR.Mac.Demo;
+			productReference = 101443F622FA883A00275DA2 /* GTR.Mac.Demo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		1014440922FA8A0800275DA2 /* GTR.iOS.Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1014441922FA8A0900275DA2 /* Build configuration list for PBXNativeTarget "GTR.iOS.Demo" */;
+			buildPhases = (
+				1014440622FA8A0800275DA2 /* Sources */,
+				1014440722FA8A0800275DA2 /* Frameworks */,
+				1014440822FA8A0800275DA2 /* Resources */,
+				1014442022FA8A5400275DA2 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1014441F22FA8A5400275DA2 /* PBXTargetDependency */,
+			);
+			name = GTR.iOS.Demo;
+			productName = GTR.iOS.Demo;
+			productReference = 1014440A22FA8A0800275DA2 /* GTR.iOS.Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1014442A22FAA46500275DA2 /* GTR.Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1014443422FAA46500275DA2 /* Build configuration list for PBXNativeTarget "GTR.Mac" */;
+			buildPhases = (
+				1014442622FAA46500275DA2 /* Headers */,
+				1014442722FAA46500275DA2 /* Sources */,
+				1014442822FAA46500275DA2 /* Frameworks */,
+				1014442922FAA46500275DA2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GTR.Mac;
+			productName = GTR.Mac;
+			productReference = 1014442B22FAA46500275DA2 /* GTR.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		42F0B0972119EF8A00D01CC4 /* GTR */ = {
 			isa = PBXNativeTarget;
@@ -413,13 +595,23 @@
 		42F0B08F2119EF8A00D01CC4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = limengyu.top;
 				TargetAttributes = {
-					4290D6252137F49200ED45E2 = {
-						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1020;
+					101443F522FA883A00275DA2 = {
+						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+					1014440922FA8A0800275DA2 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					1014442A22FAA46500275DA2 = {
+						CreatedOnToolsVersion = 10.2.1;
 					};
 					42F0B0972119EF8A00D01CC4 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -441,19 +633,37 @@
 			projectRoot = "";
 			targets = (
 				42F0B0972119EF8A00D01CC4 /* GTR */,
-				4290D6252137F49200ED45E2 /* GTRDemo */,
+				1014440922FA8A0800275DA2 /* GTR.iOS.Demo */,
+				1014442A22FAA46500275DA2 /* GTR.Mac */,
+				101443F522FA883A00275DA2 /* GTR.Mac.Demo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4290D6242137F49200ED45E2 /* Resources */ = {
+		101443F422FA883A00275DA2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4290D6332137F49200ED45E2 /* LaunchScreen.storyboard in Resources */,
-				4290D6302137F49200ED45E2 /* Assets.xcassets in Resources */,
-				4290D62E2137F49200ED45E2 /* Main.storyboard in Resources */,
+				101443FD22FA883B00275DA2 /* Assets.xcassets in Resources */,
+				1014440022FA883B00275DA2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1014440822FA8A0800275DA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1014441722FA8A0900275DA2 /* LaunchScreen.storyboard in Resources */,
+				1014441422FA8A0900275DA2 /* Assets.xcassets in Resources */,
+				1014441222FA8A0800275DA2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1014442922FAA46500275DA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,17 +677,61 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4290D6222137F49200ED45E2 /* Sources */ = {
+		101443F222FA883A00275DA2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4290D62B2137F49200ED45E2 /* ViewController.swift in Sources */,
-				4290D6292137F49200ED45E2 /* AppDelegate.swift in Sources */,
-				B2D2ACDB3A0259A88C9B9995 /* Error.swift in Sources */,
-				B2D2ACB4A0D838837E57BBC6 /* GetDemo.swift in Sources */,
-				B2D2A9B719173B6CB7608AA3 /* DownloadDemo.swift in Sources */,
-				B2D2AFD2A8141F2B80889C11 /* BrotliDemo.swift in Sources */,
-				B2D2AB0C39317AC4E640F1BF /* URLSessionDemo.swift in Sources */,
+				101443FB22FA883A00275DA2 /* ViewController.swift in Sources */,
+				101443F922FA883A00275DA2 /* AppDelegate.swift in Sources */,
+				B2D2AF99B0E744004AFF110F /* GetDemo.swift in Sources */,
+				B2D2A839A82F7891E8125890 /* BrotliDemo.swift in Sources */,
+				B2D2ACC346DFFCDD86115663 /* DownloadDemo.swift in Sources */,
+				B2D2AAEA915B5FA65F0978BC /* URLSessionDemo.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1014440622FA8A0800275DA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1014440F22FA8A0800275DA2 /* ViewController.swift in Sources */,
+				1014442222FA8A9D00275DA2 /* GetDemo.swift in Sources */,
+				1014442322FA8A9D00275DA2 /* DownloadDemo.swift in Sources */,
+				1014442522FA8A9D00275DA2 /* URLSessionDemo.swift in Sources */,
+				1014442422FA8A9D00275DA2 /* BrotliDemo.swift in Sources */,
+				1014440D22FA8A0800275DA2 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1014442722FAA46500275DA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1014444922FAA50E00275DA2 /* gtr_file_utilty.c in Sources */,
+				1014445422FAA52500275DA2 /* GTR.swift in Sources */,
+				1014445A22FAA52500275DA2 /* Race.swift in Sources */,
+				1014445722FAA52500275DA2 /* Destination.swift in Sources */,
+				1014445622FAA52500275DA2 /* ContentType.swift in Sources */,
+				1014445122FAA52500275DA2 /* Driver.swift in Sources */,
+				1014444722FAA50E00275DA2 /* gtr_ios_utility.c in Sources */,
+				1014444D22FAA50E00275DA2 /* gtr_atomic.c in Sources */,
+				1014444422FAA50600275DA2 /* gtr_core_proxy.c in Sources */,
+				1014445922FAA52500275DA2 /* Notification.swift in Sources */,
+				1014444C22FAA50E00275DA2 /* gtr_thread_pool.c in Sources */,
+				1014445C22FAA52500275DA2 /* Lock.swift in Sources */,
+				1014445222FAA52500275DA2 /* Horn.swift in Sources */,
+				1014445522FAA52500275DA2 /* Method.swift in Sources */,
+				1014443E22FAA50600275DA2 /* gtr_core.c in Sources */,
+				1014443A22FAA4EB00275DA2 /* Data.UnsafePointer.swift in Sources */,
+				1014443B22FAA4EF00275DA2 /* GTR.External.c in Sources */,
+				1014445B22FAA52500275DA2 /* Error.swift in Sources */,
+				1014445022FAA52500275DA2 /* Gearbox.swift in Sources */,
+				1014444022FAA50600275DA2 /* gtr_core_race.c in Sources */,
+				1014444622FAA50600275DA2 /* gtr_core_log.c in Sources */,
+				1014445322FAA52500275DA2 /* Engine.swift in Sources */,
+				1014445822FAA52500275DA2 /* HUD.swift in Sources */,
+				1014443922FAA4EA00275DA2 /* Dictionary.NetworkJSON.swift in Sources */,
+				1014444222FAA50600275DA2 /* gtr_core_header_helper.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +762,7 @@
 				B2D2AE3EAD1474BCA6B825D2 /* Notification.swift in Sources */,
 				B2D2AE01135DAC924C77BADE /* Race.swift in Sources */,
 				B2D2AD1D4E3244C26C3CE5F6 /* Data.UnsafePointer.swift in Sources */,
+				1014444F22FAA52000275DA2 /* Error.swift in Sources */,
 				B2D2A2C7DFFD65E55DB9B28A /* Lock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,26 +770,39 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4290D63B2137F49B00ED45E2 /* PBXTargetDependency */ = {
+		1014441F22FA8A5400275DA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 42F0B0972119EF8A00D01CC4 /* GTR */;
-			targetProxy = 4290D63A2137F49B00ED45E2 /* PBXContainerItemProxy */;
+			targetProxy = 1014441E22FA8A5400275DA2 /* PBXContainerItemProxy */;
+		};
+		1014443122FAA46500275DA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1014442A22FAA46500275DA2 /* GTR.Mac */;
+			targetProxy = 1014443022FAA46500275DA2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4290D62C2137F49200ED45E2 /* Main.storyboard */ = {
+		101443FE22FA883B00275DA2 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4290D62D2137F49200ED45E2 /* Base */,
+				101443FF22FA883B00275DA2 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		4290D6312137F49200ED45E2 /* LaunchScreen.storyboard */ = {
+		1014441022FA8A0800275DA2 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4290D6322137F49200ED45E2 /* Base */,
+				1014441122FA8A0800275DA2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1014441522FA8A0900275DA2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1014441622FA8A0900275DA2 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -542,43 +810,172 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4290D6352137F49200ED45E2 /* Debug */ = {
+		1014440422FA883B00275DA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GTR.Mac.Demo/GTR.Mac.Demo.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HMEN575QY4;
+				INFOPLIST_FILE = GTR.Mac.Demo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-Mac-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1014440522FA883B00275DA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GTR.Mac.Demo/GTR.Mac.Demo.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HMEN575QY4;
+				INFOPLIST_FILE = GTR.Mac.Demo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-Mac-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1014441A22FA8A0900275DA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HMEN575QY4;
-				INFOPLIST_FILE = GTRDemo/Info.plist;
+				INFOPLIST_FILE = GTR.iOS.Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTRDemo;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-iOS-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		4290D6362137F49200ED45E2 /* Release */ = {
+		1014441B22FA8A0900275DA2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HMEN575QY4;
-				INFOPLIST_FILE = GTRDemo/Info.plist;
+				INFOPLIST_FILE = GTR.iOS.Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTRDemo;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-iOS-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1014443522FAA46500275DA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = HMEN575QY4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/include",
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libbrotli/include",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libbrotli/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/lib",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-Mac";
+				PRODUCT_NAME = GTR;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1014443622FAA46500275DA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = HMEN575QY4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/include",
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libbrotli/include",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libbrotli/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/lib",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-Mac";
+				PRODUCT_NAME = GTR;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -713,10 +1110,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/ExternalLibrary/libcurl/include",
-					"$(PROJECT_DIR)/ExternalLibrary/libbrotli/include",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/include",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/include",
 				);
-				INFOPLIST_FILE = GTR/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -725,8 +1122,8 @@
 					"@loader_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/ExternalLibrary/libbrotli/lib",
-					"$(PROJECT_DIR)/ExternalLibrary/libcurl/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -747,10 +1144,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/ExternalLibrary/libcurl/include",
-					"$(PROJECT_DIR)/ExternalLibrary/libbrotli/include",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/include",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/include",
 				);
-				INFOPLIST_FILE = GTR/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -759,8 +1156,8 @@
 					"@loader_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/ExternalLibrary/libbrotli/lib",
-					"$(PROJECT_DIR)/ExternalLibrary/libcurl/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -773,11 +1170,29 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4290D6372137F49200ED45E2 /* Build configuration list for PBXNativeTarget "GTRDemo" */ = {
+		1014440322FA883B00275DA2 /* Build configuration list for PBXNativeTarget "GTR.Mac.Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4290D6352137F49200ED45E2 /* Debug */,
-				4290D6362137F49200ED45E2 /* Release */,
+				1014440422FA883B00275DA2 /* Debug */,
+				1014440522FA883B00275DA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1014441922FA8A0900275DA2 /* Build configuration list for PBXNativeTarget "GTR.iOS.Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1014441A22FA8A0900275DA2 /* Debug */,
+				1014441B22FA8A0900275DA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1014443422FAA46500275DA2 /* Build configuration list for PBXNativeTarget "GTR.Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1014443522FAA46500275DA2 /* Debug */,
+				1014443622FAA46500275DA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
