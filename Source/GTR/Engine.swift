@@ -246,7 +246,8 @@ func c_on_http_response_succeed_header(task_id: CUnsignedInt,
     //todo
     let swiftData = Data(bytes: c_data, count: Int(c_data_size))
     let string = String(data: swiftData, encoding: .utf8) ?? ""
-    print(string)
+    let list = string.components(separatedBy: "\n").map { (string: String) -> String in string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
+    print(list)
 }
 
 @_silgen_name("swift_get_request_succeed")
@@ -255,15 +256,15 @@ func c_get_request_succeed(task_id: CUnsignedInt,
                            c_data_size: CUnsignedLong) {
     let swiftData = Data(bytes: c_data, count: Int(c_data_size))
 
-    engine.rwLock.lockRead()
-    let succeed = engine.succeedContainer[task_id]
-    engine.rwLock.unlock()
+    __engine.rwLock.lockRead()
+    let succeed = __engine.succeedContainer[task_id]
+    __engine.rwLock.unlock()
 
-    engine.rwLock.lockWrite()
-    engine.cleanResponseHandler(taskID: task_id)
-    engine.rwLock.unlock()
+    __engine.rwLock.lockWrite()
+    __engine.cleanResponseHandler(taskID: task_id)
+    __engine.rwLock.unlock()
 
-    engine.responseQueue.async {
+    __engine.responseQueue.async {
         succeed??(swiftData)
     }
 }
@@ -273,15 +274,15 @@ func c_get_request_failure(task_id: CUnsignedInt,
                            http_response_code: CLong,
                            error_code: CInt,
                            error_message: UnsafePointer<CChar>) {
-    engine.rwLock.lockRead()
-    let failure = engine.failureContainer[task_id]
-    engine.rwLock.unlock()
+    __engine.rwLock.lockRead()
+    let failure = __engine.failureContainer[task_id]
+    __engine.rwLock.unlock()
 
-    engine.rwLock.lockWrite()
-    engine.cleanResponseHandler(taskID: task_id)
-    engine.rwLock.unlock()
+    __engine.rwLock.lockWrite()
+    __engine.cleanResponseHandler(taskID: task_id)
+    __engine.rwLock.unlock()
 
-    engine.responseQueue.async {
+    __engine.responseQueue.async {
         failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
     }
 }
@@ -292,15 +293,15 @@ func c_post_request_succeed(task_id: CUnsignedInt,
                             c_data_size: CUnsignedLong) {
     let swiftData = Data(bytes: c_data, count: Int(c_data_size))
 
-    engine.rwLock.lockRead()
-    let succeed = engine.succeedContainer[task_id]
-    engine.rwLock.unlock()
+    __engine.rwLock.lockRead()
+    let succeed = __engine.succeedContainer[task_id]
+    __engine.rwLock.unlock()
 
-    engine.rwLock.lockWrite()
-    engine.cleanResponseHandler(taskID: task_id)
-    engine.rwLock.unlock()
+    __engine.rwLock.lockWrite()
+    __engine.cleanResponseHandler(taskID: task_id)
+    __engine.rwLock.unlock()
 
-    engine.responseQueue.async {
+    __engine.responseQueue.async {
         succeed??(swiftData)
     }
 }
@@ -310,15 +311,15 @@ func c_post_request_failure(task_id: CUnsignedInt,
                             http_response_code: CLong,
                             error_code: CInt,
                             error_message: UnsafePointer<CChar>) {
-    engine.rwLock.lockRead()
-    let failure = engine.failureContainer[task_id]
-    engine.rwLock.unlock()
+    __engine.rwLock.lockRead()
+    let failure = __engine.failureContainer[task_id]
+    __engine.rwLock.unlock()
 
-    engine.rwLock.lockWrite()
-    engine.cleanResponseHandler(taskID: task_id)
-    engine.rwLock.unlock()
+    __engine.rwLock.lockWrite()
+    __engine.cleanResponseHandler(taskID: task_id)
+    __engine.rwLock.unlock()
 
-    engine.responseQueue.async {
+    __engine.responseQueue.async {
         failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
     }
 }
@@ -328,15 +329,15 @@ func c_put_request_succeed(task_id: CUnsignedInt,
                            c_data: UnsafeRawPointer,
                            c_data_size: CUnsignedLong) {
     let swiftData = Data(bytes: c_data, count: Int(c_data_size))
-    engine.rwLock.lockRead()
-    let succeed = engine.succeedContainer[task_id]
-    engine.rwLock.unlock()
+    __engine.rwLock.lockRead()
+    let succeed = __engine.succeedContainer[task_id]
+    __engine.rwLock.unlock()
 
-    engine.rwLock.lockWrite()
-    engine.cleanResponseHandler(taskID: task_id)
-    engine.rwLock.unlock()
+    __engine.rwLock.lockWrite()
+    __engine.cleanResponseHandler(taskID: task_id)
+    __engine.rwLock.unlock()
 
-    engine.responseQueue.async {
+    __engine.responseQueue.async {
         succeed??(swiftData)
     }
 }
@@ -346,30 +347,30 @@ func c_put_request_failure(task_id: CUnsignedInt,
                            http_response_code: CLong,
                            error_code: CInt,
                            error_message: UnsafePointer<CChar>) {
-    engine.rwLock.lockRead()
-    let failure = engine.failureContainer[task_id]
-    engine.rwLock.unlock()
+    __engine.rwLock.lockRead()
+    let failure = __engine.failureContainer[task_id]
+    __engine.rwLock.unlock()
 
-    engine.rwLock.lockWrite()
-    engine.cleanResponseHandler(taskID: task_id)
-    engine.rwLock.unlock()
+    __engine.rwLock.lockWrite()
+    __engine.cleanResponseHandler(taskID: task_id)
+    __engine.rwLock.unlock()
 
-    engine.responseQueue.async {
+    __engine.responseQueue.async {
         failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
     }
 }
 
 @_silgen_name("swift_download_progress")
 func c_download_progress(task_id: CUnsignedInt, download_now: CUnsignedLongLong, download_total: CUnsignedLongLong) {
-    engine.rwLock.lockRead()
-    let progress = engine.downloadProgressContainer[task_id]
-    engine.rwLock.unlock()
+    __engine.rwLock.lockRead()
+    let progress = __engine.downloadProgressContainer[task_id]
+    __engine.rwLock.unlock()
 
-    engine.rwLock.lockWrite()
-    engine.cleanDownloadProgress(taskID: task_id)
-    engine.rwLock.unlock()
+    __engine.rwLock.lockWrite()
+    __engine.cleanDownloadProgress(taskID: task_id)
+    __engine.rwLock.unlock()
 
-    engine.responseQueue.async {
+    __engine.responseQueue.async {
         progress??(download_now, download_total)
     }
 }
@@ -380,15 +381,15 @@ func c_download_request_succeed(task_id: CUnsignedInt,
                                 c_data_size: CUnsignedLong) {
     let swiftData = Data(bytes: c_data, count: Int(c_data_size))
 
-    engine.rwLock.lockRead()
-    let succeed = engine.succeedContainer[task_id]
-    engine.rwLock.unlock()
+    __engine.rwLock.lockRead()
+    let succeed = __engine.succeedContainer[task_id]
+    __engine.rwLock.unlock()
 
-    engine.rwLock.lockWrite()
-    engine.cleanResponseHandler(taskID: task_id)
-    engine.rwLock.unlock()
+    __engine.rwLock.lockWrite()
+    __engine.cleanResponseHandler(taskID: task_id)
+    __engine.rwLock.unlock()
 
-    engine.responseQueue.async {
+    __engine.responseQueue.async {
         succeed??(swiftData)
     }
 }
@@ -398,15 +399,15 @@ func c_download_request_failure(task_id: CUnsignedInt,
                                 http_response_code: CLong,
                                 error_code: CInt,
                                 error_message: UnsafePointer<CChar>) {
-    engine.rwLock.lockRead()
-    let failure = engine.failureContainer[task_id]
-    engine.rwLock.unlock()
+    __engine.rwLock.lockRead()
+    let failure = __engine.failureContainer[task_id]
+    __engine.rwLock.unlock()
 
-    engine.rwLock.lockWrite()
-    engine.cleanResponseHandler(taskID: task_id)
-    engine.rwLock.unlock()
+    __engine.rwLock.lockWrite()
+    __engine.cleanResponseHandler(taskID: task_id)
+    __engine.rwLock.unlock()
 
-    engine.responseQueue.async {
+    __engine.responseQueue.async {
         failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
     }
 }

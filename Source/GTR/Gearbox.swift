@@ -13,7 +13,7 @@ class Gearbox {
     private let proxyKey = "GTR.GearBox.Proxy.Key"
 
     class var proxyInfo: Gearbox.ProxyInfo? {
-        return gearbox.proxyInfo
+        return __gearbox.proxyInfo
     }
 }
 

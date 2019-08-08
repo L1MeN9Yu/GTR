@@ -5,24 +5,24 @@
 
 import Foundation
 
-private(set) var gearbox = { () -> Gearbox in
+private(set) var __gearbox = { () -> Gearbox in
     let gearbox = Gearbox()
     return gearbox
 }()
 
-private(set) var engine = { () -> Engine in
+private(set) var __engine = { () -> Engine in
     let engine = Engine()
     return engine
 }()
 
-private(set) var hud = { () -> HUD in
+private(set) var __hud = { () -> HUD in
     let hud = HUD()
     return hud
 }()
 
-private var _driver: Driver.Type?
+private var __driver: Driver.Type?
 
-private var _horn: Horn.Type?
+private var __horn: Horn.Type?
 
 @discardableResult
 func request(method: Method = .get,
@@ -36,19 +36,19 @@ func request(method: Method = .get,
              complete: Result?) -> UInt32 {
     var allHeaders = contentType.toHeader()
 
-    if let globalHeader = _driver?.identity() {
+    if let globalHeader = __driver?.identity() {
         allHeaders.merge(globalHeader) { (value_old: Encodable, value_new: Encodable) -> Encodable in
-            return value_new
+            value_new
         }
     }
 
     if let h = headers {
         allHeaders.merge(h) { (value_old: Encodable, value_new: Encodable) -> Encodable in
-            return value_new
+            value_new
         }
     }
 
-    return engine.request(
+    return __engine.request(
             httpMethod: method,
             url: url,
             headers: allHeaders,
@@ -69,23 +69,23 @@ func request(method: Method = .get,
 
 // MARK: - Config
 public func setup(driver: Driver.Type? = nil, horn: Horn.Type? = nil, cylinderCount: UInt32 = 8) {
-    _driver = driver
-    _horn = horn
-    engine.fire(engineNumber: driver?.userAgent(), cylinderCount: cylinderCount)
-    gearbox.start()
+    __driver = driver
+    __horn = horn
+    __engine.fire(engineNumber: driver?.userAgent(), cylinderCount: cylinderCount)
+    __gearbox.start()
 }
 
 public func config(responseQueue: DispatchQueue?) {
     guard let q = responseQueue else {
-        engine.config(responseQueue: DispatchQueue.main)
+        __engine.config(responseQueue: DispatchQueue.main)
         return
     }
 
-    engine.config(responseQueue: q)
+    __engine.config(responseQueue: q)
 }
 
 public func configProxy(isEnable: Bool, url: String, port: UInt32) {
-    gearbox.config(proxy: isEnable, url: url, port: port)
+    __gearbox.config(proxy: isEnable, url: url, port: port)
 }
 
 public func fetchProxyInfo() -> (String, UInt32)? {
@@ -100,11 +100,11 @@ func notifyFailure(url: String, headers: [String: Encodable]?, contentType: Cont
                    httpResponseCode: Int, errorCode: Int32, errorMessage: String,
                    filename: String = #file, function: String = #function, line: Int = #line) {
     let message = "response code = \(httpResponseCode)\n errorCode = \(errorCode)\n errorMessage = \(errorMessage)\n"
-    _horn?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
-    _horn?.raceDidLost(url: url, headers: headers, contentType: contentType, param: param, httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
+    __horn?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
+    __horn?.raceDidLost(url: url, headers: headers, contentType: contentType, param: param, httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
 }
 
 public func whistle(type: HornType, message: String, filename: String = #file,
                     function: String = #function, line: Int = #line) {
-    _horn?.whistle(type: type, message: message, filename: filename, function: function, line: line)
+    __horn?.whistle(type: type, message: message, filename: filename, function: function, line: line)
 }

@@ -54,7 +54,20 @@ extension ViewController {
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
                 }
-            case .lose(let httpResponseCode, let errorCode, let errorMessage):
+            case .lose(_, _, _):
+                break
+            }
+        }
+    }
+
+    private func getCache() {
+        GetCacheDemo.fetch { destination in
+            switch destination {
+            case .win(let responseData):
+                if let string = String(data: responseData, encoding: .utf8) {
+                    print("succeed : \(string)")
+                }
+            case .lose(_, _, _):
                 break
             }
         }
@@ -64,7 +77,8 @@ extension ViewController {
 extension ViewController {
     @objc
     private func getAction() {
-        self.brotli()
+//        self.brotli()
+        self.getCache()
     }
 }
 

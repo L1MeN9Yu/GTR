@@ -186,7 +186,8 @@ read_callback(
     return (size_t) bytes_read;
 }
 
-static size_t header_callback(
+static size_t
+header_callback(
         char *contents,
         size_t size,
         size_t nmemb,
@@ -343,6 +344,9 @@ request(
         long http_response_code = 0;
         curl_easy_getinfo(curl_handle, CURLINFO_RESPONSE_CODE, &http_response_code);
 
+        long condition_unmet = 0;
+        curl_easy_getinfo(curl_handle, CURLINFO_CONDITION_UNMET, &condition_unmet);
+
         /* check for errors */
         if (res != CURLE_OK) {
             gtr_core_log(gtr_log_flag_error, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
@@ -360,9 +364,8 @@ request(
         }
     }
 
-    /* cleanup curl stuff */
-    if (header) {
-        curl_slist_free_all(header);
+    {
+        if (header) {curl_slist_free_all(header);}
     }
 
     {
