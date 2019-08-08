@@ -184,7 +184,7 @@ if [ -d "$DESTDIR/include" ]; then
 	rm -rf "$DESTDIR/include"
 fi
 cp -R "$CURLPATH/include" "$DESTDIR/"
-rm include/Makefile include/Makefile.am include/Makefile.in include/README include/curl/Makefile include/curl/Makefile.in
+rm include/Makefile include/Makefile.am include/Makefile.in include/README include/curl/Makefile include/curl/Makefile.in include/curl/Makefile.am
 
 cp -r include iOS/libcurl/include
 cp libcurl.a iOS/libcurl/lib/libcurl.a

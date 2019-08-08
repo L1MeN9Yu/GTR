@@ -2,3 +2,4 @@ build_tool/brotli
 build_tool/curl
 build_tool/brotli*.tar.gz
 build_tool/curl*.tar.gz
+build_tool/.xmake

@@ -8,7 +8,7 @@ extern "C" {
 /* =================================== API ======================================= */
 
 
-typedef struct gtr_thread_pool_ *thread_pool;
+typedef struct gtr_thread_pool *thread_pool;
 
 
 /**
@@ -20,8 +20,8 @@ typedef struct gtr_thread_pool_ *thread_pool;
  * @example
  *
  *    ..
- *    thread_pool t_p;                     //First we declare a thread_pool
- *    t_p = thread_pool_init(4);               //then we initialize it to 4 threads
+ *    thread_pool t_p;                          //First we declare a thread_pool
+ *    t_p = thread_pool_init(4);                //then we initialize it to 4 threads
  *    ..
  *
  * @param  num_threads   number of threads to be created in the thread_pool
