@@ -57,8 +57,8 @@ func request(method: Method = .get,
             param: param,
             downloadPath: downloadPath,
             progress: progress,
-            succeed: { data in
-                complete?(Destination.win(responseData: data))
+            succeed: { (header, data) in
+                complete?(Destination.win(httpHeader: header, responseData: data))
             },
             failure: { (httpResponseCode, errorCode, errorMessage) in
                 complete?(Destination.lose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage))

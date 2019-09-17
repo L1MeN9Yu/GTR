@@ -67,12 +67,15 @@
 		1014446422FAE4B700275DA2 /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446322FAE4B700275DA2 /* LDAP.framework */; };
 		1014446622FAE4D900275DA2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446522FAE4D900275DA2 /* libz.tbd */; };
 		1014446722FAEAB700275DA2 /* GTR.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ACA7D124F6573FF09579 /* GTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		101CBC7222FC59D40006A9ED /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A403CABF212B9D28F286 /* HttpHeader.swift */; };
+		101CBC7322FC59D40006A9ED /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A74450D420AA489FED2D /* Coder.swift */; };
 		427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 427D2AF32119FCEA00314C23 /* libz.tbd */; };
 		4530496CB7B66057B5AAFED6 /* GTR.External.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304850E2A52EA9FD4CF561 /* GTR.External.c */; };
 		45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445B651AB97564ABE56C /* GTR.External.h */; };
 		45304E27E0E3E66A29C2F05B /* Dictionary.NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530407A138ED07408B9DB82 /* Dictionary.NetworkJSON.swift */; };
 		B2D2A09B9401A6BF6ED07EF3 /* gtr_core_header_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */; };
 		B2D2A1A80A1FEA69E1B05889 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AEE6E80C2CD98C4D3644 /* Horn.swift */; };
+		B2D2A1D06E69AC4A25F5F223 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A74450D420AA489FED2D /* Coder.swift */; };
 		B2D2A20A2778BEA763EFCD80 /* gtr_core_header_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A87062AEDDA79A61FEAA /* gtr_core_header_helper.c */; };
 		B2D2A256DEFBD6EFE49D36E8 /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */; };
 		B2D2A2586B0FCCFDBE563406 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF5C9388C2BB3FAAB204 /* Driver.swift */; };
@@ -101,6 +104,7 @@
 		B2D2AE01135DAC924C77BADE /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* Race.swift */; };
 		B2D2AE1FFACBE0355A3E8B1C /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA45760ED5D528DC4C1B /* HUD.swift */; };
 		B2D2AE3EAD1474BCA6B825D2 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */; };
+		B2D2AE62EF367FC4B8BC5DAB /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A403CABF212B9D28F286 /* HttpHeader.swift */; };
 		B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA86DA38062600F6345F /* gtr_core_log.c */; };
 		B2D2AF6943F995C6E1364374 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */; };
 		B2D2AF89CE011EDD0F488B36 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A93504887D10507AE9FE /* Destination.swift */; };
@@ -192,11 +196,13 @@
 		B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_atomic.h; sourceTree = "<group>"; };
 		B2D2A3AB95F258E1382B16AE /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		B2D2A3F728E82ED3509187B1 /* Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
+		B2D2A403CABF212B9D28F286 /* HttpHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
 		B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDemo.swift; sourceTree = "<group>"; };
 		B2D2A66D6341CB9D098269B0 /* GTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.swift; sourceTree = "<group>"; };
 		B2D2A6BA1BD7071E077D8555 /* gtr_core_race.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_race.h; sourceTree = "<group>"; };
 		B2D2A70F0C6C9CD9BFD550BB /* DownloadDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDemo.swift; sourceTree = "<group>"; };
+		B2D2A74450D420AA489FED2D /* Coder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coder.swift; sourceTree = "<group>"; };
 		B2D2A75B5BE6A302E19D81C0 /* GetDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDemo.swift; sourceTree = "<group>"; };
 		B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_thread_pool.h; sourceTree = "<group>"; };
@@ -472,6 +478,8 @@
 				B2D2A3F728E82ED3509187B1 /* Race.swift */,
 				B2D2A3AB95F258E1382B16AE /* Error.swift */,
 				B2D2A117D2CF190520B48B58 /* Lock.swift */,
+				B2D2A403CABF212B9D28F286 /* HttpHeader.swift */,
+				B2D2A74450D420AA489FED2D /* Coder.swift */,
 			);
 			path = GTR;
 			sourceTree = "<group>";
@@ -719,6 +727,7 @@
 				1014445122FAA52500275DA2 /* Driver.swift in Sources */,
 				1014444722FAA50E00275DA2 /* gtr_ios_utility.c in Sources */,
 				1014444D22FAA50E00275DA2 /* gtr_atomic.c in Sources */,
+				101CBC7222FC59D40006A9ED /* HttpHeader.swift in Sources */,
 				1014444422FAA50600275DA2 /* gtr_core_proxy.c in Sources */,
 				1014445922FAA52500275DA2 /* Notification.swift in Sources */,
 				1014444C22FAA50E00275DA2 /* gtr_thread_pool.c in Sources */,
@@ -732,6 +741,7 @@
 				1014445022FAA52500275DA2 /* Gearbox.swift in Sources */,
 				1014444022FAA50600275DA2 /* gtr_core_race.c in Sources */,
 				1014444622FAA50600275DA2 /* gtr_core_log.c in Sources */,
+				101CBC7322FC59D40006A9ED /* Coder.swift in Sources */,
 				1014445322FAA52500275DA2 /* Engine.swift in Sources */,
 				1014445822FAA52500275DA2 /* HUD.swift in Sources */,
 				1014443922FAA4EA00275DA2 /* Dictionary.NetworkJSON.swift in Sources */,
@@ -768,6 +778,8 @@
 				B2D2AD1D4E3244C26C3CE5F6 /* Data.UnsafePointer.swift in Sources */,
 				1014444F22FAA52000275DA2 /* Error.swift in Sources */,
 				B2D2A2C7DFFD65E55DB9B28A /* Lock.swift in Sources */,
+				B2D2AE62EF367FC4B8BC5DAB /* HttpHeader.swift in Sources */,
+				B2D2A1D06E69AC4A25F5F223 /* Coder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

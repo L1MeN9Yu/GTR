@@ -196,16 +196,16 @@ header_callback(
     size_t real_size = size * nmemb;
     gtr_core_race_response_header *response_header = (gtr_core_race_response_header *) user_data;
 
-    response_header->response_header_data = realloc(response_header->response_header_data, response_header->response_header_data_size + real_size + 1);
-    if (response_header->response_header_data == NULL) {
+    response_header->data = realloc(response_header->data, response_header->size + real_size + 1);
+    if (response_header->data == NULL) {
         /* out of memory! */
         gtr_core_log(gtr_log_flag_error, "not enough memory (realloc returned NULL)\n");
         return 0;
     }
 
-    memcpy(&(response_header->response_header_data[response_header->response_header_data_size]), contents, real_size);
-    response_header->response_header_data_size += real_size;
-    response_header->response_header_data[response_header->response_header_data_size] = 0;
+    memcpy(&(response_header->data[response_header->size]), contents, real_size);
+    response_header->size += real_size;
+    response_header->data[response_header->size] = 0;
 
     return real_size;
 }
@@ -228,16 +228,16 @@ write_callback(
     size_t real_size = size * nmemb;
     gtr_core_race_response_body *response_body = (gtr_core_race_response_body *) user_data;
 
-    response_body->response_body_data = realloc(response_body->response_body_data, response_body->response_body_data_size + real_size + 1);
-    if (response_body->response_body_data == NULL) {
+    response_body->data = realloc(response_body->data, response_body->size + real_size + 1);
+    if (response_body->data == NULL) {
         /* out of memory! */
         gtr_core_log(gtr_log_flag_error, "not enough memory (realloc returned NULL)\n");
         return 0;
     }
 
-    memcpy(&(response_body->response_body_data[response_body->response_body_data_size]), contents, real_size);
-    response_body->response_body_data_size += real_size;
-    response_body->response_body_data[response_body->response_body_data_size] = 0;
+    memcpy(&(response_body->data[response_body->size]), contents, real_size);
+    response_body->size += real_size;
+    response_body->data[response_body->size] = 0;
 
     return real_size;
 }
@@ -270,15 +270,15 @@ request(
 
     gtr_core_race_response_header response_header;
     {
-        response_header.response_header_data = malloc(1);
-        response_header.response_header_data_size = 0;
+        response_header.data = malloc(1);
+        response_header.size = 0;
     }
 
     gtr_core_race_response_body response_body;
 
     {
-        response_body.response_body_data = malloc(1);
-        response_body.response_body_data_size = 0;
+        response_body.data = malloc(1);
+        response_body.size = 0;
     }
 
     curl_handle = curl_easy_init();
@@ -354,12 +354,9 @@ request(
                 core_race->on_failed(core_race->task_id, http_response_code, res, curl_easy_strerror(res));
             }
         } else {
-            gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_body.response_body_data_size);
-            if (core_race->on_succeed_header) {
-                core_race->on_succeed_header(core_race->task_id, response_header.response_header_data, response_header.response_header_data_size);
-            }
-            if (core_race->on_succeed_body) {
-                core_race->on_succeed_body(core_race->task_id, http_response_code, response_body.response_body_data, response_body.response_body_data_size);
+            gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_body.size);
+            if (core_race->on_succeed) {
+                core_race->on_succeed(core_race->task_id, http_response_code, response_header.data, response_header.size, response_body.data, response_body.size);
             }
         }
     }
@@ -373,8 +370,8 @@ request(
         free(core_race->url);
         free(core_race->header);
         free(core_race);
-        free(response_header.response_header_data);
-        free(response_body.response_body_data);
+        free(response_header.data);
+        free(response_body.data);
     }
 }
 
@@ -442,11 +439,11 @@ gtr_core_go_request(
         unsigned int time_out,
         const void *request_data,
         unsigned long request_data_size,
-        void *succeed_header_callback,
-        void *succeed_body_callback,
+        void *succeed_callback,
         void *failure_callback,
         const char *file_path,
-        void *progress_callback) {
+        void *progress_callback
+) {
     gtr_core_race *core_request = (gtr_core_race *) calloc(1, sizeof(gtr_core_race));
 
     {
@@ -499,17 +496,14 @@ gtr_core_go_request(
     }
     {
         //call_back
-        core_request->on_succeed_header = succeed_header_callback;
-        core_request->on_succeed_body = succeed_body_callback;
+        core_request->on_succeed = succeed_callback;
         core_request->on_failed = failure_callback;
     }
 
     {
         if (file_path) {
             core_request->download_data = calloc(1, sizeof(gtr_core_race_download_data));
-            size_t file_path_size = strlen(file_path) + 1;
-            core_request->download_data->file_path = malloc(file_path_size);
-            memcpy(core_request->download_data->file_path, file_path, file_path_size);
+            strcpy(core_request->download_data->file_path, file_path);
             core_request->download_data->on_progress = progress_callback;
             core_request->download_data->task_id = *task_id;
         }
@@ -527,8 +521,7 @@ gtr_core_add_request(
         unsigned int time_out,
         const void *request_data,
         unsigned long request_data_size,
-        void *succeed_header_callback,
-        void *succeed_body_callback,
+        void *succeed_callback,
         void *failure_callback) {
     gtr_core_go_request(
             task_id,
@@ -538,8 +531,7 @@ gtr_core_add_request(
             time_out,
             request_data,
             request_data_size,
-            succeed_header_callback,
-            succeed_body_callback,
+            succeed_callback,
             failure_callback,
             NULL,
             NULL);
@@ -552,8 +544,7 @@ void gtr_core_add_download_request(
         const char *header,
         unsigned int time_out,
         void *progress_callback,
-        void *succeed_header_callback,
-        void *succeed_body_callback,
+        void *succeed_callback,
         void *failure_callback
 ) {
     gtr_core_go_request(
@@ -564,8 +555,7 @@ void gtr_core_add_download_request(
             time_out,
             NULL,
             0,
-            succeed_header_callback,
-            succeed_body_callback,
+            succeed_callback,
             failure_callback,
             file_path,
             progress_callback);

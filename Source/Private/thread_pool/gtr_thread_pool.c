@@ -63,7 +63,7 @@ typedef struct job_queue {
 typedef struct thread {
     int id;                                     /* friendly id               */
     pthread_t pthread;                          /* pointer to actual thread  */
-    struct gtr_thread_pool *thread_pool_p;      /* access to thread_pool     */
+    struct gtr_thread_pool *thread_pool_p;                 /* access to thread_pool     */
 } thread;
 
 
@@ -502,7 +502,6 @@ static void binary_semaphore_init(binary_semaphore *binary_semaphore_p, int valu
     pthread_cond_init(&(binary_semaphore_p->cond), NULL);
     binary_semaphore_p->v = value;
 }
-
 
 /* Reset semaphore to 0 */
 static void binary_semaphore_reset(binary_semaphore *binary_semaphore_p) {

@@ -28,8 +28,8 @@ typedef enum gtr_core_race_type {
  *
  */
 typedef struct gtr_core_race_response_header {
-    char *response_header_data;
-    unsigned long response_header_data_size;
+    char *data;
+    unsigned long size;
 } gtr_core_race_response_header;
 
 /**
@@ -45,22 +45,22 @@ typedef struct gtr_core_race_request_body {
  *
  */
 typedef struct gtr_core_race_response_body {
-    char *response_body_data;
-    unsigned long response_body_data_size;
+    char *data;
+    unsigned long size;
 } gtr_core_race_response_body;
 
 /**
  *
  */
 typedef struct gtr_core_race_download_data {
-    const char *file_path;
+    char *file_path;
     unsigned int task_id;
 
     void (*on_progress)(unsigned int task_id, unsigned long long now, unsigned long long total);
 } gtr_core_race_download_data;
 
 /**
- *
+ * 请求
  */
 typedef struct gtr_core_race {
     unsigned int task_id;
@@ -73,21 +73,15 @@ typedef struct gtr_core_race {
     gtr_core_race_download_data *download_data;
 
     /**
-     * 请求成功
-     * @param task_id
-     * @param data
-     * @param data_size
-     */
-    void (*on_succeed_header)(unsigned int task_id, void *data, unsigned long data_size);
-
-    /**
      *
      * @param task_id
      * @param http_response_code
-     * @param data
-     * @param data_size
+     * @param header_data
+     * @param header_data_size
+     * @param body_data
+     * @param body_data_size
      */
-    void (*on_succeed_body)(unsigned int task_id, long http_response_code, void *data, unsigned long data_size);
+    void (*on_succeed)(unsigned int task_id, long http_response_code, void *header_data, unsigned long header_data_size, void *body_data, unsigned long body_data_size);
 
     /**
      *

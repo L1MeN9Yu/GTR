@@ -8,7 +8,7 @@ import Foundation
 
 // MARK: - Destination
 public enum Destination {
-    case win(responseData: Foundation.Data)
+    case win(httpHeader: HttpHeader?, responseData: Foundation.Data)
     case lose(httpResponseCode: Int, errorCode: Int32, errorMessage: String)
 }
 

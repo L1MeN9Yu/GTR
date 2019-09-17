@@ -5,7 +5,7 @@
 
 import Foundation
 
-typealias GTRSucceedClosure = (_ responseData: Foundation.Data) -> Void
+typealias GTRSucceedClosure = (_ httpHeader: HttpHeader?, _ responseData: Foundation.Data) -> Void
 typealias GTRFailureClosure = (_ httpResponseCode: Swift.Int, _ errorCode: Swift.Int32, _ errorMessage: Swift.String) -> Void
 typealias GTRProgressClosure = (_ now: UInt64, _ total: UInt64) -> Void
 typealias GTRHttpHeaderClosure = () -> [Swift.String: Swift.String]
@@ -239,22 +239,16 @@ private func c_gtr_download(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: Uns
 
 // MARK: - C CallBack
 
-@_silgen_name("swift_on_http_response_succeed_header")
-func c_on_http_response_succeed_header(task_id: CUnsignedInt,
-                                       c_data: UnsafeRawPointer,
-                                       c_data_size: CUnsignedLong) {
-    //todo
-    let swiftData = Data(bytes: c_data, count: Int(c_data_size))
-    let string = String(data: swiftData, encoding: .utf8) ?? ""
-    let list = string.components(separatedBy: "\n").map { (string: String) -> String in string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
-    print(list)
-}
-
 @_silgen_name("swift_get_request_succeed")
 func c_get_request_succeed(task_id: CUnsignedInt,
-                           c_data: UnsafeRawPointer,
-                           c_data_size: CUnsignedLong) {
-    let swiftData = Data(bytes: c_data, count: Int(c_data_size))
+                           c_header_data: UnsafeRawPointer,
+                           c_header_data_size: CUnsignedLong,
+                           c_body_data: UnsafeRawPointer,
+                           c_body_data_size: CUnsignedLong) {
+    let headerData = Data(bytes: c_header_data, count: Int(c_header_data_size))
+    let header = handleHeader(headerData: headerData)
+
+    let bodyData = Data(bytes: c_body_data, count: Int(c_body_data_size))
 
     __engine.rwLock.lockRead()
     let succeed = __engine.succeedContainer[task_id]
@@ -265,7 +259,7 @@ func c_get_request_succeed(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        succeed??(swiftData)
+        succeed??(header, bodyData)
     }
 }
 
@@ -289,9 +283,14 @@ func c_get_request_failure(task_id: CUnsignedInt,
 
 @_silgen_name("swift_post_request_succeed")
 func c_post_request_succeed(task_id: CUnsignedInt,
-                            c_data: UnsafeRawPointer,
-                            c_data_size: CUnsignedLong) {
-    let swiftData = Data(bytes: c_data, count: Int(c_data_size))
+                            c_header_data: UnsafeRawPointer,
+                            c_header_data_size: CUnsignedLong,
+                            c_body_data: UnsafeRawPointer,
+                            c_body_data_size: CUnsignedLong) {
+    let headerData = Data(bytes: c_header_data, count: Int(c_header_data_size))
+    let header = handleHeader(headerData: headerData)
+
+    let bodyData = Data(bytes: c_body_data, count: Int(c_body_data_size))
 
     __engine.rwLock.lockRead()
     let succeed = __engine.succeedContainer[task_id]
@@ -302,7 +301,7 @@ func c_post_request_succeed(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        succeed??(swiftData)
+        succeed??(header, bodyData)
     }
 }
 
@@ -326,9 +325,15 @@ func c_post_request_failure(task_id: CUnsignedInt,
 
 @_silgen_name("swift_put_request_succeed")
 func c_put_request_succeed(task_id: CUnsignedInt,
-                           c_data: UnsafeRawPointer,
-                           c_data_size: CUnsignedLong) {
-    let swiftData = Data(bytes: c_data, count: Int(c_data_size))
+                           c_header_data: UnsafeRawPointer,
+                           c_header_data_size: CUnsignedLong,
+                           c_body_data: UnsafeRawPointer,
+                           c_body_data_size: CUnsignedLong) {
+    let headerData = Data(bytes: c_header_data, count: Int(c_header_data_size))
+    let header = handleHeader(headerData: headerData)
+
+    let bodyData = Data(bytes: c_body_data, count: Int(c_body_data_size))
+
     __engine.rwLock.lockRead()
     let succeed = __engine.succeedContainer[task_id]
     __engine.rwLock.unlock()
@@ -338,7 +343,7 @@ func c_put_request_succeed(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        succeed??(swiftData)
+        succeed??(header, bodyData)
     }
 }
 
@@ -390,7 +395,8 @@ func c_download_request_succeed(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        succeed??(swiftData)
+        //todo header
+        succeed??(nil, swiftData)
     }
 }
 
@@ -410,4 +416,22 @@ func c_download_request_failure(task_id: CUnsignedInt,
     __engine.responseQueue.async {
         failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
     }
+}
+
+func handleHeader(headerData: Data) -> HttpHeader? {
+    let string = String(data: headerData, encoding: .utf8) ?? ""
+    let list = string.components(separatedBy: "\n").map { (string: String) -> String in string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
+    let dictList = list.compactMap { (string: String) -> [String: String]? in
+        let components = string.components(separatedBy: ": ").map { (string: String) -> String in string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
+        guard components.count > 1, let first = components.first, let last = components.last else { return nil }
+        return [first: last]
+    }
+    let toJsonString = dictList.reduce("{") { (result: String, dictionary: [String: String]) -> String in
+        guard let key = dictionary.keys.first, let value = dictionary.values.first else { return result }
+        return result + "\"" + key + "\"" + ":" + "\"" + value + "\"" + ","
+    }
+    let result = toJsonString.dropLast().appending("}")
+    guard let resultData = result.data(using: .utf8) else { return nil }
+    let header = try? __jsonDecoder.decode(HttpHeader.self, from: resultData)
+    return header
 }

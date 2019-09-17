@@ -10,7 +10,7 @@ import UIKit
 import GTR
 
 class ViewController: UIViewController {
-    
+
     private lazy var actionButton = { () -> UIButton in
         let actionButton = UIButton(type: .custom)
         actionButton.setTitle("Go", for: .normal)
@@ -19,15 +19,15 @@ class ViewController: UIViewController {
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         return actionButton
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+
         self.setupUI()
         self.setupGTR()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -42,8 +42,8 @@ extension ViewController {
         //        self.put()
         //        self.brotli()
         //        self.download()
-        for _ in 0...100 {
-            //            URLSessionDemo.fetch()
+        for _ in 0...1000 {
+//                        URLSessionDemo.fetch()
             self.brotli()
         }
     }
@@ -58,15 +58,15 @@ extension ViewController {
         self.actionButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         self.actionButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
-    
+
     private func setupGTR() {
         GTR.setup(driver: type(of: self), horn: type(of: self))
     }
-    
+
     private func get() {
         GetDemo.fetch() { destination in
             switch destination {
-            case .win(let responseData):
+            case .win(let httpHeader, let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
                 }
@@ -76,15 +76,15 @@ extension ViewController {
             }
         }
     }
-    
+
     private func put() {
-        
+
     }
-    
+
     private func brotli() {
         BrotliDemo.fetch() { destination in
             switch destination {
-            case .win(let responseData):
+            case .win(let httpHeader, let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
                 }
@@ -93,7 +93,7 @@ extension ViewController {
             }
         }
     }
-    
+
     private func download() {
         DownloadDemo.request(progress: { now, total in
             print("now = \(now) || total = \(total)")

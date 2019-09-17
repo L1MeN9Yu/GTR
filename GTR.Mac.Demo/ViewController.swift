@@ -50,7 +50,7 @@ extension ViewController {
     private func brotli() {
         BrotliDemo.fetch() { destination in
             switch destination {
-            case .win(let responseData):
+            case .win(let header, let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
                 }
@@ -63,9 +63,10 @@ extension ViewController {
     private func getCache() {
         GetCacheDemo.fetch { destination in
             switch destination {
-            case .win(let responseData):
+            case .win(let header, let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
+                    print("\(header)")
                 }
             case .lose(_, _, _):
                 break
