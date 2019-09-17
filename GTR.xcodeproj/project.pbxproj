@@ -69,6 +69,7 @@
 		1014446722FAEAB700275DA2 /* GTR.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ACA7D124F6573FF09579 /* GTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		101CBC7222FC59D40006A9ED /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A403CABF212B9D28F286 /* HttpHeader.swift */; };
 		101CBC7322FC59D40006A9ED /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A74450D420AA489FED2D /* Coder.swift */; };
+		10ACE334233081A1006CFEDD /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446322FAE4B700275DA2 /* LDAP.framework */; };
 		427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 427D2AF32119FCEA00314C23 /* libz.tbd */; };
 		4530496CB7B66057B5AAFED6 /* GTR.External.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304850E2A52EA9FD4CF561 /* GTR.External.c */; };
 		45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445B651AB97564ABE56C /* GTR.External.h */; };
@@ -235,6 +236,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10ACE334233081A1006CFEDD /* LDAP.framework in Frameworks */,
 				1014443222FAA46500275DA2 /* GTR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

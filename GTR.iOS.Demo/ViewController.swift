@@ -42,7 +42,7 @@ extension ViewController {
         //        self.put()
         //        self.brotli()
         //        self.download()
-        for _ in 0...1000 {
+        for _ in 0...10 {
 //                        URLSessionDemo.fetch()
             self.brotli()
         }

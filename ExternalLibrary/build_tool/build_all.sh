@@ -39,12 +39,12 @@ if [ ! -d "$XCODE" ]; then
 	exit 1
 fi
 
-REL_SCRIPT_PATH="$(dirname $0)"
+REL_SCRIPT_PATH="$(dirname "$0")"
 SCRIPTPATH=$(realpath "$REL_SCRIPT_PATH")
 CURLPATH="$SCRIPTPATH/curl"
 
 PWD=$(pwd)
-cd "$CURLPATH"
+cd "$CURLPATH" || exit
 
 if [ ! -x "$CURLPATH/configure" ]; then
 	echo "Curl needs external tools to be compiled"
@@ -55,12 +55,11 @@ if [ ! -x "$CURLPATH/configure" ]; then
 	EXITCODE=$?
 	if [ $EXITCODE -ne 0 ]; then
 		echo "Error running the buildconf program"
-		cd "$PWD"
+		cd "$PWD" || exit
 		exit $EXITCODE
 	fi
 fi
 
-# git apply ../patches/patch_curl_fixes1172.diff
 
 export CC="$XCODE/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
 DESTDIR="$SCRIPTPATH/build"
@@ -78,22 +77,23 @@ for (( i=0; i<${#ARCHS[@]}; i++ )); do
 
 	ARCH=${ARCHS[$i]}
 	export CFLAGS="-arch $ARCH -pipe -Os -gdwarf-2 -mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} -fembed-bitcode -Werror=partial-availability"
-	export LDFLAGS="-arch $ARCH -L${BROTLI}/lib"
+	export LDFLAGS="-arch $ARCH"
 
-	cd "$CURLPATH"
+	cd "$CURLPATH" || exit
 	./configure	--host="${HOSTS[$i]}-apple-darwin" \
 			--with-darwinssl \
 			--with-zlib \
 			--with-brotli="${BROTLI}" \
+			--without-libidn2 \
 			--enable-static \
 			--disable-shared \
 			--enable-threaded-resolver \
 			--disable-verbose \
-			--enable-ipv6 
+			--enable-ipv6
 	EXITCODE=$?
 	if [ $EXITCODE -ne 0 ]; then
 		echo "Error running the cURL configure program"
-		cd "$PWD"
+		cd "$PWD" || exit
 		exit $EXITCODE
 	fi
 
@@ -101,7 +101,7 @@ for (( i=0; i<${#ARCHS[@]}; i++ )); do
 	EXITCODE=$?
 	if [ $EXITCODE -ne 0 ]; then
 		echo "Error running the make program"
-		cd "$PWD"
+		cd "$PWD" || exit
 		exit $EXITCODE
 	fi
 	mkdir -p "$DESTDIR/$ARCH"
@@ -155,7 +155,7 @@ for (( i=0; i<${#ARCHS[@]}; i++ )); do
 	EXITCODE=$?
 	if [ $EXITCODE -ne 0 ]; then
 		echo "Error running the cURL configure program"
-		cd "$PWD"
+		cd "$PWD" || exit
 		exit $EXITCODE
 	fi
 
@@ -163,7 +163,7 @@ for (( i=0; i<${#ARCHS[@]}; i++ )); do
 	EXITCODE=$?
 	if [ $EXITCODE -ne 0 ]; then
 		echo "Error running the make program"
-		cd "$PWD"
+		cd "$PWD" || exit
 		exit $EXITCODE
 	fi
 	mkdir -p "$DESTDIR/$ARCH"
