@@ -609,7 +609,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = limengyu.top;
 				TargetAttributes = {
 					101443F522FA883A00275DA2 = {
@@ -838,6 +838,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = HMEN575QY4;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = GTR.Mac.Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -863,6 +864,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = HMEN575QY4;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = GTR.Mac.Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
