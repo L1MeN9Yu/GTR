@@ -69,11 +69,12 @@ typedef struct gtr_core_race {
     char *url;
     char *header;
     unsigned int time_out;
+    long speed_limit;
     gtr_core_race_request_body *request_data;
     gtr_core_race_download_data *download_data;
 
     /**
-     *
+     * succeed callback
      * @param task_id
      * @param http_response_code
      * @param header_data

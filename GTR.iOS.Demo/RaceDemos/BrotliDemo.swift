@@ -10,7 +10,7 @@ import func GTR.race
 
 struct BrotliDemo: Race {
     let url: String = "https://httpbin.org/brotli"
-    let timeout: UInt32 = 10
+    let speedLimit: Int = 1
 }
 
 extension BrotliDemo {

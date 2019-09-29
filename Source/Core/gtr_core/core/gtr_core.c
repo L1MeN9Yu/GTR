@@ -39,90 +39,39 @@ static const char *temp_directory;
 
 static gtr_core_proxy *global_proxy;
 
-static void
-gtr_core_config_http_method(
-        CURL *handle,
-        gtr_core_race *request
-);
+static void gtr_core_config_http_method(CURL *handle, gtr_core_race *request);
 
-static void
-gtr_core_config_url(
-        CURL *handle,
-        const char *url
-);
+static void gtr_core_config_url(CURL *handle, const char *url);
 
-static void
-gtr_core_config_accept_encoding(
-        CURL *handle
-);
+static void gtr_core_config_accept_encoding(CURL *handle);
 
-static void
-gtr_core_config_keep_alive(
-        CURL *handle
-);
+static void gtr_core_config_keep_alive(CURL *handle);
 
-static void
-gtr_core_config_headers(
-        CURL *handle,
-        const char *user_agent, struct curl_slist *header
-);
+static void gtr_core_config_headers(CURL *handle, const char *user_agent, struct curl_slist *header);
 
-static void
-gtr_core_config_verify_peer(
-        CURL *handle,
-        bool on
-);
+static void gtr_core_config_verify_peer(CURL *handle, bool on);
 
-static void
-gtr_core_config_signal(
-        CURL *handle,
-        bool is_on
-);
+static void gtr_core_config_signal(CURL *handle, bool is_on);
 
-static void
-gtr_core_config_time_out(
-        CURL *handle,
-        unsigned int time_out
-);
+static void gtr_core_config_time_out(CURL *handle, unsigned int time_out);
 
-static void
-gtr_core_config_header_call_back(CURL *handle, gtr_core_race_response_header *response_header);
+static void gtr_core_config_header_call_back(CURL *handle, gtr_core_race_response_header *response_header);
 
-static void
-gtr_core_config_write_call_back(
-        CURL *handle,
-        gtr_core_race_response_body *response_body
-);
+static void gtr_core_config_write_call_back(CURL *handle, gtr_core_race_response_body *response_body);
 
-static void
-gtr_core_config_progress(
-        CURL *handle,
-        gtr_core_race *request
-);
+static void gtr_core_config_progress(CURL *handle, gtr_core_race *request);
 
-static void
-gtr_core_config_proxy(
-        CURL *handle
-);
+static void gtr_core_config_proxy(CURL *handle);
 
-static void
-gtr_core_config_debug(
-        CURL *handle
-);
+static void gtr_core_config_speed_limit(CURL *handle, long limit);
+
+static void gtr_core_config_debug(CURL *handle);
 
 //--- Private Utility
-static void
-gtr_core_create_temp_dir(void);
+static void gtr_core_create_temp_dir(void);
 
 //--- Call Back
-static int
-debug_func(
-        CURL *__unused handle,
-        curl_infotype type,
-        char *data,
-        size_t size,
-        void *__unused user_p
-) {
+static int debug_func(CURL *__unused handle, curl_infotype type, char *data, size_t size, void *__unused user_p) {
     switch (type) {
         case CURLINFO_TEXT:
             gtr_core_log(gtr_log_flag_trace, "Info: %.*s", size, data);
@@ -160,13 +109,7 @@ debug_func(
  * @param userp userp
  * @return size_t
  */
-static size_t
-read_callback(
-        void *ptr,
-        size_t size,
-        size_t nmemb,
-        void *userp
-) {
+static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *userp) {
     gtr_core_race_request_body *request_data = (gtr_core_race_request_body *) userp;
     unsigned long bytes_read = 0;
     if (size * nmemb < 1)
@@ -186,13 +129,7 @@ read_callback(
     return (size_t) bytes_read;
 }
 
-static size_t
-header_callback(
-        char *contents,
-        size_t size,
-        size_t nmemb,
-        void *user_data
-) {
+static size_t header_callback(char *contents, size_t size, size_t nmemb, void *user_data) {
     size_t real_size = size * nmemb;
     gtr_core_race_response_header *response_header = (gtr_core_race_response_header *) user_data;
 
@@ -218,13 +155,7 @@ header_callback(
  * @param user_data user_data
  * @return size_t
  */
-static size_t
-write_callback(
-        void *contents,
-        size_t size,
-        size_t nmemb,
-        void *user_data
-) {
+static size_t write_callback(void *contents, size_t size, size_t nmemb, void *user_data) {
     size_t real_size = size * nmemb;
     gtr_core_race_response_body *response_body = (gtr_core_race_response_body *) user_data;
 
@@ -242,8 +173,7 @@ write_callback(
     return real_size;
 }
 
-static int
-progress_callback(
+static int progress_callback(
         void *__unused p,
         curl_off_t download_total,
         curl_off_t download_now,
@@ -260,11 +190,7 @@ progress_callback(
 }
 
 //--- Core
-static void
-request(
-        gtr_core_race *core_race
-) {
-
+static void request(gtr_core_race *core_race) {
     CURL *curl_handle;
     CURLcode res;
 
@@ -275,7 +201,6 @@ request(
     }
 
     gtr_core_race_response_body response_body;
-
     {
         response_body.data = malloc(1);
         response_body.size = 0;
@@ -330,6 +255,10 @@ request(
     }
 
     {
+        gtr_core_config_speed_limit(curl_handle, core_race->speed_limit);
+    }
+
+    {
         gtr_core_config_debug(curl_handle);
     }
 
@@ -376,17 +305,9 @@ request(
 }
 
 //--- Public
-void
-gtr_core_init(const char *user_agent, void *log_callback, unsigned int cylinder_count) {
-    if (user_agent) {
-        size_t user_agent_size = strlen(user_agent) + 1;
-        global_user_agent = malloc(user_agent_size);
-        memcpy((void *) global_user_agent, user_agent, user_agent_size);
-    } else {
-        size_t user_agent_size = strlen("top.limengyu.GTR") + 1;
-        global_user_agent = malloc(user_agent_size);
-        memcpy((void *) global_user_agent, "top.limengyu.GTR", user_agent_size);
-    }
+void gtr_core_init(const char *user_agent, void *log_callback, unsigned int cylinder_count) {
+    const char *ua = user_agent ?: "top.limengyu.GTR";
+    global_user_agent = strdup(ua);
     config_log_callback(log_callback);
     curl_global_init(CURL_GLOBAL_ALL);
     gtr_core_thread_pool = thread_pool_init(cylinder_count);
@@ -396,19 +317,12 @@ gtr_core_init(const char *user_agent, void *log_callback, unsigned int cylinder_
     gtr_core_log(gtr_log_flag_info, "curl version : %s", curl_version());
 }
 
-void __unused
-gtr_core_dispose(
-        void
-) {
+void __unused gtr_core_dispose(void) {
     curl_global_cleanup();
     thread_pool_destroy(gtr_core_thread_pool);
 }
 
-void
-gtr_core_open_proxy(
-        const char *url,
-        unsigned int port
-) {
+void gtr_core_open_proxy(const char *url, unsigned int port) {
     assert(url);
     assert(port > 0);
     global_proxy = (gtr_core_proxy *) calloc(1, sizeof(gtr_core_proxy));
@@ -418,10 +332,7 @@ gtr_core_open_proxy(
     global_proxy->port = port;
 }
 
-void
-gtr_core_close_proxy(
-        void
-) {
+void gtr_core_close_proxy(void) {
     if (global_proxy) {
         if (global_proxy->url) {
             free(global_proxy->url);
@@ -430,19 +341,19 @@ gtr_core_close_proxy(
     }
 }
 
-static void
-gtr_core_go_request(
+static void gtr_core_go_request(
         unsigned int *task_id,
         gtr_core_race_type type,
         const char *url,
         const char *header,
         unsigned int time_out,
-        const void *request_data,
+        long speed_limit,
         unsigned long request_data_size,
         void *succeed_callback,
         void *failure_callback,
         const char *file_path,
-        void *progress_callback
+        void *progress_callback,
+        const void *request_data
 ) {
     gtr_core_race *core_request = (gtr_core_race *) calloc(1, sizeof(gtr_core_race));
 
@@ -495,6 +406,9 @@ gtr_core_go_request(
         core_request->time_out = time_out;
     }
     {
+        core_request->speed_limit = speed_limit;
+    }
+    {
         //call_back
         core_request->on_succeed = succeed_callback;
         core_request->on_failed = failure_callback;
@@ -512,29 +426,31 @@ gtr_core_go_request(
     thread_pool_add_work(gtr_core_thread_pool, (void *) request, core_request);
 }
 
-void
-gtr_core_add_request(
+void gtr_core_add_request(
         unsigned int *task_id,
         gtr_core_race_type type,
         const char *url,
         const char *header,
         unsigned int time_out,
-        const void *request_data,
+        long speed_limit,
         unsigned long request_data_size,
         void *succeed_callback,
-        void *failure_callback) {
+        void *failure_callback,
+        const void *request_data
+) {
     gtr_core_go_request(
             task_id,
             type,
             url,
             header,
             time_out,
-            request_data,
+            speed_limit,
             request_data_size,
             succeed_callback,
             failure_callback,
             NULL,
-            NULL);
+            NULL,
+            request_data);
 }
 
 void gtr_core_add_download_request(
@@ -543,6 +459,7 @@ void gtr_core_add_download_request(
         const char *file_path,
         const char *header,
         unsigned int time_out,
+        long speed_limit,
         void *progress_callback,
         void *succeed_callback,
         void *failure_callback
@@ -553,20 +470,17 @@ void gtr_core_add_download_request(
             url,
             header,
             time_out,
-            NULL,
+            speed_limit,
             0,
             succeed_callback,
             failure_callback,
             file_path,
-            progress_callback);
+            progress_callback,
+            NULL);
 }
 
 //---Private Config
-static void
-gtr_core_config_http_method(
-        CURL *handle,
-        gtr_core_race *request
-) {
+static void gtr_core_config_http_method(CURL *handle, gtr_core_race *request) {
     if (!request) {
         assert(request != NULL);
         return;
@@ -609,28 +523,18 @@ gtr_core_config_http_method(
     }
 }
 
-static void
-gtr_core_config_url(
-        CURL *handle,
-        const char *url
-) {
+static void gtr_core_config_url(CURL *handle, const char *url) {
     curl_easy_setopt(handle, CURLOPT_URL, url);
     curl_easy_setopt(handle, CURLOPT_TIMEOUT, 10);
     curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L);
 }
 
-static void
-gtr_core_config_accept_encoding(
-        CURL *handle
-) {
+static void gtr_core_config_accept_encoding(CURL *handle) {
     //设置CURLOPT_ACCEPT_ENCODING
     curl_easy_setopt(handle, CURLOPT_ACCEPT_ENCODING, "");
 }
 
-static void
-gtr_core_config_keep_alive(
-        CURL *handle
-) {
+static void gtr_core_config_keep_alive(CURL *handle) {
     /* enable TCP keep-alive for this transfer */
     curl_easy_setopt(handle, CURLOPT_TCP_KEEPALIVE, 1L);
     /* keep-alive idle time to 120 seconds */
@@ -639,12 +543,7 @@ gtr_core_config_keep_alive(
     curl_easy_setopt(handle, CURLOPT_TCP_KEEPINTVL, 60L);
 }
 
-static void
-gtr_core_config_headers(
-        CURL *handle,
-        const char *user_agent,
-        struct curl_slist *header
-) {
+static void gtr_core_config_headers(CURL *handle, const char *user_agent, struct curl_slist *header) {
     curl_easy_setopt(handle, CURLOPT_USERAGENT, user_agent);
     if (header) {
         CURLcode res = curl_easy_setopt(handle, CURLOPT_HTTPHEADER, header);
@@ -656,21 +555,13 @@ gtr_core_config_headers(
     }
 }
 
-static void
-gtr_core_config_verify_peer(
-        CURL *handle,
-        bool on
-) {
+static void gtr_core_config_verify_peer(CURL *handle, bool on) {
     curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, on ? 1L : 0L);
     curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, on ? 1L : 0L);
 }
 
 //TODO ETag/If_Modified_since
-static void
-gtr_core_config_time_condition(
-        CURL *handle,
-        unsigned long time
-) {
+static void gtr_core_config_time_condition(CURL *handle, unsigned long time) {
     /* January 1, 2020 is 1577833200 */
     curl_easy_setopt(handle, CURLOPT_TIMEVALUE, time);
 
@@ -678,11 +569,7 @@ gtr_core_config_time_condition(
     curl_easy_setopt(handle, CURLOPT_TIMECONDITION, CURL_TIMECOND_IFMODSINCE);
 }
 
-static void
-gtr_core_config_progress(
-        CURL *handle,
-        gtr_core_race *request
-) {
+static void gtr_core_config_progress(CURL *handle, gtr_core_race *request) {
     assert(request);
     //上传和下载才需要进度回掉方法
     switch (request->request_type) {
@@ -708,29 +595,18 @@ gtr_core_config_progress(
     }
 }
 
-static void
-gtr_core_config_time_out(
-        CURL *handle,
-        unsigned int time_out
-) {
-    long t_o = (long) (time_out > 0 ? time_out : 10L);
+static void gtr_core_config_time_out(CURL *handle, unsigned int time_out) {
+    long t_o = time_out > 0 ? time_out : 10L;
     curl_easy_setopt(handle, CURLOPT_TIMEOUT, t_o);
     curl_easy_setopt(handle, CURLOPT_CONNECTTIMEOUT, t_o);
 }
 
-static void
-gtr_core_config_signal(
-        CURL *handle,
-        bool is_on
-) {
+static void gtr_core_config_signal(CURL *handle, bool is_on) {
     long value = is_on ? 1L : 0L;
     curl_easy_setopt(handle, CURLOPT_NOSIGNAL, value);
 }
 
-static void
-gtr_core_config_proxy(
-        CURL *handle
-) {
+static void gtr_core_config_proxy(CURL *handle) {
     if (global_proxy) {
         if (strlen(global_proxy->url) > 0 && global_proxy->port > 0) {
             curl_easy_setopt(handle, CURLOPT_PROXY, global_proxy->url);
@@ -739,35 +615,28 @@ gtr_core_config_proxy(
     }
 }
 
-static void
-gtr_core_config_header_call_back(
-        CURL *handle,
-        gtr_core_race_response_header *response_header
-) {
+static void gtr_core_config_speed_limit(CURL *handle, long limit) {
+    curl_off_t _limit = limit >= 0 ?: 0;
+    curl_easy_setopt(handle, CURLOPT_MAX_RECV_SPEED_LARGE, _limit);
+}
+
+static void gtr_core_config_header_call_back(CURL *handle, gtr_core_race_response_header *response_header) {
     curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, header_callback);
     curl_easy_setopt(handle, CURLOPT_HEADERDATA, response_header);
 }
 
-static void
-gtr_core_config_write_call_back(
-        CURL *handle,
-        gtr_core_race_response_body *response_body
-) {
+static void gtr_core_config_write_call_back(CURL *handle, gtr_core_race_response_body *response_body) {
     curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, write_callback);
     curl_easy_setopt(handle, CURLOPT_WRITEDATA, response_body);
 }
 
-static void
-gtr_core_config_debug(
-        CURL *handle
-) {
+static void gtr_core_config_debug(CURL *handle) {
     curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, &debug_func);
     curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
 }
 
 //---Private Utility
-static void
-gtr_core_create_temp_dir(void) {
+static void gtr_core_create_temp_dir(void) {
     temp_directory = get_app_temp_directory();
     gtr_create_directory_if_not_exist(temp_directory);
 };

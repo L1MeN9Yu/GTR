@@ -63,8 +63,8 @@ gtr_core_close_proxy(
  * @param succeed_callback 请求成功回调函数
  * @param failure_callback 请求失败回调函数
  */
-void gtr_core_add_request(unsigned int *task_id, gtr_core_race_type type, const char *url, const char *header, unsigned int time_out, const void *request_data, unsigned long request_data_size, void *succeed_callback, void *failure_callback);
+void gtr_core_add_request(unsigned int *task_id, gtr_core_race_type type, const char *url, const char *header, unsigned int time_out, long speed_limit, unsigned long request_data_size, void *succeed_callback, void *failure_callback, const void *request_data);
 
-void gtr_core_add_download_request(unsigned int *task_id, const char *url, const char *file_path, const char *header, unsigned int time_out, void *progress_callback, void *succeed_callback, void *failure_callback);
+void gtr_core_add_download_request(unsigned int *task_id, const char *url, const char *file_path, const char *header, unsigned int time_out, long speed_limit, void *progress_callback, void *succeed_callback, void *failure_callback);
 
 #endif /* gtr_core_h */

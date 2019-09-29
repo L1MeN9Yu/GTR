@@ -61,22 +61,18 @@ void gtr_proxy(bool enable, const char *url, unsigned int port) {
 }
 
 //---------- Get请求
-void gtr_get(
-        unsigned *task_id,
-        const char *url,
-        const char *headers,
-        unsigned int time_out
-) {
+void gtr_get(unsigned *task_id, const char *url, const char *headers, unsigned int time_out, long speed_limit) {
     gtr_core_add_request(
             task_id,
             gtr_core_request_type_get,
             url,
             headers,
             time_out,
-            NULL,
+            speed_limit,
             0,
             &on_http_get_request_succeed,
-            &on_http_get_request_failure);
+            &on_http_get_request_failure,
+            NULL);
 }
 //----------
 
@@ -86,6 +82,7 @@ void gtr_post(
         const char *url,
         const char *headers,
         unsigned int time_out,
+        long speed_limit,
         const void *param_data,
         unsigned long param_size
 ) {
@@ -95,10 +92,11 @@ void gtr_post(
             url,
             headers,
             time_out,
-            param_data,
+            speed_limit,
             param_size,
             &on_http_post_request_succeed,
-            &on_http_post_request_failure);
+            &on_http_post_request_failure,
+            param_data);
 }
 //----------
 
@@ -108,6 +106,7 @@ void gtr_put(
         const char *url,
         const char *headers,
         unsigned int time_out,
+        long speed_limit,
         const void *param_data,
         unsigned long param_size
 ) {
@@ -117,16 +116,32 @@ void gtr_put(
             url,
             headers,
             time_out,
-            param_data,
+            speed_limit,
             param_size,
             &on_http_put_request_succeed,
-            &on_http_put_request_failure
-    );
+            &on_http_put_request_failure,
+            param_data);
 }
 
 //---------- 下载文件
-extern void gtr_download(unsigned int *task_id, const char *url, const char *file_path, const char *headers, unsigned int time_out) {
-    gtr_core_add_download_request(task_id, url, file_path, headers, time_out, &on_http_download_file_progress, &on_http_download_file_success, &on_http_download_failure);
+extern void gtr_download(
+        unsigned int *task_id,
+        const char *url,
+        const char *file_path,
+        const char *headers,
+        unsigned int time_out,
+        long speed_limit
+) {
+    gtr_core_add_download_request(
+            task_id,
+            url,
+            file_path,
+            headers,
+            time_out,
+            speed_limit,
+            &on_http_download_file_progress,
+            &on_http_download_file_success,
+            &on_http_download_failure);
 }
 
 //---------- 取消请求

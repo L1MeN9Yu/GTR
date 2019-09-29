@@ -30,6 +30,7 @@ func request(method: Method = .get,
              contentType: ContentType = .json,
              headers: [String: Encodable]? = nil,
              timeOut: UInt32,
+             speedLimit: Int,
              param: [String: Any]? = nil,
              downloadPath: String? = nil,
              progress: ((_ now: UInt64, _ total: UInt64) -> Void)? = nil,
@@ -37,15 +38,11 @@ func request(method: Method = .get,
     var allHeaders = contentType.toHeader()
 
     if let globalHeader = __driver?.identity() {
-        allHeaders.merge(globalHeader) { (value_old: Encodable, value_new: Encodable) -> Encodable in
-            value_new
-        }
+        allHeaders.merge(globalHeader) { (value_old: Encodable, value_new: Encodable) -> Encodable in value_new }
     }
 
     if let h = headers {
-        allHeaders.merge(h) { (value_old: Encodable, value_new: Encodable) -> Encodable in
-            value_new
-        }
+        allHeaders.merge(h) { (value_old: Encodable, value_new: Encodable) -> Encodable in value_new }
     }
 
     return __engine.request(
@@ -54,6 +51,7 @@ func request(method: Method = .get,
             headers: allHeaders,
             contentType: contentType,
             timeOut: timeOut,
+            speedLimit: speedLimit,
             param: param,
             downloadPath: downloadPath,
             progress: progress,

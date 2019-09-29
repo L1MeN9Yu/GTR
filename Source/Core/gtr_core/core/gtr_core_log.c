@@ -11,18 +11,11 @@
 
 void (*global_gtr_core_log_callback)(unsigned int flag, char *log_message);
 
-void
-config_log_callback(
-        void *log_callback
-) {
+void config_log_callback(void *log_callback) {
     global_gtr_core_log_callback = log_callback;
 }
 
-void
-gtr_core_log(
-        gtr_log_flag flag,
-        const char *format, ...
-) {
+void gtr_core_log(gtr_log_flag flag, const char *format, ...) {
     if (global_gtr_core_log_callback) {
         static char buffer[LOG_MAX_BUF_SIZE];
         va_list args;

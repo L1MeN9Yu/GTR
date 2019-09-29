@@ -6,9 +6,13 @@
 #include "gtr_ios_utility.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 char *get_app_temp_directory(void) {
     char *env_temp_dir = getenv("TMPDIR");
+    if (!env_temp_dir) {
+        env_temp_dir = P_tmpdir;
+    }
     const char *temp_dir_name = "/gtr_temp";
     char *temp_dir = malloc(sizeof(char) * (strlen(env_temp_dir) + strlen(temp_dir_name) + 1));
     strcpy(temp_dir, env_temp_dir);

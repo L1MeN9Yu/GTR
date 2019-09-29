@@ -36,28 +36,30 @@ extension Engine {
                  headers: [String: Encodable]? = nil,
                  contentType: ContentType = .json,
                  timeOut: UInt32,
+                 speedLimit: Int,
                  param: [String: Any]? = nil,
                  downloadPath: String? = nil,
                  progress: GTRProgressClosure? = nil,
                  succeed: GTRSucceedClosure?,
                  failure: GTRFailureClosure?) -> UInt32 {
+
         switch httpMethod {
         case .get:
-            return self.getRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, succeed: succeed, failure: failure)
+            return self.getRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, succeed: succeed, failure: failure)
         case .post:
-            return self.postRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, param: param, succeed: succeed, failure: failure)
+            return self.postRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, succeed: succeed, failure: failure)
         case .put:
-            return self.putRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, param: param, succeed: succeed, failure: failure)
+            return self.putRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, succeed: succeed, failure: failure)
         case .download:
             guard let downloadPath = downloadPath else { fatalError("must use download path") }
-            return self.downloadRequest(url: url, filePath: downloadPath, headers: headers, contentType: contentType, timeOut: timeOut, progress: progress, succeed: succeed, failure: failure)
+            return self.downloadRequest(url: url, filePath: downloadPath, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, progress: progress, succeed: succeed, failure: failure)
         case .upload:
             //TODO
             fatalError("not implement yet")
         }
     }
 
-    // MARK: Config
+// MARK: Config
     func config(httpHeaderClosure: GTRHttpHeaderClosure?) {
         self.httpHeaderClosure = httpHeaderClosure
     }
@@ -65,6 +67,7 @@ extension Engine {
     func config(responseQueue: DispatchQueue) {
         self.responseQueue = responseQueue
     }
+
 }
 
 // MARK: - FilePrivate
@@ -89,12 +92,13 @@ extension Engine {
                             headers: [String: Encodable]? = nil,
                             contentType: ContentType = .json,
                             timeOut: UInt32,
+                            speedLimit: Int,
                             succeed: GTRSucceedClosure?,
                             failure: GTRFailureClosure?) -> UInt32 {
         var taskID: CUnsignedInt = 0
         let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
 
-        c_gtr_get(&taskID, url.cString(using: .utf8), cHeaders, timeOut)
+        c_gtr_get(&taskID, url.cString(using: .utf8), cHeaders, timeOut, speedLimit)
 
         self.rwLock.withWriterLock { () -> Void in
             self.succeedContainer[taskID] = succeed
@@ -108,6 +112,7 @@ extension Engine {
                              headers: [String: Encodable]? = nil,
                              contentType: ContentType = .json,
                              timeOut: UInt32,
+                             speedLimit: Int,
                              param: [String: Any]? = nil,
                              succeed: GTRSucceedClosure?,
                              failure: GTRFailureClosure?) -> UInt32 {
@@ -140,8 +145,7 @@ extension Engine {
             }
         }
 
-        c_gtr_post(&taskID, url.cString(using: .utf8),
-                cHeaders, timeOut, c_param, c_param_size)
+        c_gtr_post(&taskID, url.cString(using: .utf8), cHeaders, timeOut, speedLimit, c_param, c_param_size)
 
         self.rwLock.withWriterLock { () -> Void in
             self.succeedContainer[taskID] = succeed
@@ -155,6 +159,7 @@ extension Engine {
                             headers: [String: Encodable]? = nil,
                             contentType: ContentType = .json,
                             timeOut: UInt32,
+                            speedLimit: Int,
                             param: [String: Any]? = nil,
                             succeed: GTRSucceedClosure?,
                             failure: GTRFailureClosure?) -> UInt32 {
@@ -165,11 +170,11 @@ extension Engine {
         var c_param_size: CUnsignedLong = 0
         if let `param` = param, let data = param.toData() {
             c_param = data.withUnsafePointer { unsafePointer -> UnsafeRawPointer in
-                return UnsafeRawPointer(unsafePointer)
+                UnsafeRawPointer(unsafePointer)
             }
             c_param_size = CUnsignedLong(data.count)
         }
-        c_gtr_put(&taskID, url.cString(using: .utf8), cHeaders, timeOut, c_param, c_param_size)
+        c_gtr_put(&taskID, url.cString(using: .utf8), cHeaders, timeOut, speedLimit, c_param, c_param_size)
 
         self.rwLock.withWriterLock { () -> Void in
             self.succeedContainer[taskID] = succeed
@@ -184,12 +189,13 @@ extension Engine {
                                  headers: [String: Encodable]? = nil,
                                  contentType: ContentType = .json,
                                  timeOut: UInt32,
+                                 speedLimit: Int,
                                  progress: GTRProgressClosure?,
                                  succeed: GTRSucceedClosure?,
                                  failure: GTRFailureClosure?) -> UInt32 {
         var taskID: CUnsignedInt = 0
         let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
-        c_gtr_download(&taskID, url.cString(using: .utf8), filePath.cString(using: .utf8), cHeaders, timeOut)
+        c_gtr_download(&taskID, url.cString(using: .utf8), filePath.cString(using: .utf8), cHeaders, timeOut, speedLimit)
         return taskID
     }
 
@@ -198,7 +204,7 @@ extension Engine {
         var allHeaders = self.httpHeaderClosure?() ?? [String: Encodable]()
         if let additionHeader = headers {
             allHeaders.merge(additionHeader) { (value1: Encodable, value2: Encodable) -> Encodable in
-                return value2
+                value2
             }
         }
         let headerString = allHeaders.jsonStringEncoded()?.replacingOccurrences(of: "\\/", with: "/")
@@ -213,7 +219,7 @@ extension Engine {
                                      method: Method) {
         let center = NotificationCenter.default
         let notificationName = status.notificationName
-        var userInfo: [String: Any] = [
+        let userInfo: [String: Any] = [
             Notification.userInfoTaskIDKey: taskID,
             Notification.userInfoMethodKey: method
         ]
@@ -226,16 +232,23 @@ extension Engine {
 private func c_gtr_init(_ user_agent: UnsafePointer<Int8>?, _ cylinder_count: UInt32)
 
 @_silgen_name("gtr_get")
-private func c_gtr_get(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32)
+private func c_gtr_get(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?,
+                       _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ speed_limit: Int)
 
 @_silgen_name("gtr_post")
-private func c_gtr_post(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ param_data: UnsafeRawPointer?, _ param_size: UInt)
+private func c_gtr_post(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?,
+                        _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ speed_limit: Int,
+                        _ param_data: UnsafeRawPointer?, _ param_size: UInt)
 
 @_silgen_name("gtr_put")
-private func c_gtr_put(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ param_data: UnsafeRawPointer?, _ param_size: UInt)
+private func c_gtr_put(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?,
+                       _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ speed_limit: Int,
+                       _ param_data: UnsafeRawPointer?, _ param_size: UInt)
 
 @_silgen_name("gtr_download")
-private func c_gtr_download(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?, _ filePath: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?, _ time_out: UInt32)
+private func c_gtr_download(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?,
+                            _ filePath: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?,
+                            _ time_out: UInt32, _ speed_limit: Int)
 
 // MARK: - C CallBack
 

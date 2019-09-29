@@ -110,13 +110,16 @@ extension ViewController {
 
 extension ViewController: Driver {
     public static var identity: () -> [String: Encodable]? {
-        return {
-            ["Access-Token": "000347174c.db8743c66094ff2964a2b4b6791cf5db"]
+        {
+            [
+                "Author": "L1MeN9Yu",
+                "email": "baal998.mophisto@gmail.com",
+            ]
         }
     }
     public static var userAgent: () -> String? {
-        return {
-            "GTRDemo/1.0.0"
+        {
+            nil
         }
     }
 }

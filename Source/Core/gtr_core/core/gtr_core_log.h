@@ -12,18 +12,11 @@ typedef enum {
     gtr_log_flag_info,
     gtr_log_flag_warning,
     gtr_log_flag_error,
-    gtr_log_flag_critical_error
+    gtr_log_flag_critical
 } gtr_log_flag;
 
-void
-config_log_callback(
-        void *log_callback
-);
+void config_log_callback(void *log_callback);
 
-void
-gtr_core_log(
-        gtr_log_flag flag,
-        const char *format, ...
-);
+void gtr_core_log(gtr_log_flag flag, const char *format, ...);
 
 #endif //GTR_CORE_LOG_H

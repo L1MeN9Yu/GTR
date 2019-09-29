@@ -32,7 +32,7 @@ extern void gtr_proxy(bool enable, const char *url, unsigned int port);
  * @param headers 请求的Header
  * @param time_out 请求的超时时间
  */
-extern void gtr_get(unsigned int *task_id, const char *url, const char *headers, unsigned int time_out);
+extern void gtr_get(unsigned *task_id, const char *url, const char *headers, unsigned int time_out, long speed_limit);
 
 /**
  * 发起POST请求
@@ -43,7 +43,7 @@ extern void gtr_get(unsigned int *task_id, const char *url, const char *headers,
  * @param param_data 请求体的数据
  * @param param_size 请求体的数据大小
  */
-extern void gtr_post(unsigned int *task_id, const char *url, const char *headers, unsigned int time_out, const void *param_data, unsigned long param_size);
+extern void gtr_post(unsigned int *task_id, const char *url, const char *headers, unsigned int time_out, long speed_limit, const void *param_data, unsigned long param_size);
 
 /**
  * 发起PUT请求
@@ -54,17 +54,17 @@ extern void gtr_post(unsigned int *task_id, const char *url, const char *headers
  * @param param_data 请求体的数据
  * @param param_size 请求体的数据大小
  */
-extern void gtr_put(unsigned int *task_id, const char *url, const char *headers, unsigned int time_out, const void *param_data, unsigned long param_size);
+extern void gtr_put(unsigned int *task_id, const char *url, const char *headers, unsigned int time_out, long speed_limit, const void *param_data, unsigned long param_size);
 
 /**
  * 发起下载请求
  * @param task_id 任务id
  * @param url 请求地址
- * @param filePath 下载到本地的路径
+ * @param file_path 下载到本地的路径
  * @param headers 请求的Header
  * @param time_out 请求的超时时间
  */
-extern void gtr_download(unsigned int *task_id, const char *url, const char *filePath, const char *headers, unsigned int time_out);
+extern void gtr_download(unsigned int *task_id, const char *url, const char *file_path, const char *headers, unsigned int time_out, long speed_limit);
 
 /**
  * 取消请求

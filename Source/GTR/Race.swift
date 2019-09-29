@@ -8,6 +8,7 @@ import Foundation
 public protocol Race {
     var url: String { get }
     var timeout: UInt32 { get }
+    var speedLimit: Int { get }
     var headers: [String: Encodable]? { get }
     var method: Method { get }
     var contentType: ContentType { get }
@@ -15,25 +16,17 @@ public protocol Race {
 }
 
 extension Race {
-    public var timeout: UInt32 {
-        return 10
-    }
+    public var timeout: UInt32 { 10 }
 
-    public var headers: [String: Encodable]? {
-        return nil
-    }
+    public var speedLimit: Int { 0 }
 
-    public var method: Method {
-        return .get
-    }
+    public var headers: [String: Encodable]? { nil }
 
-    public var contentType:ContentType {
-        return .json
-    }
+    public var method: Method { .get }
 
-    public var parameters: [String: Encodable]? {
-        return nil
-    }
+    public var contentType: ContentType { .json }
+
+    public var parameters: [String: Encodable]? { nil }
 }
 
 public protocol LongDistanceRace: Race {
@@ -42,16 +35,16 @@ public protocol LongDistanceRace: Race {
 }
 
 extension LongDistanceRace {
-    public var progress: ((UInt64, UInt64) -> Void)? { return nil }
+    public var progress: ((UInt64, UInt64) -> Void)? { nil }
 }
 
 public func race(race: Race, complete: @escaping (Result)) -> UInt32 {
-    return request(
-            method: race.method,
+    request(method: race.method,
             url: race.url,
             contentType: race.contentType,
             headers: race.headers,
             timeOut: race.timeout,
+            speedLimit: race.speedLimit,
             param: race.parameters,
             complete: complete)
 }
@@ -64,6 +57,7 @@ public func longDistanceRace(race: LongDistanceRace, complete: @escaping (Result
             contentType: race.contentType,
             headers: race.headers,
             timeOut: race.timeout,
+            speedLimit: race.speedLimit,
             param: race.parameters,
             downloadPath: race.filePath,
             progress: race.progress,
