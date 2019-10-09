@@ -59,7 +59,8 @@ func request(method: Method = .get,
                 complete?(Destination.win(httpHeader: header, responseData: data))
             },
             failure: { (httpResponseCode, errorCode, errorMessage) in
-                complete?(Destination.lose(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage))
+                let error = RaceError(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
+                complete?(Destination.lose(error))
                 notifyFailure(url: url, headers: allHeaders, contentType: contentType, param: param, httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
             })
 }

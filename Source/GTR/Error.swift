@@ -5,6 +5,6 @@
 
 import Foundation
 
-public enum GTRError: Error {
-    case raceFailed(httpResponseCode: Int, errorCode: Int32, errorMessage: String)
+public struct RaceError: Error {
+    let httpResponseCode: Int, errorCode: Int32, errorMessage: String
 }

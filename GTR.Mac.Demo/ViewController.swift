@@ -54,7 +54,7 @@ extension ViewController {
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
                 }
-            case .lose(_, _, _):
+            case .lose(let error):
                 break
             }
         }
@@ -68,7 +68,7 @@ extension ViewController {
                     print("succeed : \(string)")
                     print("\(header)")
                 }
-            case .lose(_, _, _):
+            case .lose(let error):
                 break
             }
         }

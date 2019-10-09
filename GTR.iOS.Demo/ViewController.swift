@@ -71,7 +71,7 @@ extension ViewController {
                     print("succeed : \(string)")
                 }
                 break
-            case .lose(let httpResponseCode, let errorCode, let errorMessage):
+            case .lose(let error):
                 break
             }
         }
@@ -88,7 +88,7 @@ extension ViewController {
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
                 }
-            case .lose(let httpResponseCode, let errorCode, let errorMessage):
+            case .lose(let error):
                 break
             }
         }
@@ -101,7 +101,7 @@ extension ViewController {
             switch destination {
             case .win(let responseData):
                 return
-            case .lose(let httpResponseCode, let errorCode, let errorMessage):
+            case .lose(let error):
                 return
             }
         })
