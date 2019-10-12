@@ -8,3 +8,13 @@ import Foundation
 public struct RaceError: Error {
     let httpResponseCode: Int, errorCode: Int32, errorMessage: String
 }
+
+extension RaceError: CustomStringConvertible {
+    public var description: String {
+        """
+        http code : \(httpResponseCode)
+        error code : \(errorCode)
+        message : \(errorMessage)
+        """
+    }
+}

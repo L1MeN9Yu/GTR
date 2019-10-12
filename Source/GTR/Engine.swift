@@ -212,19 +212,6 @@ extension Engine {
 
         return string
     }
-
-    // MARK: 发送通知
-    private func notifyRequestStatus(status: Notification.RequestStatusType,
-                                     taskID: UInt32,
-                                     method: Method) {
-        let center = NotificationCenter.default
-        let notificationName = status.notificationName
-        let userInfo: [String: Any] = [
-            Notification.userInfoTaskIDKey: taskID,
-            Notification.userInfoMethodKey: method
-        ]
-        center.post(name: notificationName, object: nil, userInfo: userInfo)
-    }
 }
 
 // MARK: - C Bridge

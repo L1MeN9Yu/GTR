@@ -15,11 +15,6 @@ private(set) var __engine = { () -> Engine in
     return engine
 }()
 
-private(set) var __hud = { () -> HUD in
-    let hud = HUD()
-    return hud
-}()
-
 private var __driver: Driver.Type?
 
 private var __horn: Horn.Type?

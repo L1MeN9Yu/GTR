@@ -56,8 +56,6 @@
 		1014445522FAA52500275DA2 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A324D196A2CEAE3D76E8 /* Method.swift */; };
 		1014445622FAA52500275DA2 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */; };
 		1014445722FAA52500275DA2 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A93504887D10507AE9FE /* Destination.swift */; };
-		1014445822FAA52500275DA2 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA45760ED5D528DC4C1B /* HUD.swift */; };
-		1014445922FAA52500275DA2 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */; };
 		1014445A22FAA52500275DA2 /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* Race.swift */; };
 		1014445B22FAA52500275DA2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* Error.swift */; };
 		1014445C22FAA52500275DA2 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A117D2CF190520B48B58 /* Lock.swift */; };
@@ -103,8 +101,6 @@
 		B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
 		B2D2AD1D4E3244C26C3CE5F6 /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */; };
 		B2D2AE01135DAC924C77BADE /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* Race.swift */; };
-		B2D2AE1FFACBE0355A3E8B1C /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA45760ED5D528DC4C1B /* HUD.swift */; };
-		B2D2AE3EAD1474BCA6B825D2 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */; };
 		B2D2AE62EF367FC4B8BC5DAB /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A403CABF212B9D28F286 /* HttpHeader.swift */; };
 		B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA86DA38062600F6345F /* gtr_core_log.c */; };
 		B2D2AF6943F995C6E1364374 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */; };
@@ -214,8 +210,6 @@
 		B2D2A97607A814FF3E6C113B /* gtr_core_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_log.h; sourceTree = "<group>"; };
 		B2D2A99333109680AB041F1C /* gtr_ios_utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_ios_utility.h; sourceTree = "<group>"; };
 		B2D2A9FAAA09E1B0C76D2851 /* BrotliDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrotliDemo.swift; sourceTree = "<group>"; };
-		B2D2AA45760ED5D528DC4C1B /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
-		B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		B2D2AA86DA38062600F6345F /* gtr_core_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_log.c; sourceTree = "<group>"; };
 		B2D2ABDE7CA1FFE3D5E6528B /* URLSessionDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDemo.swift; sourceTree = "<group>"; };
 		B2D2ACA7D124F6573FF09579 /* GTR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTR.h; sourceTree = "<group>"; };
@@ -475,8 +469,6 @@
 				B2D2A324D196A2CEAE3D76E8 /* Method.swift */,
 				B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */,
 				B2D2A93504887D10507AE9FE /* Destination.swift */,
-				B2D2AA45760ED5D528DC4C1B /* HUD.swift */,
-				B2D2AA4F6CFEE54E5F48DC8E /* Notification.swift */,
 				B2D2A3F728E82ED3509187B1 /* Race.swift */,
 				B2D2A3AB95F258E1382B16AE /* Error.swift */,
 				B2D2A117D2CF190520B48B58 /* Lock.swift */,
@@ -731,7 +723,6 @@
 				1014444D22FAA50E00275DA2 /* gtr_atomic.c in Sources */,
 				101CBC7222FC59D40006A9ED /* HttpHeader.swift in Sources */,
 				1014444422FAA50600275DA2 /* gtr_core_proxy.c in Sources */,
-				1014445922FAA52500275DA2 /* Notification.swift in Sources */,
 				1014444C22FAA50E00275DA2 /* gtr_thread_pool.c in Sources */,
 				1014445C22FAA52500275DA2 /* Lock.swift in Sources */,
 				1014445222FAA52500275DA2 /* Horn.swift in Sources */,
@@ -745,7 +736,6 @@
 				1014444622FAA50600275DA2 /* gtr_core_log.c in Sources */,
 				101CBC7322FC59D40006A9ED /* Coder.swift in Sources */,
 				1014445322FAA52500275DA2 /* Engine.swift in Sources */,
-				1014445822FAA52500275DA2 /* HUD.swift in Sources */,
 				1014443922FAA4EA00275DA2 /* Dictionary.NetworkJSON.swift in Sources */,
 				1014444222FAA50600275DA2 /* gtr_core_header_helper.c in Sources */,
 			);
@@ -774,8 +764,6 @@
 				B2D2A74AE57967404805704F /* Method.swift in Sources */,
 				B2D2A6A3E200D7095DD39717 /* ContentType.swift in Sources */,
 				B2D2AF89CE011EDD0F488B36 /* Destination.swift in Sources */,
-				B2D2AE1FFACBE0355A3E8B1C /* HUD.swift in Sources */,
-				B2D2AE3EAD1474BCA6B825D2 /* Notification.swift in Sources */,
 				B2D2AE01135DAC924C77BADE /* Race.swift in Sources */,
 				B2D2AD1D4E3244C26C3CE5F6 /* Data.UnsafePointer.swift in Sources */,
 				1014444F22FAA52000275DA2 /* Error.swift in Sources */,

@@ -183,7 +183,7 @@ static int progress_callback(
     gtr_core_log(
             gtr_log_flag_debug,
             "UP: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
-            "  DOWN: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
+            "DOWN: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T
             "\r\n",
             upload_now, upload_total, download_now, download_total);
     return 0;
@@ -313,8 +313,14 @@ void gtr_core_init(const char *user_agent, void *log_callback, unsigned int cyli
     gtr_core_thread_pool = thread_pool_init(cylinder_count);
     thread_pool_wait(gtr_core_thread_pool);
     gtr_core_create_temp_dir();
-    gtr_core_log(gtr_log_flag_info, "gtr : global_user_agent = %s", global_user_agent);
-    gtr_core_log(gtr_log_flag_info, "curl version : %s", curl_version());
+    gtr_core_log(
+            gtr_log_flag_trace,
+            "GTR start succeed !!!\n"
+            "global_user_agent = %s\n"
+            "curl version : %s",
+            global_user_agent,
+            curl_version()
+    );
 }
 
 void __unused gtr_core_dispose(void) {
