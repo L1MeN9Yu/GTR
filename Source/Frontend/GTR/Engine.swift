@@ -13,8 +13,7 @@ typealias GTRHttpHeaderClosure = () -> [Swift.String: Swift.String]
 final class Engine {
     private(set) var responseQueue = DispatchQueue.main
     private(set) var notificationQueue = DispatchQueue.main
-    private(set) var succeedContainer: [Swift.UInt32: GTRSucceedClosure?] = [Swift.UInt32: GTRSucceedClosure?]()
-    private(set) var failureContainer: [Swift.UInt32: GTRFailureClosure?] = [Swift.UInt32: GTRFailureClosure?]()
+    private(set) var completionContainer = [Swift.CUnsignedInt: GTR.Result?]()
     private(set) var downloadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
     private(set) var uploadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
 
@@ -23,43 +22,16 @@ final class Engine {
     fileprivate let rwLock = ReadWriteLock()
 }
 
-// MARK: - Internal
+// MARK: - Fire
 extension Engine {
     func fire(engineNumber: String? = nil, cylinderCount: UInt32) {
         c_gtr_init(engineNumber?.cString(using: .utf8), cylinderCount)
     }
+}
 
-    // MARK: Request
-    @discardableResult
-    func request(httpMethod: Method,
-                 url: String,
-                 headers: [String: Encodable]? = nil,
-                 contentType: ContentType = .json,
-                 timeOut: UInt32,
-                 speedLimit: Int,
-                 param: [String: Any]? = nil,
-                 downloadPath: String? = nil,
-                 progress: GTRProgressClosure? = nil,
-                 succeed: GTRSucceedClosure?,
-                 failure: GTRFailureClosure?) -> UInt32 {
+// MARK: - Config
 
-        switch httpMethod {
-        case .get:
-            return self.getRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, succeed: succeed, failure: failure)
-        case .post:
-            return self.postRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, succeed: succeed, failure: failure)
-        case .put:
-            return self.putRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, succeed: succeed, failure: failure)
-        case .download:
-            guard let downloadPath = downloadPath else { fatalError("must use download path") }
-            return self.downloadRequest(url: url, filePath: downloadPath, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, progress: progress, succeed: succeed, failure: failure)
-        case .upload:
-            //TODO
-            fatalError("not implement yet")
-        }
-    }
-
-// MARK: Config
+extension Engine {
     func config(httpHeaderClosure: GTRHttpHeaderClosure?) {
         self.httpHeaderClosure = httpHeaderClosure
     }
@@ -67,55 +39,35 @@ extension Engine {
     func config(responseQueue: DispatchQueue) {
         self.responseQueue = responseQueue
     }
-
 }
 
-// MARK: - FilePrivate
+// MARK: - Request
 extension Engine {
-    fileprivate func cleanResponseHandler(taskID: UInt32) {
-        self.succeedContainer.removeValue(forKey: taskID)
-        self.failureContainer.removeValue(forKey: taskID)
-    }
-
-    fileprivate func cleanDownloadProgress(taskID: UInt32) {
-        self.downloadProgressContainer.removeValue(forKey: taskID)
-    }
-
-    fileprivate func cleanUploadProgress(taskID: UInt32) {
-        self.uploadProgressContainer.removeValue(forKey: taskID)
-    }
-}
-
-// MARK: - Private
-extension Engine {
-    private func getRequest(url: String,
-                            headers: [String: Encodable]? = nil,
-                            contentType: ContentType = .json,
-                            timeOut: UInt32,
-                            speedLimit: Int,
-                            succeed: GTRSucceedClosure?,
-                            failure: GTRFailureClosure?) -> UInt32 {
+    func getRequest(url: String,
+                    headers: [String: Encodable]? = nil,
+                    contentType: ContentType = .json,
+                    timeOut: UInt32,
+                    speedLimit: Int,
+                    completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
         let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
 
         c_gtr_get(&taskID, url.cString(using: .utf8), cHeaders, timeOut, speedLimit)
 
         self.rwLock.withWriterLock { () -> Void in
-            self.succeedContainer[taskID] = succeed
-            self.failureContainer[taskID] = failure
+            self.completionContainer[taskID] = completion
         }
 
         return taskID
     }
 
-    private func postRequest(url: String,
-                             headers: [String: Encodable]? = nil,
-                             contentType: ContentType = .json,
-                             timeOut: UInt32,
-                             speedLimit: Int,
-                             param: [String: Any]? = nil,
-                             succeed: GTRSucceedClosure?,
-                             failure: GTRFailureClosure?) -> UInt32 {
+    func postRequest(url: String,
+                     headers: [String: Encodable]? = nil,
+                     contentType: ContentType = .json,
+                     timeOut: UInt32,
+                     speedLimit: Int,
+                     param: [String: Any]? = nil,
+                     completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
         let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
 
@@ -148,21 +100,19 @@ extension Engine {
         c_gtr_post(&taskID, url.cString(using: .utf8), cHeaders, timeOut, speedLimit, c_param, c_param_size)
 
         self.rwLock.withWriterLock { () -> Void in
-            self.succeedContainer[taskID] = succeed
-            self.failureContainer[taskID] = failure
+            self.completionContainer[taskID] = completion
         }
 
         return taskID
     }
 
-    private func putRequest(url: String,
-                            headers: [String: Encodable]? = nil,
-                            contentType: ContentType = .json,
-                            timeOut: UInt32,
-                            speedLimit: Int,
-                            param: [String: Any]? = nil,
-                            succeed: GTRSucceedClosure?,
-                            failure: GTRFailureClosure?) -> UInt32 {
+    func putRequest(url: String,
+                    headers: [String: Encodable]? = nil,
+                    contentType: ContentType = .json,
+                    timeOut: UInt32,
+                    speedLimit: Int,
+                    param: [String: Any]? = nil,
+                    completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
         let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
 
@@ -177,28 +127,29 @@ extension Engine {
         c_gtr_put(&taskID, url.cString(using: .utf8), cHeaders, timeOut, speedLimit, c_param, c_param_size)
 
         self.rwLock.withWriterLock { () -> Void in
-            self.succeedContainer[taskID] = succeed
-            self.failureContainer[taskID] = failure
+            self.completionContainer[taskID] = completion
         }
 
         return taskID
     }
 
-    private func downloadRequest(url: String,
-                                 filePath: String,
-                                 headers: [String: Encodable]? = nil,
-                                 contentType: ContentType = .json,
-                                 timeOut: UInt32,
-                                 speedLimit: Int,
-                                 progress: GTRProgressClosure?,
-                                 succeed: GTRSucceedClosure?,
-                                 failure: GTRFailureClosure?) -> UInt32 {
+    func downloadRequest(url: String,
+                         filePath: String,
+                         headers: [String: Encodable]? = nil,
+                         contentType: ContentType = .json,
+                         timeOut: UInt32,
+                         speedLimit: Int,
+                         progress: GTRProgressClosure?,
+                         completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
         let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
         c_gtr_download(&taskID, url.cString(using: .utf8), filePath.cString(using: .utf8), cHeaders, timeOut, speedLimit)
         return taskID
     }
+}
 
+// MARK: - Private
+extension Engine {
     ///构建Headers
     private func generateHeaderString(headers: [String: Encodable]? = nil) -> [CChar]? {
         var allHeaders = self.httpHeaderClosure?() ?? [String: Encodable]()
@@ -211,6 +162,21 @@ extension Engine {
         let string = headerString?.cString(using: .utf8)
 
         return string
+    }
+}
+
+// MARK: - FilePrivate
+extension Engine {
+    fileprivate func cleanResponseHandler(taskID: UInt32) {
+        self.completionContainer.removeValue(forKey: taskID)
+    }
+
+    fileprivate func cleanDownloadProgress(taskID: UInt32) {
+        self.downloadProgressContainer.removeValue(forKey: taskID)
+    }
+
+    fileprivate func cleanUploadProgress(taskID: UInt32) {
+        self.uploadProgressContainer.removeValue(forKey: taskID)
     }
 }
 
@@ -251,7 +217,7 @@ func c_get_request_succeed(task_id: CUnsignedInt,
     let bodyData = Data(bytes: c_body_data, count: Int(c_body_data_size))
 
     __engine.rwLock.lockRead()
-    let succeed = __engine.succeedContainer[task_id]
+    let result = __engine.completionContainer[task_id]
     __engine.rwLock.unlock()
 
     __engine.rwLock.lockWrite()
@@ -259,7 +225,7 @@ func c_get_request_succeed(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        succeed??(header, bodyData)
+        result??(Destination.win(httpHeader: header, responseData: bodyData))
     }
 }
 
@@ -269,7 +235,7 @@ func c_get_request_failure(task_id: CUnsignedInt,
                            error_code: CInt,
                            error_message: UnsafePointer<CChar>) {
     __engine.rwLock.lockRead()
-    let failure = __engine.failureContainer[task_id]
+    let result = __engine.completionContainer[task_id]
     __engine.rwLock.unlock()
 
     __engine.rwLock.lockWrite()
@@ -277,7 +243,7 @@ func c_get_request_failure(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
+        result??(Destination.lose(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
     }
 }
 
@@ -293,7 +259,7 @@ func c_post_request_succeed(task_id: CUnsignedInt,
     let bodyData = Data(bytes: c_body_data, count: Int(c_body_data_size))
 
     __engine.rwLock.lockRead()
-    let succeed = __engine.succeedContainer[task_id]
+    let result = __engine.completionContainer[task_id]
     __engine.rwLock.unlock()
 
     __engine.rwLock.lockWrite()
@@ -301,7 +267,7 @@ func c_post_request_succeed(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        succeed??(header, bodyData)
+        result??(Destination.win(httpHeader: header, responseData: bodyData))
     }
 }
 
@@ -311,7 +277,7 @@ func c_post_request_failure(task_id: CUnsignedInt,
                             error_code: CInt,
                             error_message: UnsafePointer<CChar>) {
     __engine.rwLock.lockRead()
-    let failure = __engine.failureContainer[task_id]
+    let result = __engine.completionContainer[task_id]
     __engine.rwLock.unlock()
 
     __engine.rwLock.lockWrite()
@@ -319,7 +285,7 @@ func c_post_request_failure(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
+        result??(Destination.lose(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
     }
 }
 
@@ -335,7 +301,7 @@ func c_put_request_succeed(task_id: CUnsignedInt,
     let bodyData = Data(bytes: c_body_data, count: Int(c_body_data_size))
 
     __engine.rwLock.lockRead()
-    let succeed = __engine.succeedContainer[task_id]
+    let result = __engine.completionContainer[task_id]
     __engine.rwLock.unlock()
 
     __engine.rwLock.lockWrite()
@@ -343,7 +309,7 @@ func c_put_request_succeed(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        succeed??(header, bodyData)
+        result??(Destination.win(httpHeader: header, responseData: bodyData))
     }
 }
 
@@ -353,7 +319,7 @@ func c_put_request_failure(task_id: CUnsignedInt,
                            error_code: CInt,
                            error_message: UnsafePointer<CChar>) {
     __engine.rwLock.lockRead()
-    let failure = __engine.failureContainer[task_id]
+    let result = __engine.completionContainer[task_id]
     __engine.rwLock.unlock()
 
     __engine.rwLock.lockWrite()
@@ -361,7 +327,7 @@ func c_put_request_failure(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
+        result??(Destination.lose(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
     }
 }
 
@@ -387,7 +353,7 @@ func c_download_request_succeed(task_id: CUnsignedInt,
     let swiftData = Data(bytes: c_data, count: Int(c_data_size))
 
     __engine.rwLock.lockRead()
-    let succeed = __engine.succeedContainer[task_id]
+    let result = __engine.completionContainer[task_id]
     __engine.rwLock.unlock()
 
     __engine.rwLock.lockWrite()
@@ -396,7 +362,7 @@ func c_download_request_succeed(task_id: CUnsignedInt,
 
     __engine.responseQueue.async {
         //todo header
-        succeed??(nil, swiftData)
+        result??(Destination.win(httpHeader: nil, responseData: swiftData))
     }
 }
 
@@ -406,7 +372,7 @@ func c_download_request_failure(task_id: CUnsignedInt,
                                 error_code: CInt,
                                 error_message: UnsafePointer<CChar>) {
     __engine.rwLock.lockRead()
-    let failure = __engine.failureContainer[task_id]
+    let result = __engine.completionContainer[task_id]
     __engine.rwLock.unlock()
 
     __engine.rwLock.lockWrite()
@@ -414,7 +380,7 @@ func c_download_request_failure(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        failure??(http_response_code, error_code, String(cString: error_message, encoding: .utf8) ?? "empty error message")
+        result??(Destination.lose(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
     }
 }
 

@@ -25,90 +25,90 @@
 		1014442522FA8A9D00275DA2 /* URLSessionDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2ABDE7CA1FFE3D5E6528B /* URLSessionDemo.swift */; };
 		1014443222FAA46500275DA2 /* GTR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014442B22FAA46500275DA2 /* GTR.framework */; };
 		1014443322FAA46500275DA2 /* GTR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1014442B22FAA46500275DA2 /* GTR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1014443922FAA4EA00275DA2 /* Dictionary.NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530407A138ED07408B9DB82 /* Dictionary.NetworkJSON.swift */; };
-		1014443A22FAA4EB00275DA2 /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */; };
-		1014443B22FAA4EF00275DA2 /* GTR.External.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304850E2A52EA9FD4CF561 /* GTR.External.c */; };
-		1014443C22FAA4EF00275DA2 /* GTR.External.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445B651AB97564ABE56C /* GTR.External.h */; };
-		1014443D22FAA50600275DA2 /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AEB9DF57C656DED22A14 /* gtr_core.h */; };
-		1014443E22FAA50600275DA2 /* gtr_core.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A837AC809BA32AB9C92E /* gtr_core.c */; };
-		1014443F22FAA50600275DA2 /* gtr_core_race.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A6BA1BD7071E077D8555 /* gtr_core_race.h */; };
-		1014444022FAA50600275DA2 /* gtr_core_race.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_race.c */; };
-		1014444122FAA50600275DA2 /* gtr_core_header_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */; };
-		1014444222FAA50600275DA2 /* gtr_core_header_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A87062AEDDA79A61FEAA /* gtr_core_header_helper.c */; };
-		1014444322FAA50600275DA2 /* gtr_core_proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2D8BFFA713174DBF04F /* gtr_core_proxy.h */; };
-		1014444422FAA50600275DA2 /* gtr_core_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */; };
-		1014444522FAA50600275DA2 /* gtr_core_log.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A97607A814FF3E6C113B /* gtr_core_log.h */; };
-		1014444622FAA50600275DA2 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA86DA38062600F6345F /* gtr_core_log.c */; };
-		1014444722FAA50E00275DA2 /* gtr_ios_utility.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */; };
-		1014444822FAA50E00275DA2 /* gtr_ios_utility.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A99333109680AB041F1C /* gtr_ios_utility.h */; };
-		1014444922FAA50E00275DA2 /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */; };
-		1014444A22FAA50E00275DA2 /* gtr_file_utilty.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2BDD4B1B3DA0EB45914 /* gtr_file_utilty.h */; };
-		1014444B22FAA50E00275DA2 /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */; };
-		1014444C22FAA50E00275DA2 /* gtr_thread_pool.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A92CF98064AA0469F777 /* gtr_thread_pool.c */; };
-		1014444D22FAA50E00275DA2 /* gtr_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE7237C26F0FDC915ADB /* gtr_atomic.c */; };
-		1014444E22FAA50E00275DA2 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */; };
-		1014444F22FAA52000275DA2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* Error.swift */; };
-		1014445022FAA52500275DA2 /* Gearbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2E6359680E3E556337F /* Gearbox.swift */; };
-		1014445122FAA52500275DA2 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF5C9388C2BB3FAAB204 /* Driver.swift */; };
-		1014445222FAA52500275DA2 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AEE6E80C2CD98C4D3644 /* Horn.swift */; };
-		1014445322FAA52500275DA2 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */; };
-		1014445422FAA52500275DA2 /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
-		1014445522FAA52500275DA2 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A324D196A2CEAE3D76E8 /* Method.swift */; };
-		1014445622FAA52500275DA2 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */; };
-		1014445722FAA52500275DA2 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A93504887D10507AE9FE /* Destination.swift */; };
-		1014445A22FAA52500275DA2 /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* Race.swift */; };
-		1014445B22FAA52500275DA2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3AB95F258E1382B16AE /* Error.swift */; };
-		1014445C22FAA52500275DA2 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A117D2CF190520B48B58 /* Lock.swift */; };
 		1014445E22FAAFBF00275DA2 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014445D22FAAFBF00275DA2 /* libbrotli.a */; };
 		1014446022FAE2F900275DA2 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014445F22FAE2F900275DA2 /* libbrotli.a */; };
 		1014446222FAE31000275DA2 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446122FAE31000275DA2 /* libcurl.a */; };
 		1014446422FAE4B700275DA2 /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446322FAE4B700275DA2 /* LDAP.framework */; };
 		1014446622FAE4D900275DA2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446522FAE4D900275DA2 /* libz.tbd */; };
 		1014446722FAEAB700275DA2 /* GTR.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ACA7D124F6573FF09579 /* GTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		101CBC7222FC59D40006A9ED /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A403CABF212B9D28F286 /* HttpHeader.swift */; };
-		101CBC7322FC59D40006A9ED /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A74450D420AA489FED2D /* Coder.swift */; };
 		10ACE334233081A1006CFEDD /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446322FAE4B700275DA2 /* LDAP.framework */; };
 		427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 427D2AF32119FCEA00314C23 /* libz.tbd */; };
-		4530496CB7B66057B5AAFED6 /* GTR.External.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304850E2A52EA9FD4CF561 /* GTR.External.c */; };
-		45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445B651AB97564ABE56C /* GTR.External.h */; };
-		45304E27E0E3E66A29C2F05B /* Dictionary.NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530407A138ED07408B9DB82 /* Dictionary.NetworkJSON.swift */; };
-		B2D2A09B9401A6BF6ED07EF3 /* gtr_core_header_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */; };
-		B2D2A1A80A1FEA69E1B05889 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AEE6E80C2CD98C4D3644 /* Horn.swift */; };
-		B2D2A1D06E69AC4A25F5F223 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A74450D420AA489FED2D /* Coder.swift */; };
-		B2D2A20A2778BEA763EFCD80 /* gtr_core_header_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A87062AEDDA79A61FEAA /* gtr_core_header_helper.c */; };
-		B2D2A256DEFBD6EFE49D36E8 /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */; };
-		B2D2A2586B0FCCFDBE563406 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF5C9388C2BB3FAAB204 /* Driver.swift */; };
-		B2D2A29DD062DF021D9E496B /* gtr_core_log.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A97607A814FF3E6C113B /* gtr_core_log.h */; };
-		B2D2A2C7DFFD65E55DB9B28A /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A117D2CF190520B48B58 /* Lock.swift */; };
-		B2D2A2E69F5A86DDFAB5CA99 /* gtr_ios_utility.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A99333109680AB041F1C /* gtr_ios_utility.h */; };
-		B2D2A4955B3EA1C9E7D6A350 /* gtr_file_utilty.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2BDD4B1B3DA0EB45914 /* gtr_file_utilty.h */; };
-		B2D2A645319ED3F4CF2F4476 /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AEB9DF57C656DED22A14 /* gtr_core.h */; };
+		4530401E3ABB5CFE24F090EB /* Bridge.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530494E2451C0A6D3BA8D00 /* Bridge.c */; };
+		4530404B999DB1780EDEE988 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043A5B7BB7B56EDABCFA6 /* Horn.swift */; };
+		4530405800AE10AB1449A6F7 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304D3EB222085453CDF82C /* Lock.swift */; };
+		45304067751496998EBBEF13 /* gtr_core_header_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304B4F01021E294EE68DB7 /* gtr_core_header_helper.c */; };
+		45304093371D9BE8CEFDA810 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453049CDE99968EFECD98520 /* Driver.swift */; };
+		4530410E19DC66B0A44C04E1 /* gtr_core.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304A47184D26DCE52EC436 /* gtr_core.c */; };
+		4530411D9000D559FA140E81 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453049CDE99968EFECD98520 /* Driver.swift */; };
+		45304161202C48E39C8F4271 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304876F84C702262FACB30 /* ContentType.swift */; };
+		453041C034F89631FFE5826A /* Bridge.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530494E2451C0A6D3BA8D00 /* Bridge.c */; };
+		453041D198EF86AF9BA01C67 /* gtr_core_header_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304E1E305264220A387730 /* gtr_core_header_helper.h */; };
+		453041D1CEEFFA14EEBFEF92 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304B50FF08A72D38810291 /* gtr_core_log.c */; };
+		453041DC7F1B2F485106FFF9 /* gtr_ios_utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 453043EC0EC465E8B1371DAF /* gtr_ios_utility.c */; };
+		4530425600B9576CC16BD2DE /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530409BD353035B085B3C43 /* GTR.swift */; };
+		4530428DC3A05ABC1F3FF868 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453048AD1CF0E9303476421E /* Engine.swift */; };
+		453042F4DE93F69B0D9A7769 /* gtr_core_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530451EA45CBCB6EE8D3FEB /* gtr_core_proxy.c */; };
+		45304352C5A670E0B8194399 /* gtr_core_race.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044592721A9D0030EE196 /* gtr_core_race.h */; };
+		4530436ADA34EDE9D7B9175F /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453048AD1CF0E9303476421E /* Engine.swift */; };
+		4530438317E139DA683066AE /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530409BD353035B085B3C43 /* GTR.swift */; };
+		453043A7612E39E8D258AB72 /* gtr_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304AA86F5A166AC1144AAA /* gtr_atomic.c */; };
+		4530441E9F745380E9AA30CB /* Bridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304629AB6B39BFB9C2F361 /* Bridge.h */; };
+		45304426377416C11FDB186A /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304876F84C702262FACB30 /* ContentType.swift */; };
+		453044CA8907227214AC23F9 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453049F4F9787C5FAF6F9A30 /* Destination.swift */; };
+		4530454850E63352D6FD7376 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304A30498AC432AC2E7C08 /* HttpHeader.swift */; };
+		4530455372854072E27E6BF9 /* gtr_core_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530451EA45CBCB6EE8D3FEB /* gtr_core_proxy.c */; };
+		45304565446AD130AAC55D76 /* gtr_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304AA86F5A166AC1144AAA /* gtr_atomic.c */; };
+		4530456A5FA011AB6D76A2C4 /* gtr_core_header_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304B4F01021E294EE68DB7 /* gtr_core_header_helper.c */; };
+		4530460F25286B4C4325025A /* gtr_thread_pool.c in Sources */ = {isa = PBXBuildFile; fileRef = 453041465001FC167A94594F /* gtr_thread_pool.c */; };
+		4530465B47620B278D36D26A /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304B9F8682FCEF47D0C0A5 /* Error.swift */; };
+		45304661E295AEF1062C1949 /* gtr_core_race.c in Sources */ = {isa = PBXBuildFile; fileRef = 453046E2F58C67E6474F9884 /* gtr_core_race.c */; };
+		4530475245410CCF76F176C4 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530429585B7B5F90F944B5D /* Method.swift */; };
+		4530478569B455ED9282C75D /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044C9CEB3987575E9104C /* gtr_thread_pool.h */; };
+		4530484655CDBA1A1746552D /* gtr_core_race.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044592721A9D0030EE196 /* gtr_core_race.h */; };
+		45304896F2F797EE362AE47D /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530428C99D71BC9C8F67C1D /* gtr_file_utilty.c */; };
+		4530489A166D5F4AF54894EC /* gtr_core_header_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304E1E305264220A387730 /* gtr_core_header_helper.h */; };
+		453048D5E214B991492B85BA /* gtr_core_proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304922B17CE7F2CB0BAB85 /* gtr_core_proxy.h */; };
+		45304948B771B5FE5BDB5888 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = 453049D9A2FBAAF2D55E3BDB /* gtr_atomic.h */; };
+		4530498A758F3EE5254DB11D /* gtr_file_utilty.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304A43BE3071F84DC2A459 /* gtr_file_utilty.h */; };
+		4530499504C639ED14BBA5AF /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530476DA4F717F971216FF5 /* Coder.swift */; };
+		45304A726AD89E02857F6319 /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304B07088F57658B0C17A6 /* Data.UnsafePointer.swift */; };
+		45304AB1E8D402803D3677A4 /* gtr_file_utilty.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304A43BE3071F84DC2A459 /* gtr_file_utilty.h */; };
+		45304AB8B49CB224F5F8CA87 /* Gearbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043B61F371229744E87A4 /* Gearbox.swift */; };
+		45304AD8316D2466FD04B679 /* gtr_thread_pool.c in Sources */ = {isa = PBXBuildFile; fileRef = 453041465001FC167A94594F /* gtr_thread_pool.c */; };
+		45304AD93793BEAC29634112 /* gtr_ios_utility.h in Headers */ = {isa = PBXBuildFile; fileRef = 453042E09FF41933C9396F40 /* gtr_ios_utility.h */; };
+		45304B664BC4DF0A942D9957 /* gtr_core.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304A47184D26DCE52EC436 /* gtr_core.c */; };
+		45304BA184CDF87D6CC7905C /* gtr_core_log.h in Headers */ = {isa = PBXBuildFile; fileRef = 453040FD7E18593F327D3A1D /* gtr_core_log.h */; };
+		45304BA2F0D2569B97B679AC /* Dictionary.NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047D3BDE1ED0674617279 /* Dictionary.NetworkJSON.swift */; };
+		45304BA3ECF4BA0CFD748F14 /* Dictionary.NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047D3BDE1ED0674617279 /* Dictionary.NetworkJSON.swift */; };
+		45304C47BE88C0AEAD805236 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304D3EB222085453CDF82C /* Lock.swift */; };
+		45304C552ADC7FD282C5E079 /* gtr_ios_utility.h in Headers */ = {isa = PBXBuildFile; fileRef = 453042E09FF41933C9396F40 /* gtr_ios_utility.h */; };
+		45304C82F9A266A12689ED20 /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304B07088F57658B0C17A6 /* Data.UnsafePointer.swift */; };
+		45304CA2C2019ED1FDE1D1F4 /* gtr_ios_utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 453043EC0EC465E8B1371DAF /* gtr_ios_utility.c */; };
+		45304CB37A86D9A90B369AE8 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453049F4F9787C5FAF6F9A30 /* Destination.swift */; };
+		45304D058F7C21C971AA93FF /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530428C99D71BC9C8F67C1D /* gtr_file_utilty.c */; };
+		45304D3981FB3CC94C2B32C5 /* gtr_core_race.c in Sources */ = {isa = PBXBuildFile; fileRef = 453046E2F58C67E6474F9884 /* gtr_core_race.c */; };
+		45304D4B8F9458A803AE6890 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043A5B7BB7B56EDABCFA6 /* Horn.swift */; };
+		45304E03DC6BFC4574A69C94 /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304073D194ABF12E3029A0 /* Race.swift */; };
+		45304E7E1C94E1F4D6BCA799 /* gtr_core_log.h in Headers */ = {isa = PBXBuildFile; fileRef = 453040FD7E18593F327D3A1D /* gtr_core_log.h */; };
+		45304E98590531704A628736 /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304073D194ABF12E3029A0 /* Race.swift */; };
+		45304EC2789E88368CCFBC4C /* Bridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304629AB6B39BFB9C2F361 /* Bridge.h */; };
+		45304EFC792291C38BF16863 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304A30498AC432AC2E7C08 /* HttpHeader.swift */; };
+		45304EFF6DB5D9AB04D92234 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = 453049D9A2FBAAF2D55E3BDB /* gtr_atomic.h */; };
+		45304F11DFE46B24260C28B2 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530429585B7B5F90F944B5D /* Method.swift */; };
+		45304F126DC8E357560FBABF /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304B50FF08A72D38810291 /* gtr_core_log.c */; };
+		45304F16D766418782551661 /* Gearbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043B61F371229744E87A4 /* Gearbox.swift */; };
+		45304F3FE7B49D974E336458 /* gtr_core_proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304922B17CE7F2CB0BAB85 /* gtr_core_proxy.h */; };
+		45304F5D7CA7D371A71C4EBD /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044C9CEB3987575E9104C /* gtr_thread_pool.h */; };
+		45304F84D5E92F5F1AAC3EBB /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530479472D7EB72D361A9BE /* gtr_core.h */; };
+		45304F8B9A87D771702947D3 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530476DA4F717F971216FF5 /* Coder.swift */; };
+		45304FADCAED76AAA8FBE8E1 /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530479472D7EB72D361A9BE /* gtr_core.h */; };
+		45304FB33DFA9EFC49686283 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304B9F8682FCEF47D0C0A5 /* Error.swift */; };
 		B2D2A65E39A12F7FA30D41FA /* GTR.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ACA7D124F6573FF09579 /* GTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B2D2A6A3E200D7095DD39717 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */; };
-		B2D2A73BDD3AC4DB369B4D4F /* gtr_core_race.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A6BA1BD7071E077D8555 /* gtr_core_race.h */; };
-		B2D2A7455E628509E3CF98A4 /* gtr_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE7237C26F0FDC915ADB /* gtr_atomic.c */; };
-		B2D2A74AE57967404805704F /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A324D196A2CEAE3D76E8 /* Method.swift */; };
-		B2D2A7D3C1BA520918B671B5 /* Gearbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2E6359680E3E556337F /* Gearbox.swift */; };
-		B2D2A7E2090D47010200A05A /* gtr_thread_pool.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A92CF98064AA0469F777 /* gtr_thread_pool.c */; };
 		B2D2A839A82F7891E8125890 /* BrotliDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE96645DF01C2B54B99E /* BrotliDemo.swift */; };
-		B2D2A976E33BE36728663A76 /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */; };
-		B2D2A9BA51EF9099AA29A60B /* gtr_ios_utility.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */; };
-		B2D2AA47DDDFFC7C173B0904 /* gtr_core_race.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_race.c */; };
 		B2D2AAA9C8BC155072EDD7AD /* GetCacheDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A285D9FB8A0AC436864E /* GetCacheDemo.swift */; };
 		B2D2AAEA915B5FA65F0978BC /* URLSessionDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF2B4BE0A9F3E7EF79E9 /* URLSessionDemo.swift */; };
-		B2D2AB6C41D6946014980FC4 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */; };
 		B2D2ACC346DFFCDD86115663 /* DownloadDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A70F0C6C9CD9BFD550BB /* DownloadDemo.swift */; };
-		B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A66D6341CB9D098269B0 /* GTR.swift */; };
-		B2D2AD1D4E3244C26C3CE5F6 /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */; };
-		B2D2AE01135DAC924C77BADE /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A3F728E82ED3509187B1 /* Race.swift */; };
-		B2D2AE62EF367FC4B8BC5DAB /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A403CABF212B9D28F286 /* HttpHeader.swift */; };
-		B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA86DA38062600F6345F /* gtr_core_log.c */; };
-		B2D2AF6943F995C6E1364374 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */; };
-		B2D2AF89CE011EDD0F488B36 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A93504887D10507AE9FE /* Destination.swift */; };
 		B2D2AF99B0E744004AFF110F /* GetDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */; };
-		B2D2AFBDC898B35762D951FD /* gtr_core_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */; };
-		B2D2AFC49D6B321A06E20266 /* gtr_core.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A837AC809BA32AB9C92E /* gtr_core.c */; };
-		B2D2AFC953EBC5C6072E8A94 /* gtr_core_proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2A2D8BFFA713174DBF04F /* gtr_core_proxy.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,51 +178,51 @@
 		427D2AF32119FCEA00314C23 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		42F0B0982119EF8A00D01CC4 /* GTR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0B09C2119EF8A00D01CC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4530407A138ED07408B9DB82 /* Dictionary.NetworkJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.NetworkJSON.swift; sourceTree = "<group>"; };
-		4530445B651AB97564ABE56C /* GTR.External.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTR.External.h; sourceTree = "<group>"; };
-		45304850E2A52EA9FD4CF561 /* GTR.External.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GTR.External.c; sourceTree = "<group>"; };
-		B2D2A117D2CF190520B48B58 /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
-		B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_proxy.c; sourceTree = "<group>"; };
-		B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.UnsafePointer.swift; sourceTree = "<group>"; };
+		45304073D194ABF12E3029A0 /* Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
+		4530409BD353035B085B3C43 /* GTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.swift; sourceTree = "<group>"; };
+		453040FD7E18593F327D3A1D /* gtr_core_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_log.h; sourceTree = "<group>"; };
+		453041465001FC167A94594F /* gtr_thread_pool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_thread_pool.c; sourceTree = "<group>"; };
+		4530428C99D71BC9C8F67C1D /* gtr_file_utilty.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_file_utilty.c; sourceTree = "<group>"; };
+		4530429585B7B5F90F944B5D /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
+		453042E09FF41933C9396F40 /* gtr_ios_utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_ios_utility.h; sourceTree = "<group>"; };
+		453043A5B7BB7B56EDABCFA6 /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
+		453043B61F371229744E87A4 /* Gearbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gearbox.swift; sourceTree = "<group>"; };
+		453043EC0EC465E8B1371DAF /* gtr_ios_utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_ios_utility.c; sourceTree = "<group>"; };
+		453044592721A9D0030EE196 /* gtr_core_race.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_race.h; sourceTree = "<group>"; };
+		453044C9CEB3987575E9104C /* gtr_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_thread_pool.h; sourceTree = "<group>"; };
+		4530451EA45CBCB6EE8D3FEB /* gtr_core_proxy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_proxy.c; sourceTree = "<group>"; };
+		45304629AB6B39BFB9C2F361 /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
+		453046E2F58C67E6474F9884 /* gtr_core_race.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_race.c; sourceTree = "<group>"; };
+		4530476DA4F717F971216FF5 /* Coder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coder.swift; sourceTree = "<group>"; };
+		4530479472D7EB72D361A9BE /* gtr_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core.h; sourceTree = "<group>"; };
+		453047D3BDE1ED0674617279 /* Dictionary.NetworkJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.NetworkJSON.swift; sourceTree = "<group>"; };
+		45304876F84C702262FACB30 /* ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
+		453048AD1CF0E9303476421E /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		45304922B17CE7F2CB0BAB85 /* gtr_core_proxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_proxy.h; sourceTree = "<group>"; };
+		4530494E2451C0A6D3BA8D00 /* Bridge.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Bridge.c; sourceTree = "<group>"; };
+		453049CDE99968EFECD98520 /* Driver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
+		453049D9A2FBAAF2D55E3BDB /* gtr_atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_atomic.h; sourceTree = "<group>"; };
+		453049F4F9787C5FAF6F9A30 /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
+		45304A30498AC432AC2E7C08 /* HttpHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
+		45304A43BE3071F84DC2A459 /* gtr_file_utilty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_file_utilty.h; sourceTree = "<group>"; };
+		45304A47184D26DCE52EC436 /* gtr_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core.c; sourceTree = "<group>"; };
+		45304AA86F5A166AC1144AAA /* gtr_atomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_atomic.c; sourceTree = "<group>"; };
+		45304B07088F57658B0C17A6 /* Data.UnsafePointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.UnsafePointer.swift; sourceTree = "<group>"; };
+		45304B4F01021E294EE68DB7 /* gtr_core_header_helper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_header_helper.c; sourceTree = "<group>"; };
+		45304B50FF08A72D38810291 /* gtr_core_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_log.c; sourceTree = "<group>"; };
+		45304B9F8682FCEF47D0C0A5 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		45304D3EB222085453CDF82C /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
+		45304E1E305264220A387730 /* gtr_core_header_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_header_helper.h; sourceTree = "<group>"; };
 		B2D2A285D9FB8A0AC436864E /* GetCacheDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCacheDemo.swift; sourceTree = "<group>"; };
-		B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_race.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_race.c; sourceTree = "<group>"; };
-		B2D2A2BDD4B1B3DA0EB45914 /* gtr_file_utilty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_file_utilty.h; sourceTree = "<group>"; };
-		B2D2A2D8BFFA713174DBF04F /* gtr_core_proxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_proxy.h; sourceTree = "<group>"; };
-		B2D2A2E6359680E3E556337F /* Gearbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gearbox.swift; sourceTree = "<group>"; };
-		B2D2A324D196A2CEAE3D76E8 /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
-		B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_atomic.h; sourceTree = "<group>"; };
-		B2D2A3AB95F258E1382B16AE /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
-		B2D2A3F728E82ED3509187B1 /* Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
-		B2D2A403CABF212B9D28F286 /* HttpHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
-		B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDemo.swift; sourceTree = "<group>"; };
-		B2D2A66D6341CB9D098269B0 /* GTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.swift; sourceTree = "<group>"; };
-		B2D2A6BA1BD7071E077D8555 /* gtr_core_race.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_race.h; sourceTree = "<group>"; };
 		B2D2A70F0C6C9CD9BFD550BB /* DownloadDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDemo.swift; sourceTree = "<group>"; };
-		B2D2A74450D420AA489FED2D /* Coder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coder.swift; sourceTree = "<group>"; };
 		B2D2A75B5BE6A302E19D81C0 /* GetDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDemo.swift; sourceTree = "<group>"; };
-		B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
-		B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_thread_pool.h; sourceTree = "<group>"; };
-		B2D2A837AC809BA32AB9C92E /* gtr_core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core.c; sourceTree = "<group>"; };
-		B2D2A87062AEDDA79A61FEAA /* gtr_core_header_helper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_header_helper.c; sourceTree = "<group>"; };
-		B2D2A92CF98064AA0469F777 /* gtr_thread_pool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_thread_pool.c; sourceTree = "<group>"; };
-		B2D2A93504887D10507AE9FE /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
-		B2D2A97607A814FF3E6C113B /* gtr_core_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_log.h; sourceTree = "<group>"; };
-		B2D2A99333109680AB041F1C /* gtr_ios_utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_ios_utility.h; sourceTree = "<group>"; };
 		B2D2A9FAAA09E1B0C76D2851 /* BrotliDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrotliDemo.swift; sourceTree = "<group>"; };
-		B2D2AA86DA38062600F6345F /* gtr_core_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_core_log.c; sourceTree = "<group>"; };
 		B2D2ABDE7CA1FFE3D5E6528B /* URLSessionDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDemo.swift; sourceTree = "<group>"; };
 		B2D2ACA7D124F6573FF09579 /* GTR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTR.h; sourceTree = "<group>"; };
 		B2D2AD1B0E33EAA4250B06E4 /* DownloadDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDemo.swift; sourceTree = "<group>"; };
-		B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_ios_utility.c; sourceTree = "<group>"; };
-		B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core_header_helper.h; sourceTree = "<group>"; };
-		B2D2AE7237C26F0FDC915ADB /* gtr_atomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_atomic.c; sourceTree = "<group>"; };
 		B2D2AE96645DF01C2B54B99E /* BrotliDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrotliDemo.swift; sourceTree = "<group>"; };
-		B2D2AEB9DF57C656DED22A14 /* gtr_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_core.h; sourceTree = "<group>"; };
-		B2D2AEE6E80C2CD98C4D3644 /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
 		B2D2AF2B4BE0A9F3E7EF79E9 /* URLSessionDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDemo.swift; sourceTree = "<group>"; };
-		B2D2AF5C9388C2BB3FAAB204 /* Driver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
-		B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_file_utilty.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,10 +300,9 @@
 			children = (
 				B2D2ACA7D124F6573FF09579 /* GTR.h */,
 				42F0B09C2119EF8A00D01CC4 /* Info.plist */,
-				453046D2720EF6530D08D345 /* Extension */,
-				45304E707DAAA9CE5B6C65A8 /* Core */,
-				B2D2A43C582960401B2E45CA /* Private */,
-				B2D2AC4CF2F2BD3D5AA1CB66 /* GTR */,
+				453045B6B1D86C9512491BF0 /* Backend */,
+				4530463497E899879234AB97 /* Bridge */,
+				453040F1BC57D0FD9F35628B /* Frontend */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -344,32 +343,124 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		453046D2720EF6530D08D345 /* Extension */ = {
+		45304074221478D317744F9B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				4530407A138ED07408B9DB82 /* Dictionary.NetworkJSON.swift */,
-				B2D2A27FCE78BB09B4D53CCB /* Data.UnsafePointer.swift */,
+				453047D3BDE1ED0674617279 /* Dictionary.NetworkJSON.swift */,
+				45304B07088F57658B0C17A6 /* Data.UnsafePointer.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		45304E707DAAA9CE5B6C65A8 /* Core */ = {
+		453040F1BC57D0FD9F35628B /* Frontend */ = {
 			isa = PBXGroup;
 			children = (
-				45304850E2A52EA9FD4CF561 /* GTR.External.c */,
-				4530445B651AB97564ABE56C /* GTR.External.h */,
-				B2D2A2920DF46B0427FF62B4 /* gtr_core */,
+				45304EE052C93695F1492FDA /* GTR */,
+				45304074221478D317744F9B /* Extension */,
 			);
-			path = Core;
+			path = Frontend;
 			sourceTree = "<group>";
 		};
-		B2D2A217B277142DCC3174BC /* atomic */ = {
+		45304163ADC298FA6AD08DFA /* gtr_core */ = {
 			isa = PBXGroup;
 			children = (
-				B2D2AE7237C26F0FDC915ADB /* gtr_atomic.c */,
-				B2D2A3A4AF7D6FE7769D095A /* gtr_atomic.h */,
+				45304C2C1CB2ACB9E36D9A93 /* core */,
+				4530436CFDB19094CCAD87BA /* utility */,
+			);
+			path = gtr_core;
+			sourceTree = "<group>";
+		};
+		453042D8C3B4B97024915FB3 /* thread_pool */ = {
+			isa = PBXGroup;
+			children = (
+				453044C9CEB3987575E9104C /* gtr_thread_pool.h */,
+				453041465001FC167A94594F /* gtr_thread_pool.c */,
+			);
+			path = thread_pool;
+			sourceTree = "<group>";
+		};
+		4530436CFDB19094CCAD87BA /* utility */ = {
+			isa = PBXGroup;
+			children = (
+				45304A81A27620AB7EC41CFB /* ios */,
+				4530428C99D71BC9C8F67C1D /* gtr_file_utilty.c */,
+				45304A43BE3071F84DC2A459 /* gtr_file_utilty.h */,
+			);
+			path = utility;
+			sourceTree = "<group>";
+		};
+		453045B6B1D86C9512491BF0 /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				453042D8C3B4B97024915FB3 /* thread_pool */,
+				45304CDFC9C982656C4D0CA0 /* atomic */,
+				45304163ADC298FA6AD08DFA /* gtr_core */,
+			);
+			path = Backend;
+			sourceTree = "<group>";
+		};
+		4530463497E899879234AB97 /* Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				4530494E2451C0A6D3BA8D00 /* Bridge.c */,
+				45304629AB6B39BFB9C2F361 /* Bridge.h */,
+			);
+			path = Bridge;
+			sourceTree = "<group>";
+		};
+		45304A81A27620AB7EC41CFB /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				453043EC0EC465E8B1371DAF /* gtr_ios_utility.c */,
+				453042E09FF41933C9396F40 /* gtr_ios_utility.h */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		45304C2C1CB2ACB9E36D9A93 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				4530479472D7EB72D361A9BE /* gtr_core.h */,
+				45304A47184D26DCE52EC436 /* gtr_core.c */,
+				453044592721A9D0030EE196 /* gtr_core_race.h */,
+				453046E2F58C67E6474F9884 /* gtr_core_race.c */,
+				45304E1E305264220A387730 /* gtr_core_header_helper.h */,
+				45304B4F01021E294EE68DB7 /* gtr_core_header_helper.c */,
+				45304922B17CE7F2CB0BAB85 /* gtr_core_proxy.h */,
+				4530451EA45CBCB6EE8D3FEB /* gtr_core_proxy.c */,
+				453040FD7E18593F327D3A1D /* gtr_core_log.h */,
+				45304B50FF08A72D38810291 /* gtr_core_log.c */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		45304CDFC9C982656C4D0CA0 /* atomic */ = {
+			isa = PBXGroup;
+			children = (
+				45304AA86F5A166AC1144AAA /* gtr_atomic.c */,
+				453049D9A2FBAAF2D55E3BDB /* gtr_atomic.h */,
 			);
 			path = atomic;
+			sourceTree = "<group>";
+		};
+		45304EE052C93695F1492FDA /* GTR */ = {
+			isa = PBXGroup;
+			children = (
+				453043B61F371229744E87A4 /* Gearbox.swift */,
+				453049CDE99968EFECD98520 /* Driver.swift */,
+				453043A5B7BB7B56EDABCFA6 /* Horn.swift */,
+				453048AD1CF0E9303476421E /* Engine.swift */,
+				4530409BD353035B085B3C43 /* GTR.swift */,
+				4530429585B7B5F90F944B5D /* Method.swift */,
+				45304876F84C702262FACB30 /* ContentType.swift */,
+				453049F4F9787C5FAF6F9A30 /* Destination.swift */,
+				45304073D194ABF12E3029A0 /* Race.swift */,
+				45304B9F8682FCEF47D0C0A5 /* Error.swift */,
+				45304D3EB222085453CDF82C /* Lock.swift */,
+				45304A30498AC432AC2E7C08 /* HttpHeader.swift */,
+				4530476DA4F717F971216FF5 /* Coder.swift */,
+			);
+			path = GTR;
 			sourceTree = "<group>";
 		};
 		B2D2A24A2EAF119D14A997AB /* RaceDemos */ = {
@@ -381,41 +472,6 @@
 				B2D2ABDE7CA1FFE3D5E6528B /* URLSessionDemo.swift */,
 			);
 			path = RaceDemos;
-			sourceTree = "<group>";
-		};
-		B2D2A2920DF46B0427FF62B4 /* gtr_core */ = {
-			isa = PBXGroup;
-			children = (
-				B2D2A36DCF3678B347305729 /* core */,
-				B2D2A96F459653659A0ADD07 /* utility */,
-			);
-			path = gtr_core;
-			sourceTree = "<group>";
-		};
-		B2D2A36DCF3678B347305729 /* core */ = {
-			isa = PBXGroup;
-			children = (
-				B2D2AEB9DF57C656DED22A14 /* gtr_core.h */,
-				B2D2A837AC809BA32AB9C92E /* gtr_core.c */,
-				B2D2A6BA1BD7071E077D8555 /* gtr_core_race.h */,
-				B2D2A2AAA72EFC2857CAB2F9 /* gtr_core_race.c */,
-				B2D2ADD57A8A897EE03BEA12 /* gtr_core_header_helper.h */,
-				B2D2A87062AEDDA79A61FEAA /* gtr_core_header_helper.c */,
-				B2D2A2D8BFFA713174DBF04F /* gtr_core_proxy.h */,
-				B2D2A15689F55E391FCF43D6 /* gtr_core_proxy.c */,
-				B2D2A97607A814FF3E6C113B /* gtr_core_log.h */,
-				B2D2AA86DA38062600F6345F /* gtr_core_log.c */,
-			);
-			path = core;
-			sourceTree = "<group>";
-		};
-		B2D2A43C582960401B2E45CA /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				B2D2AB3810D00303BC168D34 /* thread_pool */,
-				B2D2A217B277142DCC3174BC /* atomic */,
-			);
-			path = Private;
 			sourceTree = "<group>";
 		};
 		B2D2A731B73EB91162A1EFEF /* RaceDemos */ = {
@@ -430,54 +486,6 @@
 			path = RaceDemos;
 			sourceTree = "<group>";
 		};
-		B2D2A738773BEA4FCC73F1C9 /* ios */ = {
-			isa = PBXGroup;
-			children = (
-				B2D2AD2DAF0A059A832B66FB /* gtr_ios_utility.c */,
-				B2D2A99333109680AB041F1C /* gtr_ios_utility.h */,
-			);
-			path = ios;
-			sourceTree = "<group>";
-		};
-		B2D2A96F459653659A0ADD07 /* utility */ = {
-			isa = PBXGroup;
-			children = (
-				B2D2A738773BEA4FCC73F1C9 /* ios */,
-				B2D2AFA0F415C331E787051B /* gtr_file_utilty.c */,
-				B2D2A2BDD4B1B3DA0EB45914 /* gtr_file_utilty.h */,
-			);
-			path = utility;
-			sourceTree = "<group>";
-		};
-		B2D2AB3810D00303BC168D34 /* thread_pool */ = {
-			isa = PBXGroup;
-			children = (
-				B2D2A81BF8CD49873EC5CCD7 /* gtr_thread_pool.h */,
-				B2D2A92CF98064AA0469F777 /* gtr_thread_pool.c */,
-			);
-			path = thread_pool;
-			sourceTree = "<group>";
-		};
-		B2D2AC4CF2F2BD3D5AA1CB66 /* GTR */ = {
-			isa = PBXGroup;
-			children = (
-				B2D2A2E6359680E3E556337F /* Gearbox.swift */,
-				B2D2AF5C9388C2BB3FAAB204 /* Driver.swift */,
-				B2D2AEE6E80C2CD98C4D3644 /* Horn.swift */,
-				B2D2A4DDB4BAAEF6A3DA2F5B /* Engine.swift */,
-				B2D2A66D6341CB9D098269B0 /* GTR.swift */,
-				B2D2A324D196A2CEAE3D76E8 /* Method.swift */,
-				B2D2A79F5D15A7C37F65BC0B /* ContentType.swift */,
-				B2D2A93504887D10507AE9FE /* Destination.swift */,
-				B2D2A3F728E82ED3509187B1 /* Race.swift */,
-				B2D2A3AB95F258E1382B16AE /* Error.swift */,
-				B2D2A117D2CF190520B48B58 /* Lock.swift */,
-				B2D2A403CABF212B9D28F286 /* HttpHeader.swift */,
-				B2D2A74450D420AA489FED2D /* Coder.swift */,
-			);
-			path = GTR;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -486,16 +494,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				1014446722FAEAB700275DA2 /* GTR.h in Headers */,
-				1014444E22FAA50E00275DA2 /* gtr_atomic.h in Headers */,
-				1014443F22FAA50600275DA2 /* gtr_core_race.h in Headers */,
-				1014444822FAA50E00275DA2 /* gtr_ios_utility.h in Headers */,
-				1014444B22FAA50E00275DA2 /* gtr_thread_pool.h in Headers */,
-				1014444122FAA50600275DA2 /* gtr_core_header_helper.h in Headers */,
-				1014444322FAA50600275DA2 /* gtr_core_proxy.h in Headers */,
-				1014443C22FAA4EF00275DA2 /* GTR.External.h in Headers */,
-				1014443D22FAA50600275DA2 /* gtr_core.h in Headers */,
-				1014444A22FAA50E00275DA2 /* gtr_file_utilty.h in Headers */,
-				1014444522FAA50600275DA2 /* gtr_core_log.h in Headers */,
+				45304F5D7CA7D371A71C4EBD /* gtr_thread_pool.h in Headers */,
+				45304EFF6DB5D9AB04D92234 /* gtr_atomic.h in Headers */,
+				45304F84D5E92F5F1AAC3EBB /* gtr_core.h in Headers */,
+				45304352C5A670E0B8194399 /* gtr_core_race.h in Headers */,
+				453041D198EF86AF9BA01C67 /* gtr_core_header_helper.h in Headers */,
+				45304F3FE7B49D974E336458 /* gtr_core_proxy.h in Headers */,
+				45304BA184CDF87D6CC7905C /* gtr_core_log.h in Headers */,
+				45304C552ADC7FD282C5E079 /* gtr_ios_utility.h in Headers */,
+				45304AB1E8D402803D3677A4 /* gtr_file_utilty.h in Headers */,
+				4530441E9F745380E9AA30CB /* Bridge.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,16 +512,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2D2A65E39A12F7FA30D41FA /* GTR.h in Headers */,
-				B2D2A976E33BE36728663A76 /* gtr_thread_pool.h in Headers */,
-				B2D2AB6C41D6946014980FC4 /* gtr_atomic.h in Headers */,
-				B2D2AFC953EBC5C6072E8A94 /* gtr_core_proxy.h in Headers */,
-				B2D2A73BDD3AC4DB369B4D4F /* gtr_core_race.h in Headers */,
-				B2D2A09B9401A6BF6ED07EF3 /* gtr_core_header_helper.h in Headers */,
-				B2D2A645319ED3F4CF2F4476 /* gtr_core.h in Headers */,
-				B2D2A2E69F5A86DDFAB5CA99 /* gtr_ios_utility.h in Headers */,
-				B2D2A4955B3EA1C9E7D6A350 /* gtr_file_utilty.h in Headers */,
-				45304A5936EC1AF541A7EC69 /* GTR.External.h in Headers */,
-				B2D2A29DD062DF021D9E496B /* gtr_core_log.h in Headers */,
+				4530478569B455ED9282C75D /* gtr_thread_pool.h in Headers */,
+				45304948B771B5FE5BDB5888 /* gtr_atomic.h in Headers */,
+				45304FADCAED76AAA8FBE8E1 /* gtr_core.h in Headers */,
+				4530484655CDBA1A1746552D /* gtr_core_race.h in Headers */,
+				4530489A166D5F4AF54894EC /* gtr_core_header_helper.h in Headers */,
+				453048D5E214B991492B85BA /* gtr_core_proxy.h in Headers */,
+				45304E7E1C94E1F4D6BCA799 /* gtr_core_log.h in Headers */,
+				45304AD93793BEAC29634112 /* gtr_ios_utility.h in Headers */,
+				4530498A758F3EE5254DB11D /* gtr_file_utilty.h in Headers */,
+				45304EC2789E88368CCFBC4C /* Bridge.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,31 +721,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1014444922FAA50E00275DA2 /* gtr_file_utilty.c in Sources */,
-				1014445422FAA52500275DA2 /* GTR.swift in Sources */,
-				1014445A22FAA52500275DA2 /* Race.swift in Sources */,
-				1014445722FAA52500275DA2 /* Destination.swift in Sources */,
-				1014445622FAA52500275DA2 /* ContentType.swift in Sources */,
-				1014445122FAA52500275DA2 /* Driver.swift in Sources */,
-				1014444722FAA50E00275DA2 /* gtr_ios_utility.c in Sources */,
-				1014444D22FAA50E00275DA2 /* gtr_atomic.c in Sources */,
-				101CBC7222FC59D40006A9ED /* HttpHeader.swift in Sources */,
-				1014444422FAA50600275DA2 /* gtr_core_proxy.c in Sources */,
-				1014444C22FAA50E00275DA2 /* gtr_thread_pool.c in Sources */,
-				1014445C22FAA52500275DA2 /* Lock.swift in Sources */,
-				1014445222FAA52500275DA2 /* Horn.swift in Sources */,
-				1014445522FAA52500275DA2 /* Method.swift in Sources */,
-				1014443E22FAA50600275DA2 /* gtr_core.c in Sources */,
-				1014443A22FAA4EB00275DA2 /* Data.UnsafePointer.swift in Sources */,
-				1014443B22FAA4EF00275DA2 /* GTR.External.c in Sources */,
-				1014445B22FAA52500275DA2 /* Error.swift in Sources */,
-				1014445022FAA52500275DA2 /* Gearbox.swift in Sources */,
-				1014444022FAA50600275DA2 /* gtr_core_race.c in Sources */,
-				1014444622FAA50600275DA2 /* gtr_core_log.c in Sources */,
-				101CBC7322FC59D40006A9ED /* Coder.swift in Sources */,
-				1014445322FAA52500275DA2 /* Engine.swift in Sources */,
-				1014443922FAA4EA00275DA2 /* Dictionary.NetworkJSON.swift in Sources */,
-				1014444222FAA50600275DA2 /* gtr_core_header_helper.c in Sources */,
+				4530460F25286B4C4325025A /* gtr_thread_pool.c in Sources */,
+				45304565446AD130AAC55D76 /* gtr_atomic.c in Sources */,
+				4530410E19DC66B0A44C04E1 /* gtr_core.c in Sources */,
+				45304D3981FB3CC94C2B32C5 /* gtr_core_race.c in Sources */,
+				45304067751496998EBBEF13 /* gtr_core_header_helper.c in Sources */,
+				453042F4DE93F69B0D9A7769 /* gtr_core_proxy.c in Sources */,
+				45304F126DC8E357560FBABF /* gtr_core_log.c in Sources */,
+				45304CA2C2019ED1FDE1D1F4 /* gtr_ios_utility.c in Sources */,
+				45304896F2F797EE362AE47D /* gtr_file_utilty.c in Sources */,
+				4530401E3ABB5CFE24F090EB /* Bridge.c in Sources */,
+				45304F16D766418782551661 /* Gearbox.swift in Sources */,
+				4530411D9000D559FA140E81 /* Driver.swift in Sources */,
+				45304D4B8F9458A803AE6890 /* Horn.swift in Sources */,
+				4530436ADA34EDE9D7B9175F /* Engine.swift in Sources */,
+				4530438317E139DA683066AE /* GTR.swift in Sources */,
+				45304F11DFE46B24260C28B2 /* Method.swift in Sources */,
+				45304161202C48E39C8F4271 /* ContentType.swift in Sources */,
+				453044CA8907227214AC23F9 /* Destination.swift in Sources */,
+				45304E03DC6BFC4574A69C94 /* Race.swift in Sources */,
+				4530465B47620B278D36D26A /* Error.swift in Sources */,
+				45304C47BE88C0AEAD805236 /* Lock.swift in Sources */,
+				4530454850E63352D6FD7376 /* HttpHeader.swift in Sources */,
+				45304F8B9A87D771702947D3 /* Coder.swift in Sources */,
+				45304BA2F0D2569B97B679AC /* Dictionary.NetworkJSON.swift in Sources */,
+				45304A726AD89E02857F6319 /* Data.UnsafePointer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,31 +753,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45304E27E0E3E66A29C2F05B /* Dictionary.NetworkJSON.swift in Sources */,
-				4530496CB7B66057B5AAFED6 /* GTR.External.c in Sources */,
-				B2D2A7E2090D47010200A05A /* gtr_thread_pool.c in Sources */,
-				B2D2A7455E628509E3CF98A4 /* gtr_atomic.c in Sources */,
-				B2D2A7D3C1BA520918B671B5 /* Gearbox.swift in Sources */,
-				B2D2A2586B0FCCFDBE563406 /* Driver.swift in Sources */,
-				B2D2A1A80A1FEA69E1B05889 /* Horn.swift in Sources */,
-				B2D2AF6943F995C6E1364374 /* Engine.swift in Sources */,
-				B2D2ACEE24DB44D431A9304A /* GTR.swift in Sources */,
-				B2D2AFBDC898B35762D951FD /* gtr_core_proxy.c in Sources */,
-				B2D2AA47DDDFFC7C173B0904 /* gtr_core_race.c in Sources */,
-				B2D2A20A2778BEA763EFCD80 /* gtr_core_header_helper.c in Sources */,
-				B2D2AFC49D6B321A06E20266 /* gtr_core.c in Sources */,
-				B2D2A9BA51EF9099AA29A60B /* gtr_ios_utility.c in Sources */,
-				B2D2A256DEFBD6EFE49D36E8 /* gtr_file_utilty.c in Sources */,
-				B2D2AED03A200CB538BEC2D9 /* gtr_core_log.c in Sources */,
-				B2D2A74AE57967404805704F /* Method.swift in Sources */,
-				B2D2A6A3E200D7095DD39717 /* ContentType.swift in Sources */,
-				B2D2AF89CE011EDD0F488B36 /* Destination.swift in Sources */,
-				B2D2AE01135DAC924C77BADE /* Race.swift in Sources */,
-				B2D2AD1D4E3244C26C3CE5F6 /* Data.UnsafePointer.swift in Sources */,
-				1014444F22FAA52000275DA2 /* Error.swift in Sources */,
-				B2D2A2C7DFFD65E55DB9B28A /* Lock.swift in Sources */,
-				B2D2AE62EF367FC4B8BC5DAB /* HttpHeader.swift in Sources */,
-				B2D2A1D06E69AC4A25F5F223 /* Coder.swift in Sources */,
+				45304AD8316D2466FD04B679 /* gtr_thread_pool.c in Sources */,
+				453043A7612E39E8D258AB72 /* gtr_atomic.c in Sources */,
+				45304B664BC4DF0A942D9957 /* gtr_core.c in Sources */,
+				45304661E295AEF1062C1949 /* gtr_core_race.c in Sources */,
+				4530456A5FA011AB6D76A2C4 /* gtr_core_header_helper.c in Sources */,
+				4530455372854072E27E6BF9 /* gtr_core_proxy.c in Sources */,
+				453041D1CEEFFA14EEBFEF92 /* gtr_core_log.c in Sources */,
+				453041DC7F1B2F485106FFF9 /* gtr_ios_utility.c in Sources */,
+				45304D058F7C21C971AA93FF /* gtr_file_utilty.c in Sources */,
+				453041C034F89631FFE5826A /* Bridge.c in Sources */,
+				45304AB8B49CB224F5F8CA87 /* Gearbox.swift in Sources */,
+				45304093371D9BE8CEFDA810 /* Driver.swift in Sources */,
+				4530404B999DB1780EDEE988 /* Horn.swift in Sources */,
+				4530428DC3A05ABC1F3FF868 /* Engine.swift in Sources */,
+				4530425600B9576CC16BD2DE /* GTR.swift in Sources */,
+				4530475245410CCF76F176C4 /* Method.swift in Sources */,
+				45304426377416C11FDB186A /* ContentType.swift in Sources */,
+				45304CB37A86D9A90B369AE8 /* Destination.swift in Sources */,
+				45304E98590531704A628736 /* Race.swift in Sources */,
+				45304FB33DFA9EFC49686283 /* Error.swift in Sources */,
+				4530405800AE10AB1449A6F7 /* Lock.swift in Sources */,
+				45304EFC792291C38BF16863 /* HttpHeader.swift in Sources */,
+				4530499504C639ED14BBA5AF /* Coder.swift in Sources */,
+				45304BA3ECF4BA0CFD748F14 /* Dictionary.NetworkJSON.swift in Sources */,
+				45304C82F9A266A12689ED20 /* Data.UnsafePointer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

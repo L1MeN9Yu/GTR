@@ -1,6 +1,6 @@
 //
 // Created by Mengyu Li on 2018/8/10.
-// Copyright (c) 2018 HuJiang. All rights reserved.
+// Copyright (c) 2018 top.limengyu. All rights reserved.
 //
 
 import Foundation
@@ -29,6 +29,20 @@ extension Race {
     public var parameters: [String: Encodable]? { nil }
 }
 
+extension Race {
+    @discardableResult
+    public func race(complete: @escaping Result) -> CUnsignedInt {
+        request(method: method,
+                url: url,
+                contentType: contentType,
+                headers: headers,
+                timeOut: timeout,
+                speedLimit: speedLimit,
+                param: parameters,
+                complete: complete)
+    }
+}
+
 public protocol LongDistanceRace: Race {
     var filePath: String { get }
     var progress: ((_ now: UInt64, _ total: UInt64) -> Void)? { get }
@@ -36,17 +50,6 @@ public protocol LongDistanceRace: Race {
 
 extension LongDistanceRace {
     public var progress: ((UInt64, UInt64) -> Void)? { nil }
-}
-
-public func race(race: Race, complete: @escaping (Result)) -> UInt32 {
-    request(method: race.method,
-            url: race.url,
-            contentType: race.contentType,
-            headers: race.headers,
-            timeOut: race.timeout,
-            speedLimit: race.speedLimit,
-            param: race.parameters,
-            complete: complete)
 }
 
 public func longDistanceRace(race: LongDistanceRace, complete: @escaping (Result)) -> UInt32 {

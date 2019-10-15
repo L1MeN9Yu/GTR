@@ -6,17 +6,8 @@
 import Foundation
 import protocol GTR.Race
 import typealias GTR.Result
-import func GTR.race
 
 struct BrotliDemo: Race {
     let url: String = "https://httpbin.org/brotli"
     let speedLimit: Int = 1
-}
-
-extension BrotliDemo {
-    @discardableResult
-    static func fetch(complete: @escaping GTR.Result) -> UInt32 {
-        let brotliDemo = BrotliDemo()
-        return race(race: brotliDemo, complete: complete)
-    }
 }

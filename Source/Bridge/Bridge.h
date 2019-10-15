@@ -14,6 +14,7 @@
 /**
  * 初始化GTR,生命周期内只执行一次
  * @param user_agent 全局user agent
+ * @param cylinder_count 线程池数量
  */
 extern void gtr_init(const char *user_agent, unsigned int cylinder_count);
 

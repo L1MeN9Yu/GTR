@@ -48,7 +48,7 @@ extension ViewController {
 
 extension ViewController {
     private func brotli() {
-        BrotliDemo.fetch() { destination in
+        BrotliDemo().race { destination in
             switch destination {
             case .win(let header, let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
@@ -61,7 +61,7 @@ extension ViewController {
     }
 
     private func getCache() {
-        GetCacheDemo.fetch { destination in
+        GetCacheDemo().race { destination in
             switch destination {
             case .win(let header, let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
@@ -85,12 +85,12 @@ extension ViewController {
 
 extension ViewController: Driver {
     public static var identity: () -> [String: Encodable]? {
-        return {
+        {
             ["Access-Token": "000347174c.db8743c66094ff2964a2b4b6791cf5db"]
         }
     }
     public static var userAgent: () -> String? {
-        return {
+        {
             "GTRDemo/1.0.0"
         }
     }

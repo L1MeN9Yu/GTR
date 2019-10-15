@@ -40,24 +40,20 @@ func request(method: Method = .get,
         allHeaders.merge(h) { (value_old: Encodable, value_new: Encodable) -> Encodable in value_new }
     }
 
-    return __engine.request(
-            httpMethod: method,
-            url: url,
-            headers: allHeaders,
-            contentType: contentType,
-            timeOut: timeOut,
-            speedLimit: speedLimit,
-            param: param,
-            downloadPath: downloadPath,
-            progress: progress,
-            succeed: { (header, data) in
-                complete?(Destination.win(httpHeader: header, responseData: data))
-            },
-            failure: { (httpResponseCode, errorCode, errorMessage) in
-                let error = RaceError(httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
-                complete?(Destination.lose(error))
-                notifyFailure(url: url, headers: allHeaders, contentType: contentType, param: param, httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
-            })
+    switch method {
+    case .get:
+        return __engine.getRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, completion: complete)
+    case .post:
+        return __engine.postRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, completion: complete)
+    case .put:
+        return __engine.putRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, completion: complete)
+    case .download:
+        guard let downloadPath = downloadPath else { fatalError("must use download path") }
+        return __engine.downloadRequest(url: url, filePath: downloadPath, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, progress: progress, completion: complete)
+    case .upload:
+        //TODO
+        fatalError("not implement yet")
+    }
 }
 
 
@@ -90,15 +86,7 @@ public func fetchProxyInfo() -> (String, UInt32)? {
 }
 
 // MARK: - Extern
-func notifyFailure(url: String, headers: [String: Encodable]?, contentType: ContentType, param: [String: Any]?,
-                   httpResponseCode: Int, errorCode: Int32, errorMessage: String,
-                   filename: String = #file, function: String = #function, line: Int = #line) {
-    let message = "response code = \(httpResponseCode)\n errorCode = \(errorCode)\n errorMessage = \(errorMessage)\n"
-    __horn?.whistle(type: .error, message: message, filename: filename, function: function, line: line)
-    __horn?.raceDidLost(url: url, headers: headers, contentType: contentType, param: param, httpResponseCode: httpResponseCode, errorCode: errorCode, errorMessage: errorMessage)
-}
-
-public func whistle(type: HornType, message: String, filename: String = #file,
-                    function: String = #function, line: Int = #line) {
+func whistle(type: HornType, message: String, filename: String = #file,
+             function: String = #function, line: Int = #line) {
     __horn?.whistle(type: type, message: message, filename: filename, function: function, line: line)
 }
