@@ -576,9 +576,9 @@
 			productReference = 1014442B22FAA46500275DA2 /* GTR.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		42F0B0972119EF8A00D01CC4 /* GTR */ = {
+		42F0B0972119EF8A00D01CC4 /* GTR.iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 42F0B0A02119EF8A00D01CC4 /* Build configuration list for PBXNativeTarget "GTR" */;
+			buildConfigurationList = 42F0B0A02119EF8A00D01CC4 /* Build configuration list for PBXNativeTarget "GTR.iOS" */;
 			buildPhases = (
 				42F0B0932119EF8A00D01CC4 /* Sources */,
 				42F0B0942119EF8A00D01CC4 /* Frameworks */,
@@ -589,7 +589,7 @@
 			);
 			dependencies = (
 			);
-			name = GTR;
+			name = GTR.iOS;
 			productName = GTR;
 			productReference = 42F0B0982119EF8A00D01CC4 /* GTR.framework */;
 			productType = "com.apple.product-type.framework";
@@ -637,7 +637,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				42F0B0972119EF8A00D01CC4 /* GTR */,
+				42F0B0972119EF8A00D01CC4 /* GTR.iOS */,
 				1014440922FA8A0800275DA2 /* GTR.iOS.Demo */,
 				1014442A22FAA46500275DA2 /* GTR.Mac */,
 				101443F522FA883A00275DA2 /* GTR.Mac.Demo */,
@@ -778,7 +778,7 @@
 /* Begin PBXTargetDependency section */
 		1014441F22FA8A5400275DA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 42F0B0972119EF8A00D01CC4 /* GTR */;
+			target = 42F0B0972119EF8A00D01CC4 /* GTR.iOS */;
 			targetProxy = 1014441E22FA8A5400275DA2 /* PBXContainerItemProxy */;
 		};
 		1014443122FAA46500275DA2 /* PBXTargetDependency */ = {
@@ -1135,7 +1135,7 @@
 				);
 				MARKETING_VERSION = 0.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = GTR;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1170,7 +1170,7 @@
 				);
 				MARKETING_VERSION = 0.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = GTR;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1216,7 +1216,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		42F0B0A02119EF8A00D01CC4 /* Build configuration list for PBXNativeTarget "GTR" */ = {
+		42F0B0A02119EF8A00D01CC4 /* Build configuration list for PBXNativeTarget "GTR.iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				42F0B0A12119EF8A00D01CC4 /* Debug */,

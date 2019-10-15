@@ -12,9 +12,7 @@ class Gearbox {
 
     private let proxyKey = "GTR.GearBox.Proxy.Key"
 
-    class var proxyInfo: Gearbox.ProxyInfo? {
-        return __gearbox.proxyInfo
-    }
+    class var proxyInfo: Gearbox.ProxyInfo? { __gearbox.proxyInfo }
 }
 
 extension Gearbox {

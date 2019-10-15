@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "42F0B0972119EF8A00D01CC4"
                BuildableName = "GTR.framework"
-               BlueprintName = "GTR"
+               BlueprintName = "GTR.iOS"
                ReferencedContainer = "container:GTR.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,7 +45,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "42F0B0972119EF8A00D01CC4"
             BuildableName = "GTR.framework"
-            BlueprintName = "GTR"
+            BlueprintName = "GTR.iOS"
             ReferencedContainer = "container:GTR.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
