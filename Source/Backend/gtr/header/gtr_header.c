@@ -7,7 +7,7 @@
 //
 
 #include <string.h>
-#include "gtr_core_header_helper.h"
+#include "gtr_header.h"
 
 struct curl_slist *gtr_core_add_custom_headers(const char *headers_json) {
     struct curl_slist *header = NULL;

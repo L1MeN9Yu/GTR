@@ -5,7 +5,7 @@
 
 #include <zconf.h>
 #include <stdio.h>
-#include "gtr_core_log.h"
+#include "gtr_log.h"
 
 #define LOG_MAX_BUF_SIZE 512
 

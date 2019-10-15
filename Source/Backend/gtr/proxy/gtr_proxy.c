@@ -6,4 +6,4 @@
 //  Copyright © 2018 limengyu.top. All rights reserved.
 //
 
-#include "gtr_core_proxy.h"
+#include "gtr_proxy.h"

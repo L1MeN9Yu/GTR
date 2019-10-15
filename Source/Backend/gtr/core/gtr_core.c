@@ -14,24 +14,20 @@
 #include <assert.h>
 #include <curl/curl.h>
 #include "gtr_core.h"
-#include "gtr_core_race.h"
+#include "gtr_race.h"
 #include "gtr_thread_pool.h"
 #include "gtr_atomic.h"
-#include "gtr_core_header_helper.h"
-#include "gtr_core_proxy.h"
-#include "gtr_core_log.h"
-#include "gtr_ios_utility.h"
+#include "gtr_header.h"
+#include "gtr_proxy.h"
+#include "gtr_log.h"
 #include "gtr_file_utilty.h"
+#include "gtr_task_id.h"
+#include "gtr_method.h"
 
 /**
  * 请求的线程池
  */
 static thread_pool gtr_core_thread_pool;
-
-/**
- * 全局唯一当前请求id
- */
-static volatile unsigned int gtr_core_request_global_task_id = 0;
 
 static const char *global_user_agent;
 
@@ -298,6 +294,7 @@ static void request(gtr_core_race *core_race) {
         curl_easy_cleanup(curl_handle);
         free(core_race->url);
         free(core_race->header);
+        free(core_race->method);
         free(core_race);
         free(response_header.data);
         free(response_body.data);
@@ -347,185 +344,38 @@ void gtr_core_close_proxy(void) {
     }
 }
 
-static void gtr_core_go_request(
-        unsigned int *task_id,
-        gtr_core_race_type type,
-        const char *url,
-        const char *header,
-        unsigned int time_out,
-        long speed_limit,
-        unsigned long request_data_size,
-        void *succeed_callback,
-        void *failure_callback,
-        const char *file_path,
-        void *progress_callback,
-        const void *request_data
-) {
-    gtr_core_race *core_request = (gtr_core_race *) calloc(1, sizeof(gtr_core_race));
-
-    {
-        *task_id = gtr_atomic_unsigned_int_add_and_fetch(&gtr_core_request_global_task_id, 1);
-        core_request->task_id = *task_id;
-    }
-
-    {
-        core_request->is_cancel = false;
-        core_request->request_type = type;
-    }
-
-    {
-        //url
-        assert(url);
-        if (url) {
-            size_t url_size = strlen(url) + 1;
-            core_request->url = malloc(url_size);
-            memcpy(core_request->url, url, url_size);
-        }
-    }
-    {
-        //header
-        if (header) {
-            size_t header_size = strlen(header) + 1;
-            core_request->header = malloc(header_size);
-            memcpy(core_request->header, header, header_size);
-        }
-    }
-
-    {
-        //data
-        if (request_data_size > 0 && request_data != NULL) {
-            core_request->request_data = (gtr_core_race_request_body *) calloc(1, sizeof(gtr_core_race_request_body));
-            core_request->request_data->data = malloc((size_t) request_data_size);
-            core_request->request_data->size_left = request_data_size;
-            core_request->request_data->size = request_data_size;
-            if (core_request->request_data->data == NULL) {
-                //error
-            } else {
-                memcpy(core_request->request_data->data, request_data, request_data_size);
-            }
-        } else {
-            core_request->request_data = NULL;
-        }
-    }
-    {
-        //time out
-        core_request->time_out = time_out;
-    }
-    {
-        core_request->speed_limit = speed_limit;
-    }
-    {
-        //call_back
-        core_request->on_succeed = succeed_callback;
-        core_request->on_failed = failure_callback;
-    }
-
-    {
-        if (file_path) {
-            core_request->download_data = calloc(1, sizeof(gtr_core_race_download_data));
-            strcpy(core_request->download_data->file_path, file_path);
-            core_request->download_data->on_progress = progress_callback;
-            core_request->download_data->task_id = *task_id;
-        }
-    }
-
-    thread_pool_add_work(gtr_core_thread_pool, (void *) request, core_request);
-}
-
-void gtr_core_add_request(
-        unsigned int *task_id,
-        gtr_core_race_type type,
-        const char *url,
-        const char *header,
-        unsigned int time_out,
-        long speed_limit,
-        unsigned long request_data_size,
-        void *succeed_callback,
-        void *failure_callback,
-        const void *request_data
-) {
-    gtr_core_go_request(
-            task_id,
-            type,
-            url,
-            header,
-            time_out,
-            speed_limit,
-            request_data_size,
-            succeed_callback,
-            failure_callback,
-            NULL,
-            NULL,
-            request_data);
-}
-
-void gtr_core_add_download_request(
-        unsigned int *task_id,
-        const char *url,
-        const char *file_path,
-        const char *header,
-        unsigned int time_out,
-        long speed_limit,
-        void *progress_callback,
-        void *succeed_callback,
-        void *failure_callback
-) {
-    gtr_core_go_request(
-            task_id,
-            gtr_core_request_type_download,
-            url,
-            header,
-            time_out,
-            speed_limit,
-            0,
-            succeed_callback,
-            failure_callback,
-            file_path,
-            progress_callback,
-            NULL);
+void gtr_core_race_start(gtr_core_race *race) {
+    thread_pool_add_work(gtr_core_thread_pool, (void (*)(void *)) request, race);
 }
 
 //---Private Config
 static void gtr_core_config_http_method(CURL *handle, gtr_core_race *request) {
-    if (!request) {
-        assert(request != NULL);
-        return;
-    }
-    switch (request->request_type) {
-        case gtr_core_request_type_get:
-            curl_easy_setopt(handle, CURLOPT_HTTPGET, 1L);
-            break;
-        case gtr_core_request_type_post:
-            curl_easy_setopt(handle, CURLOPT_POST, 1L);
-//            curl_easy_setopt(handle, CURLOPT_READFUNCTION, read_callback);
-//            curl_easy_setopt(handle, CURLOPT_READDATA, request->request_data);
-            if (request->request_data && request->request_data->data) {
-                curl_easy_setopt(handle, CURLOPT_POSTFIELDS, request->request_data->data);
-                curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, request->request_data->size);
-                curl_easy_setopt(handle, CURLOPT_INFILESIZE, request->request_data->size);
-            }
-            break;
-        case gtr_core_request_type_put:
-//            curl_easy_setopt(handle, CURLOPT_UPLOAD, 1L);
-//            curl_easy_setopt(handle, CURLOPT_PUT, 1L);
-            curl_easy_setopt(handle, CURLOPT_CUSTOMREQUEST, "PUT");
-//            curl_easy_setopt(handle, CURLOPT_READFUNCTION, read_callback);
-//            curl_easy_setopt(handle, CURLOPT_READDATA, request->request_data->data);
-            if (request->request_data && request->request_data->data) {
-                curl_easy_setopt(handle, CURLOPT_POSTFIELDS, request->request_data->data);
-                curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, request->request_data->size);
-                curl_easy_setopt(handle, CURLOPT_INFILESIZE, request->request_data->size);
-            } else {
-                curl_easy_setopt(handle, CURLOPT_POSTFIELDS, "");
-                curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, 0);
-            }
-            break;
-        case gtr_core_request_type_download:
-            curl_easy_setopt(handle, CURLOPT_HTTPGET, 1L);
-            break;
-        case gtr_core_request_type_upload:
-            curl_easy_setopt(handle, CURLOPT_UPLOAD, 1L);
-            break;
+    assert(request);
+    if (strcmp(request->method, METHOD_GET) == 0) {
+        curl_easy_setopt(handle, CURLOPT_HTTPGET, 1L);
+    } else if (strcmp(request->method, METHOD_POST) == 0) {
+        if (request->request_data && request->request_data->data) {
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDS, request->request_data->data);
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, request->request_data->size);
+            curl_easy_setopt(handle, CURLOPT_INFILESIZE, request->request_data->size);
+        } else {
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDS, "");
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, 0);
+        }
+    } else if (strcmp(request->method, METHOD_DOWNLOAD) == 0) {
+        curl_easy_setopt(handle, CURLOPT_HTTPGET, 1L);
+    } else if (strcmp(request->method, METHOD_UPLOAD) == 0) {
+        curl_easy_setopt(handle, CURLOPT_UPLOAD, 1L);
+    } else {
+        if (request->method) {curl_easy_setopt(handle, CURLOPT_CUSTOMREQUEST, request->method);}
+        if (request->request_data && request->request_data->data) {
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDS, request->request_data->data);
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, request->request_data->size);
+            curl_easy_setopt(handle, CURLOPT_INFILESIZE, request->request_data->size);
+        } else {
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDS, "");
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, 0);
+        }
     }
 }
 
@@ -554,9 +404,7 @@ static void gtr_core_config_headers(CURL *handle, const char *user_agent, struct
     if (header) {
         CURLcode res = curl_easy_setopt(handle, CURLOPT_HTTPHEADER, header);
         if (res != CURLE_OK) {
-            fprintf(stderr,
-                    "curl_easy_perform() failed: %s\n",
-                    curl_easy_strerror(res));
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
         }
     }
 }
@@ -578,26 +426,15 @@ static void gtr_core_config_time_condition(CURL *handle, unsigned long time) {
 static void gtr_core_config_progress(CURL *handle, gtr_core_race *request) {
     assert(request);
     //上传和下载才需要进度回掉方法
-    switch (request->request_type) {
-        case gtr_core_request_type_get:
-            curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 1L);
-            break;
-        case gtr_core_request_type_post:
-            curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 1L);
-            break;
-        case gtr_core_request_type_put:
-            curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 1L);
-            break;
-        case gtr_core_request_type_download:
-            curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
-            curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
-            curl_easy_setopt(handle, CURLOPT_XFERINFODATA, &request->download_data);
-            break;
-        case gtr_core_request_type_upload:
-            curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
-            curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
-            curl_easy_setopt(handle, CURLOPT_XFERINFODATA, NULL);
-            break;
+    if (!request->method) {return;}
+    if (strcmp(request->method, METHOD_DOWNLOAD) == 0) {
+        curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
+        curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
+        curl_easy_setopt(handle, CURLOPT_XFERINFODATA, &request->download_data);
+    } else if (strcmp(request->method, METHOD_UPLOAD) == 0) {
+        curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
+        curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
+        curl_easy_setopt(handle, CURLOPT_XFERINFODATA, NULL);
     }
 }
 

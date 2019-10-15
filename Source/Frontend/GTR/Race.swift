@@ -5,7 +5,9 @@
 
 import Foundation
 
-public protocol Race {
+public typealias Race = DataTask
+
+public protocol DataTask {
     var url: String { get }
     var timeout: UInt32 { get }
     var speedLimit: Int { get }
@@ -31,38 +33,38 @@ extension Race {
 
 extension Race {
     @discardableResult
-    public func race(complete: @escaping Result) -> CUnsignedInt {
-        request(method: method,
+    public func race(completion: @escaping Result) -> CUnsignedInt {
+        dataTask(method: method,
                 url: url,
                 contentType: contentType,
                 headers: headers,
                 timeOut: timeout,
                 speedLimit: speedLimit,
                 param: parameters,
-                complete: complete)
+                completion: completion)
     }
 }
 
-public protocol LongDistanceRace: Race {
-    var filePath: String { get }
-    var progress: ((_ now: UInt64, _ total: UInt64) -> Void)? { get }
-}
-
-extension LongDistanceRace {
-    public var progress: ((UInt64, UInt64) -> Void)? { nil }
-}
-
-public func longDistanceRace(race: LongDistanceRace, complete: @escaping (Result)) -> UInt32 {
-    assert((race.method == Method.download || race.method == Method.upload), "method must be download or upload")
-    return request(
-            method: race.method,
-            url: race.url,
-            contentType: race.contentType,
-            headers: race.headers,
-            timeOut: race.timeout,
-            speedLimit: race.speedLimit,
-            param: race.parameters,
-            downloadPath: race.filePath,
-            progress: race.progress,
-            complete: complete)
-}
+//public protocol LongDistanceRace: Race {
+//    var filePath: String { get }
+//    var progress: ((_ now: UInt64, _ total: UInt64) -> Void)? { get }
+//}
+//
+//extension LongDistanceRace {
+//    public var progress: ((UInt64, UInt64) -> Void)? { nil }
+//}
+//
+//public func longDistanceRace(race: LongDistanceRace, complete: @escaping (Result)) -> UInt32 {
+//    assert((race.method == Method.download || race.method == Method.upload), "method must be download or upload")
+//    return request(
+//            method: race.method,
+//            url: race.url,
+//            contentType: race.contentType,
+//            headers: race.headers,
+//            timeOut: race.timeout,
+//            speedLimit: race.speedLimit,
+//            param: race.parameters,
+//            downloadPath: race.filePath,
+//            progress: race.progress,
+//            completion: complete)
+//}

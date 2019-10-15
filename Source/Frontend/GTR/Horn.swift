@@ -21,20 +21,6 @@ extension Horn {
     public static func raceDidLost(url: String, headers: [String: Encodable]?, contentType: ContentType, param: [String: Any]?, httpResponseCode: Int, errorCode: Int32, errorMessage: String) {}
 }
 
-// MARK: - C Bridge
-@_silgen_name("swift_log_callback")
-func c_log_callback(c_flag: CUnsignedInt, c_message: UnsafePointer<CChar>?) {
-    if let c_message = c_message {
-        if let message = String(cString: c_message, encoding: .utf8) {
-            if let type = HornType(flag: c_flag) {
-                return whistle(type: type, message: message.trimmingCharacters(in: .whitespacesAndNewlines))
-            }
-
-            return whistle(type: .critical, message: "flag不存在!!!" + "\n" + "message : \(message)")
-        }
-    }
-}
-
 public enum HornType {
     case trace
     case debug

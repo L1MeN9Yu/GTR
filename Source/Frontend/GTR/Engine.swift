@@ -106,13 +106,14 @@ extension Engine {
         return taskID
     }
 
-    func putRequest(url: String,
-                    headers: [String: Encodable]? = nil,
-                    contentType: ContentType = .json,
-                    timeOut: UInt32,
-                    speedLimit: Int,
-                    param: [String: Any]? = nil,
-                    completion: GTR.Result?) -> UInt32 {
+    func customRequest(url: String,
+                       headers: [String: Encodable]? = nil,
+                       method: String,
+                       contentType: ContentType = .json,
+                       timeOut: UInt32,
+                       speedLimit: Int,
+                       param: [String: Any]? = nil,
+                       completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
         let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
 
@@ -124,7 +125,7 @@ extension Engine {
             }
             c_param_size = CUnsignedLong(data.count)
         }
-        c_gtr_put(&taskID, url.cString(using: .utf8), cHeaders, timeOut, speedLimit, c_param, c_param_size)
+        gtr_custom(&taskID, url.cString(using: .utf8), cHeaders, method.cString(using: .utf8), timeOut, speedLimit, c_param, c_param_size)
 
         self.rwLock.withWriterLock { () -> Void in
             self.completionContainer[taskID] = completion
@@ -180,28 +181,40 @@ extension Engine {
     }
 }
 
-// MARK: - C Bridge
-@_silgen_name("gtr_init")
-private func c_gtr_init(_ user_agent: UnsafePointer<Int8>?, _ cylinder_count: UInt32)
+extension Engine {
+    func dataTaskSucceed(task_id: UInt32, c_header_data: UnsafeRawPointer, c_header_data_size: UInt, c_body_data: UnsafeRawPointer, c_body_data_size: UInt) {
+        let headerData = Data(bytes: c_header_data, count: Int(c_header_data_size))
+        let header = handleHeader(headerData: headerData)
 
-@_silgen_name("gtr_get")
-private func c_gtr_get(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?,
-                       _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ speed_limit: Int)
+        let bodyData = Data(bytes: c_body_data, count: Int(c_body_data_size))
 
-@_silgen_name("gtr_post")
-private func c_gtr_post(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?,
-                        _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ speed_limit: Int,
-                        _ param_data: UnsafeRawPointer?, _ param_size: UInt)
+        rwLock.lockRead()
+        let result = completionContainer[task_id]
+        rwLock.unlock()
 
-@_silgen_name("gtr_put")
-private func c_gtr_put(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?,
-                       _ headers: UnsafePointer<Int8>?, _ time_out: UInt32, _ speed_limit: Int,
-                       _ param_data: UnsafeRawPointer?, _ param_size: UInt)
+        rwLock.lockWrite()
+        cleanResponseHandler(taskID: task_id)
+        rwLock.unlock()
 
-@_silgen_name("gtr_download")
-private func c_gtr_download(_ task_id: UnsafeMutablePointer<UInt32>?, _ url: UnsafePointer<Int8>?,
-                            _ filePath: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?,
-                            _ time_out: UInt32, _ speed_limit: Int)
+        responseQueue.async {
+            result??(Destination.win(httpHeader: header, responseData: bodyData))
+        }
+    }
+
+    func dataTaskFailed(task_id: UInt32, http_response_code: Int, error_code: Int32, error_message: UnsafePointer<Int8>) {
+        rwLock.lockRead()
+        let result = completionContainer[task_id]
+        rwLock.unlock()
+
+        rwLock.lockWrite()
+        cleanResponseHandler(taskID: task_id)
+        rwLock.unlock()
+
+        responseQueue.async {
+            result??(Destination.lose(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
+        }
+    }
+}
 
 // MARK: - C CallBack
 

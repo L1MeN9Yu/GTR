@@ -66,9 +66,38 @@ extension ViewController {
             case .win(let header, let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
+                    print("=====================")
                     print("\(header)")
                 }
             case .lose(let error):
+                break
+            }
+        }
+    }
+
+    private func post() {
+        PostDemo().race { destination in
+            switch destination {
+            case .win(let httpHeader, let responseData):
+                if let string = String(data: responseData, encoding: .utf8) {
+                    print("succeed : \(string)")
+                }
+                break
+            case .lose(_):
+                break
+            }
+        }
+    }
+
+    private func custom() {
+        CustomDemo().race { destination in
+            switch destination {
+            case .win(let httpHeader, let responseData):
+                if let string = String(data: responseData, encoding: .utf8) {
+                    print("succeed : \(string)")
+                }
+                break
+            case .lose(_):
                 break
             }
         }
@@ -79,7 +108,9 @@ extension ViewController {
     @objc
     private func getAction() {
 //        self.brotli()
-        self.getCache()
+//        self.getCache()
+//        self.post()
+        self.custom()
     }
 }
 

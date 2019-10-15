@@ -3,8 +3,7 @@
 // Copyright (c) 2018 limengyu.top. All rights reserved.
 //
 
-import Foundation
-
+// MARK: - Components
 private(set) var __gearbox = { () -> Gearbox in
     let gearbox = Gearbox()
     return gearbox
@@ -19,17 +18,16 @@ private var __driver: Driver.Type?
 
 private var __horn: Horn.Type?
 
+// MARK: - Tasks
 @discardableResult
-func request(method: Method = .get,
-             url: String,
-             contentType: ContentType = .json,
-             headers: [String: Encodable]? = nil,
-             timeOut: UInt32,
-             speedLimit: Int,
-             param: [String: Any]? = nil,
-             downloadPath: String? = nil,
-             progress: ((_ now: UInt64, _ total: UInt64) -> Void)? = nil,
-             complete: Result?) -> UInt32 {
+func dataTask(method: Method = .get,
+              url: String,
+              contentType: ContentType = .json,
+              headers: [String: Encodable]? = nil,
+              timeOut: UInt32,
+              speedLimit: Int,
+              param: [String: Any]? = nil,
+              completion: Result?) -> UInt32 {
     var allHeaders = contentType.toHeader()
 
     if let globalHeader = __driver?.identity() {
@@ -42,17 +40,17 @@ func request(method: Method = .get,
 
     switch method {
     case .get:
-        return __engine.getRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, completion: complete)
+        return __engine.getRequest(url: url, headers: allHeaders, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, completion: completion)
     case .post:
-        return __engine.postRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, completion: complete)
-    case .put:
-        return __engine.putRequest(url: url, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, completion: complete)
-    case .download:
-        guard let downloadPath = downloadPath else { fatalError("must use download path") }
-        return __engine.downloadRequest(url: url, filePath: downloadPath, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, progress: progress, completion: complete)
-    case .upload:
-        //TODO
-        fatalError("not implement yet")
+        return __engine.postRequest(url: url, headers: allHeaders, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, completion: completion)
+    case .custom(let method):
+        return __engine.customRequest(url: url, headers: allHeaders, method: method, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, completion: completion)
+//    case .download:
+//        guard let downloadPath = downloadPath else { fatalError("must use download path") }
+//        return __engine.downloadRequest(url: url, filePath: downloadPath, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, progress: progress, completion: completion)
+//    case .upload:
+//        //TODO
+//        fatalError("not implement yet")
     }
 }
 

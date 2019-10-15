@@ -58,6 +58,3 @@ extension Gearbox {
         self.updateGTR()
     }
 }
-
-@_silgen_name("gtr_proxy")
-func c_gtr_proxy(_ enable: Bool, _ url: UnsafePointer<Int8>?, _ port: UInt32)

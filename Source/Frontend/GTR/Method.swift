@@ -5,13 +5,8 @@
 
 
 // MARK: - Http Method
-public enum Method: UInt {
+public enum Method {
     case get
     case post
-    /// 像Post一样请求,对服务端而言PUT是幂等的,如需上传文件,用upload
-    case put
-    case download
-    case upload
-
-    static let userInfoKey = "GTR.Method"
+    case custom(String)
 }

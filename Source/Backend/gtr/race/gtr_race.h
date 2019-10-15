@@ -12,10 +12,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <curl/curl.h>
+#include "gtr_callback.h"
 
-/**
- *
- */
 typedef enum gtr_core_race_type {
     gtr_core_request_type_get,
     gtr_core_request_type_post,
@@ -65,7 +63,7 @@ typedef struct gtr_core_race_download_data {
 typedef struct gtr_core_race {
     unsigned int task_id;
     bool is_cancel;
-    gtr_core_race_type request_type;
+    char *method;
     char *url;
     char *header;
     unsigned int time_out;
@@ -82,8 +80,8 @@ typedef struct gtr_core_race {
      * @param body_data
      * @param body_data_size
      */
-    void (*on_succeed)(unsigned int task_id, long http_response_code, void *header_data, unsigned long header_data_size, void *body_data, unsigned long body_data_size);
-
+//    void (*on_succeed)(unsigned int task_id, long http_response_code, void *header_data, unsigned long header_data_size, void *body_data, unsigned long body_data_size);
+    on_data_task_succeed on_succeed;
     /**
      *
      * @param task_id
@@ -91,8 +89,21 @@ typedef struct gtr_core_race {
      * @param error_code
      * @param error_message
      */
-    void (*on_failed)(unsigned int task_id, long http_response_code, CURLcode error_code, const char *error_message);
+//    void (*on_failed)(unsigned int task_id, long http_response_code, CURLcode error_code, const char *error_message);
+    on_data_task_failed on_failed;
 } gtr_core_race;
 
+gtr_core_race *gtr_data_task_init(
+        unsigned int *task_id,
+        const char *method,
+        const char *url,
+        const char *header,
+        unsigned int time_out,
+        long speed_limit,
+        const void *request_data,
+        unsigned long request_data_size,
+        on_data_task_succeed succeed_callback,
+        on_data_task_failed failure_callback
+);
 
 #endif /* gtr_core_request_h */

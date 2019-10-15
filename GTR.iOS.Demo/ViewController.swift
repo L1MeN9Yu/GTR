@@ -38,14 +38,14 @@ class ViewController: UIViewController {
 extension ViewController {
     @objc
     private func getAction(button: UIButton) {
-        //        self.get()
+        self.get()
         //        self.put()
         //        self.brotli()
         //        self.download()
-        for _ in 0...10 {
+//        for _ in 0...10 {
 //                        URLSessionDemo.fetch()
-            self.brotli()
-        }
+//            self.brotli()
+//        }
     }
 }
 
@@ -95,16 +95,17 @@ extension ViewController {
     }
 
     private func download() {
-        DownloadDemo.request(progress: { now, total in
-            print("now = \(now) || total = \(total)")
-        }, complete: { destination in
-            switch destination {
-            case .win(let responseData):
-                return
-            case .lose(let error):
-                return
-            }
-        })
+        //ToDo [L1MeN9Yu]
+//        DownloadDemo.request(progress: { now, total in
+//            print("now = \(now) || total = \(total)")
+//        }, complete: { destination in
+//            switch destination {
+//            case .win(let responseData):
+//                return
+//            case .lose(let error):
+//                return
+//            }
+//        })
     }
 }
 
