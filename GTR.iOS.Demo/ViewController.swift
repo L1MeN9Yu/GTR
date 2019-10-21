@@ -38,14 +38,14 @@ class ViewController: UIViewController {
 extension ViewController {
     @objc
     private func getAction(button: UIButton) {
-        //        self.get()
+        self.get()
         //        self.put()
         //        self.brotli()
         //        self.download()
-        for _ in 0...10 {
+//        for _ in 0...10 {
 //                        URLSessionDemo.fetch()
-            self.brotli()
-        }
+//            self.brotli()
+//        }
     }
 }
 
@@ -64,14 +64,14 @@ extension ViewController {
     }
 
     private func get() {
-        GetDemo.fetch() { destination in
+        GetDemo().race { destination in
             switch destination {
             case .win(let httpHeader, let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
                 }
                 break
-            case .lose(let httpResponseCode, let errorCode, let errorMessage):
+            case .lose(let error):
                 break
             }
         }
@@ -82,41 +82,45 @@ extension ViewController {
     }
 
     private func brotli() {
-        BrotliDemo.fetch() { destination in
+        BrotliDemo().race { destination in
             switch destination {
             case .win(let httpHeader, let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
                 }
-            case .lose(let httpResponseCode, let errorCode, let errorMessage):
+            case .lose(let error):
                 break
             }
         }
     }
 
     private func download() {
-        DownloadDemo.request(progress: { now, total in
-            print("now = \(now) || total = \(total)")
-        }, complete: { destination in
-            switch destination {
-            case .win(let responseData):
-                return
-            case .lose(let httpResponseCode, let errorCode, let errorMessage):
-                return
-            }
-        })
+        //ToDo [L1MeN9Yu]
+//        DownloadDemo.request(progress: { now, total in
+//            print("now = \(now) || total = \(total)")
+//        }, complete: { destination in
+//            switch destination {
+//            case .win(let responseData):
+//                return
+//            case .lose(let error):
+//                return
+//            }
+//        })
     }
 }
 
 extension ViewController: Driver {
     public static var identity: () -> [String: Encodable]? {
-        return {
-            ["Access-Token": "000347174c.db8743c66094ff2964a2b4b6791cf5db"]
+        {
+            [
+                "Author": "L1MeN9Yu",
+                "email": "baal998.mophisto@gmail.com",
+            ]
         }
     }
     public static var userAgent: () -> String? {
-        return {
-            "GTRDemo/1.0.0"
+        {
+            nil
         }
     }
 }

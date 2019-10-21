@@ -48,27 +48,56 @@ extension ViewController {
 
 extension ViewController {
     private func brotli() {
-        BrotliDemo.fetch() { destination in
+        BrotliDemo().race { destination in
             switch destination {
             case .win(let header, let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
                 }
-            case .lose(_, _, _):
+            case .lose(let error):
                 break
             }
         }
     }
 
     private func getCache() {
-        GetCacheDemo.fetch { destination in
+        GetCacheDemo().race { destination in
             switch destination {
             case .win(let header, let responseData):
                 if let string = String(data: responseData, encoding: .utf8) {
                     print("succeed : \(string)")
+                    print("=====================")
                     print("\(header)")
                 }
-            case .lose(_, _, _):
+            case .lose(let error):
+                break
+            }
+        }
+    }
+
+    private func post() {
+        PostDemo().race { destination in
+            switch destination {
+            case .win(let httpHeader, let responseData):
+                if let string = String(data: responseData, encoding: .utf8) {
+                    print("succeed : \(string)")
+                }
+                break
+            case .lose(_):
+                break
+            }
+        }
+    }
+
+    private func custom() {
+        CustomDemo().race { destination in
+            switch destination {
+            case .win(let httpHeader, let responseData):
+                if let string = String(data: responseData, encoding: .utf8) {
+                    print("succeed : \(string)")
+                }
+                break
+            case .lose(_):
                 break
             }
         }
@@ -79,18 +108,20 @@ extension ViewController {
     @objc
     private func getAction() {
 //        self.brotli()
-        self.getCache()
+//        self.getCache()
+//        self.post()
+        self.custom()
     }
 }
 
 extension ViewController: Driver {
     public static var identity: () -> [String: Encodable]? {
-        return {
+        {
             ["Access-Token": "000347174c.db8743c66094ff2964a2b4b6791cf5db"]
         }
     }
     public static var userAgent: () -> String? {
-        return {
+        {
             "GTRDemo/1.0.0"
         }
     }

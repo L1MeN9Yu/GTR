@@ -9,11 +9,3 @@ import GTR
 struct GetCacheDemo: Race {
     let url: String = "https://httpbin.org/cache"
 }
-
-extension GetCacheDemo {
-    @discardableResult
-    static func fetch(complete: @escaping GTR.Result) -> UInt32 {
-        let demo = GetCacheDemo()
-        return race(race: demo, complete: complete)
-    }
-}
