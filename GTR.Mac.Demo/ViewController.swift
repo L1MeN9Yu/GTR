@@ -47,6 +47,19 @@ extension ViewController {
 }
 
 extension ViewController {
+    private func get() {
+        GetDemo().race { destination in
+            switch destination {
+            case .win(let header, let responseData):
+                if let string = String(data: responseData, encoding: .utf8) {
+                    print("succeed : \(string)")
+                }
+            case .lose(let error):
+                break
+            }
+        }
+    }
+
     private func brotli() {
         BrotliDemo().race { destination in
             switch destination {
@@ -110,7 +123,8 @@ extension ViewController {
 //        self.brotli()
 //        self.getCache()
 //        self.post()
-        self.custom()
+//        self.custom()
+        self.get()
     }
 }
 

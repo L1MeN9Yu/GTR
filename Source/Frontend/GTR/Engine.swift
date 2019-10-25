@@ -48,11 +48,17 @@ extension Engine {
                     contentType: ContentType = .json,
                     timeOut: UInt32,
                     speedLimit: Int,
+                    param: [String: Any]? = nil,
                     completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
         let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
 
-        c_gtr_get(&taskID, url.cString(using: .utf8), cHeaders, timeOut, speedLimit)
+        if let queueParam = param?.filterValue(valueType: String.self),
+           let url = URL(string: url)?.appendingQueryParameters(queueParam) {
+            c_gtr_get(&taskID, url.absoluteString.cString(using: .utf8), cHeaders, timeOut, speedLimit)
+        } else {
+            c_gtr_get(&taskID, url.cString(using: .utf8), cHeaders, timeOut, speedLimit)
+        }
 
         self.rwLock.withWriterLock { () -> Void in
             self.completionContainer[taskID] = completion

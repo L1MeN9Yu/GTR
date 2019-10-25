@@ -7,5 +7,9 @@ import Foundation
 import GTR
 
 struct GetDemo: Race {
-    var url: String { "https://httpbin.org/get" }
+    var url: String { "https://httpbin.org/get?555=999" }
+    private(set) var parameters: [String: Encodable]? = [
+        "1": "2",
+        "3": 456,
+    ]
 }

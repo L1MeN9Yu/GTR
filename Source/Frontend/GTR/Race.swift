@@ -14,7 +14,7 @@ public protocol DataTask {
     var headers: [String: Encodable]? { get }
     var method: Method { get }
     var contentType: ContentType { get }
-    var parameters: [String: Encodable]? { get }
+    var parameters: [String: Any]? { get }
 }
 
 extension Race {
@@ -28,7 +28,7 @@ extension Race {
 
     public var contentType: ContentType { .json }
 
-    public var parameters: [String: Encodable]? { nil }
+    public var parameters: [String: Any]? { nil }
 }
 
 extension Race {

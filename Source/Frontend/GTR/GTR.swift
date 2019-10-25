@@ -40,7 +40,7 @@ func dataTask(method: Method = .get,
 
     switch method {
     case .get:
-        return __engine.getRequest(url: url, headers: allHeaders, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, completion: completion)
+        return __engine.getRequest(url: url, headers: allHeaders, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, completion: completion)
     case .post:
         return __engine.postRequest(url: url, headers: allHeaders, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, param: param, completion: completion)
     case .custom(let method):
