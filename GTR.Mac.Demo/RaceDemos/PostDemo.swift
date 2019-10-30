@@ -10,4 +10,6 @@ struct PostDemo: Race {
     let url: String = "https://httpbin.org/post"
     let method: GTR.Method = .post
     let parameters: [String: Any]? = ["a": 1, "b": "boy"]
+
+    let options: RaceOptions = RaceOptions(isDebug: true, timeout: 10)
 }

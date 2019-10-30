@@ -21,7 +21,10 @@ __attribute__((nonnull(1)))
 extern void gtr_data_task_config_parameters(gtr_core_race *core_race, const char *method, const void *param_data, unsigned long param_size);
 
 __attribute__((nonnull(1)))
-extern void gtr_data_task_config_options(gtr_core_race *core_race, bool is_debug, unsigned int time_out, long speed_limit);
+extern void gtr_data_task_config_options(gtr_core_race *core_race, bool is_debug, unsigned int time_out, long max_redirects);
+
+__attribute__((nonnull(1)))
+extern void gtr_data_task_config_speed(gtr_core_race *core_race, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time);
 
 __attribute__((nonnull(1)))
 extern void gtr_data_task_start(gtr_core_race *core_race);

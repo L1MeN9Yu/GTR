@@ -50,6 +50,18 @@ typedef struct gtr_core_race_download_data {
     void (*on_progress)(unsigned int task_id, unsigned long long now, unsigned long long total);
 } gtr_core_race_download_data;
 
+typedef struct gtr_task_options {
+    bool is_debug;
+    unsigned int time_out;
+    long max_redirects;
+} gtr_task_options;
+
+typedef struct gtr_task_speed {
+    long max_receive_speed;
+    long max_send_speed;
+    long low_speed_limit;
+    long low_speed_time;
+} gtr_task_speed;
 /**
  * 请求
  */
@@ -59,9 +71,8 @@ struct gtr_core_race {
     char *method;
     char *url;
     char *header;
-    bool is_debug;
-    unsigned int time_out;
-    long speed_limit;
+    gtr_task_options options;
+    gtr_task_speed speed;
     gtr_core_race_request_body *request_data;
     gtr_core_race_download_data *download_data;
 
@@ -102,7 +113,9 @@ gtr_core_race *gtr_core_data_task_create(unsigned int *task_id, const char *url,
 
 void gtr_core_data_task_config_parameters(gtr_core_race *core_race, const char *method, const void *param_data, unsigned long param_size);
 
-void gtr_core_data_task_config_options(gtr_core_race *core_race, bool is_debug, unsigned int time_out, long speed_limit);
+void gtr_core_data_task_config_options(gtr_core_race *core_race, bool is_debug, unsigned int time_out, long max_redirects);
+
+void gtr_core_data_task_config_speed(gtr_core_race *core_race, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time);
 
 void gtr_core_data_task_config_callback(gtr_core_race *core_race, on_data_task_succeed succeed_callback, on_data_task_failed failure_callback);
 

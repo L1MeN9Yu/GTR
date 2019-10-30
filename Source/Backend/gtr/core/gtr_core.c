@@ -59,7 +59,9 @@ static void gtr_core_config_progress(CURL *handle, gtr_core_race *request);
 
 static void gtr_core_config_proxy(CURL *handle);
 
-static void gtr_core_config_speed_limit(CURL *handle, long limit);
+static void gtr_core_config_max_redirects(CURL *handle, long max_redirects);
+
+static void gtr_core_config_speed(CURL *handle, gtr_task_speed speed);
 
 static void gtr_core_config_debug(CURL *handle, bool is_debug);
 
@@ -225,7 +227,7 @@ static void request(gtr_core_race *core_race) {
     }
 
     {
-        gtr_core_config_time_out(curl_handle, core_race->time_out);
+        gtr_core_config_time_out(curl_handle, core_race->options.time_out);
     }
 
     {
@@ -246,17 +248,10 @@ static void request(gtr_core_race *core_race) {
         gtr_core_config_progress(curl_handle, core_race);
     }
 
-    {
-        gtr_core_config_proxy(curl_handle);
-    }
-
-    {
-        gtr_core_config_speed_limit(curl_handle, core_race->speed_limit);
-    }
-
-    {
-        gtr_core_config_debug(curl_handle, core_race->is_debug);
-    }
+    gtr_core_config_proxy(curl_handle);
+    gtr_core_config_max_redirects(curl_handle, core_race->options.max_redirects);
+    gtr_core_config_speed(curl_handle, core_race->speed);
+    gtr_core_config_debug(curl_handle, core_race->options.is_debug);
 
     struct curl_slist *header = gtr_core_add_custom_headers(core_race->header);
     gtr_core_config_headers(curl_handle, global_user_agent, header);
@@ -458,9 +453,20 @@ static void gtr_core_config_proxy(CURL *handle) {
     }
 }
 
-static void gtr_core_config_speed_limit(CURL *handle, long limit) {
-    curl_off_t _limit = limit >= 0 ?: 0;
-    curl_easy_setopt(handle, CURLOPT_MAX_RECV_SPEED_LARGE, _limit);
+static void gtr_core_config_max_redirects(CURL *handle, long max_redirects) {
+    curl_easy_setopt(handle, CURLOPT_MAXREDIRS, max_redirects);
+}
+
+static void gtr_core_config_speed(CURL *handle, gtr_task_speed speed) {
+    curl_off_t max_receive_speed = speed.max_receive_speed;
+    curl_off_t max_send_speed = speed.max_send_speed;
+    curl_off_t low_speed_limit = speed.low_speed_limit;
+    curl_off_t low_speed_time = speed.low_speed_time;
+
+    curl_easy_setopt(handle, CURLOPT_MAX_RECV_SPEED_LARGE, max_receive_speed);
+    curl_easy_setopt(handle, CURLOPT_MAX_SEND_SPEED_LARGE, max_send_speed);
+    curl_easy_setopt(handle, CURLOPT_LOW_SPEED_LIMIT, low_speed_limit);
+    curl_easy_setopt(handle, CURLOPT_LOW_SPEED_TIME, low_speed_time);
 }
 
 static void gtr_core_config_header_call_back(CURL *handle, gtr_core_race_response_header *response_header) {

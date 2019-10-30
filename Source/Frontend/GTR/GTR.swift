@@ -27,7 +27,7 @@ func dataTask(method: Method,
               contentType: ContentType,
               headers: [String: Encodable]?,
               options: RaceOptions,
-              speedLimit: Int,
+              speedLimit: RaceSpeedLimit,
               param: [String: Any]?,
               completion: Result?) -> UInt32 {
     var allHeaders = contentType.toHeader()

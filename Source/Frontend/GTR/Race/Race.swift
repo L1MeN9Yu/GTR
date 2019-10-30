@@ -9,18 +9,19 @@ public typealias Race = DataTask
 
 public protocol DataTask {
     var url: String { get }
-    var speedLimit: Int { get }
     var headers: [String: Encodable]? { get }
     var method: Method { get }
     var contentType: ContentType { get }
     var parameters: [String: Any]? { get }
 
     var options: RaceOptions { get }
+
+    var speedLimit: RaceSpeedLimit { get }
 }
 
 extension Race {
 
-    public var speedLimit: Int { 0 }
+    public var speedLimit: RaceSpeedLimit { RaceSpeedLimit() }
 
     public var headers: [String: Encodable]? { nil }
 

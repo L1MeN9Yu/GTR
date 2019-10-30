@@ -123,8 +123,8 @@ extension ViewController {
 //        self.brotli()
 //        self.getCache()
         self.post()
-        self.custom()
-        self.get()
+//        self.custom()
+//        self.get()
     }
 }
 

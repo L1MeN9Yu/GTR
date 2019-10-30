@@ -12,8 +12,11 @@ public struct RaceOptions {
 
     let timeout: UInt32
 
-    public init(isDebug: Bool, timeout: UInt32) {
+    let maxRedirects: Int
+
+    public init(isDebug: Bool, timeout: UInt32, maxRedirects: Int = -1) {
         self.isDebug = isDebug
         self.timeout = timeout
+        self.maxRedirects = maxRedirects
     }
 }

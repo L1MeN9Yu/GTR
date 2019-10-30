@@ -34,8 +34,12 @@ void gtr_data_task_config_parameters(gtr_core_race *core_race, const char *metho
     gtr_core_data_task_config_parameters(core_race, method, param_data, param_size);
 }
 
-void gtr_data_task_config_options(gtr_core_race *core_race, bool is_debug, unsigned int time_out, long speed_limit) {
-    gtr_core_data_task_config_options(core_race, is_debug, time_out, speed_limit);
+void gtr_data_task_config_options(gtr_core_race *core_race, bool is_debug, unsigned int time_out, long max_redirects) {
+    gtr_core_data_task_config_options(core_race, is_debug, time_out, max_redirects);
+}
+
+void gtr_data_task_config_speed(gtr_core_race *core_race, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time) {
+    gtr_core_data_task_config_speed(core_race, max_receive_speed, max_send_speed, low_speed_limit, low_speed_time);
 }
 
 void gtr_data_task_start(gtr_core_race *core_race) {

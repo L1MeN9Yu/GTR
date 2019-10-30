@@ -49,7 +49,7 @@ extension Engine {
                     method: Method,
                     contentType: ContentType = .json,
                     options: RaceOptions,
-                    speedLimit: Int,
+                    speedLimit: RaceSpeedLimit,
                     param: [String: Any]? = nil,
                     completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
@@ -59,7 +59,8 @@ extension Engine {
 
         let dataTask = gtr_data_task_create(&taskID, getURL, cHeaders)
         gtr_data_task_config_parameters(dataTask, method.stringValue, nil, 0)
-        gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, speedLimit)
+        gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, options.maxRedirects)
+        gtr_data_task_config_speed(dataTask, speedLimit.maxReceiveSpeed, speedLimit.maxSendSpeed, speedLimit.lowSpeedLimit, speedLimit.lowSpeedTime)
         gtr_data_task_start(dataTask)
 
         self.rwLock.withWriterLock { () -> Void in
@@ -74,7 +75,7 @@ extension Engine {
                      method: Method,
                      contentType: ContentType = .json,
                      options: RaceOptions,
-                     speedLimit: Int,
+                     speedLimit: RaceSpeedLimit,
                      param: [String: Any]? = nil,
                      completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
@@ -84,7 +85,8 @@ extension Engine {
 
         let dataTask = gtr_data_task_create(&taskID, url, cHeaders)
         gtr_data_task_config_parameters(dataTask, method.stringValue, parameter.0, parameter.1)
-        gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, speedLimit)
+        gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, options.maxRedirects)
+        gtr_data_task_config_speed(dataTask, speedLimit.maxReceiveSpeed, speedLimit.maxSendSpeed, speedLimit.lowSpeedLimit, speedLimit.lowSpeedTime)
         gtr_data_task_start(dataTask)
 
         self.rwLock.withWriterLock { () -> Void in
@@ -99,7 +101,7 @@ extension Engine {
                        method: Method,
                        contentType: ContentType = .json,
                        options: RaceOptions,
-                       speedLimit: Int,
+                       speedLimit: RaceSpeedLimit,
                        param: [String: Any]? = nil,
                        completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
@@ -109,7 +111,8 @@ extension Engine {
 
         let dataTask = gtr_data_task_create(&taskID, url, cHeaders)
         gtr_data_task_config_parameters(dataTask, method.stringValue, parameter.0, parameter.1)
-        gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, speedLimit)
+        gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, options.maxRedirects)
+        gtr_data_task_config_speed(dataTask, speedLimit.maxReceiveSpeed, speedLimit.maxSendSpeed, speedLimit.lowSpeedLimit, speedLimit.lowSpeedTime)
         gtr_data_task_start(dataTask)
 
         self.rwLock.withWriterLock { () -> Void in
