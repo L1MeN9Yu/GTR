@@ -1,25 +1,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "gtr_core.h"
-#include "gtr_get.h"
 #include "Bridge.Callback.h"
-#include "gtr_post.h"
-#include "gtr_custom.h"
 #include "Bridge.Task.h"
 
 //---------- Export
-extern void swift_get_request_succeed(unsigned int task_id, void *c_header_data, unsigned long c_header_data_size, void *c_body_data, unsigned long c_body_data_size);
-
-extern void swift_get_request_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
-
-extern void swift_post_request_succeed(unsigned int task_id, void *c_header_data, unsigned long c_header_data_size, void *c_body_data, unsigned long c_body_data_size);
-
-extern void swift_post_request_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
-
-extern void swift_put_request_succeed(unsigned int task_id, void *c_header_data, unsigned long c_header_data_size, void *c_body_data, unsigned long c_body_data_size);
-
-extern void swift_put_request_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
-
 extern void swift_download_progress(unsigned int task_id, unsigned long long now, unsigned long long total);
 
 extern void swift_download_request_succeed(unsigned int task_id, void *c_data, unsigned long c_date_size);
@@ -39,23 +24,6 @@ static void on_data_task_succeed_callback(unsigned int task_id, long http_respon
 
 /// on_data_task_failed_callback
 static void on_data_task_failed_callback(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
-
-//---------- Get
-void gtr_get(unsigned *task_id, const char *url, const char *headers, unsigned int time_out, long speed_limit) {
-    gtr_add_get_request(task_id, url, headers, time_out, speed_limit, &on_data_task_succeed_callback, &on_data_task_failed_callback);
-}
-//----------
-
-//---------- Post
-void gtr_post(unsigned int *task_id, const char *url, const char *headers, unsigned int time_out, long speed_limit, const void *param_data, unsigned long param_size) {
-    gtr_add_post_request(task_id, url, headers, time_out, speed_limit, param_data, param_size, &on_data_task_succeed_callback, &on_data_task_failed_callback);
-}
-//----------
-
-//---------- CUSTOM
-void gtr_custom(unsigned int *task_id, const char *url, const char *headers, const char *method, unsigned int time_out, long speed_limit, const void *param_data, unsigned long param_size) {
-    gtr_add_custom_request(task_id, url, headers, method, time_out, speed_limit, param_data, param_size, &on_data_task_succeed_callback, &on_data_task_failed_callback);
-}
 
 gtr_core_race *gtr_data_task_create(unsigned *task_id, const char *url, const char *headers) {
     gtr_core_race *core_race = gtr_core_data_task_create(task_id, url, headers);
