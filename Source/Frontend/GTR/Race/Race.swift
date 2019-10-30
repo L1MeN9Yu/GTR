@@ -9,16 +9,16 @@ public typealias Race = DataTask
 
 public protocol DataTask {
     var url: String { get }
-    var timeout: UInt32 { get }
     var speedLimit: Int { get }
     var headers: [String: Encodable]? { get }
     var method: Method { get }
     var contentType: ContentType { get }
     var parameters: [String: Any]? { get }
+
+    var options: RaceOptions { get }
 }
 
 extension Race {
-    public var timeout: UInt32 { 10 }
 
     public var speedLimit: Int { 0 }
 
@@ -29,19 +29,23 @@ extension Race {
     public var contentType: ContentType { .json }
 
     public var parameters: [String: Any]? { nil }
+
+    public var options: RaceOptions { RaceOptions(isDebug: __optionalEquipments.debug, timeout: __optionalEquipments.timeout) }
 }
 
 extension Race {
     @discardableResult
     public func race(completion: @escaping Result) -> CUnsignedInt {
-        dataTask(method: method,
+        dataTask(
+                method: method,
                 url: url,
                 contentType: contentType,
                 headers: headers,
-                timeOut: timeout,
+                options: options,
                 speedLimit: speedLimit,
                 param: parameters,
-                completion: completion)
+                completion: completion
+        )
     }
 }
 

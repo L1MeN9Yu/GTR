@@ -9,6 +9,8 @@
 #ifndef Bridge_Core_h
 #define Bridge_Core_h
 
+#include <stdbool.h>
+
 /**
  * 初始化GTR,生命周期内只执行一次
  * @param user_agent 全局user agent

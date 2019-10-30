@@ -42,7 +42,7 @@ extension ViewController {
     }
 
     private func setupGTR() {
-        GTR.setup(driver: type(of: self), horn: type(of: self))
+        GTR.setup(driver: type(of: self), horn: type(of: self), optionalEquipments: type(of: self))
     }
 }
 
@@ -122,8 +122,8 @@ extension ViewController {
     private func getAction() {
 //        self.brotli()
 //        self.getCache()
-//        self.post()
-//        self.custom()
+        self.post()
+        self.custom()
         self.get()
     }
 }
@@ -145,4 +145,8 @@ extension ViewController: Horn {
     public class func whistle(type: HornType, message: String, filename: String, function: String, line: Int) {
         print("[\(type.name)] => \(message)")
     }
+}
+
+extension ViewController: Configuration {
+
 }

@@ -61,7 +61,7 @@ static void gtr_core_config_proxy(CURL *handle);
 
 static void gtr_core_config_speed_limit(CURL *handle, long limit);
 
-static void gtr_core_config_debug(CURL *handle);
+static void gtr_core_config_debug(CURL *handle, bool is_debug);
 
 //--- Private Utility
 static void gtr_core_create_temp_dir(void);
@@ -255,7 +255,7 @@ static void request(gtr_core_race *core_race) {
     }
 
     {
-        gtr_core_config_debug(curl_handle);
+        gtr_core_config_debug(curl_handle, core_race->is_debug);
     }
 
     struct curl_slist *header = gtr_core_add_custom_headers(core_race->header);
@@ -473,9 +473,9 @@ static void gtr_core_config_write_call_back(CURL *handle, gtr_core_race_response
     curl_easy_setopt(handle, CURLOPT_WRITEDATA, response_body);
 }
 
-static void gtr_core_config_debug(CURL *handle) {
+static void gtr_core_config_debug(CURL *handle, bool is_debug) {
     curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, &debug_func);
-    curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
+    curl_easy_setopt(handle, CURLOPT_VERBOSE, is_debug ? 1L : 0L);
 }
 
 //---Private Utility

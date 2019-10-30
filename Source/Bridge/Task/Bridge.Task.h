@@ -11,6 +11,21 @@
 
 #include <stdbool.h>
 
+
+typedef struct gtr_core_race gtr_core_race;
+
+__attribute__((nonnull(1)))
+extern gtr_core_race *gtr_data_task_create(unsigned *task_id, const char *url, const char *headers);
+
+__attribute__((nonnull(1)))
+extern void gtr_data_task_config_parameters(gtr_core_race *core_race, const char *method, const void *param_data, unsigned long param_size);
+
+__attribute__((nonnull(1)))
+extern void gtr_data_task_config_options(gtr_core_race *core_race, bool is_debug, unsigned int time_out, long speed_limit);
+
+__attribute__((nonnull(1)))
+extern void gtr_data_task_start(gtr_core_race *core_race);
+
 /**
  * 发起GET请求
  * @param task_id 任务id
@@ -57,7 +72,7 @@ extern void gtr_download(unsigned int *task_id, const char *url, const char *fil
 
 /**
  * 取消请求
- * @param task_id
+ * @param task_id task_id
  */
 extern void gtr_cancel(unsigned int task_id);
 

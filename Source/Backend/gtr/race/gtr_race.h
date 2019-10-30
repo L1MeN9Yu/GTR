@@ -13,14 +13,7 @@
 #include <stdbool.h>
 #include <curl/curl.h>
 #include "gtr_callback.h"
-
-typedef enum gtr_core_race_type {
-    gtr_core_request_type_get,
-    gtr_core_request_type_post,
-    gtr_core_request_type_put,
-    gtr_core_request_type_download,
-    gtr_core_request_type_upload
-} gtr_core_race_type;
+#include "Bridge.Task.h"
 
 /**
  *
@@ -60,12 +53,13 @@ typedef struct gtr_core_race_download_data {
 /**
  * 请求
  */
-typedef struct gtr_core_race {
+struct gtr_core_race {
     unsigned int task_id;
     bool is_cancel;
     char *method;
     char *url;
     char *header;
+    bool is_debug;
     unsigned int time_out;
     long speed_limit;
     gtr_core_race_request_body *request_data;
@@ -80,7 +74,6 @@ typedef struct gtr_core_race {
      * @param body_data
      * @param body_data_size
      */
-//    void (*on_succeed)(unsigned int task_id, long http_response_code, void *header_data, unsigned long header_data_size, void *body_data, unsigned long body_data_size);
     on_data_task_succeed on_succeed;
     /**
      *
@@ -89,9 +82,8 @@ typedef struct gtr_core_race {
      * @param error_code
      * @param error_message
      */
-//    void (*on_failed)(unsigned int task_id, long http_response_code, CURLcode error_code, const char *error_message);
     on_data_task_failed on_failed;
-} gtr_core_race;
+};
 
 gtr_core_race *gtr_data_task_init(
         unsigned int *task_id,
@@ -105,5 +97,13 @@ gtr_core_race *gtr_data_task_init(
         on_data_task_succeed succeed_callback,
         on_data_task_failed failure_callback
 );
+
+gtr_core_race *gtr_core_data_task_create(unsigned int *task_id, const char *url, const char *header);
+
+void gtr_core_data_task_config_parameters(gtr_core_race *core_race, const char *method, const void *param_data, unsigned long param_size);
+
+void gtr_core_data_task_config_options(gtr_core_race *core_race, bool is_debug, unsigned int time_out, long speed_limit);
+
+void gtr_core_data_task_config_callback(gtr_core_race *core_race, on_data_task_succeed succeed_callback, on_data_task_failed failure_callback);
 
 #endif /* gtr_core_request_h */

@@ -5,6 +5,7 @@
 #include "Bridge.Callback.h"
 #include "gtr_post.h"
 #include "gtr_custom.h"
+#include "Bridge.Task.h"
 
 //---------- Export
 extern void swift_get_request_succeed(unsigned int task_id, void *c_header_data, unsigned long c_header_data_size, void *c_body_data, unsigned long c_body_data_size);
@@ -54,6 +55,24 @@ void gtr_post(unsigned int *task_id, const char *url, const char *headers, unsig
 //---------- CUSTOM
 void gtr_custom(unsigned int *task_id, const char *url, const char *headers, const char *method, unsigned int time_out, long speed_limit, const void *param_data, unsigned long param_size) {
     gtr_add_custom_request(task_id, url, headers, method, time_out, speed_limit, param_data, param_size, &on_data_task_succeed_callback, &on_data_task_failed_callback);
+}
+
+gtr_core_race *gtr_data_task_create(unsigned *task_id, const char *url, const char *headers) {
+    gtr_core_race *core_race = gtr_core_data_task_create(task_id, url, headers);
+    return core_race;
+}
+
+void gtr_data_task_config_parameters(gtr_core_race *core_race, const char *method, const void *param_data, unsigned long param_size) {
+    gtr_core_data_task_config_parameters(core_race, method, param_data, param_size);
+}
+
+void gtr_data_task_config_options(gtr_core_race *core_race, bool is_debug, unsigned int time_out, long speed_limit) {
+    gtr_core_data_task_config_options(core_race, is_debug, time_out, speed_limit);
+}
+
+void gtr_data_task_start(gtr_core_race *core_race) {
+    gtr_core_data_task_config_callback(core_race, &on_data_task_succeed_callback, &on_data_task_failed_callback);
+    gtr_core_race_start(core_race);
 }
 
 //---------- 下载文件

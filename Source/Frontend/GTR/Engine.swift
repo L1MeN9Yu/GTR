@@ -43,22 +43,24 @@ extension Engine {
 
 // MARK: - Request
 extension Engine {
+
     func getRequest(url: String,
                     headers: [String: Encodable]? = nil,
+                    method: Method,
                     contentType: ContentType = .json,
-                    timeOut: UInt32,
+                    options: RaceOptions,
                     speedLimit: Int,
                     param: [String: Any]? = nil,
                     completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
-        let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
+        let cHeaders = self.generateHeaderString(headers: headers)
 
-        if let queueParam = param?.filterValue(valueType: String.self),
-           let url = URL(string: url)?.appendingQueryParameters(queueParam) {
-            c_gtr_get(&taskID, url.absoluteString.cString(using: .utf8), cHeaders, timeOut, speedLimit)
-        } else {
-            c_gtr_get(&taskID, url.cString(using: .utf8), cHeaders, timeOut, speedLimit)
-        }
+        let getURL = urlForGetParameter(url: url, param: param)
+
+        let dataTask = gtr_data_task_create(&taskID, getURL, cHeaders)
+        gtr_data_task_config_parameters(dataTask, method.stringValue, nil, 0)
+        gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, speedLimit)
+        gtr_data_task_start(dataTask)
 
         self.rwLock.withWriterLock { () -> Void in
             self.completionContainer[taskID] = completion
@@ -69,14 +71,83 @@ extension Engine {
 
     func postRequest(url: String,
                      headers: [String: Encodable]? = nil,
+                     method: Method,
                      contentType: ContentType = .json,
-                     timeOut: UInt32,
+                     options: RaceOptions,
                      speedLimit: Int,
                      param: [String: Any]? = nil,
                      completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
-        let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
+        let cHeaders = self.generateHeaderString(headers: headers)
 
+        let parameter = cParameter(contentType: contentType, param: param)
+
+        let dataTask = gtr_data_task_create(&taskID, url, cHeaders)
+        gtr_data_task_config_parameters(dataTask, method.stringValue, parameter.0, parameter.1)
+        gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, speedLimit)
+        gtr_data_task_start(dataTask)
+
+        self.rwLock.withWriterLock { () -> Void in
+            self.completionContainer[taskID] = completion
+        }
+
+        return taskID
+    }
+
+    func customRequest(url: String,
+                       headers: [String: Encodable]? = nil,
+                       method: Method,
+                       contentType: ContentType = .json,
+                       options: RaceOptions,
+                       speedLimit: Int,
+                       param: [String: Any]? = nil,
+                       completion: GTR.Result?) -> UInt32 {
+        var taskID: CUnsignedInt = 0
+        let cHeaders = self.generateHeaderString(headers: headers)
+
+        let parameter = cParameter(contentType: contentType, param: param)
+
+        let dataTask = gtr_data_task_create(&taskID, url, cHeaders)
+        gtr_data_task_config_parameters(dataTask, method.stringValue, parameter.0, parameter.1)
+        gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, speedLimit)
+        gtr_data_task_start(dataTask)
+
+        self.rwLock.withWriterLock { () -> Void in
+            self.completionContainer[taskID] = completion
+        }
+
+        return taskID
+    }
+
+    func downloadRequest(url: String,
+                         filePath: String,
+                         headers: [String: Encodable]? = nil,
+                         contentType: ContentType = .json,
+                         timeOut: UInt32,
+                         speedLimit: Int,
+                         progress: GTRProgressClosure?,
+                         completion: GTR.Result?) -> UInt32 {
+        var taskID: CUnsignedInt = 0
+        let cHeaders = self.generateHeaderString(headers: headers)
+        c_gtr_download(&taskID, url.cString(using: .utf8), filePath.cString(using: .utf8), cHeaders, timeOut, speedLimit)
+        return taskID
+    }
+}
+
+// MARK: - Private
+extension Engine {
+    private func urlForGetParameter(url: String, param: [String: Any]?) -> String {
+        var _url = url
+
+        if let queueParam = param?.filterValue(valueType: String.self),
+           let url = URL(string: url)?.appendingQueryParameters(queueParam) {
+            _url = url.absoluteString
+        }
+
+        return _url
+    }
+
+    private func cParameter(contentType: ContentType, param: [String: Any]?) -> (UnsafeRawPointer?, CUnsignedLong) {
         var c_param: UnsafeRawPointer? = nil
         var c_param_size: CUnsignedLong = 0
         switch contentType {
@@ -102,63 +173,11 @@ extension Engine {
                 c_param_size = CUnsignedLong(data.count)
             }
         }
-
-        c_gtr_post(&taskID, url.cString(using: .utf8), cHeaders, timeOut, speedLimit, c_param, c_param_size)
-
-        self.rwLock.withWriterLock { () -> Void in
-            self.completionContainer[taskID] = completion
-        }
-
-        return taskID
+        return (c_param, c_param_size)
     }
 
-    func customRequest(url: String,
-                       headers: [String: Encodable]? = nil,
-                       method: String,
-                       contentType: ContentType = .json,
-                       timeOut: UInt32,
-                       speedLimit: Int,
-                       param: [String: Any]? = nil,
-                       completion: GTR.Result?) -> UInt32 {
-        var taskID: CUnsignedInt = 0
-        let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
-
-        var c_param: UnsafeRawPointer? = nil
-        var c_param_size: CUnsignedLong = 0
-        if let `param` = param, let data = param.toData() {
-            c_param = data.withUnsafePointer { unsafePointer -> UnsafeRawPointer in
-                UnsafeRawPointer(unsafePointer)
-            }
-            c_param_size = CUnsignedLong(data.count)
-        }
-        gtr_custom(&taskID, url.cString(using: .utf8), cHeaders, method.cString(using: .utf8), timeOut, speedLimit, c_param, c_param_size)
-
-        self.rwLock.withWriterLock { () -> Void in
-            self.completionContainer[taskID] = completion
-        }
-
-        return taskID
-    }
-
-    func downloadRequest(url: String,
-                         filePath: String,
-                         headers: [String: Encodable]? = nil,
-                         contentType: ContentType = .json,
-                         timeOut: UInt32,
-                         speedLimit: Int,
-                         progress: GTRProgressClosure?,
-                         completion: GTR.Result?) -> UInt32 {
-        var taskID: CUnsignedInt = 0
-        let cHeaders: [CChar]? = self.generateHeaderString(headers: headers)
-        c_gtr_download(&taskID, url.cString(using: .utf8), filePath.cString(using: .utf8), cHeaders, timeOut, speedLimit)
-        return taskID
-    }
-}
-
-// MARK: - Private
-extension Engine {
     ///构建Headers
-    private func generateHeaderString(headers: [String: Encodable]? = nil) -> [CChar]? {
+    private func generateHeaderString(headers: [String: Encodable]? = nil) -> String? {
         var allHeaders = self.httpHeaderClosure?() ?? [String: Encodable]()
         if let additionHeader = headers {
             allHeaders.merge(additionHeader) { (value1: Encodable, value2: Encodable) -> Encodable in
@@ -166,9 +185,9 @@ extension Engine {
             }
         }
         let headerString = allHeaders.jsonStringEncoded()?.replacingOccurrences(of: "\\/", with: "/")
-        let string = headerString?.cString(using: .utf8)
+//        let string = headerString?.cString
 
-        return string
+        return headerString
     }
 }
 

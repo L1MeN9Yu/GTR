@@ -9,4 +9,5 @@ import GTR
 struct PostDemo: Race {
     let url: String = "https://httpbin.org/post"
     let method: GTR.Method = .post
+    let parameters: [String: Any]? = ["a": 1, "b": "boy"]
 }
