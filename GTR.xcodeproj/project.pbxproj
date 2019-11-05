@@ -800,8 +800,8 @@
 			projectRoot = "";
 			targets = (
 				42F0B0972119EF8A00D01CC4 /* GTR.iOS */,
-				1014440922FA8A0800275DA2 /* GTR.iOS.Demo */,
 				1014442A22FAA46500275DA2 /* GTR.Mac */,
+				1014440922FA8A0800275DA2 /* GTR.iOS.Demo */,
 				101443F522FA883A00275DA2 /* GTR.Mac.Demo */,
 			);
 		};
@@ -1099,6 +1099,7 @@
 		1014443522FAA46500275DA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1125,7 +1126,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.7.5;
+				MARKETING_VERSION = 0.7.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-Mac";
@@ -1139,6 +1140,7 @@
 		1014443622FAA46500275DA2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1165,7 +1167,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.7.5;
+				MARKETING_VERSION = 0.7.6;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-Mac";
 				PRODUCT_NAME = GTR;
@@ -1298,6 +1300,7 @@
 		42F0B0A12119EF8A00D01CC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1321,7 +1324,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
 				);
-				MARKETING_VERSION = 0.7.5;
+				MARKETING_VERSION = 0.7.6;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = GTR;
 				SKIP_INSTALL = YES;
@@ -1333,6 +1336,7 @@
 		42F0B0A22119EF8A00D01CC4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1356,7 +1360,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
 				);
-				MARKETING_VERSION = 0.7.5;
+				MARKETING_VERSION = 0.7.6;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = GTR;
 				SKIP_INSTALL = YES;
