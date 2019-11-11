@@ -1116,7 +1116,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.7.6;
+				MARKETING_VERSION = 0.8.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-Mac";
@@ -1157,7 +1157,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.7.6;
+				MARKETING_VERSION = 0.8.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-Mac";
 				PRODUCT_NAME = GTR;
@@ -1314,7 +1314,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
 				);
-				MARKETING_VERSION = 0.7.6;
+				MARKETING_VERSION = 0.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = GTR;
 				SKIP_INSTALL = YES;
@@ -1350,7 +1350,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
 				);
-				MARKETING_VERSION = 0.7.6;
+				MARKETING_VERSION = 0.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = GTR;
 				SKIP_INSTALL = YES;
