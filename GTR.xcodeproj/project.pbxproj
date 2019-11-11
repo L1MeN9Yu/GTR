@@ -65,6 +65,7 @@
 		453043C223756B7FAAABA914 /* gtr_method.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304658050C8401DBCAE0F6 /* gtr_method.h */; };
 		453043D0ADE5929EEA9BE37C /* OptionalEquipments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304FE2D27B5AA173C6A5F8 /* OptionalEquipments.swift */; };
 		45304426377416C11FDB186A /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304876F84C702262FACB30 /* ContentType.swift */; };
+		4530445C1A07B77ADF72240C /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453042B7E28C5CC1B74939B3 /* Goal.swift */; };
 		453044868054CAECF8E81D33 /* gtr_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530421F6850913AB2029ABD /* gtr_proxy.c */; };
 		4530449AE624A8B6BDDE698C /* Bridge.Callback.h in Headers */ = {isa = PBXBuildFile; fileRef = 453042396006C73E96B8C0A9 /* Bridge.Callback.h */; };
 		453044CA8907227214AC23F9 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453049F4F9787C5FAF6F9A30 /* Destination.swift */; };
@@ -128,6 +129,7 @@
 		45304EFC792291C38BF16863 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304A30498AC432AC2E7C08 /* HttpHeader.swift */; };
 		45304EFF6DB5D9AB04D92234 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = 453049D9A2FBAAF2D55E3BDB /* gtr_atomic.h */; };
 		45304F11DFE46B24260C28B2 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530429585B7B5F90F944B5D /* Method.swift */; };
+		45304F128D7EF44CFC348E36 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453042B7E28C5CC1B74939B3 /* Goal.swift */; };
 		45304F16D766418782551661 /* Gearbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043B61F371229744E87A4 /* Gearbox.swift */; };
 		45304F5D7CA7D371A71C4EBD /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044C9CEB3987575E9104C /* gtr_thread_pool.h */; };
 		45304F84D5E92F5F1AAC3EBB /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530479472D7EB72D361A9BE /* gtr_core.h */; };
@@ -220,6 +222,7 @@
 		453042618C3440EFFB3E5ECA /* gtr_task_id.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_task_id.c; sourceTree = "<group>"; };
 		4530428C99D71BC9C8F67C1D /* gtr_file_utilty.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_file_utilty.c; sourceTree = "<group>"; };
 		4530429585B7B5F90F944B5D /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
+		453042B7E28C5CC1B74939B3 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		45304331F349EC915B692895 /* Bridge.Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Core.swift; sourceTree = "<group>"; };
 		453043524BBF19360E89D12A /* CustomDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDemo.swift; sourceTree = "<group>"; };
 		453043A5B7BB7B56EDABCFA6 /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
@@ -594,6 +597,7 @@
 				4530476DA4F717F971216FF5 /* Coder.swift */,
 				45304FE2D27B5AA173C6A5F8 /* OptionalEquipments.swift */,
 				4530425EB9E2E27221703C97 /* Race */,
+				453042B7E28C5CC1B74939B3 /* Goal.swift */,
 			);
 			path = GTR;
 			sourceTree = "<group>";
@@ -913,6 +917,7 @@
 				453047921BA750D20A4BE648 /* Race.swift in Sources */,
 				453042F7D04D7A9973B6140E /* RaceOptions.swift in Sources */,
 				45304A108895266D46FF62C1 /* RaceSpeedLimit.swift in Sources */,
+				45304F128D7EF44CFC348E36 /* Goal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -956,6 +961,7 @@
 				453048AA22C8A7CBDB3E5852 /* Race.swift in Sources */,
 				45304DE60DD72928E0C20FBC /* RaceOptions.swift in Sources */,
 				453046279E26F2A8DB204FB7 /* RaceSpeedLimit.swift in Sources */,
+				4530445C1A07B77ADF72240C /* Goal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

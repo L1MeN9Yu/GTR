@@ -50,11 +50,9 @@ extension ViewController {
     private func get() {
         GetDemo().race { destination in
             switch destination {
-            case .win(let header, let responseData):
-                if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string)")
-                }
-            case .lose(let error):
+            case .success(let goal):
+                print("\(goal)")
+            case .failure(_):
                 break
             }
         }
@@ -63,11 +61,9 @@ extension ViewController {
     private func brotli() {
         BrotliDemo().race { destination in
             switch destination {
-            case .win(let header, let responseData):
-                if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string)")
-                }
-            case .lose(let error):
+            case .success(let goal):
+                print("\(goal)")
+            case .failure(_):
                 break
             }
         }
@@ -76,13 +72,9 @@ extension ViewController {
     private func getCache() {
         GetCacheDemo().race { destination in
             switch destination {
-            case .win(let header, let responseData):
-                if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string)")
-                    print("=====================")
-                    print("\(header)")
-                }
-            case .lose(let error):
+            case .success(let goal):
+                print("\(goal)")
+            case .failure(_):
                 break
             }
         }
@@ -91,12 +83,10 @@ extension ViewController {
     private func post() {
         PostDemo().race { destination in
             switch destination {
-            case .win(let httpHeader, let responseData):
-                if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string)")
-                }
+            case .success(let goal):
+                print("\(goal)")
                 break
-            case .lose(_):
+            case .failure(_):
                 break
             }
         }
@@ -105,12 +95,10 @@ extension ViewController {
     private func custom() {
         CustomDemo().race { destination in
             switch destination {
-            case .win(let httpHeader, let responseData):
-                if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string)")
-                }
+            case .success(let goal):
+                print("\(goal)")
                 break
-            case .lose(_):
+            case .failure(_):
                 break
             }
         }
@@ -143,7 +131,7 @@ extension ViewController: Driver {
 
 extension ViewController: Horn {
     public class func whistle(type: HornType, message: String, filename: String, function: String, line: Int) {
-        print("[\(type.name)] => \(message)")
+        print("[\(type.prefix)] => \(message)")
     }
 }
 

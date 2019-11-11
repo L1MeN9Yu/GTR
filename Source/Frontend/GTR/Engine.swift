@@ -225,7 +225,7 @@ extension Engine {
         rwLock.unlock()
 
         responseQueue.async {
-            result??(Destination.win(httpHeader: header, responseData: bodyData))
+            result??(Destination.success(Goal(header: header, body: bodyData)))
         }
     }
 
@@ -239,7 +239,7 @@ extension Engine {
         rwLock.unlock()
 
         responseQueue.async {
-            result??(Destination.lose(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
+            result??(Destination.failure(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
         }
     }
 }
@@ -266,7 +266,7 @@ func c_get_request_succeed(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        result??(Destination.win(httpHeader: header, responseData: bodyData))
+        result??(Destination.success(Goal(header: header, body: bodyData)))
     }
 }
 
@@ -284,7 +284,7 @@ func c_get_request_failure(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        result??(Destination.lose(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
+        result??(Destination.failure(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
     }
 }
 
@@ -308,7 +308,7 @@ func c_post_request_succeed(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        result??(Destination.win(httpHeader: header, responseData: bodyData))
+        result??(Destination.success(Goal(header: header, body: bodyData)))
     }
 }
 
@@ -326,7 +326,7 @@ func c_post_request_failure(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        result??(Destination.lose(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
+        result??(Destination.failure(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
     }
 }
 
@@ -350,7 +350,7 @@ func c_put_request_succeed(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        result??(Destination.win(httpHeader: header, responseData: bodyData))
+        result??(Destination.success(Goal(header: header, body: bodyData)))
     }
 }
 
@@ -368,7 +368,7 @@ func c_put_request_failure(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        result??(Destination.lose(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
+        result??(Destination.failure(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
     }
 }
 
@@ -391,7 +391,10 @@ func c_download_progress(task_id: CUnsignedInt, download_now: CUnsignedLongLong,
 func c_download_request_succeed(task_id: CUnsignedInt,
                                 c_data: UnsafeRawPointer,
                                 c_data_size: CUnsignedLong) {
-    let swiftData = Data(bytes: c_data, count: Int(c_data_size))
+    //ToDo [L1MeN9Yu] implement
+    fatalError("not implement")
+
+/*    let swiftData = Data(bytes: c_data, count: Int(c_data_size))
 
     __engine.rwLock.lockRead()
     let result = __engine.completionContainer[task_id]
@@ -402,9 +405,8 @@ func c_download_request_succeed(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        //todo header
-        result??(Destination.win(httpHeader: nil, responseData: swiftData))
-    }
+        result??(Destination.success(Goal(header: nil, body: swiftData)))
+    }*/
 }
 
 @_silgen_name("swift_download_request_failure")
@@ -421,11 +423,11 @@ func c_download_request_failure(task_id: CUnsignedInt,
     __engine.rwLock.unlock()
 
     __engine.responseQueue.async {
-        result??(Destination.lose(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
+        result??(Destination.failure(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
     }
 }
 
-func handleHeader(headerData: Data) -> HttpHeader? {
+func handleHeader(headerData: Data) -> Data? {
     let string = String(data: headerData, encoding: .utf8) ?? ""
     let list = string.components(separatedBy: "\n").map { (string: String) -> String in string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
     let dictList = list.compactMap { (string: String) -> [String: String]? in
@@ -439,6 +441,5 @@ func handleHeader(headerData: Data) -> HttpHeader? {
     }
     let result = toJsonString.dropLast().appending("}")
     guard let resultData = result.data(using: .utf8) else { return nil }
-    let header = try? __jsonDecoder.decode(HttpHeader.self, from: resultData)
-    return header
+    return resultData
 }

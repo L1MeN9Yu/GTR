@@ -14,12 +14,14 @@ public protocol Horn {
 
 extension Horn {
     public static func whistle(type: HornType, message: String, filename: String, function: String, line: Int) {
-        let allMessage = "[\(type.name)] ======>>>[\(URL(fileURLWithPath: filename).lastPathComponent):\(line)] \(function) - \(message)"
+        let allMessage = "[\(type.prefix)] ======>>>[\(URL(fileURLWithPath: filename).lastPathComponent):\(line)] \(function) - \(message)"
         print(allMessage)
     }
 
     public static func raceDidLost(url: String, headers: [String: Encodable]?, contentType: ContentType, param: [String: Any]?, httpResponseCode: Int, errorCode: Int32, errorMessage: String) {}
 }
+
+public typealias LogFlag = HornType
 
 public enum HornType {
     case trace
@@ -48,7 +50,7 @@ public enum HornType {
         }
     }
 
-    public var name: String {
+    public var prefix: String {
         switch self {
         case .trace:
             return "trace:"
@@ -68,6 +70,6 @@ public enum HornType {
 
 extension HornType: CustomStringConvertible {
     public var description: String {
-        self.name
+        self.prefix
     }
 }
