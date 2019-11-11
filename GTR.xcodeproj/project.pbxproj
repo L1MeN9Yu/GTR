@@ -26,7 +26,6 @@
 		1014446222FAE31000275DA2 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446122FAE31000275DA2 /* libcurl.a */; };
 		1014446422FAE4B700275DA2 /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446322FAE4B700275DA2 /* LDAP.framework */; };
 		1014446622FAE4D900275DA2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446522FAE4D900275DA2 /* libz.tbd */; };
-		1014446722FAEAB700275DA2 /* GTR.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ACA7D124F6573FF09579 /* GTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		10ACE334233081A1006CFEDD /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446322FAE4B700275DA2 /* LDAP.framework */; };
 		427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 427D2AF32119FCEA00314C23 /* libz.tbd */; };
 		42C2C92D23797335001BC1D7 /* GetDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */; };
@@ -140,7 +139,6 @@
 		45304FADCAED76AAA8FBE8E1 /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530479472D7EB72D361A9BE /* gtr_core.h */; };
 		45304FB33DFA9EFC49686283 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304B9F8682FCEF47D0C0A5 /* Error.swift */; };
 		45304FEE1FE0C69F36C9B273 /* OptionalEquipments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304FE2D27B5AA173C6A5F8 /* OptionalEquipments.swift */; };
-		B2D2A65E39A12F7FA30D41FA /* GTR.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2ACA7D124F6573FF09579 /* GTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2D2A839A82F7891E8125890 /* BrotliDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE96645DF01C2B54B99E /* BrotliDemo.swift */; };
 		B2D2AAA9C8BC155072EDD7AD /* GetCacheDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A285D9FB8A0AC436864E /* GetCacheDemo.swift */; };
 		B2D2AAEA915B5FA65F0978BC /* URLSessionDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF2B4BE0A9F3E7EF79E9 /* URLSessionDemo.swift */; };
@@ -271,7 +269,6 @@
 		B2D2A285D9FB8A0AC436864E /* GetCacheDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCacheDemo.swift; sourceTree = "<group>"; };
 		B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDemo.swift; sourceTree = "<group>"; };
 		B2D2A70F0C6C9CD9BFD550BB /* DownloadDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDemo.swift; sourceTree = "<group>"; };
-		B2D2ACA7D124F6573FF09579 /* GTR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTR.h; sourceTree = "<group>"; };
 		B2D2AE96645DF01C2B54B99E /* BrotliDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrotliDemo.swift; sourceTree = "<group>"; };
 		B2D2AF2B4BE0A9F3E7EF79E9 /* URLSessionDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDemo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -347,7 +344,6 @@
 		1014443822FAA48600275DA2 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				B2D2ACA7D124F6573FF09579 /* GTR.h */,
 				42F0B09C2119EF8A00D01CC4 /* Info.plist */,
 				453045B6B1D86C9512491BF0 /* Backend */,
 				4530463497E899879234AB97 /* Bridge */,
@@ -630,7 +626,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1014446722FAEAB700275DA2 /* GTR.h in Headers */,
 				45304F5D7CA7D371A71C4EBD /* gtr_thread_pool.h in Headers */,
 				45304EFF6DB5D9AB04D92234 /* gtr_atomic.h in Headers */,
 				45304F84D5E92F5F1AAC3EBB /* gtr_core.h in Headers */,
@@ -652,7 +647,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2D2A65E39A12F7FA30D41FA /* GTR.h in Headers */,
 				4530478569B455ED9282C75D /* gtr_thread_pool.h in Headers */,
 				45304948B771B5FE5BDB5888 /* gtr_atomic.h in Headers */,
 				45304FADCAED76AAA8FBE8E1 /* gtr_core.h in Headers */,

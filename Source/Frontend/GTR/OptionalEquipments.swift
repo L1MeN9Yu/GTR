@@ -3,6 +3,8 @@
 // Copyright (c) 2019 limengyu.top. All rights reserved.
 //
 
+import class Dispatch.DispatchQueue
+
 public typealias Configuration = OptionalEquipments
 
 public protocol OptionalEquipments {
