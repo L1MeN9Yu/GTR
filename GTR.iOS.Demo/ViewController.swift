@@ -60,18 +60,16 @@ extension ViewController {
     }
 
     private func setupGTR() {
-        GTR.setup(driver: type(of: self), horn: type(of: self))
+        GTR.setup(driver: type(of: self), horn: type(of: self), optionalEquipments: type(of: self))
     }
 
     private func get() {
         GetDemo().race { destination in
             switch destination {
-            case .win(let httpHeader, let responseData):
-                if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string)")
-                }
+            case .success(let goal):
+                print("\(goal)")
                 break
-            case .lose(let error):
+            case .failure(_):
                 break
             }
         }
@@ -84,11 +82,9 @@ extension ViewController {
     private func brotli() {
         BrotliDemo().race { destination in
             switch destination {
-            case .win(let httpHeader, let responseData):
-                if let string = String(data: responseData, encoding: .utf8) {
-                    print("succeed : \(string)")
-                }
-            case .lose(let error):
+            case .success(let goal):
+                print("\(goal)")
+            case .failure(_):
                 break
             }
         }
@@ -102,7 +98,7 @@ extension ViewController {
 //            switch destination {
 //            case .win(let responseData):
 //                return
-//            case .lose(let error):
+//            case .failure(_):
 //                return
 //            }
 //        })
@@ -131,3 +127,6 @@ extension ViewController: Horn {
     }
 }
 
+extension ViewController: Configuration {
+
+}
