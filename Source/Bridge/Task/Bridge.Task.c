@@ -20,10 +20,10 @@ static void on_http_download_file_success(unsigned int task_id, long http_respon
 static void on_http_download_failure(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
 
 /// on_data_task_succeed_callback
-static void on_data_task_succeed_callback(unsigned int task_id, long http_response_code, const void *header_data, unsigned long header_data_size, const void *body_data, unsigned long body_data_size);
+static void on_data_task_succeed_callback(unsigned int task_id, const void *response_info_data, long response_info_data_size, const void *header_data, long header_data_size, const void *body_data, long body_data_size);
 
 /// on_data_task_failed_callback
-static void on_data_task_failed_callback(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
+static void on_data_task_failed_callback(unsigned int task_id, const void *response_info_data, long response_info_data_size, int error_code, const char *error_message);
 
 gtr_core_data_task *gtr_data_task_create(unsigned *task_id, const char *url, const char *headers) {
     gtr_core_data_task *core_race = gtr_core_data_task_create(task_id, url, headers);
@@ -61,12 +61,12 @@ extern void gtr_cancel(unsigned int task_id) {
 
 }
 
-static void on_data_task_succeed_callback(unsigned int task_id, long http_response_code, const void *header_data, unsigned long header_data_size, const void *body_data, unsigned long body_data_size) {
-    swift_data_task_succeed(task_id, header_data, header_data_size, body_data, body_data_size);
+static void on_data_task_succeed_callback(unsigned int task_id, const void *response_info_data, long response_info_data_size, const void *header_data, long header_data_size, const void *body_data, long body_data_size) {
+    swift_data_task_succeed(task_id, response_info_data, response_info_data_size, header_data, header_data_size, body_data, body_data_size);
 }
 
-static void on_data_task_failed_callback(unsigned int task_id, long http_response_code, int error_code, const char *error_message) {
-    swift_data_task_failed(task_id, http_response_code, error_code, error_message);
+static void on_data_task_failed_callback(unsigned int task_id, const void *response_info_data, long response_info_data_size, int error_code, const char *error_message) {
+    swift_data_task_failed(task_id, response_info_data, response_info_data_size, error_code, error_message);
 }
 
 static void on_http_download_file_progress(unsigned int task_id, unsigned long long downloaded_size, unsigned long long total_size) {

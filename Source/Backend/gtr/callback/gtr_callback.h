@@ -12,13 +12,15 @@
 
 typedef void (*on_data_task_succeed)(
         unsigned int task_id,
-        long http_response_code,
-        const void *header_data, unsigned long header_data_size,
-        const void *body_data, unsigned long body_data_size
-) __attribute__((nonnull(3, 5)));
+        const void *response_info_data, long response_info_data_size,
+        const void *header_data, long header_data_size,
+        const void *body_data, long body_data_size
+) __attribute__((nonnull(2, 4, 6)));
 
 typedef void (*on_data_task_failed)(
-        unsigned int task_id, long http_response_code, int error_code, const char *error_message
-) __attribute__((nonnull(4)));
+        unsigned int task_id,
+        const void *response_info_data, long response_info_data_size,
+        int error_code, const char *error_message
+) __attribute__((nonnull(2, 5)));
 
 #endif /* gtr_callback_h */

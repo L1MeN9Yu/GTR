@@ -10,6 +10,7 @@ public typealias Response = Goal
 public struct Goal {
     public let header: Data?
     public let body: Data
+    public let info: ResponseInfo?
 }
 
 public extension Goal {
@@ -29,6 +30,9 @@ extension Goal: CustomStringConvertible {
         header : \(headerString ?? "")
 
         body : \(bodyString ?? "")
+
+        info: 
+        \(info?.description ?? "")
         """
     }
 }

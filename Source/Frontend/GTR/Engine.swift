@@ -5,8 +5,6 @@
 
 import Foundation
 
-typealias GTRSucceedClosure = (_ httpHeader: HttpHeader?, _ responseData: Foundation.Data) -> Void
-typealias GTRFailureClosure = (_ httpResponseCode: Swift.Int, _ errorCode: Swift.Int32, _ errorMessage: Swift.String) -> Void
 typealias GTRProgressClosure = (_ now: UInt64, _ total: UInt64) -> Void
 typealias GTRHttpHeaderClosure = () -> [Swift.String: Swift.String]
 
@@ -220,11 +218,19 @@ extension Engine {
 }
 
 extension Engine {
-    func dataTaskSucceed(task_id: UInt32, c_header_data: UnsafeRawPointer, c_header_data_size: UInt, c_body_data: UnsafeRawPointer, c_body_data_size: UInt) {
-        let headerData = Data(bytes: c_header_data, count: Int(c_header_data_size))
+    func dataTaskSucceed(
+            task_id: UInt32,
+            response_info_data: UnsafeRawPointer, response_info_data_size: Int,
+            c_header_data: UnsafeRawPointer, c_header_data_size: Int,
+            c_body_data: UnsafeRawPointer, c_body_data_size: Int
+    ) {
+        let headerData = Data(bytes: c_header_data, count: c_header_data_size)
         let header = handleHeader(headerData: headerData)
 
-        let bodyData = Data(bytes: c_body_data, count: Int(c_body_data_size))
+        let bodyData = Data(bytes: c_body_data, count: c_body_data_size)
+
+        let cResponseData = Data(bytes: response_info_data, count: response_info_data_size)
+        let responseInfo: ResponseInfo? = Coder.decode(data: cResponseData)
 
         rwLock.lockRead()
         let result = completionContainer[task_id]
@@ -235,11 +241,18 @@ extension Engine {
         rwLock.unlock()
 
         responseQueue.async {
-            result??(Destination.success(Goal(header: header, body: bodyData)))
+            result??(Destination.success(Goal(header: header, body: bodyData, info: responseInfo)))
         }
     }
 
-    func dataTaskFailed(task_id: UInt32, http_response_code: Int, error_code: Int32, error_message: UnsafePointer<Int8>) {
+    func dataTaskFailed(
+            task_id: UInt32,
+            response_info_data: UnsafeRawPointer, response_info_data_size: Int,
+            error_code: Int32, error_message: UnsafePointer<Int8>
+    ) {
+        let cResponseData = Data(bytes: response_info_data, count: response_info_data_size)
+        let responseInfo: ResponseInfo? = Coder.decode(data: cResponseData)
+
         rwLock.lockRead()
         let result = completionContainer[task_id]
         rwLock.unlock()
@@ -249,14 +262,15 @@ extension Engine {
         rwLock.unlock()
 
         responseQueue.async {
-            result??(Destination.failure(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
+            //ToDo [L1MeN9Yu]
+            result??(Destination.failure(RaceError(responseInfo: responseInfo, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
         }
     }
 }
 
 // MARK: - C CallBack
 
-@_silgen_name("swift_get_request_succeed")
+/*@_silgen_name("swift_get_request_succeed")
 func c_get_request_succeed(task_id: CUnsignedInt,
                            c_header_data: UnsafeRawPointer,
                            c_header_data_size: CUnsignedLong,
@@ -380,7 +394,7 @@ func c_put_request_failure(task_id: CUnsignedInt,
     __engine.responseQueue.async {
         result??(Destination.failure(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
     }
-}
+}*/
 
 @_silgen_name("swift_download_progress")
 func c_download_progress(task_id: CUnsignedInt, download_now: CUnsignedLongLong, download_total: CUnsignedLongLong) {
@@ -424,7 +438,9 @@ func c_download_request_failure(task_id: CUnsignedInt,
                                 http_response_code: CLong,
                                 error_code: CInt,
                                 error_message: UnsafePointer<CChar>) {
-    __engine.rwLock.lockRead()
+    //ToDo [L1MeN9Yu] implement
+    fatalError("not implement")
+/*    __engine.rwLock.lockRead()
     let result = __engine.completionContainer[task_id]
     __engine.rwLock.unlock()
 
@@ -434,7 +450,7 @@ func c_download_request_failure(task_id: CUnsignedInt,
 
     __engine.responseQueue.async {
         result??(Destination.failure(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
-    }
+    }*/
 }
 
 func handleHeader(headerData: Data) -> Data? {

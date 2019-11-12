@@ -24,6 +24,7 @@
 #include "gtr_file_utilty.h"
 #include "gtr_task_id.h"
 #include "gtr_method.h"
+#include "gtr_response.h"
 
 /**
  * 请求的线程池
@@ -260,23 +261,24 @@ static void request(gtr_core_data_task *data_task) {
     }
 
     {
-        long http_response_code = 0;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_response_code);
-
-        long condition_unmet = 0;
-        curl_easy_getinfo(curl, CURLINFO_CONDITION_UNMET, &condition_unmet);
-
+        char *response_info = NULL;
+        size_t response_info_size = 0;
+        gtr_get_data_task_response_info(curl, data_task, &response_info, &response_info_size);
         /* check for errors */
         if (res != CURLE_OK) {
             gtr_core_log(gtr_log_flag_error, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
             if (data_task->on_failed) {
-                data_task->on_failed(data_task->task_id, http_response_code, res, curl_easy_strerror(res));
+                data_task->on_failed(data_task->task_id, response_info, response_info_size, res, curl_easy_strerror(res));
             }
         } else {
             gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_body.size);
             if (data_task->on_succeed) {
-                data_task->on_succeed(data_task->task_id, http_response_code, response_header.data, response_header.size, response_body.data, response_body.size);
+                data_task->on_succeed(data_task->task_id, response_info, response_info_size, response_header.data, response_header.size, response_body.data, response_body.size);
             }
+        }
+
+        if (response_info){
+            free(response_info);
         }
     }
 
