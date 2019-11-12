@@ -27,6 +27,8 @@
 		1014446422FAE4B700275DA2 /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446322FAE4B700275DA2 /* LDAP.framework */; };
 		1014446622FAE4D900275DA2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446522FAE4D900275DA2 /* libz.tbd */; };
 		10ACE334233081A1006CFEDD /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446322FAE4B700275DA2 /* LDAP.framework */; };
+		4226E54B237AA288001CF4B9 /* libcJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4226E54A237AA27C001CF4B9 /* libcJSON.a */; };
+		4226E54E237AA2EB001CF4B9 /* libcJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4226E54C237AA299001CF4B9 /* libcJSON.a */; };
 		427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 427D2AF32119FCEA00314C23 /* libz.tbd */; };
 		42C2C92D23797335001BC1D7 /* GetDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */; };
 		42C2C92E23797335001BC1D7 /* BrotliDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE96645DF01C2B54B99E /* BrotliDemo.swift */; };
@@ -59,6 +61,8 @@
 		453042E316ADCFBD9CA120FD /* gtr_task_id.c in Sources */ = {isa = PBXBuildFile; fileRef = 453042618C3440EFFB3E5ECA /* gtr_task_id.c */; };
 		453042F7D04D7A9973B6140E /* RaceOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304147F0F9588BFD84C370 /* RaceOptions.swift */; };
 		453043019715130918016EEC /* gtr_callback.h in Headers */ = {isa = PBXBuildFile; fileRef = 453040DBEC7B95F7855F185D /* gtr_callback.h */; };
+		4530430557B63729185B978E /* gtr_response.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530442FA9172EF1D3A9FD2A /* gtr_response.c */; };
+		453043079241B1F5857EAB08 /* gtr_response.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530456198C60CC3F6813D95 /* gtr_response.h */; };
 		453043197794166E2032DB24 /* Bridge.Task.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530460F1160445F37D5FC14 /* Bridge.Task.h */; };
 		4530436ADA34EDE9D7B9175F /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453048AD1CF0E9303476421E /* Engine.swift */; };
 		4530438317E139DA683066AE /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530409BD353035B085B3C43 /* GTR.swift */; };
@@ -98,6 +102,7 @@
 		453048AA22C8A7CBDB3E5852 /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304BB687C668668605CD0F /* Race.swift */; };
 		453048F3D83F004AC05F0115 /* gtr_log.h in Headers */ = {isa = PBXBuildFile; fileRef = 453046B78AE5DDE753D1E372 /* gtr_log.h */; };
 		453048F40031D8EEF0F7667E /* CustomDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043524BBF19360E89D12A /* CustomDemo.swift */; };
+		4530493157B9652A1797B2A1 /* gtr_response.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530456198C60CC3F6813D95 /* gtr_response.h */; };
 		453049381C4B1261B61B6777 /* gtr_callback.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304DD81244CC86D323BADB /* gtr_callback.c */; };
 		453049474CBE170EA93A0920 /* gtr_proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 453048F080CF4B56A9516823 /* gtr_proxy.h */; };
 		45304948B771B5FE5BDB5888 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = 453049D9A2FBAAF2D55E3BDB /* gtr_atomic.h */; };
@@ -133,6 +138,7 @@
 		45304EFF6DB5D9AB04D92234 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = 453049D9A2FBAAF2D55E3BDB /* gtr_atomic.h */; };
 		45304F11DFE46B24260C28B2 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530429585B7B5F90F944B5D /* Method.swift */; };
 		45304F128D7EF44CFC348E36 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453042B7E28C5CC1B74939B3 /* Goal.swift */; };
+		45304F406EFF2F8C4BA62732 /* gtr_response.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530442FA9172EF1D3A9FD2A /* gtr_response.c */; };
 		45304F5D7CA7D371A71C4EBD /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044C9CEB3987575E9104C /* gtr_thread_pool.h */; };
 		45304F84D5E92F5F1AAC3EBB /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530479472D7EB72D361A9BE /* gtr_core.h */; };
 		45304F8B9A87D771702947D3 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530476DA4F717F971216FF5 /* Coder.swift */; };
@@ -213,6 +219,8 @@
 		420D2F3C237A611600B67E37 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		420D2F3D237A611600B67E37 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		420D2F3E237A611600B67E37 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		4226E54A237AA27C001CF4B9 /* libcJSON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcJSON.a; path = ExternalLibrary/iOS/libcJSON/lib/libcJSON.a; sourceTree = "<group>"; };
+		4226E54C237AA299001CF4B9 /* libcJSON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcJSON.a; path = ExternalLibrary/macOS/libcJSON/lib/libcJSON.a; sourceTree = "<group>"; };
 		427D2AF32119FCEA00314C23 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		42F0B0982119EF8A00D01CC4 /* GTR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0B09C2119EF8A00D01CC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -231,10 +239,12 @@
 		453043524BBF19360E89D12A /* CustomDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDemo.swift; sourceTree = "<group>"; };
 		4530437B47CE4FD6AD68ECA0 /* ProxyDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProxyDemo.swift; sourceTree = "<group>"; };
 		453043A5B7BB7B56EDABCFA6 /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
+		4530442FA9172EF1D3A9FD2A /* gtr_response.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_response.c; sourceTree = "<group>"; };
 		4530444CAF8488C3DD4A2D39 /* RaceSpeedLimit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceSpeedLimit.swift; sourceTree = "<group>"; };
 		4530447DEF7F65DBA6CC1FCF /* gtr_task_id.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_task_id.h; sourceTree = "<group>"; };
 		453044C9CEB3987575E9104C /* gtr_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_thread_pool.h; sourceTree = "<group>"; };
 		453044F2A2359F10494DFB9A /* Bridge.Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.Core.h; sourceTree = "<group>"; };
+		4530456198C60CC3F6813D95 /* gtr_response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_response.h; sourceTree = "<group>"; };
 		4530460F1160445F37D5FC14 /* Bridge.Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.Task.h; sourceTree = "<group>"; };
 		45304658050C8401DBCAE0F6 /* gtr_method.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_method.h; sourceTree = "<group>"; };
 		4530466502F7970352AF4A13 /* gtr_race.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_race.c; sourceTree = "<group>"; };
@@ -299,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1014446622FAE4D900275DA2 /* libz.tbd in Frameworks */,
+				4226E54E237AA2EB001CF4B9 /* libcJSON.a in Frameworks */,
 				1014446422FAE4B700275DA2 /* LDAP.framework in Frameworks */,
 				1014446222FAE31000275DA2 /* libcurl.a in Frameworks */,
 				1014446022FAE2F900275DA2 /* libbrotli.a in Frameworks */,
@@ -310,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1014445E22FAAFBF00275DA2 /* libbrotli.a in Frameworks */,
+				4226E54B237AA288001CF4B9 /* libcJSON.a in Frameworks */,
 				101443F122FA877500275DA2 /* libcurl.a in Frameworks */,
 				427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */,
 			);
@@ -358,6 +370,8 @@
 		427D2AEA2119FA1D00314C23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4226E54A237AA27C001CF4B9 /* libcJSON.a */,
+				4226E54C237AA299001CF4B9 /* libcJSON.a */,
 				1014446522FAE4D900275DA2 /* libz.tbd */,
 				1014446322FAE4B700275DA2 /* LDAP.framework */,
 				1014446122FAE31000275DA2 /* libcurl.a */,
@@ -451,6 +465,7 @@
 				453041108EA977EA9E8CE015 /* task_id */,
 				45304A441C64BE38AEBD28B8 /* callback */,
 				453047C793222F71325964E9 /* method */,
+				45304AEB073BB83DC6906D1E /* reponse */,
 			);
 			path = gtr;
 			sourceTree = "<group>";
@@ -547,6 +562,15 @@
 				45304DD81244CC86D323BADB /* gtr_callback.c */,
 			);
 			path = callback;
+			sourceTree = "<group>";
+		};
+		45304AEB073BB83DC6906D1E /* reponse */ = {
+			isa = PBXGroup;
+			children = (
+				4530456198C60CC3F6813D95 /* gtr_response.h */,
+				4530442FA9172EF1D3A9FD2A /* gtr_response.c */,
+			);
+			path = reponse;
 			sourceTree = "<group>";
 		};
 		45304BC9A0A021915F294B19 /* Task */ = {
@@ -646,6 +670,7 @@
 				4530449AE624A8B6BDDE698C /* Bridge.Callback.h in Headers */,
 				45304047C17289D541291039 /* Bridge.Core.h in Headers */,
 				453043197794166E2032DB24 /* Bridge.Task.h in Headers */,
+				4530493157B9652A1797B2A1 /* gtr_response.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +692,7 @@
 				45304A83A52F6B336489BBD2 /* Bridge.Callback.h in Headers */,
 				45304A1E6D72A19BEC13AD21 /* Bridge.Core.h in Headers */,
 				4530408B6B34416E056D8EDD /* Bridge.Task.h in Headers */,
+				453043079241B1F5857EAB08 /* gtr_response.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -909,6 +935,7 @@
 				453042F7D04D7A9973B6140E /* RaceOptions.swift in Sources */,
 				45304A108895266D46FF62C1 /* RaceSpeedLimit.swift in Sources */,
 				45304F128D7EF44CFC348E36 /* Goal.swift in Sources */,
+				45304F406EFF2F8C4BA62732 /* gtr_response.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,6 +979,7 @@
 				45304DE60DD72928E0C20FBC /* RaceOptions.swift in Sources */,
 				453046279E26F2A8DB204FB7 /* RaceSpeedLimit.swift in Sources */,
 				4530445C1A07B77ADF72240C /* Goal.swift in Sources */,
+				4530430557B63729185B978E /* gtr_response.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,6 +1136,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/include",
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libbrotli/include",
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcJSON/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1120,6 +1149,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libbrotli/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcJSON/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MARKETING_VERSION = 0.8.0;
@@ -1150,6 +1180,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/include",
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libbrotli/include",
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcJSON/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1162,6 +1193,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libbrotli/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcurl/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcJSON/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MARKETING_VERSION = 0.8.0;
@@ -1309,6 +1341,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/include",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/include",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcJSON/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1321,6 +1354,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcJSON/lib",
 				);
 				MARKETING_VERSION = 0.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
@@ -1346,6 +1380,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/include",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/include",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcJSON/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1358,6 +1393,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcJSON/lib",
 				);
 				MARKETING_VERSION = 0.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;

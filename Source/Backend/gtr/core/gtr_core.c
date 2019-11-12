@@ -13,6 +13,7 @@
 #include <zconf.h>
 #include <assert.h>
 #include <curl/curl.h>
+#include <cJSON/cJSON.h>
 #include "gtr_core.h"
 #include "gtr_race.h"
 #include "gtr_thread_pool.h"
@@ -186,8 +187,8 @@ static int progress_callback(
 }
 
 //--- Core
-static void request(gtr_core_data_task *core_race) {
-    CURL *curl_handle;
+static void request(gtr_core_data_task *data_task) {
+    CURL *curl;
     CURLcode res;
 
     gtr_core_race_response_header response_header;
@@ -202,79 +203,79 @@ static void request(gtr_core_data_task *core_race) {
         response_body.size = 0;
     }
 
-    curl_handle = curl_easy_init();
+    curl = curl_easy_init();
 
     {
-        gtr_core_config_http_method(curl_handle, core_race);
+        gtr_core_config_http_method(curl, data_task);
     }
 
     {
-        gtr_core_config_url(curl_handle, core_race->url);
+        gtr_core_config_url(curl, data_task->url);
     }
 
     {
-        gtr_core_config_accept_encoding(curl_handle);
+        gtr_core_config_accept_encoding(curl);
     }
 
     {
-        gtr_core_config_keep_alive(curl_handle);
+        gtr_core_config_keep_alive(curl);
     }
 
     {
-        gtr_core_config_verify_peer(curl_handle, true);
+        gtr_core_config_verify_peer(curl, true);
     }
 
     {
-        gtr_core_config_time_out(curl_handle, core_race->options.time_out);
+        gtr_core_config_time_out(curl, data_task->options.time_out);
     }
 
     {
         //如果不使用threaded resolver或者c-ares,需要no_signal=1,否则在dns解析超时情况下crash
         //详见:https://curl.haxx.se/libcurl/c/CURLOPT_NOSIGNAL.html https://curl.haxx.se/libcurl/c/threadsafe.html
-        gtr_core_config_signal(curl_handle, true);
+        gtr_core_config_signal(curl, true);
     }
 
     {
-        gtr_core_config_header_call_back(curl_handle, &response_header);
+        gtr_core_config_header_call_back(curl, &response_header);
     }
 
     {
-        gtr_core_config_write_call_back(curl_handle, &response_body);
+        gtr_core_config_write_call_back(curl, &response_body);
     }
 
     {
-        gtr_core_config_progress(curl_handle, core_race);
+        gtr_core_config_progress(curl, data_task);
     }
 
-    gtr_core_config_proxy(curl_handle, core_race);
-    gtr_core_config_max_redirects(curl_handle, core_race->options.max_redirects);
-    gtr_core_config_speed(curl_handle, core_race->speed);
-    gtr_core_config_debug(curl_handle, core_race->options.is_debug);
+    gtr_core_config_proxy(curl, data_task);
+    gtr_core_config_max_redirects(curl, data_task->options.max_redirects);
+    gtr_core_config_speed(curl, data_task->speed);
+    gtr_core_config_debug(curl, data_task->options.is_debug);
 
-    struct curl_slist *header = gtr_core_add_custom_headers(core_race->header);
-    gtr_core_config_headers(curl_handle, global_user_agent, header);
+    struct curl_slist *header = gtr_core_add_custom_headers(data_task->header);
+    gtr_core_config_headers(curl, global_user_agent, header);
 
     {
-        res = curl_easy_perform(curl_handle);
+        res = curl_easy_perform(curl);
     }
 
     {
         long http_response_code = 0;
-        curl_easy_getinfo(curl_handle, CURLINFO_RESPONSE_CODE, &http_response_code);
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_response_code);
 
         long condition_unmet = 0;
-        curl_easy_getinfo(curl_handle, CURLINFO_CONDITION_UNMET, &condition_unmet);
+        curl_easy_getinfo(curl, CURLINFO_CONDITION_UNMET, &condition_unmet);
 
         /* check for errors */
         if (res != CURLE_OK) {
             gtr_core_log(gtr_log_flag_error, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-            if (core_race->on_failed) {
-                core_race->on_failed(core_race->task_id, http_response_code, res, curl_easy_strerror(res));
+            if (data_task->on_failed) {
+                data_task->on_failed(data_task->task_id, http_response_code, res, curl_easy_strerror(res));
             }
         } else {
             gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_body.size);
-            if (core_race->on_succeed) {
-                core_race->on_succeed(core_race->task_id, http_response_code, response_header.data, response_header.size, response_body.data, response_body.size);
+            if (data_task->on_succeed) {
+                data_task->on_succeed(data_task->task_id, http_response_code, response_header.data, response_header.size, response_body.data, response_body.size);
             }
         }
     }
@@ -283,17 +284,17 @@ static void request(gtr_core_data_task *core_race) {
         if (header) {curl_slist_free_all(header);}
     }
     {
-        if (core_race->proxy && core_race->proxy->url) {
-            free(core_race->proxy->url);
-            free(core_race->proxy);
+        if (data_task->proxy && data_task->proxy->url) {
+            free(data_task->proxy->url);
+            free(data_task->proxy);
         }
     }
     {
-        curl_easy_cleanup(curl_handle);
-        free(core_race->url);
-        free(core_race->header);
-        free(core_race->method);
-        free(core_race);
+        curl_easy_cleanup(curl);
+        free(data_task->url);
+        free(data_task->header);
+        free(data_task->method);
+        free(data_task);
         free(response_header.data);
         free(response_body.data);
     }
@@ -310,11 +311,13 @@ void gtr_core_init(const char *user_agent, void *log_callback, unsigned int cyli
     gtr_core_create_temp_dir();
     gtr_core_log(
             gtr_log_flag_trace,
-            "GTR start succeed !!!\n"
-            "global_user_agent = %s\n"
-            "curl version : %s",
+            "GTR start succeed \n"
+            "global_user_agent = %s \n"
+            "curl version : %s \n"
+            "cJSON version: %s",
             global_user_agent,
-            curl_version()
+            curl_version(),
+            cJSON_Version()
     );
 }
 

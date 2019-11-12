@@ -18,6 +18,8 @@ private(set) var __horn: Horn.Type!
 
 private(set) var __gearBox: GearBox.Type!
 
+private var fired = false
+
 // MARK: - Tasks
 @discardableResult
 func dataTask(method: Method,
@@ -29,6 +31,8 @@ func dataTask(method: Method,
               proxy: (String, Int)?,
               param: [String: Any]?,
               completion: Result?) -> UInt32 {
+    assert(fired, "must setup first")
+
     var allHeaders = contentType.toHeader()
 
     if let globalHeader = __driver.identity {
@@ -67,6 +71,7 @@ public func setup(agent: Agent, logger: Logger, configuration: Configuration) {
     __gearBox = configuration
     __engine.fire(engineNumber: agent.userAgent, cylinderCount: __gearBox.threadCount)
     __engine.config(responseQueue: __gearBox.responseQueue)
+    fired = true
 }
 
 // MARK: - Extern

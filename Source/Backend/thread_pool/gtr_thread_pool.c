@@ -313,7 +313,7 @@ static void *thread_do(thread *thread_p) {
 
     /* Set thread name for profiling and debugging */
     char thread_name[128] = {0};
-    sprintf(thread_name, "top.limengyu.gtr_thread_pool.thread_%d", thread_p->id);
+    sprintf(thread_name, "top.limengyu.GTR.thread_pool.%d", thread_p->id);
 
 #if defined(__linux__)
     /* Use prctl instead to prevent using _GNU_SOURCE flag and implicit declaration */

@@ -11,8 +11,10 @@
 
 
 typedef void (*on_data_task_succeed)(
-        unsigned int task_id, long http_response_code, const void *header_data,
-        unsigned long header_data_size, const void *body_data, unsigned long body_data_size
+        unsigned int task_id,
+        long http_response_code,
+        const void *header_data, unsigned long header_data_size,
+        const void *body_data, unsigned long body_data_size
 ) __attribute__((nonnull(3, 5)));
 
 typedef void (*on_data_task_failed)(

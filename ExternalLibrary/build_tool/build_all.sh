@@ -3,31 +3,39 @@
 echo "Remove build folder"
 rm -rf build
 
-echo "Build Brotli for iOS"
+
+echo "Build Brotli/cJSON for iOS"
 xmake m package -p iphoneos -f "--target_minver=9 --cxflags=\"-fembed-bitcode\" --mxflags=\"-fembed-bitcode\" --asflags=\"-fembed-bitcode\""
 
-echo "Build Brotli for macOS"
+echo "Build Brotli/cJSON for macOS"
 xmake m package -p macosx -f "--target_minver=10.12 --cxflags=\"-fembed-bitcode\" --mxflags=\"-fembed-bitcode\" --asflags=\"-fembed-bitcode\""
 
 echo "Create folders"
-mkdir \
-build/iOS build/macOS build/iOS/libcurl build/iOS/libbrotli build/macOS/libcurl \
-build/macOS/libbrotli build/iOS/libbrotli/lib build/macOS/libbrotli/lib \
-build/iOS/libcurl/lib build/macOS/libcurl/lib
+mkdir -p \
+build/iOS/libbrotli/lib build/macOS/libbrotli/lib \
+build/iOS/libcurl/lib build/macOS/libcurl/lib \
+build/iOS/libcJSON/lib build/macOS/libcJSON/lib \
+build/iOS/libcJSON/include/cJSON build/macOS/libcJSON/include/cJSON \
 
 echo "Copy Headers"
 mv build/brotli.pkg build/brotli
 cp -r brotli/c/include build/iOS/libbrotli/include 
 cp -r brotli/c/include build/macOS/libbrotli/include 
 
+mv build/cJSON.pkg build/cJSON
+cp -r cJSON/cJSON.h build/iOS/libcJSON/include/cJSON
+cp -r cJSON/cJSON.h build/macOS/libcJSON/include/cJSON
+
 echo "Copy Libs"
 cp build/brotli/iphoneos/universal/lib/release/libbrotli.a build/iOS/libbrotli/lib/libbrotli.a
 cp build/brotli/iphoneos/universal/lib/release/libbrotli.a build/iOS/libbrotli/lib/libbrotlidec.a
-lipo -create build/brotli/macosx/i386/lib/release/libbrotli.a build/brotli/macosx/x86_64/lib/release/libbrotli.a -output build/macOS/libbrotli/lib/libbrotli.a
+cp build/cJSON/iphoneos/universal/lib/release/libcJSON.a build/iOS/libcJSON/lib/libcJSON.a
+cp build/brotli/macosx/x86_64/lib/release/libbrotli.a build/macOS/libbrotli/lib/libbrotli.a
 cp build/macOS/libbrotli/lib/libbrotli.a build/macOS/libbrotli/lib/libbrotlidec.a
+cp build/cJSON/macosx/x86_64/lib/release/libcJSON.a build/macOS/libcJSON/lib/libcJSON.a
 
 echo "clean brotli files"
-rm -rf .xmake build/.deps build/.objs build/brotli build/iphoneos build/macosx
+rm -rf .xmake build/.deps build/.objs build/brotli build/cJSON build/iphoneos build/macosx
 
 realpath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"

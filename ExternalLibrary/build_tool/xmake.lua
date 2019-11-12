@@ -5,6 +5,11 @@ target("brotli")
     add_files("brotli/c/dec/**.c")
     add_files("brotli/c/enc/**.c")
 
-    add_headerfiles("brotli/c/include/**.h", {public = true})
-
     add_includedirs("brotli/c/include", {public = true})
+
+target("cJSON")
+    set_kind("static")
+
+    add_files("cJSON/**.c")
+
+    add_includedirs("cJSON/**.h")
