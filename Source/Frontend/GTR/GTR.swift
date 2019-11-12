@@ -5,6 +5,8 @@
 
 // MARK: - Components
 
+import Foundation
+
 private(set) var __engine = { () -> Engine in
     let engine = Engine()
     return engine

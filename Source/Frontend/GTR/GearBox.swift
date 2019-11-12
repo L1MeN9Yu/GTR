@@ -4,6 +4,7 @@
 //
 
 import class Dispatch.DispatchQueue
+import class Foundation.ProcessInfo
 
 public typealias Configuration = GearBox.Type
 
@@ -14,7 +15,7 @@ public protocol GearBox {
     static var responseQueue: DispatchQueue { get }
     /// is debug mode , default is false
     static var debug: Bool { get }
-    /// number of thread to use , default is 8
+    /// number of thread to use , default is ProcessInfo.processInfo.activeProcessorCount
     static var threadCount: UInt32 { get }
     /// proxy , default is nil
     static var proxy: (String, Int)? { get }
@@ -24,6 +25,6 @@ public extension GearBox {
     static var timeout: UInt32 { 10 }
     static var responseQueue: DispatchQueue { DispatchQueue.main }
     static var debug: Bool { false }
-    static var threadCount: UInt32 { 8 }
+    static var threadCount: UInt32 { ProcessInfo.processInfo.activeProcessorCount }
     static var proxy: (String, Int)? { nil }
 }
