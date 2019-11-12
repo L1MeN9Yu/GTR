@@ -24,6 +24,8 @@ gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char 
 
     core_request->url = strdup(url);
 
+    core_request->proxy = NULL;
+
     if (header) {core_request->header = strdup(header);}
     return core_request;
 }
@@ -53,10 +55,10 @@ void gtr_core_data_task_config_speed(gtr_core_data_task *core_race, long max_rec
 }
 
 void gtr_core_data_task_config_proxy(gtr_core_data_task *core_race, const char *url, long port) {
-    if (url && strlen(url) > 0) {
-        gtr_task_proxy proxy = {NULL, port};
-        proxy.url = strdup(url);
-        core_race->proxy = proxy;
+    if (url && strlen(url) > 0 && port > 0) {
+        core_race->proxy = malloc(sizeof(gtr_task_proxy));
+        core_race->proxy->url = strdup(url);
+        core_race->proxy->port = port;
     }
 }
 

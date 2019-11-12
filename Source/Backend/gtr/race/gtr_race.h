@@ -79,7 +79,7 @@ struct gtr_core_data_task {
     char *header;
     gtr_task_options options;
     gtr_task_speed speed;
-    gtr_task_proxy proxy;
+    gtr_task_proxy *proxy;
     gtr_task_request_body *request_data;
 
     /**

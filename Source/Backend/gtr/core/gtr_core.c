@@ -283,8 +283,9 @@ static void request(gtr_core_data_task *core_race) {
         if (header) {curl_slist_free_all(header);}
     }
     {
-        if (core_race->proxy.url && strlen(core_race->proxy.url) > 0) {
-            free(core_race->proxy.url);
+        if (core_race->proxy && core_race->proxy->url) {
+            free(core_race->proxy->url);
+            free(core_race->proxy);
         }
     }
     {
@@ -431,9 +432,9 @@ static void gtr_core_config_signal(CURL *handle, bool is_on) {
 }
 
 static void gtr_core_config_proxy(CURL *handle, gtr_core_data_task *core_data_task) {
-    if (core_data_task && core_data_task->proxy.url && strlen(core_data_task->proxy.url) > 0 && core_data_task->proxy.port > 0) {
-        curl_easy_setopt(handle, CURLOPT_PROXY, core_data_task->proxy.url);
-        curl_easy_setopt(handle, CURLOPT_PROXYPORT, core_data_task->proxy.port);
+    if (core_data_task && core_data_task->proxy && core_data_task->proxy->url && strlen(core_data_task->proxy->url) > 0 && core_data_task->proxy->port > 0) {
+        curl_easy_setopt(handle, CURLOPT_PROXY, core_data_task->proxy->url);
+        curl_easy_setopt(handle, CURLOPT_PROXYPORT, core_data_task->proxy->port);
     }
 }
 

@@ -25,6 +25,6 @@ public extension GearBox {
     static var timeout: UInt32 { 10 }
     static var responseQueue: DispatchQueue { DispatchQueue.main }
     static var debug: Bool { false }
-    static var threadCount: UInt32 { ProcessInfo.processInfo.activeProcessorCount }
+    static var threadCount: UInt32 { UInt32(ProcessInfo.processInfo.activeProcessorCount) }
     static var proxy: (String, Int)? { nil }
 }

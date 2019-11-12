@@ -67,10 +67,10 @@ DESTDIR="$SCRIPTPATH/build"
 echo "Build libcurl for macOSX"
 
 export MACOSX_DEPLOYMENT_TARGET="10.12"
-ARCHS=(i386 x86_64)
-HOSTS=(i386 x86_64)
-PLATFORMS=(MacOSX MacOSX)
-SDK=(MacOSX MacOSX)
+ARCHS=(x86_64)
+HOSTS=(x86_64)
+PLATFORMS=(MacOSX)
+SDK=(MacOSX)
 BROTLI="${PWD}/../build/macOS/libbrotli"
 
 for (( i=0; i<${#ARCHS[@]}; i++ )); do
@@ -78,6 +78,7 @@ for (( i=0; i<${#ARCHS[@]}; i++ )); do
 	ARCH=${ARCHS[$i]}
 	export CFLAGS="-arch $ARCH -pipe -Os -gdwarf-2 -mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} -fembed-bitcode -Werror=partial-availability"
 	export LDFLAGS="-arch $ARCH"
+	export CPPFLAGS="-I${PWD}/../include"
 
 	cd "$CURLPATH" || exit
 	./configure	--host="${HOSTS[$i]}-apple-darwin" \
