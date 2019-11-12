@@ -210,6 +210,9 @@
 		1014446322FAE4B700275DA2 /* LDAP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LDAP.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/LDAP.framework; sourceTree = DEVELOPER_DIR; };
 		1014446522FAE4D900275DA2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
 		1014446822FAEE1A00275DA2 /* GTR.Mac.Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GTR.Mac.Demo.entitlements; sourceTree = "<group>"; };
+		420D2F3C237A611600B67E37 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		420D2F3D237A611600B67E37 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
+		420D2F3E237A611600B67E37 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		427D2AF32119FCEA00314C23 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		42F0B0982119EF8A00D01CC4 /* GTR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0B09C2119EF8A00D01CC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -384,6 +387,9 @@
 		42F0B08E2119EF8A00D01CC4 = {
 			isa = PBXGroup;
 			children = (
+				420D2F3D237A611600B67E37 /* .gitattributes */,
+				420D2F3E237A611600B67E37 /* .gitignore */,
+				420D2F3C237A611600B67E37 /* README.md */,
 				1014443822FAA48600275DA2 /* Source */,
 				42C2C92C23797303001BC1D7 /* RaceDemo */,
 				101443F722FA883A00275DA2 /* GTR.Mac.Demo */,

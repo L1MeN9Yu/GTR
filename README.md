@@ -1,2 +1,2 @@
 # GTR
-a network library base on curl written in swift
+a network library base on libcurl written in swift
