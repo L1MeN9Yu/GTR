@@ -25,26 +25,30 @@ static void on_data_task_succeed_callback(unsigned int task_id, long http_respon
 /// on_data_task_failed_callback
 static void on_data_task_failed_callback(unsigned int task_id, long http_response_code, int error_code, const char *error_message);
 
-gtr_core_race *gtr_data_task_create(unsigned *task_id, const char *url, const char *headers) {
-    gtr_core_race *core_race = gtr_core_data_task_create(task_id, url, headers);
+gtr_core_data_task *gtr_data_task_create(unsigned *task_id, const char *url, const char *headers) {
+    gtr_core_data_task *core_race = gtr_core_data_task_create(task_id, url, headers);
     return core_race;
 }
 
-void gtr_data_task_config_parameters(gtr_core_race *core_race, const char *method, const void *param_data, unsigned long param_size) {
+void gtr_data_task_config_parameters(gtr_core_data_task *core_race, const char *method, const void *param_data, unsigned long param_size) {
     gtr_core_data_task_config_parameters(core_race, method, param_data, param_size);
 }
 
-void gtr_data_task_config_options(gtr_core_race *core_race, bool is_debug, unsigned int time_out, long max_redirects) {
+void gtr_data_task_config_options(gtr_core_data_task *core_race, bool is_debug, unsigned int time_out, long max_redirects) {
     gtr_core_data_task_config_options(core_race, is_debug, time_out, max_redirects);
 }
 
-void gtr_data_task_config_speed(gtr_core_race *core_race, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time) {
+void gtr_data_task_config_speed(gtr_core_data_task *core_race, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time) {
     gtr_core_data_task_config_speed(core_race, max_receive_speed, max_send_speed, low_speed_limit, low_speed_time);
 }
 
-void gtr_data_task_start(gtr_core_race *core_race) {
+void gtr_data_task_config_proxy(gtr_core_data_task *core_race, const char *url, long port) {
+    gtr_core_data_task_config_proxy(core_race, url, port);
+}
+
+void gtr_data_task_start(gtr_core_data_task *core_race) {
     gtr_core_data_task_config_callback(core_race, &on_data_task_succeed_callback, &on_data_task_failed_callback);
-    gtr_core_race_start(core_race);
+    gtr_core_data_task_start(core_race);
 }
 
 //---------- 下载文件

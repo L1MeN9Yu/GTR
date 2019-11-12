@@ -4,10 +4,6 @@
 //
 
 // MARK: - Components
-private(set) var __gearbox = { () -> Gearbox in
-    let gearbox = Gearbox()
-    return gearbox
-}()
 
 private(set) var __engine = { () -> Engine in
     let engine = Engine()
@@ -18,7 +14,7 @@ private(set) var __driver: Driver.Type!
 
 private(set) var __horn: Horn.Type!
 
-private(set) var __optionalEquipments: OptionalEquipments.Type!
+private(set) var __gearBox: GearBox.Type!
 
 // MARK: - Tasks
 @discardableResult
@@ -28,11 +24,12 @@ func dataTask(method: Method,
               headers: [String: Encodable]?,
               options: RaceOptions,
               speedLimit: RaceSpeedLimit,
+              proxy: (String, Int)?,
               param: [String: Any]?,
               completion: Result?) -> UInt32 {
     var allHeaders = contentType.toHeader()
 
-    if let globalHeader = __driver?.identity() {
+    if let globalHeader = __driver.identity {
         allHeaders.merge(globalHeader) { (value_old: Encodable, value_new: Encodable) -> Encodable in value_new }
     }
 
@@ -42,11 +39,15 @@ func dataTask(method: Method,
 
     switch method {
     case .get:
-        return __engine.getRequest(url: url, headers: allHeaders, method: method, contentType: contentType, options: options, speedLimit: speedLimit, param: param, completion: completion)
+        return __engine.getRequest(
+                url: url, headers: allHeaders, method: method, contentType: contentType,
+                options: options, speedLimit: speedLimit, proxy: proxy, param: param, completion: completion)
     case .post:
-        return __engine.postRequest(url: url, headers: allHeaders,method: method,contentType: contentType, options: options, speedLimit: speedLimit, param: param, completion: completion)
+        return __engine.postRequest(url: url, headers: allHeaders, method: method, contentType: contentType,
+                options: options, speedLimit: speedLimit, proxy: proxy, param: param, completion: completion)
     case .custom(_):
-        return __engine.customRequest(url: url, headers: allHeaders, method: method, contentType: contentType, options: options, speedLimit: speedLimit, param: param, completion: completion)
+        return __engine.customRequest(url: url, headers: allHeaders, method: method, contentType: contentType,
+                options: options, speedLimit: speedLimit, proxy: proxy, param: param, completion: completion)
 //    case .download:
 //        guard let downloadPath = downloadPath else { fatalError("must use download path") }
 //        return __engine.downloadRequest(url: url, filePath: downloadPath, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, progress: progress, completion: completion)
@@ -58,24 +59,12 @@ func dataTask(method: Method,
 
 
 // MARK: - Config
-public func setup(driver: Driver.Type, horn: Horn.Type, optionalEquipments: OptionalEquipments.Type) {
-    __driver = driver
-    __horn = horn
-    __optionalEquipments = optionalEquipments
-    __engine.fire(engineNumber: driver.userAgent(), cylinderCount: __optionalEquipments.threadCount)
-    __engine.config(responseQueue: __optionalEquipments.responseQueue)
-    __gearbox.start()
-}
-
-public func configProxy(isEnable: Bool, url: String, port: UInt32) {
-    __gearbox.config(proxy: isEnable, url: url, port: port)
-}
-
-public func fetchProxyInfo() -> (String, UInt32)? {
-    if let proxyInfo = Gearbox.proxyInfo {
-        return (proxyInfo.url, proxyInfo.port)
-    }
-    return nil
+public func setup(agent: Agent, logger: Logger, configuration: Configuration) {
+    __driver = agent
+    __horn = logger
+    __gearBox = configuration
+    __engine.fire(engineNumber: agent.userAgent, cylinderCount: __gearBox.threadCount)
+    __engine.config(responseQueue: __gearBox.responseQueue)
 }
 
 // MARK: - Extern

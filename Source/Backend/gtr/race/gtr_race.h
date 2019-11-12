@@ -1,5 +1,5 @@
 //
-//  gtr_core_race.h
+//  gtr_core_data_task.h
 //  GTR
 //
 //  Created L1MeN9Yu on 2018/9/2.
@@ -30,7 +30,7 @@ typedef struct gtr_core_race_request_body {
     char *data;
     unsigned long size;
     unsigned long size_left;
-} gtr_core_race_request_body;
+} gtr_task_request_body;
 
 /**
  *
@@ -48,7 +48,7 @@ typedef struct gtr_core_race_download_data {
     unsigned int task_id;
 
     void (*on_progress)(unsigned int task_id, unsigned long long now, unsigned long long total);
-} gtr_core_race_download_data;
+} gtr_task_download_data;
 
 typedef struct gtr_task_options {
     bool is_debug;
@@ -62,10 +62,16 @@ typedef struct gtr_task_speed {
     long low_speed_limit;
     long low_speed_time;
 } gtr_task_speed;
+
+typedef struct gtr_task_proxy {
+    char *url;
+    long port;
+} gtr_task_proxy;
+
 /**
  * 请求
  */
-struct gtr_core_race {
+struct gtr_core_data_task {
     unsigned int task_id;
     bool is_cancel;
     char *method;
@@ -73,8 +79,8 @@ struct gtr_core_race {
     char *header;
     gtr_task_options options;
     gtr_task_speed speed;
-    gtr_core_race_request_body *request_data;
-    gtr_core_race_download_data *download_data;
+    gtr_task_proxy proxy;
+    gtr_task_request_body *request_data;
 
     /**
      * succeed callback
@@ -96,27 +102,16 @@ struct gtr_core_race {
     on_data_task_failed on_failed;
 };
 
-gtr_core_race *gtr_data_task_init(
-        unsigned int *task_id,
-        const char *method,
-        const char *url,
-        const char *header,
-        unsigned int time_out,
-        long speed_limit,
-        const void *request_data,
-        unsigned long request_data_size,
-        on_data_task_succeed succeed_callback,
-        on_data_task_failed failure_callback
-);
+gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char *url, const char *header);
 
-gtr_core_race *gtr_core_data_task_create(unsigned int *task_id, const char *url, const char *header);
+void gtr_core_data_task_config_parameters(gtr_core_data_task *core_race, const char *method, const void *param_data, unsigned long param_size);
 
-void gtr_core_data_task_config_parameters(gtr_core_race *core_race, const char *method, const void *param_data, unsigned long param_size);
+void gtr_core_data_task_config_options(gtr_core_data_task *core_race, bool is_debug, unsigned int time_out, long max_redirects);
 
-void gtr_core_data_task_config_options(gtr_core_race *core_race, bool is_debug, unsigned int time_out, long max_redirects);
+void gtr_core_data_task_config_speed(gtr_core_data_task *core_race, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time);
 
-void gtr_core_data_task_config_speed(gtr_core_race *core_race, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time);
+void gtr_core_data_task_config_proxy(gtr_core_data_task *core_race, const char *url, long port);
 
-void gtr_core_data_task_config_callback(gtr_core_race *core_race, on_data_task_succeed succeed_callback, on_data_task_failed failure_callback);
+void gtr_core_data_task_config_callback(gtr_core_data_task *core_race, on_data_task_succeed succeed_callback, on_data_task_failed failure_callback);
 
 #endif /* gtr_core_request_h */

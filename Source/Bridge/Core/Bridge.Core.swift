@@ -6,9 +6,6 @@
 @_silgen_name("gtr_init")
 func c_gtr_init(_ user_agent: UnsafePointer<Int8>?, _ cylinder_count: UInt32)
 
-@_silgen_name("gtr_proxy")
-func c_gtr_proxy(_ enable: Bool, _ url: UnsafePointer<Int8>?, _ port: UInt32)
-
 // MARK: - C Bridge
 @_silgen_name("swift_log_callback")
 func c_log_callback(c_flag: CUnsignedInt, c_message: UnsafePointer<CChar>?) {

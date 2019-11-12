@@ -22,5 +22,8 @@ func gtr_data_task_config_options(_ core_race: OpaquePointer, _ is_debug: Bool, 
 @_silgen_name("gtr_data_task_config_speed")
 func gtr_data_task_config_speed(_ core_race: OpaquePointer, _ max_receive_speed: Int, _ max_send_speed: Int, _ low_speed_limit: Int, _ low_speed_time: Int)
 
+@_silgen_name("gtr_data_task_config_proxy")
+func gtr_data_task_config_proxy(_ core_race: OpaquePointer, _ url: UnsafePointer<Int8>?, _ port: Int)
+
 @_silgen_name("gtr_data_task_start")
 func gtr_data_task_start(_ core_race: OpaquePointer)

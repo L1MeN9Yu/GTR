@@ -42,7 +42,7 @@ extension ViewController {
     }
 
     private func setupGTR() {
-        GTR.setup(driver: type(of: self), horn: type(of: self), optionalEquipments: type(of: self))
+        GTR.setup(agent: type(of: self), logger: type(of: self), configuration: type(of: self))
     }
 }
 
@@ -103,6 +103,18 @@ extension ViewController {
             }
         }
     }
+
+    private func proxy() {
+        ProxyDemo().race { destination in
+            switch destination {
+            case .success(let goal):
+                print("\(goal)")
+                break
+            case .failure(_):
+                break
+            }
+        }
+    }
 }
 
 extension ViewController {
@@ -110,22 +122,19 @@ extension ViewController {
     private func getAction() {
 //        self.brotli()
 //        self.getCache()
-        self.post()
+//        self.post()
 //        self.custom()
-//        self.get()
+        self.get()
+//        self.proxy()
     }
 }
 
 extension ViewController: Driver {
-    public static var identity: () -> [String: Encodable]? {
-        {
-            ["Access-Token": "000347174c.db8743c66094ff2964a2b4b6791cf5db"]
-        }
+    public static var identity: [String: Encodable]? {
+        ["Access-Token": "000347174c.db8743c66094ff2964a2b4b6791cf5db"]
     }
-    public static var userAgent: () -> String? {
-        {
-            "GTRDemo/1.0.0"
-        }
+    public static var userAgent: String? {
+        "GTRDemo/1.0.0"
     }
 }
 
@@ -135,6 +144,7 @@ extension ViewController: Horn {
     }
 }
 
-extension ViewController: Configuration {
-
+extension ViewController: GearBox {
+    //global proxy
+//    public private(set) static var proxy: (String, Int)? = ("http://127.0.0.1", 1087)
 }

@@ -18,12 +18,5 @@
  */
 extern void gtr_init(const char *user_agent, unsigned int cylinder_count);
 
-/**
- * 配置代理
- * @param enable 是否开启
- * @param url 代理的地址
- * @param port 代理的端口
- */
-extern void gtr_proxy(bool enable, const char *url, unsigned int port);
 
 #endif /* Bridge_Core_h */

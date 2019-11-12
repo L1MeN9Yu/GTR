@@ -25,17 +25,9 @@ void gtr_core_init(const char *user_agent, void *log_callback, unsigned int cyli
 void __unused gtr_core_dispose(void);
 
 /**
- * 开启代理
- * @param url url
- * @param port 端口
+ * data task start
+ * @param core_data_task data task
  */
-void gtr_core_open_proxy(const char *url, unsigned int port);
-
-/**
- * 关闭代理
- */
-void gtr_core_close_proxy(void);
-
-void gtr_core_race_start(gtr_core_race *race);
+void gtr_core_data_task_start(gtr_core_data_task *core_data_task);
 
 #endif /* gtr_core_h */

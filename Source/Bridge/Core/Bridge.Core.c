@@ -22,17 +22,6 @@ void gtr_init(const char *user_agent, unsigned int cylinder_count) {
 }
 //----------
 
-//---------- 设置代理
-void gtr_proxy(bool enable, const char *url, unsigned int port) {
-    if (enable) {
-        gtr_core_open_proxy(url, port);
-    } else {
-        gtr_core_close_proxy();
-    }
-}
-
-//----------
-
 static void gtr_log_message_call_back(unsigned int flag, char *message) {
     swift_log_callback(flag, message);
 }

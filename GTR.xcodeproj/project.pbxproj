@@ -65,7 +65,7 @@
 		45304393A6F8E0BBA5C4DB46 /* Bridge.Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304FD728BC2AF719ABACF0 /* Bridge.Callback.swift */; };
 		453043A7612E39E8D258AB72 /* gtr_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304AA86F5A166AC1144AAA /* gtr_atomic.c */; };
 		453043C223756B7FAAABA914 /* gtr_method.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304658050C8401DBCAE0F6 /* gtr_method.h */; };
-		453043D0ADE5929EEA9BE37C /* OptionalEquipments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304FE2D27B5AA173C6A5F8 /* OptionalEquipments.swift */; };
+		453043D0ADE5929EEA9BE37C /* GearBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304FE2D27B5AA173C6A5F8 /* GearBox.swift */; };
 		45304426377416C11FDB186A /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304876F84C702262FACB30 /* ContentType.swift */; };
 		4530445C1A07B77ADF72240C /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453042B7E28C5CC1B74939B3 /* Goal.swift */; };
 		453044868054CAECF8E81D33 /* gtr_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530421F6850913AB2029ABD /* gtr_proxy.c */; };
@@ -101,6 +101,7 @@
 		453049381C4B1261B61B6777 /* gtr_callback.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304DD81244CC86D323BADB /* gtr_callback.c */; };
 		453049474CBE170EA93A0920 /* gtr_proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 453048F080CF4B56A9516823 /* gtr_proxy.h */; };
 		45304948B771B5FE5BDB5888 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = 453049D9A2FBAAF2D55E3BDB /* gtr_atomic.h */; };
+		4530494C0F4A1FB2DECBBB98 /* ProxyDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530437B47CE4FD6AD68ECA0 /* ProxyDemo.swift */; };
 		4530498A758F3EE5254DB11D /* gtr_file_utilty.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304A43BE3071F84DC2A459 /* gtr_file_utilty.h */; };
 		4530499504C639ED14BBA5AF /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530476DA4F717F971216FF5 /* Coder.swift */; };
 		453049B80BCE389735096FC0 /* Bridge.Core.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304BC7EF220E7A98049088 /* Bridge.Core.c */; };
@@ -109,7 +110,6 @@
 		45304A726AD89E02857F6319 /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304B07088F57658B0C17A6 /* Data.UnsafePointer.swift */; };
 		45304A83A52F6B336489BBD2 /* Bridge.Callback.h in Headers */ = {isa = PBXBuildFile; fileRef = 453042396006C73E96B8C0A9 /* Bridge.Callback.h */; };
 		45304AB1E8D402803D3677A4 /* gtr_file_utilty.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304A43BE3071F84DC2A459 /* gtr_file_utilty.h */; };
-		45304AB8B49CB224F5F8CA87 /* Gearbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043B61F371229744E87A4 /* Gearbox.swift */; };
 		45304AC099DCC65C61A61C66 /* gtr_log.h in Headers */ = {isa = PBXBuildFile; fileRef = 453046B78AE5DDE753D1E372 /* gtr_log.h */; };
 		45304AD8316D2466FD04B679 /* gtr_thread_pool.c in Sources */ = {isa = PBXBuildFile; fileRef = 453041465001FC167A94594F /* gtr_thread_pool.c */; };
 		45304AD9B34EF77679225F11 /* gtr_task_id.c in Sources */ = {isa = PBXBuildFile; fileRef = 453042618C3440EFFB3E5ECA /* gtr_task_id.c */; };
@@ -123,6 +123,7 @@
 		45304CB37A86D9A90B369AE8 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453049F4F9787C5FAF6F9A30 /* Destination.swift */; };
 		45304D058F7C21C971AA93FF /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530428C99D71BC9C8F67C1D /* gtr_file_utilty.c */; };
 		45304D4B8F9458A803AE6890 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043A5B7BB7B56EDABCFA6 /* Horn.swift */; };
+		45304DD7A219168AEB55C6BB /* ProxyDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530437B47CE4FD6AD68ECA0 /* ProxyDemo.swift */; };
 		45304DE315BB1D61CD43F152 /* gtr_header.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304FB2916F66DC9A8D208F /* gtr_header.h */; };
 		45304DE60DD72928E0C20FBC /* RaceOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304147F0F9588BFD84C370 /* RaceOptions.swift */; };
 		45304E13EFA858B91A85EA5A /* gtr_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 453046C71873837E02FBC193 /* gtr_log.c */; };
@@ -132,13 +133,12 @@
 		45304EFF6DB5D9AB04D92234 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = 453049D9A2FBAAF2D55E3BDB /* gtr_atomic.h */; };
 		45304F11DFE46B24260C28B2 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530429585B7B5F90F944B5D /* Method.swift */; };
 		45304F128D7EF44CFC348E36 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453042B7E28C5CC1B74939B3 /* Goal.swift */; };
-		45304F16D766418782551661 /* Gearbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043B61F371229744E87A4 /* Gearbox.swift */; };
 		45304F5D7CA7D371A71C4EBD /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044C9CEB3987575E9104C /* gtr_thread_pool.h */; };
 		45304F84D5E92F5F1AAC3EBB /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530479472D7EB72D361A9BE /* gtr_core.h */; };
 		45304F8B9A87D771702947D3 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530476DA4F717F971216FF5 /* Coder.swift */; };
 		45304FADCAED76AAA8FBE8E1 /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530479472D7EB72D361A9BE /* gtr_core.h */; };
 		45304FB33DFA9EFC49686283 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304B9F8682FCEF47D0C0A5 /* Error.swift */; };
-		45304FEE1FE0C69F36C9B273 /* OptionalEquipments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304FE2D27B5AA173C6A5F8 /* OptionalEquipments.swift */; };
+		45304FEE1FE0C69F36C9B273 /* GearBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304FE2D27B5AA173C6A5F8 /* GearBox.swift */; };
 		B2D2A839A82F7891E8125890 /* BrotliDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE96645DF01C2B54B99E /* BrotliDemo.swift */; };
 		B2D2AAA9C8BC155072EDD7AD /* GetCacheDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A285D9FB8A0AC436864E /* GetCacheDemo.swift */; };
 		B2D2AAEA915B5FA65F0978BC /* URLSessionDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF2B4BE0A9F3E7EF79E9 /* URLSessionDemo.swift */; };
@@ -226,8 +226,8 @@
 		453042B7E28C5CC1B74939B3 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		45304331F349EC915B692895 /* Bridge.Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Core.swift; sourceTree = "<group>"; };
 		453043524BBF19360E89D12A /* CustomDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDemo.swift; sourceTree = "<group>"; };
+		4530437B47CE4FD6AD68ECA0 /* ProxyDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProxyDemo.swift; sourceTree = "<group>"; };
 		453043A5B7BB7B56EDABCFA6 /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
-		453043B61F371229744E87A4 /* Gearbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gearbox.swift; sourceTree = "<group>"; };
 		4530444CAF8488C3DD4A2D39 /* RaceSpeedLimit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceSpeedLimit.swift; sourceTree = "<group>"; };
 		4530447DEF7F65DBA6CC1FCF /* gtr_task_id.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_task_id.h; sourceTree = "<group>"; };
 		453044C9CEB3987575E9104C /* gtr_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_thread_pool.h; sourceTree = "<group>"; };
@@ -265,7 +265,7 @@
 		45304E775DAC1E47DC49EA90 /* Bridge.Task.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Bridge.Task.c; sourceTree = "<group>"; };
 		45304FB2916F66DC9A8D208F /* gtr_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_header.h; sourceTree = "<group>"; };
 		45304FD728BC2AF719ABACF0 /* Bridge.Callback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Callback.swift; sourceTree = "<group>"; };
-		45304FE2D27B5AA173C6A5F8 /* OptionalEquipments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalEquipments.swift; sourceTree = "<group>"; };
+		45304FE2D27B5AA173C6A5F8 /* GearBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GearBox.swift; sourceTree = "<group>"; };
 		B2D2A285D9FB8A0AC436864E /* GetCacheDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCacheDemo.swift; sourceTree = "<group>"; };
 		B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDemo.swift; sourceTree = "<group>"; };
 		B2D2A70F0C6C9CD9BFD550BB /* DownloadDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDemo.swift; sourceTree = "<group>"; };
@@ -376,6 +376,7 @@
 				B2D2A285D9FB8A0AC436864E /* GetCacheDemo.swift */,
 				45304ACE10FB624A2B547201 /* PostDemo.swift */,
 				453043524BBF19360E89D12A /* CustomDemo.swift */,
+				4530437B47CE4FD6AD68ECA0 /* ProxyDemo.swift */,
 			);
 			path = RaceDemo;
 			sourceTree = "<group>";
@@ -591,7 +592,6 @@
 		45304EE052C93695F1492FDA /* GTR */ = {
 			isa = PBXGroup;
 			children = (
-				453043B61F371229744E87A4 /* Gearbox.swift */,
 				453049CDE99968EFECD98520 /* Driver.swift */,
 				453043A5B7BB7B56EDABCFA6 /* Horn.swift */,
 				453048AD1CF0E9303476421E /* Engine.swift */,
@@ -603,7 +603,7 @@
 				45304D3EB222085453CDF82C /* Lock.swift */,
 				45304A30498AC432AC2E7C08 /* HttpHeader.swift */,
 				4530476DA4F717F971216FF5 /* Coder.swift */,
-				45304FE2D27B5AA173C6A5F8 /* OptionalEquipments.swift */,
+				45304FE2D27B5AA173C6A5F8 /* GearBox.swift */,
 				4530425EB9E2E27221703C97 /* Race */,
 				453042B7E28C5CC1B74939B3 /* Goal.swift */,
 			);
@@ -842,6 +842,7 @@
 				B2D2AAA9C8BC155072EDD7AD /* GetCacheDemo.swift in Sources */,
 				45304502DFA63B1B2B478391 /* PostDemo.swift in Sources */,
 				453048F40031D8EEF0F7667E /* CustomDemo.swift in Sources */,
+				4530494C0F4A1FB2DECBBB98 /* ProxyDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,6 +859,7 @@
 				42C2C93023797335001BC1D7 /* URLSessionDemo.swift in Sources */,
 				42C2C92D23797335001BC1D7 /* GetDemo.swift in Sources */,
 				1014440D22FA8A0800275DA2 /* AppDelegate.swift in Sources */,
+				45304DD7A219168AEB55C6BB /* ProxyDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -869,7 +871,6 @@
 				45304565446AD130AAC55D76 /* gtr_atomic.c in Sources */,
 				4530410E19DC66B0A44C04E1 /* gtr_core.c in Sources */,
 				45304896F2F797EE362AE47D /* gtr_file_utilty.c in Sources */,
-				45304F16D766418782551661 /* Gearbox.swift in Sources */,
 				4530411D9000D559FA140E81 /* Driver.swift in Sources */,
 				45304D4B8F9458A803AE6890 /* Horn.swift in Sources */,
 				4530436ADA34EDE9D7B9175F /* Engine.swift in Sources */,
@@ -897,7 +898,7 @@
 				453049B80BCE389735096FC0 /* Bridge.Core.c in Sources */,
 				45304C419FBEA8503685A5DF /* URL.Query.swift in Sources */,
 				45304867C56D231F5A0A12FC /* Dictionary.Filter.swift in Sources */,
-				453043D0ADE5929EEA9BE37C /* OptionalEquipments.swift in Sources */,
+				453043D0ADE5929EEA9BE37C /* GearBox.swift in Sources */,
 				453047921BA750D20A4BE648 /* Race.swift in Sources */,
 				453042F7D04D7A9973B6140E /* RaceOptions.swift in Sources */,
 				45304A108895266D46FF62C1 /* RaceSpeedLimit.swift in Sources */,
@@ -913,7 +914,6 @@
 				453043A7612E39E8D258AB72 /* gtr_atomic.c in Sources */,
 				45304B664BC4DF0A942D9957 /* gtr_core.c in Sources */,
 				45304D058F7C21C971AA93FF /* gtr_file_utilty.c in Sources */,
-				45304AB8B49CB224F5F8CA87 /* Gearbox.swift in Sources */,
 				45304093371D9BE8CEFDA810 /* Driver.swift in Sources */,
 				4530404B999DB1780EDEE988 /* Horn.swift in Sources */,
 				4530428DC3A05ABC1F3FF868 /* Engine.swift in Sources */,
@@ -941,7 +941,7 @@
 				4530416292501913EDEF40CE /* Bridge.Core.c in Sources */,
 				4530403B383D42D62E1036F8 /* URL.Query.swift in Sources */,
 				45304E73C6F15C7EEDCEA71A /* Dictionary.Filter.swift in Sources */,
-				45304FEE1FE0C69F36C9B273 /* OptionalEquipments.swift in Sources */,
+				45304FEE1FE0C69F36C9B273 /* GearBox.swift in Sources */,
 				453048AA22C8A7CBDB3E5852 /* Race.swift in Sources */,
 				45304DE60DD72928E0C20FBC /* RaceOptions.swift in Sources */,
 				453046279E26F2A8DB204FB7 /* RaceSpeedLimit.swift in Sources */,

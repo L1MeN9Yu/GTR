@@ -8,20 +8,34 @@ import Foundation
 public typealias Race = DataTask
 
 public protocol DataTask {
+    /// url
     var url: String { get }
+
+    /// default nil , will merge agent's value
     var headers: [String: Encodable]? { get }
+
+    /// default GET
     var method: Method { get }
+
+    /// default .json
     var contentType: ContentType { get }
+
+    /// default nil
     var parameters: [String: Any]? { get }
 
+    /// default use gearbox's value
     var options: RaceOptions { get }
 
+    /// default use gearbox's value
     var speedLimit: RaceSpeedLimit { get }
+
+    /// default use gearbox's value
+    var proxy: (String, Int)? { get }
 }
 
 extension Race {
 
-    public var speedLimit: RaceSpeedLimit { RaceSpeedLimit() }
+    public var speedLimit: TaskSpeedLimit { TaskSpeedLimit() }
 
     public var headers: [String: Encodable]? { nil }
 
@@ -31,7 +45,9 @@ extension Race {
 
     public var parameters: [String: Any]? { nil }
 
-    public var options: RaceOptions { RaceOptions(isDebug: __optionalEquipments.debug, timeout: __optionalEquipments.timeout) }
+    public var options: TaskOptions { TaskOptions(isDebug: __gearBox.debug, timeout: __gearBox.timeout) }
+
+    public var proxy: (String, Int)? { __gearBox.proxy }
 }
 
 extension Race {
@@ -44,6 +60,7 @@ extension Race {
                 headers: headers,
                 options: options,
                 speedLimit: speedLimit,
+                proxy: proxy,
                 param: parameters,
                 completion: completion
         )

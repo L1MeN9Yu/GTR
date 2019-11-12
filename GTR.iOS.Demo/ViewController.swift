@@ -60,7 +60,7 @@ extension ViewController {
     }
 
     private func setupGTR() {
-        GTR.setup(driver: type(of: self), horn: type(of: self), optionalEquipments: type(of: self))
+        GTR.setup(agent: type(of: self), logger: type(of: self), configuration: type(of: self))
     }
 
     private func get() {
@@ -106,18 +106,14 @@ extension ViewController {
 }
 
 extension ViewController: Driver {
-    public static var identity: () -> [String: Encodable]? {
-        {
-            [
-                "Author": "L1MeN9Yu",
-                "email": "baal998.mophisto@gmail.com",
-            ]
-        }
+    public static var identity: [String: Encodable]? {
+        [
+            "Author": "L1MeN9Yu",
+            "email": "baal998.mophisto@gmail.com",
+        ]
     }
-    public static var userAgent: () -> String? {
-        {
-            nil
-        }
+    public static var userAgent: String? {
+        nil
     }
 }
 
@@ -127,6 +123,6 @@ extension ViewController: Horn {
     }
 }
 
-extension ViewController: Configuration {
+extension ViewController: GearBox {
 
 }

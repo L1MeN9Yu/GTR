@@ -5,18 +5,25 @@
 
 import class Dispatch.DispatchQueue
 
-public typealias Configuration = OptionalEquipments
+public typealias Configuration = GearBox.Type
 
-public protocol OptionalEquipments {
+public protocol GearBox {
+    /// timeout , default is 10
     static var timeout: UInt32 { get }
+    /// responseQueue , default is main queue
     static var responseQueue: DispatchQueue { get }
+    /// is debug mode , default is false
     static var debug: Bool { get }
+    /// number of thread to use , default is 8
     static var threadCount: UInt32 { get }
+    /// proxy , default is nil
+    static var proxy: (String, Int)? { get }
 }
 
-public extension OptionalEquipments {
+public extension GearBox {
     static var timeout: UInt32 { 10 }
     static var responseQueue: DispatchQueue { DispatchQueue.main }
     static var debug: Bool { false }
     static var threadCount: UInt32 { 8 }
+    static var proxy: (String, Int)? { nil }
 }

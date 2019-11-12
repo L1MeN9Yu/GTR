@@ -33,9 +33,7 @@ static const char *global_user_agent;
 
 static const char *temp_directory;
 
-static gtr_core_proxy *global_proxy;
-
-static void gtr_core_config_http_method(CURL *handle, gtr_core_race *request);
+static void gtr_core_config_http_method(CURL *handle, gtr_core_data_task *request);
 
 static void gtr_core_config_url(CURL *handle, const char *url);
 
@@ -55,9 +53,9 @@ static void gtr_core_config_header_call_back(CURL *handle, gtr_core_race_respons
 
 static void gtr_core_config_write_call_back(CURL *handle, gtr_core_race_response_body *response_body);
 
-static void gtr_core_config_progress(CURL *handle, gtr_core_race *request);
+static void gtr_core_config_progress(CURL *handle, gtr_core_data_task *request);
 
-static void gtr_core_config_proxy(CURL *handle);
+static void gtr_core_config_proxy(CURL *handle, gtr_core_data_task *core_data_task);
 
 static void gtr_core_config_max_redirects(CURL *handle, long max_redirects);
 
@@ -108,7 +106,7 @@ static int debug_func(CURL *__unused handle, curl_infotype type, char *data, siz
  * @return size_t
  */
 static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *userp) {
-    gtr_core_race_request_body *request_data = (gtr_core_race_request_body *) userp;
+    gtr_task_request_body *request_data = (gtr_task_request_body *) userp;
     unsigned long bytes_read = 0;
     if (size * nmemb < 1)
         return (size_t) bytes_read;
@@ -188,7 +186,7 @@ static int progress_callback(
 }
 
 //--- Core
-static void request(gtr_core_race *core_race) {
+static void request(gtr_core_data_task *core_race) {
     CURL *curl_handle;
     CURLcode res;
 
@@ -248,7 +246,7 @@ static void request(gtr_core_race *core_race) {
         gtr_core_config_progress(curl_handle, core_race);
     }
 
-    gtr_core_config_proxy(curl_handle);
+    gtr_core_config_proxy(curl_handle, core_race);
     gtr_core_config_max_redirects(curl_handle, core_race->options.max_redirects);
     gtr_core_config_speed(curl_handle, core_race->speed);
     gtr_core_config_debug(curl_handle, core_race->options.is_debug);
@@ -284,7 +282,11 @@ static void request(gtr_core_race *core_race) {
     {
         if (header) {curl_slist_free_all(header);}
     }
-
+    {
+        if (core_race->proxy.url && strlen(core_race->proxy.url) > 0) {
+            free(core_race->proxy.url);
+        }
+    }
     {
         curl_easy_cleanup(curl_handle);
         free(core_race->url);
@@ -320,31 +322,12 @@ void __unused gtr_core_dispose(void) {
     thread_pool_destroy(gtr_core_thread_pool);
 }
 
-void gtr_core_open_proxy(const char *url, unsigned int port) {
-    assert(url);
-    assert(port > 0);
-    global_proxy = (gtr_core_proxy *) calloc(1, sizeof(gtr_core_proxy));
-    size_t url_size = strlen(url) + 1;
-    global_proxy->url = malloc(url_size);
-    memcpy(global_proxy->url, url, url_size);
-    global_proxy->port = port;
-}
-
-void gtr_core_close_proxy(void) {
-    if (global_proxy) {
-        if (global_proxy->url) {
-            free(global_proxy->url);
-        }
-        global_proxy = NULL;
-    }
-}
-
-void gtr_core_race_start(gtr_core_race *race) {
-    thread_pool_add_work(gtr_core_thread_pool, (void (*)(void *)) request, race);
+void gtr_core_data_task_start(gtr_core_data_task *core_data_task) {
+    thread_pool_add_work(gtr_core_thread_pool, (void (*)(void *)) request, core_data_task);
 }
 
 //---Private Config
-static void gtr_core_config_http_method(CURL *handle, gtr_core_race *request) {
+static void gtr_core_config_http_method(CURL *handle, gtr_core_data_task *request) {
     assert(request);
     if (strcmp(request->method, METHOD_GET) == 0) {
         curl_easy_setopt(handle, CURLOPT_HTTPGET, 1L);
@@ -418,19 +401,22 @@ static void gtr_core_config_time_condition(CURL *handle, unsigned long time) {
     curl_easy_setopt(handle, CURLOPT_TIMECONDITION, CURL_TIMECOND_IFMODSINCE);
 }
 
-static void gtr_core_config_progress(CURL *handle, gtr_core_race *request) {
+static void gtr_core_config_progress(CURL *handle, gtr_core_data_task *request) {
     assert(request);
     //上传和下载才需要进度回掉方法
+    //ToDo [L1MeN9Yu] implement
+    /*
     if (!request->method) {return;}
     if (strcmp(request->method, METHOD_DOWNLOAD) == 0) {
         curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
         curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
-        curl_easy_setopt(handle, CURLOPT_XFERINFODATA, &request->download_data);
+        curl_easy_setopt(handle, CURLOPT_XFERINFODATA, NULL);
     } else if (strcmp(request->method, METHOD_UPLOAD) == 0) {
         curl_easy_setopt(handle, CURLOPT_NOPROGRESS, 0L);
         curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, progress_callback);
         curl_easy_setopt(handle, CURLOPT_XFERINFODATA, NULL);
     }
+     */
 }
 
 static void gtr_core_config_time_out(CURL *handle, unsigned int time_out) {
@@ -444,12 +430,10 @@ static void gtr_core_config_signal(CURL *handle, bool is_on) {
     curl_easy_setopt(handle, CURLOPT_NOSIGNAL, value);
 }
 
-static void gtr_core_config_proxy(CURL *handle) {
-    if (global_proxy) {
-        if (strlen(global_proxy->url) > 0 && global_proxy->port > 0) {
-            curl_easy_setopt(handle, CURLOPT_PROXY, global_proxy->url);
-            curl_easy_setopt(handle, CURLOPT_PROXYPORT, global_proxy->port);
-        }
+static void gtr_core_config_proxy(CURL *handle, gtr_core_data_task *core_data_task) {
+    if (core_data_task && core_data_task->proxy.url && strlen(core_data_task->proxy.url) > 0 && core_data_task->proxy.port > 0) {
+        curl_easy_setopt(handle, CURLOPT_PROXY, core_data_task->proxy.url);
+        curl_easy_setopt(handle, CURLOPT_PROXYPORT, core_data_task->proxy.port);
     }
 }
 

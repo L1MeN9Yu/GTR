@@ -3,10 +3,12 @@
 // Copyright (c) 2018 limengyu.top. All rights reserved.
 //
 
+public typealias Agent = Driver.Type
+
 public protocol Driver {
     ///全局Header
-    static var identity: () -> [String: Encodable]? { get }
+    static var identity: [String: Encodable]? { get }
 
     ///UserAgent
-    static var userAgent: () -> String? { get }
+    static var userAgent: String? { get }
 }

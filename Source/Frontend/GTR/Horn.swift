@@ -5,6 +5,8 @@
 
 import Foundation
 
+public typealias Logger = Horn.Type
+
 public protocol Horn {
     static func whistle(type: HornType, message: String, filename: String, function: String, line: Int)
 
