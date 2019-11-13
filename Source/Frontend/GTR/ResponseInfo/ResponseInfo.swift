@@ -29,19 +29,19 @@ extension ResponseInfo: CustomStringConvertible {
     public var description: String {
         """
         base : 
-        \(base)
+            \(base)
         time : 
-        \(time)
+            \(time)
         size : 
-        \(size)
+            \(size)
         speed :
-        \(speed)
+            \(speed)
         ssl :
-        \(ssl)
+            \(ssl)
         socket :
-        \(socket)
+            \(socket)
         cookie :
-        \(cookie)
+            \(cookie)
         """
     }
 }
