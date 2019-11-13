@@ -7,10 +7,7 @@
 
 import Foundation
 
-private(set) var __engine = { () -> Engine in
-    let engine = Engine()
-    return engine
-}()
+private(set) var __engine = Engine.self
 
 private(set) var __driver: Driver.Type!
 
@@ -31,7 +28,7 @@ func dataTask(method: Method,
               proxy: (String, Int)?,
               param: [String: Any]?,
               completion: Result?) -> UInt32 {
-    assert(fired, "must setup first")
+    precondition(fired, "must setup first")
 
     var allHeaders = contentType.toHeader()
 

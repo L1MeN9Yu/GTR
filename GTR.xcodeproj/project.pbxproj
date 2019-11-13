@@ -40,7 +40,6 @@
 		4530402AFAEC11B694B74BBE /* GearBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453046A2FD60608F31F27ECC /* GearBox.swift */; };
 		4530403B383D42D62E1036F8 /* URL.Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304873182CCB2835EB77BA /* URL.Query.swift */; };
 		45304047C17289D541291039 /* Bridge.Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044F2A2359F10494DFB9A /* Bridge.Core.h */; };
-		4530404B999DB1780EDEE988 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043A5B7BB7B56EDABCFA6 /* Horn.swift */; };
 		4530405800AE10AB1449A6F7 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304D3EB222085453CDF82C /* Lock.swift */; };
 		4530408B6B34416E056D8EDD /* Bridge.Task.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530460F1160445F37D5FC14 /* Bridge.Task.h */; };
 		45304093371D9BE8CEFDA810 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453049CDE99968EFECD98520 /* Driver.swift */; };
@@ -57,6 +56,7 @@
 		453041ED863157A35FE7C64F /* Bridge.Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304331F349EC915B692895 /* Bridge.Core.swift */; };
 		45304248B1A6BBBFC0087D80 /* gtr_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 453047CC11F791F9F9CF20F3 /* gtr_header.c */; };
 		4530425600B9576CC16BD2DE /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530409BD353035B085B3C43 /* GTR.swift */; };
+		453042742CFF9DB813B16554 /* ResponseInfo.SSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453041FA93207E0F7190700F /* ResponseInfo.SSL.swift */; };
 		4530428DC3A05ABC1F3FF868 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453048AD1CF0E9303476421E /* Engine.swift */; };
 		4530429202525136280998F6 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304D3B569F8561E604FD09 /* Goal.swift */; };
 		453042B6A8666D828C7B86B6 /* Bridge.Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453048EC33B2865255E0FCD2 /* Bridge.Task.swift */; };
@@ -64,6 +64,7 @@
 		453042E316ADCFBD9CA120FD /* gtr_task_id.c in Sources */ = {isa = PBXBuildFile; fileRef = 453042618C3440EFFB3E5ECA /* gtr_task_id.c */; };
 		453042F7D04D7A9973B6140E /* RaceOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304147F0F9588BFD84C370 /* RaceOptions.swift */; };
 		453043019715130918016EEC /* gtr_callback.h in Headers */ = {isa = PBXBuildFile; fileRef = 453040DBEC7B95F7855F185D /* gtr_callback.h */; };
+		45304303CC8A196A6222F89B /* ResponseInfo.Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530435D8BFC3680C9DD34CC /* ResponseInfo.Size.swift */; };
 		4530430557B63729185B978E /* gtr_response.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530442FA9172EF1D3A9FD2A /* gtr_response.c */; };
 		453043079241B1F5857EAB08 /* gtr_response.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530456198C60CC3F6813D95 /* gtr_response.h */; };
 		453043197794166E2032DB24 /* Bridge.Task.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530460F1160445F37D5FC14 /* Bridge.Task.h */; };
@@ -73,11 +74,14 @@
 		45304393A6F8E0BBA5C4DB46 /* Bridge.Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304FD728BC2AF719ABACF0 /* Bridge.Callback.swift */; };
 		453043A7612E39E8D258AB72 /* gtr_atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304AA86F5A166AC1144AAA /* gtr_atomic.c */; };
 		453043C223756B7FAAABA914 /* gtr_method.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304658050C8401DBCAE0F6 /* gtr_method.h */; };
+		453043E4D93A45C3768F47C7 /* ResponseInfo.Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304BFC8955BB5D5C9E3115 /* ResponseInfo.Base.swift */; };
+		45304422297D873002C6A1E8 /* ResponseInfo.Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530435D8BFC3680C9DD34CC /* ResponseInfo.Size.swift */; };
 		45304426377416C11FDB186A /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304876F84C702262FACB30 /* ContentType.swift */; };
 		4530446D68DEA78609A73398 /* ResponseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304127BF97F2A44EC80D2E /* ResponseInfo.swift */; };
 		453044868054CAECF8E81D33 /* gtr_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530421F6850913AB2029ABD /* gtr_proxy.c */; };
 		4530449AE624A8B6BDDE698C /* Bridge.Callback.h in Headers */ = {isa = PBXBuildFile; fileRef = 453042396006C73E96B8C0A9 /* Bridge.Callback.h */; };
 		453044CA8907227214AC23F9 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453049F4F9787C5FAF6F9A30 /* Destination.swift */; };
+		453044ECB26E881D77E43D4C /* ResponseInfo.Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530401E2B4A724983C76373 /* ResponseInfo.Time.swift */; };
 		453044EFA70546A2AAED62D0 /* gtr_method.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304658050C8401DBCAE0F6 /* gtr_method.h */; };
 		453044F516B8C46393753934 /* gtr_race.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304A7788CC2F3DAADEE6F9 /* gtr_race.h */; };
 		45304502DFA63B1B2B478391 /* PostDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304ACE10FB624A2B547201 /* PostDemo.swift */; };
@@ -90,13 +94,16 @@
 		4530460F25286B4C4325025A /* gtr_thread_pool.c in Sources */ = {isa = PBXBuildFile; fileRef = 453041465001FC167A94594F /* gtr_thread_pool.c */; };
 		453046279E26F2A8DB204FB7 /* RaceSpeedLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530444CAF8488C3DD4A2D39 /* RaceSpeedLimit.swift */; };
 		45304635CF203C459407207B /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304D3B569F8561E604FD09 /* Goal.swift */; };
+		453046484F0742C6345D948C /* ResponseInfo.Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304DCA2AA246D7C890A68D /* ResponseInfo.Socket.swift */; };
 		4530469C9368A00AA9527632 /* gtr_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 453047CC11F791F9F9CF20F3 /* gtr_header.c */; };
+		4530469D334BF37EDE263E0F /* ResponseInfo.Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304B8991FAD9B4989338B1 /* ResponseInfo.Speed.swift */; };
 		453046CE9E7468E83F922AC6 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304EF7820F0C15F84B295F /* HttpHeader.swift */; };
 		4530475245410CCF76F176C4 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530429585B7B5F90F944B5D /* Method.swift */; };
 		4530476FE563E6C4BC6BD7E5 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304C22145A685B9B217A04 /* Coder.swift */; };
 		4530478569B455ED9282C75D /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044C9CEB3987575E9104C /* gtr_thread_pool.h */; };
 		453047921BA750D20A4BE648 /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304BB687C668668605CD0F /* Race.swift */; };
 		4530479E89B057D60573F32A /* Bridge.Task.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304E775DAC1E47DC49EA90 /* Bridge.Task.c */; };
+		453047DB581E771125F03E98 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304E8C2150F7FAFA569796 /* Horn.swift */; };
 		453048067EBBC69BE9A62733 /* gtr_task_id.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530447DEF7F65DBA6CC1FCF /* gtr_task_id.h */; };
 		45304807F2A7B0B74D5F7A3F /* gtr_method.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530484CF9C4AF29AA0C905C /* gtr_method.c */; };
 		45304836FF23AD30FC81BB77 /* gtr_race.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304A7788CC2F3DAADEE6F9 /* gtr_race.h */; };
@@ -105,6 +112,7 @@
 		45304867C56D231F5A0A12FC /* Dictionary.Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453041E2813151DA95078D9F /* Dictionary.Filter.swift */; };
 		45304896F2F797EE362AE47D /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530428C99D71BC9C8F67C1D /* gtr_file_utilty.c */; };
 		453048AA22C8A7CBDB3E5852 /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304BB687C668668605CD0F /* Race.swift */; };
+		453048B5A72694E621ABA23E /* ResponseInfo.Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530401E2B4A724983C76373 /* ResponseInfo.Time.swift */; };
 		453048F3D83F004AC05F0115 /* gtr_log.h in Headers */ = {isa = PBXBuildFile; fileRef = 453046B78AE5DDE753D1E372 /* gtr_log.h */; };
 		453048F40031D8EEF0F7667E /* CustomDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043524BBF19360E89D12A /* CustomDemo.swift */; };
 		4530493157B9652A1797B2A1 /* gtr_response.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530456198C60CC3F6813D95 /* gtr_response.h */; };
@@ -112,7 +120,9 @@
 		453049474CBE170EA93A0920 /* gtr_proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 453048F080CF4B56A9516823 /* gtr_proxy.h */; };
 		45304948B771B5FE5BDB5888 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = 453049D9A2FBAAF2D55E3BDB /* gtr_atomic.h */; };
 		4530494C0F4A1FB2DECBBB98 /* ProxyDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530437B47CE4FD6AD68ECA0 /* ProxyDemo.swift */; };
+		4530496473B64116D5FA8624 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304E8C2150F7FAFA569796 /* Horn.swift */; };
 		4530498A758F3EE5254DB11D /* gtr_file_utilty.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304A43BE3071F84DC2A459 /* gtr_file_utilty.h */; };
+		453049AED036117D05D7059A /* ResponseInfo.SSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453041FA93207E0F7190700F /* ResponseInfo.SSL.swift */; };
 		453049B80BCE389735096FC0 /* Bridge.Core.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304BC7EF220E7A98049088 /* Bridge.Core.c */; };
 		45304A108895266D46FF62C1 /* RaceSpeedLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530444CAF8488C3DD4A2D39 /* RaceSpeedLimit.swift */; };
 		45304A1E6D72A19BEC13AD21 /* Bridge.Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044F2A2359F10494DFB9A /* Bridge.Core.h */; };
@@ -124,6 +134,7 @@
 		45304AD9B34EF77679225F11 /* gtr_task_id.c in Sources */ = {isa = PBXBuildFile; fileRef = 453042618C3440EFFB3E5ECA /* gtr_task_id.c */; };
 		45304AFFD5D7EB7255530283 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047209F7E1BE3C49273A0 /* Error.swift */; };
 		45304B664BC4DF0A942D9957 /* gtr_core.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304A47184D26DCE52EC436 /* gtr_core.c */; };
+		45304B801B6D3BEF728E6910 /* ResponseInfo.Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304BFC8955BB5D5C9E3115 /* ResponseInfo.Base.swift */; };
 		45304BA2F0D2569B97B679AC /* Dictionary.NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047D3BDE1ED0674617279 /* Dictionary.NetworkJSON.swift */; };
 		45304BA3ECF4BA0CFD748F14 /* Dictionary.NetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047D3BDE1ED0674617279 /* Dictionary.NetworkJSON.swift */; };
 		45304BDFA191FABB9D12450B /* gtr_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530421F6850913AB2029ABD /* gtr_proxy.c */; };
@@ -133,7 +144,6 @@
 		45304CB37A86D9A90B369AE8 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453049F4F9787C5FAF6F9A30 /* Destination.swift */; };
 		45304CF1750DFF832A48DD7A /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047209F7E1BE3C49273A0 /* Error.swift */; };
 		45304D058F7C21C971AA93FF /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530428C99D71BC9C8F67C1D /* gtr_file_utilty.c */; };
-		45304D4B8F9458A803AE6890 /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043A5B7BB7B56EDABCFA6 /* Horn.swift */; };
 		45304DD7A219168AEB55C6BB /* ProxyDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530437B47CE4FD6AD68ECA0 /* ProxyDemo.swift */; };
 		45304DE315BB1D61CD43F152 /* gtr_header.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304FB2916F66DC9A8D208F /* gtr_header.h */; };
 		45304DE60DD72928E0C20FBC /* RaceOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304147F0F9588BFD84C370 /* RaceOptions.swift */; };
@@ -145,8 +155,10 @@
 		45304F370D6D92D1660981AB /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304C22145A685B9B217A04 /* Coder.swift */; };
 		45304F406EFF2F8C4BA62732 /* gtr_response.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530442FA9172EF1D3A9FD2A /* gtr_response.c */; };
 		45304F5D7CA7D371A71C4EBD /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044C9CEB3987575E9104C /* gtr_thread_pool.h */; };
+		45304F844FB8BA6936F473E5 /* ResponseInfo.Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304B8991FAD9B4989338B1 /* ResponseInfo.Speed.swift */; };
 		45304F84D5E92F5F1AAC3EBB /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530479472D7EB72D361A9BE /* gtr_core.h */; };
 		45304FADCAED76AAA8FBE8E1 /* gtr_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530479472D7EB72D361A9BE /* gtr_core.h */; };
+		45304FE650935D9D5C1197FD /* ResponseInfo.Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304DCA2AA246D7C890A68D /* ResponseInfo.Socket.swift */; };
 		B2D2A839A82F7891E8125890 /* BrotliDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AE96645DF01C2B54B99E /* BrotliDemo.swift */; };
 		B2D2AAA9C8BC155072EDD7AD /* GetCacheDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A285D9FB8A0AC436864E /* GetCacheDemo.swift */; };
 		B2D2AAEA915B5FA65F0978BC /* URLSessionDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AF2B4BE0A9F3E7EF79E9 /* URLSessionDemo.swift */; };
@@ -226,12 +238,14 @@
 		427D2AF32119FCEA00314C23 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		42F0B0982119EF8A00D01CC4 /* GTR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0B09C2119EF8A00D01CC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4530401E2B4A724983C76373 /* ResponseInfo.Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseInfo.Time.swift; sourceTree = "<group>"; };
 		4530409BD353035B085B3C43 /* GTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTR.swift; sourceTree = "<group>"; };
 		453040DBEC7B95F7855F185D /* gtr_callback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_callback.h; sourceTree = "<group>"; };
 		45304127BF97F2A44EC80D2E /* ResponseInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseInfo.swift; sourceTree = "<group>"; };
 		453041465001FC167A94594F /* gtr_thread_pool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_thread_pool.c; sourceTree = "<group>"; };
 		45304147F0F9588BFD84C370 /* RaceOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceOptions.swift; sourceTree = "<group>"; };
 		453041E2813151DA95078D9F /* Dictionary.Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.Filter.swift; sourceTree = "<group>"; };
+		453041FA93207E0F7190700F /* ResponseInfo.SSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseInfo.SSL.swift; sourceTree = "<group>"; };
 		4530421F6850913AB2029ABD /* gtr_proxy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_proxy.c; sourceTree = "<group>"; };
 		453042396006C73E96B8C0A9 /* Bridge.Callback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.Callback.h; sourceTree = "<group>"; };
 		453042618C3440EFFB3E5ECA /* gtr_task_id.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_task_id.c; sourceTree = "<group>"; };
@@ -239,8 +253,8 @@
 		4530429585B7B5F90F944B5D /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		45304331F349EC915B692895 /* Bridge.Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Core.swift; sourceTree = "<group>"; };
 		453043524BBF19360E89D12A /* CustomDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDemo.swift; sourceTree = "<group>"; };
+		4530435D8BFC3680C9DD34CC /* ResponseInfo.Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseInfo.Size.swift; sourceTree = "<group>"; };
 		4530437B47CE4FD6AD68ECA0 /* ProxyDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProxyDemo.swift; sourceTree = "<group>"; };
-		453043A5B7BB7B56EDABCFA6 /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
 		4530442FA9172EF1D3A9FD2A /* gtr_response.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_response.c; sourceTree = "<group>"; };
 		4530444CAF8488C3DD4A2D39 /* RaceSpeedLimit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceSpeedLimit.swift; sourceTree = "<group>"; };
 		4530447DEF7F65DBA6CC1FCF /* gtr_task_id.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_task_id.h; sourceTree = "<group>"; };
@@ -272,13 +286,17 @@
 		45304AA86F5A166AC1144AAA /* gtr_atomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_atomic.c; sourceTree = "<group>"; };
 		45304ACE10FB624A2B547201 /* PostDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDemo.swift; sourceTree = "<group>"; };
 		45304B07088F57658B0C17A6 /* Data.UnsafePointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.UnsafePointer.swift; sourceTree = "<group>"; };
+		45304B8991FAD9B4989338B1 /* ResponseInfo.Speed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseInfo.Speed.swift; sourceTree = "<group>"; };
 		45304BB687C668668605CD0F /* Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
 		45304BC7EF220E7A98049088 /* Bridge.Core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Bridge.Core.c; sourceTree = "<group>"; };
+		45304BFC8955BB5D5C9E3115 /* ResponseInfo.Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseInfo.Base.swift; sourceTree = "<group>"; };
 		45304C22145A685B9B217A04 /* Coder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coder.swift; sourceTree = "<group>"; };
 		45304D3B569F8561E604FD09 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		45304D3EB222085453CDF82C /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
+		45304DCA2AA246D7C890A68D /* ResponseInfo.Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseInfo.Socket.swift; sourceTree = "<group>"; };
 		45304DD81244CC86D323BADB /* gtr_callback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_callback.c; sourceTree = "<group>"; };
 		45304E775DAC1E47DC49EA90 /* Bridge.Task.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Bridge.Task.c; sourceTree = "<group>"; };
+		45304E8C2150F7FAFA569796 /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
 		45304EF7820F0C15F84B295F /* HttpHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
 		45304FB2916F66DC9A8D208F /* gtr_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_header.h; sourceTree = "<group>"; };
 		45304FD728BC2AF719ABACF0 /* Bridge.Callback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Callback.swift; sourceTree = "<group>"; };
@@ -629,6 +647,14 @@
 			path = atomic;
 			sourceTree = "<group>";
 		};
+		45304D0EAB1F3F5BDFD80415 /* Horn */ = {
+			isa = PBXGroup;
+			children = (
+				45304E8C2150F7FAFA569796 /* Horn.swift */,
+			);
+			path = Horn;
+			sourceTree = "<group>";
+		};
 		45304D7E1168ECB72C4DF2A2 /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -659,6 +685,12 @@
 			isa = PBXGroup;
 			children = (
 				45304127BF97F2A44EC80D2E /* ResponseInfo.swift */,
+				45304BFC8955BB5D5C9E3115 /* ResponseInfo.Base.swift */,
+				4530401E2B4A724983C76373 /* ResponseInfo.Time.swift */,
+				4530435D8BFC3680C9DD34CC /* ResponseInfo.Size.swift */,
+				45304B8991FAD9B4989338B1 /* ResponseInfo.Speed.swift */,
+				453041FA93207E0F7190700F /* ResponseInfo.SSL.swift */,
+				45304DCA2AA246D7C890A68D /* ResponseInfo.Socket.swift */,
 			);
 			path = ResponseInfo;
 			sourceTree = "<group>";
@@ -667,7 +699,6 @@
 			isa = PBXGroup;
 			children = (
 				453049CDE99968EFECD98520 /* Driver.swift */,
-				453043A5B7BB7B56EDABCFA6 /* Horn.swift */,
 				453048AD1CF0E9303476421E /* Engine.swift */,
 				4530409BD353035B085B3C43 /* GTR.swift */,
 				4530429585B7B5F90F944B5D /* Method.swift */,
@@ -680,6 +711,7 @@
 				45304EC8BCADC32BA9342338 /* ResponseInfo */,
 				45304D7E1168ECB72C4DF2A2 /* Error */,
 				4530461E9EE15112D351597A /* Coder */,
+				45304D0EAB1F3F5BDFD80415 /* Horn */,
 			);
 			path = GTR;
 			sourceTree = "<group>";
@@ -950,7 +982,6 @@
 				4530410E19DC66B0A44C04E1 /* gtr_core.c in Sources */,
 				45304896F2F797EE362AE47D /* gtr_file_utilty.c in Sources */,
 				4530411D9000D559FA140E81 /* Driver.swift in Sources */,
-				45304D4B8F9458A803AE6890 /* Horn.swift in Sources */,
 				4530436ADA34EDE9D7B9175F /* Engine.swift in Sources */,
 				4530438317E139DA683066AE /* GTR.swift in Sources */,
 				45304F11DFE46B24260C28B2 /* Method.swift in Sources */,
@@ -982,6 +1013,13 @@
 				45304332ECFBD9732D78BB3E /* ResponseInfo.swift in Sources */,
 				45304AFFD5D7EB7255530283 /* Error.swift in Sources */,
 				45304F370D6D92D1660981AB /* Coder.swift in Sources */,
+				4530496473B64116D5FA8624 /* Horn.swift in Sources */,
+				453043E4D93A45C3768F47C7 /* ResponseInfo.Base.swift in Sources */,
+				453048B5A72694E621ABA23E /* ResponseInfo.Time.swift in Sources */,
+				45304303CC8A196A6222F89B /* ResponseInfo.Size.swift in Sources */,
+				45304F844FB8BA6936F473E5 /* ResponseInfo.Speed.swift in Sources */,
+				453049AED036117D05D7059A /* ResponseInfo.SSL.swift in Sources */,
+				45304FE650935D9D5C1197FD /* ResponseInfo.Socket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,7 +1032,6 @@
 				45304B664BC4DF0A942D9957 /* gtr_core.c in Sources */,
 				45304D058F7C21C971AA93FF /* gtr_file_utilty.c in Sources */,
 				45304093371D9BE8CEFDA810 /* Driver.swift in Sources */,
-				4530404B999DB1780EDEE988 /* Horn.swift in Sources */,
 				4530428DC3A05ABC1F3FF868 /* Engine.swift in Sources */,
 				4530425600B9576CC16BD2DE /* GTR.swift in Sources */,
 				4530475245410CCF76F176C4 /* Method.swift in Sources */,
@@ -1026,6 +1063,13 @@
 				4530446D68DEA78609A73398 /* ResponseInfo.swift in Sources */,
 				45304CF1750DFF832A48DD7A /* Error.swift in Sources */,
 				4530476FE563E6C4BC6BD7E5 /* Coder.swift in Sources */,
+				453047DB581E771125F03E98 /* Horn.swift in Sources */,
+				45304B801B6D3BEF728E6910 /* ResponseInfo.Base.swift in Sources */,
+				453044ECB26E881D77E43D4C /* ResponseInfo.Time.swift in Sources */,
+				45304422297D873002C6A1E8 /* ResponseInfo.Size.swift in Sources */,
+				4530469D334BF37EDE263E0F /* ResponseInfo.Speed.swift in Sources */,
+				453042742CFF9DB813B16554 /* ResponseInfo.SSL.swift in Sources */,
+				453046484F0742C6345D948C /* ResponseInfo.Socket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

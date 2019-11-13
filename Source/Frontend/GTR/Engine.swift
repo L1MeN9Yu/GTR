@@ -9,19 +9,25 @@ typealias GTRProgressClosure = (_ now: UInt64, _ total: UInt64) -> Void
 typealias GTRHttpHeaderClosure = () -> [Swift.String: Swift.String]
 
 final class Engine {
-    private(set) var responseQueue = DispatchQueue.main
-    private(set) var notificationQueue = DispatchQueue.main
-    private(set) var completionContainer = [Swift.CUnsignedInt: GTR.Result?]()
-    private(set) var downloadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
-    private(set) var uploadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
+    private init() {}
+}
 
-    private var httpHeaderClosure: GTRHttpHeaderClosure?
+// MARK: - Variable
+extension Engine {
+    private(set) static var responseQueue = DispatchQueue.main
+    private(set) static var notificationQueue = DispatchQueue.main
+    private(set) static var completionContainer = [Swift.CUnsignedInt: GTR.Result?]()
+    private(set) static var downloadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
+    private(set) static var uploadProgressContainer: [Swift.UInt32: GTRProgressClosure?] = [Swift.UInt32: GTRProgressClosure?]()
 
-    fileprivate let rwLock = ReadWriteLock()
+    private static var httpHeaderClosure: GTRHttpHeaderClosure?
+
+    fileprivate static let rwLock = ReadWriteLock()
 }
 
 // MARK: - Fire
 extension Engine {
+    internal static
     func fire(engineNumber: String? = nil, cylinderCount: UInt32) {
         c_gtr_init(engineNumber?.cString(using: .utf8), cylinderCount)
     }
@@ -30,10 +36,12 @@ extension Engine {
 // MARK: - Config
 
 extension Engine {
+    internal static
     func config(httpHeaderClosure: GTRHttpHeaderClosure?) {
         self.httpHeaderClosure = httpHeaderClosure
     }
 
+    internal static
     func config(responseQueue: DispatchQueue) {
         self.responseQueue = responseQueue
     }
@@ -41,7 +49,7 @@ extension Engine {
 
 // MARK: - Request
 extension Engine {
-
+    internal static
     func getRequest(url: String,
                     headers: [String: Encodable]? = nil,
                     method: Method,
@@ -70,6 +78,7 @@ extension Engine {
         return taskID
     }
 
+    internal static
     func postRequest(url: String,
                      headers: [String: Encodable]? = nil,
                      method: Method,
@@ -98,6 +107,7 @@ extension Engine {
         return taskID
     }
 
+    internal static
     func customRequest(url: String,
                        headers: [String: Encodable]? = nil,
                        method: Method,
@@ -126,6 +136,7 @@ extension Engine {
         return taskID
     }
 
+    internal static
     func downloadRequest(url: String,
                          filePath: String,
                          headers: [String: Encodable]? = nil,
@@ -143,7 +154,8 @@ extension Engine {
 
 // MARK: - Private
 extension Engine {
-    private func urlForGetParameter(url: String, param: [String: Any]?) -> String {
+    private static
+    func urlForGetParameter(url: String, param: [String: Any]?) -> String {
         var _url = url
 
         if let queueParam = param?.filterValue(valueType: String.self),
@@ -154,7 +166,8 @@ extension Engine {
         return _url
     }
 
-    private func cParameter(contentType: ContentType, param: [String: Any]?) -> (UnsafeRawPointer?, CUnsignedLong) {
+    private static
+    func cParameter(contentType: ContentType, param: [String: Any]?) -> (UnsafeRawPointer?, CUnsignedLong) {
         var c_param: UnsafeRawPointer? = nil
         var c_param_size: CUnsignedLong = 0
         switch contentType {
@@ -184,7 +197,8 @@ extension Engine {
     }
 
     ///构建Headers
-    private func generateHeaderString(headers: [String: Encodable]? = nil) -> String? {
+    private static
+    func generateHeaderString(headers: [String: Encodable]? = nil) -> String? {
         var allHeaders = self.httpHeaderClosure?() ?? [String: Encodable]()
         if let additionHeader = headers {
             allHeaders.merge(additionHeader) { (value1: Encodable, value2: Encodable) -> Encodable in
@@ -196,7 +210,8 @@ extension Engine {
         return headerString
     }
 
-    private func config(proxy: (String, Int)?, to dataTask: OpaquePointer) {
+    private static
+    func config(proxy: (String, Int)?, to dataTask: OpaquePointer) {
         guard let proxy = proxy else { return }
         gtr_data_task_config_proxy(dataTask, proxy.0.cString(using: .utf8), proxy.1)
     }
@@ -204,20 +219,24 @@ extension Engine {
 
 // MARK: - FilePrivate
 extension Engine {
-    fileprivate func cleanResponseHandler(taskID: UInt32) {
+    fileprivate static
+    func cleanResponseHandler(taskID: UInt32) {
         self.completionContainer.removeValue(forKey: taskID)
     }
 
-    fileprivate func cleanDownloadProgress(taskID: UInt32) {
+    fileprivate static
+    func cleanDownloadProgress(taskID: UInt32) {
         self.downloadProgressContainer.removeValue(forKey: taskID)
     }
 
-    fileprivate func cleanUploadProgress(taskID: UInt32) {
+    fileprivate static
+    func cleanUploadProgress(taskID: UInt32) {
         self.uploadProgressContainer.removeValue(forKey: taskID)
     }
 }
 
 extension Engine {
+    internal static
     func dataTaskSucceed(
             task_id: UInt32,
             response_info_data: UnsafeRawPointer, response_info_data_size: Int,
@@ -245,6 +264,7 @@ extension Engine {
         }
     }
 
+    internal static
     func dataTaskFailed(
             task_id: UInt32,
             response_info_data: UnsafeRawPointer, response_info_data_size: Int,
@@ -269,132 +289,6 @@ extension Engine {
 }
 
 // MARK: - C CallBack
-
-/*@_silgen_name("swift_get_request_succeed")
-func c_get_request_succeed(task_id: CUnsignedInt,
-                           c_header_data: UnsafeRawPointer,
-                           c_header_data_size: CUnsignedLong,
-                           c_body_data: UnsafeRawPointer,
-                           c_body_data_size: CUnsignedLong) {
-    let headerData = Data(bytes: c_header_data, count: Int(c_header_data_size))
-    let header = handleHeader(headerData: headerData)
-
-    let bodyData = Data(bytes: c_body_data, count: Int(c_body_data_size))
-
-    __engine.rwLock.lockRead()
-    let result = __engine.completionContainer[task_id]
-    __engine.rwLock.unlock()
-
-    __engine.rwLock.lockWrite()
-    __engine.cleanResponseHandler(taskID: task_id)
-    __engine.rwLock.unlock()
-
-    __engine.responseQueue.async {
-        result??(Destination.success(Goal(header: header, body: bodyData)))
-    }
-}
-
-@_silgen_name("swift_get_request_failure")
-func c_get_request_failure(task_id: CUnsignedInt,
-                           http_response_code: CLong,
-                           error_code: CInt,
-                           error_message: UnsafePointer<CChar>) {
-    __engine.rwLock.lockRead()
-    let result = __engine.completionContainer[task_id]
-    __engine.rwLock.unlock()
-
-    __engine.rwLock.lockWrite()
-    __engine.cleanResponseHandler(taskID: task_id)
-    __engine.rwLock.unlock()
-
-    __engine.responseQueue.async {
-        result??(Destination.failure(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
-    }
-}
-
-@_silgen_name("swift_post_request_succeed")
-func c_post_request_succeed(task_id: CUnsignedInt,
-                            c_header_data: UnsafeRawPointer,
-                            c_header_data_size: CUnsignedLong,
-                            c_body_data: UnsafeRawPointer,
-                            c_body_data_size: CUnsignedLong) {
-    let headerData = Data(bytes: c_header_data, count: Int(c_header_data_size))
-    let header = handleHeader(headerData: headerData)
-
-    let bodyData = Data(bytes: c_body_data, count: Int(c_body_data_size))
-
-    __engine.rwLock.lockRead()
-    let result = __engine.completionContainer[task_id]
-    __engine.rwLock.unlock()
-
-    __engine.rwLock.lockWrite()
-    __engine.cleanResponseHandler(taskID: task_id)
-    __engine.rwLock.unlock()
-
-    __engine.responseQueue.async {
-        result??(Destination.success(Goal(header: header, body: bodyData)))
-    }
-}
-
-@_silgen_name("swift_post_request_failure")
-func c_post_request_failure(task_id: CUnsignedInt,
-                            http_response_code: CLong,
-                            error_code: CInt,
-                            error_message: UnsafePointer<CChar>) {
-    __engine.rwLock.lockRead()
-    let result = __engine.completionContainer[task_id]
-    __engine.rwLock.unlock()
-
-    __engine.rwLock.lockWrite()
-    __engine.cleanResponseHandler(taskID: task_id)
-    __engine.rwLock.unlock()
-
-    __engine.responseQueue.async {
-        result??(Destination.failure(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
-    }
-}
-
-@_silgen_name("swift_put_request_succeed")
-func c_put_request_succeed(task_id: CUnsignedInt,
-                           c_header_data: UnsafeRawPointer,
-                           c_header_data_size: CUnsignedLong,
-                           c_body_data: UnsafeRawPointer,
-                           c_body_data_size: CUnsignedLong) {
-    let headerData = Data(bytes: c_header_data, count: Int(c_header_data_size))
-    let header = handleHeader(headerData: headerData)
-
-    let bodyData = Data(bytes: c_body_data, count: Int(c_body_data_size))
-
-    __engine.rwLock.lockRead()
-    let result = __engine.completionContainer[task_id]
-    __engine.rwLock.unlock()
-
-    __engine.rwLock.lockWrite()
-    __engine.cleanResponseHandler(taskID: task_id)
-    __engine.rwLock.unlock()
-
-    __engine.responseQueue.async {
-        result??(Destination.success(Goal(header: header, body: bodyData)))
-    }
-}
-
-@_silgen_name("swift_put_request_failure")
-func c_put_request_failure(task_id: CUnsignedInt,
-                           http_response_code: CLong,
-                           error_code: CInt,
-                           error_message: UnsafePointer<CChar>) {
-    __engine.rwLock.lockRead()
-    let result = __engine.completionContainer[task_id]
-    __engine.rwLock.unlock()
-
-    __engine.rwLock.lockWrite()
-    __engine.cleanResponseHandler(taskID: task_id)
-    __engine.rwLock.unlock()
-
-    __engine.responseQueue.async {
-        result??(Destination.failure(RaceError(httpResponseCode: http_response_code, errorCode: error_code, errorMessage: String(cString: error_message, encoding: .utf8) ?? "")))
-    }
-}*/
 
 @_silgen_name("swift_download_progress")
 func c_download_progress(task_id: CUnsignedInt, download_now: CUnsignedLongLong, download_total: CUnsignedLongLong) {

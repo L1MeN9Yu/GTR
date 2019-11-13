@@ -6,66 +6,42 @@
 import Foundation
 
 public struct ResponseInfo: Codable {
-    public let responseCode: Int
+    public let base: Base
     public let time: Time
+    public let size: Size
+    public let speed: Speed
+    public let ssl: SSL
+    public let socket: Socket
+    public let cookie: [String]
 
     enum CodingKeys: String, CodingKey {
-        case responseCode = "RESPONSE_CODE"
-        /**
-            |--NAMELOOKUP
-            |--|--CONNECT
-            |--|--|--APPCONNECT
-            |--|--|--|--PRETRANSFER
-            |--|--|--|--|--STARTTRANSFER
-            |--|--|--|--|--|--TOTAL
-            |--|--|--|--|--|--REDIRECT
-        **/
+        case base = "BASE_INFO"
         case time = "TIME_INFO"
+        case size = "SIZE_INFO"
+        case speed = "SPEED_INFO"
+        case ssl = "SSL_INFO"
+        case socket = "SOCKET_INFO"
+        case cookie = "COOKIE_LIST"
     }
 }
 
 extension ResponseInfo: CustomStringConvertible {
     public var description: String {
         """
-        responseCode : \(responseCode)
+        base : 
+        \(base)
         time : 
         \(time)
-        """
-    }
-}
-
-public extension ResponseInfo {
-    struct Time: Codable {
-        let nameLookup: Double
-        let connect: Double
-        let appConnect: Double
-        let preTransfer: Double
-        let startTransfer: Double
-        let total: Double
-        let redirect: Double
-
-        enum CodingKeys: String, CodingKey {
-            case nameLookup = "NAME_LOOKUP_TIME"
-            case connect = "CONNECT_TIME"
-            case appConnect = "APP_CONNECT_TIME"
-            case preTransfer = "PRE_TRANSFER_TIME"
-            case startTransfer = "START_TRANSFER_TIME"
-            case total = "TOTAL_TIME"
-            case redirect = "REDIRECT_TIME"
-        }
-    }
-}
-
-extension ResponseInfo.Time: CustomStringConvertible {
-    public var description: String {
-        """
-        nameLookup : \(nameLookup)
-        connect : \(connect)
-        appConnect : \(appConnect)
-        preTransfer : \(preTransfer)
-        startTransfer : \(startTransfer)
-        total : \(total)
-        redirect : \(redirect)
+        size : 
+        \(size)
+        speed :
+        \(speed)
+        ssl :
+        \(ssl)
+        socket :
+        \(socket)
+        cookie :
+        \(cookie)
         """
     }
 }

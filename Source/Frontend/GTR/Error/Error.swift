@@ -12,7 +12,7 @@ public struct RaceError: Error {
 extension RaceError: CustomStringConvertible {
     public var description: String {
         """
-        response info : \(responseInfo?.description ?? "")
+        response info : \((responseInfo?.description ?? ""))
         error code : \(errorCode)
         message : \(errorMessage)
         """
