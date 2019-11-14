@@ -24,18 +24,19 @@ public protocol DataTask {
     var parameters: [String: Any]? { get }
 
     /// default use gearbox's value
-    var options: RaceOptions { get }
+    var options: Option.Race { get }
+
+    /// default don't get any info
+    var responseInfoOption: Option.ResponseInfo { get }
 
     /// default use gearbox's value
-    var speedLimit: RaceSpeedLimit { get }
+    var speedLimit: Option.SpeedLimit { get }
 
     /// default use gearbox's value
-    var proxy: (String, Int)? { get }
+    var proxy: Option.Proxy? { get }
 }
 
 extension Race {
-
-    public var speedLimit: TaskSpeedLimit { TaskSpeedLimit() }
 
     public var headers: [String: Encodable]? { nil }
 
@@ -45,9 +46,13 @@ extension Race {
 
     public var parameters: [String: Any]? { nil }
 
-    public var options: TaskOptions { TaskOptions(isDebug: __gearBox.debug, timeout: __gearBox.timeout) }
+    public var options: TaskOptions { Option.defaultTask }
 
-    public var proxy: (String, Int)? { __gearBox.proxy }
+    public var responseInfoOption: Option.ResponseInfo { Option.defaultResponseInfo }
+
+    public var speedLimit: TaskSpeedLimit { Option.defaultSpeedLimit }
+
+    public var proxy: Option.Proxy? { __gearBox.proxy }
 }
 
 extension Race {
@@ -59,6 +64,7 @@ extension Race {
                 contentType: contentType,
                 headers: headers,
                 options: options,
+                responseInfoOption: responseInfoOption,
                 speedLimit: speedLimit,
                 proxy: proxy,
                 param: parameters,

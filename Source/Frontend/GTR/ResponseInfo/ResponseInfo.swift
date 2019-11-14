@@ -6,13 +6,13 @@
 import Foundation
 
 public struct ResponseInfo: Codable {
-    public let base: Base
-    public let time: Time
-    public let size: Size
-    public let speed: Speed
-    public let ssl: SSL
-    public let socket: Socket
-    public let cookie: [String]
+    public let base: Base?
+    public let time: Time?
+    public let size: Size?
+    public let speed: Speed?
+    public let ssl: SSL?
+    public let socket: Socket?
+    public let cookie: [String]?
 
     enum CodingKeys: String, CodingKey {
         case base = "BASE_INFO"
@@ -29,19 +29,19 @@ extension ResponseInfo: CustomStringConvertible {
     public var description: String {
         """
         base : 
-            \(base)
+            \(base?.description ?? "nil")
         time : 
-            \(time)
+            \(time?.description ?? "nil")
         size : 
-            \(size)
+            \(size?.description ?? "nil")
         speed :
-            \(speed)
+            \(speed?.description ?? "nil")
         ssl :
-            \(ssl)
+            \(ssl?.description ?? "nil")
         socket :
-            \(socket)
+            \(socket?.description ?? "nil")
         cookie :
-            \(cookie)
+            \(cookie?.description ?? "nil")
         """
     }
 }

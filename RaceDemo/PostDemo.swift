@@ -11,5 +11,5 @@ struct PostDemo: Race {
     let method: GTR.Method = .post
     let parameters: [String: Any]? = ["a": 1, "b": "boy"]
 
-    let options: RaceOptions = RaceOptions(isDebug: true, timeout: 10)
+    let options = TaskOptions(isDebug: true, timeout: 10)
 }

@@ -19,6 +19,9 @@ func gtr_data_task_config_parameters(_ core_race: OpaquePointer, _ method: Unsaf
 @_silgen_name("gtr_data_task_config_options")
 func gtr_data_task_config_options(_ core_race: OpaquePointer, _ is_debug: Bool, _ time_out: UInt32, _ max_redirects: Int)
 
+@_silgen_name("gtr_data_task_config_response_info_options")
+func gtr_data_task_config_response_info_options(_ data_task: OpaquePointer, _ base: Bool, _ time: Bool, _ size: Bool, _ speed: Bool, _ ssl: Bool, _ socket: Bool, _ cookie: Bool)
+
 @_silgen_name("gtr_data_task_config_speed")
 func gtr_data_task_config_speed(_ core_race: OpaquePointer, _ max_receive_speed: Int, _ max_send_speed: Int, _ low_speed_limit: Int, _ low_speed_time: Int)
 

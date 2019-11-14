@@ -18,7 +18,7 @@ public protocol GearBox {
     /// number of thread to use , default is ProcessInfo.processInfo.activeProcessorCount
     static var threadCount: UInt32 { get }
     /// proxy , default is nil
-    static var proxy: (String, Int)? { get }
+    static var proxy: Option.Proxy? { get }
 }
 
 public extension GearBox {
@@ -26,5 +26,5 @@ public extension GearBox {
     static var responseQueue: DispatchQueue { DispatchQueue.main }
     static var debug: Bool { false }
     static var threadCount: UInt32 { UInt32(ProcessInfo.processInfo.activeProcessorCount) }
-    static var proxy: (String, Int)? { nil }
+    static var proxy: Option.Proxy? { nil }
 }

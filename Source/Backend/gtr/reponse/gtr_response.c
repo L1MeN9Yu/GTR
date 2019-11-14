@@ -95,6 +95,8 @@ int gtr_get_data_task_response_info(CURL *curl, gtr_core_data_task *data_task, c
 }
 
 static void base_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
+    if (!data_task->response_info_options.base) {return;}
+
     cJSON *base_info = cJSON_CreateObject();
 
     long http_response_code = 0;
@@ -141,6 +143,8 @@ static void base_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
 }
 
 static void time_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
+    if (!data_task->response_info_options.time) {return;}
+
     cJSON *time_info = cJSON_CreateObject();
 
     double name_lookup_time = 0;
@@ -175,6 +179,8 @@ static void time_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
 }
 
 static void size_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
+    if (!data_task->response_info_options.size) {return;}
+
     cJSON *size_info = cJSON_CreateObject();
 
     long upload_size;
@@ -197,6 +203,8 @@ static void size_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
 }
 
 static void speed_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
+    if (!data_task->response_info_options.speed) {return;}
+
     cJSON *speed_info = cJSON_CreateObject();
 
     long upload_speed;
@@ -211,6 +219,8 @@ static void speed_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
 }
 
 static void ssl_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
+    if (!data_task->response_info_options.ssl) {return;}
+
     cJSON *ssl_info = cJSON_CreateObject();
 
     long verify_result;
@@ -240,6 +250,8 @@ static void ssl_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
 }
 
 static void socket_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
+    if (!data_task->response_info_options.socket) {return;}
+
     cJSON *socket_info = cJSON_CreateObject();
 
     char *primary_ip;
@@ -262,6 +274,8 @@ static void socket_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) 
 }
 
 static void cookie_list(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
+    if (!data_task->response_info_options.cookie) {return;}
+
     cJSON *cookie_list = cJSON_CreateArray();
 
     struct curl_slist *cookies = NULL;

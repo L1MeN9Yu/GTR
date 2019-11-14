@@ -23,9 +23,10 @@ func dataTask(method: Method,
               url: String,
               contentType: ContentType,
               headers: [String: Encodable]?,
-              options: RaceOptions,
-              speedLimit: RaceSpeedLimit,
-              proxy: (String, Int)?,
+              options: Option.Race,
+              responseInfoOption: Option.ResponseInfo,
+              speedLimit: Option.SpeedLimit,
+              proxy: Option.Proxy?,
               param: [String: Any]?,
               completion: Result?) -> UInt32 {
     precondition(fired, "must setup first")
@@ -44,13 +45,21 @@ func dataTask(method: Method,
     case .get:
         return __engine.getRequest(
                 url: url, headers: allHeaders, method: method, contentType: contentType,
-                options: options, speedLimit: speedLimit, proxy: proxy, param: param, completion: completion)
+                options: options, responseInfoOption: responseInfoOption,
+                speedLimit: speedLimit, proxy: proxy, param: param, completion: completion
+        )
     case .post:
-        return __engine.postRequest(url: url, headers: allHeaders, method: method, contentType: contentType,
-                options: options, speedLimit: speedLimit, proxy: proxy, param: param, completion: completion)
+        return __engine.postRequest(
+                url: url, headers: allHeaders, method: method, contentType: contentType,
+                options: options, responseInfoOption: responseInfoOption,
+                speedLimit: speedLimit, proxy: proxy, param: param, completion: completion
+        )
     case .custom(_):
-        return __engine.customRequest(url: url, headers: allHeaders, method: method, contentType: contentType,
-                options: options, speedLimit: speedLimit, proxy: proxy, param: param, completion: completion)
+        return __engine.customRequest(
+                url: url, headers: allHeaders, method: method, contentType: contentType,
+                options: options, responseInfoOption: responseInfoOption,
+                speedLimit: speedLimit, proxy: proxy, param: param, completion: completion
+        )
 //    case .download:
 //        guard let downloadPath = downloadPath else { fatalError("must use download path") }
 //        return __engine.downloadRequest(url: url, filePath: downloadPath, headers: headers, contentType: contentType, timeOut: timeOut, speedLimit: speedLimit, progress: progress, completion: completion)

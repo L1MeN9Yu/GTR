@@ -54,9 +54,10 @@ extension Engine {
                     headers: [String: Encodable]? = nil,
                     method: Method,
                     contentType: ContentType = .json,
-                    options: RaceOptions,
-                    speedLimit: RaceSpeedLimit,
-                    proxy: (String, Int)?,
+                    options: Option.Race,
+                    responseInfoOption: Option.ResponseInfo,
+                    speedLimit: Option.SpeedLimit,
+                    proxy: Option.Proxy?,
                     param: [String: Any]? = nil,
                     completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
@@ -67,6 +68,10 @@ extension Engine {
         let dataTask = gtr_data_task_create(&taskID, getURL, cHeaders)
         gtr_data_task_config_parameters(dataTask, method.stringValue, nil, 0)
         gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, options.maxRedirects)
+        gtr_data_task_config_response_info_options(
+                dataTask, responseInfoOption.base, responseInfoOption.time, responseInfoOption.size,
+                responseInfoOption.speed, responseInfoOption.ssl, responseInfoOption.socket, responseInfoOption.cookie
+        )
         gtr_data_task_config_speed(dataTask, speedLimit.maxReceiveSpeed, speedLimit.maxSendSpeed, speedLimit.lowSpeedLimit, speedLimit.lowSpeedTime)
         config(proxy: proxy, to: dataTask)
         gtr_data_task_start(dataTask)
@@ -83,9 +88,10 @@ extension Engine {
                      headers: [String: Encodable]? = nil,
                      method: Method,
                      contentType: ContentType = .json,
-                     options: RaceOptions,
-                     speedLimit: RaceSpeedLimit,
-                     proxy: (String, Int)?,
+                     options: Option.Race,
+                     responseInfoOption: Option.ResponseInfo,
+                     speedLimit: Option.SpeedLimit,
+                     proxy: Option.Proxy?,
                      param: [String: Any]? = nil,
                      completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
@@ -96,6 +102,10 @@ extension Engine {
         let dataTask = gtr_data_task_create(&taskID, url, cHeaders)
         gtr_data_task_config_parameters(dataTask, method.stringValue, parameter.0, parameter.1)
         gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, options.maxRedirects)
+        gtr_data_task_config_response_info_options(
+                dataTask, responseInfoOption.base, responseInfoOption.time, responseInfoOption.size,
+                responseInfoOption.speed, responseInfoOption.ssl, responseInfoOption.socket, responseInfoOption.cookie
+        )
         gtr_data_task_config_speed(dataTask, speedLimit.maxReceiveSpeed, speedLimit.maxSendSpeed, speedLimit.lowSpeedLimit, speedLimit.lowSpeedTime)
         config(proxy: proxy, to: dataTask)
         gtr_data_task_start(dataTask)
@@ -112,9 +122,10 @@ extension Engine {
                        headers: [String: Encodable]? = nil,
                        method: Method,
                        contentType: ContentType = .json,
-                       options: RaceOptions,
-                       speedLimit: RaceSpeedLimit,
-                       proxy: (String, Int)?,
+                       options: Option.Race,
+                       responseInfoOption: Option.ResponseInfo,
+                       speedLimit: Option.SpeedLimit,
+                       proxy: Option.Proxy?,
                        param: [String: Any]? = nil,
                        completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
@@ -125,6 +136,10 @@ extension Engine {
         let dataTask = gtr_data_task_create(&taskID, url, cHeaders)
         gtr_data_task_config_parameters(dataTask, method.stringValue, parameter.0, parameter.1)
         gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, options.maxRedirects)
+        gtr_data_task_config_response_info_options(
+                dataTask, responseInfoOption.base, responseInfoOption.time, responseInfoOption.size,
+                responseInfoOption.speed, responseInfoOption.ssl, responseInfoOption.socket, responseInfoOption.cookie
+        )
         gtr_data_task_config_speed(dataTask, speedLimit.maxReceiveSpeed, speedLimit.maxSendSpeed, speedLimit.lowSpeedLimit, speedLimit.lowSpeedTime)
         config(proxy: proxy, to: dataTask)
         gtr_data_task_start(dataTask)
@@ -211,9 +226,9 @@ extension Engine {
     }
 
     private static
-    func config(proxy: (String, Int)?, to dataTask: OpaquePointer) {
+    func config(proxy: Option.Proxy?, to dataTask: OpaquePointer) {
         guard let proxy = proxy else { return }
-        gtr_data_task_config_proxy(dataTask, proxy.0.cString(using: .utf8), proxy.1)
+        gtr_data_task_config_proxy(dataTask, proxy.url.cString(using: .utf8), proxy.port)
     }
 }
 
