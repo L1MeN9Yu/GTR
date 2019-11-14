@@ -9,6 +9,7 @@
 #include "gtr_response.h"
 #include <cJSON/cJSON.h>
 #include <memory.h>
+#include "gtr_curl_map.h"
 
 //-------------------------------------//
 const char *const BASE_INFO = "BASE_INFO";
@@ -105,7 +106,8 @@ static void base_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
 
     long protocol;
     curl_easy_getinfo(curl, CURLINFO_PROTOCOL, &protocol);
-    cJSON_AddItemToObject(base_info, PROTOCOL, cJSON_CreateNumber(protocol));
+    const char *protocol_name = gtr_curl_map_protocol(protocol);
+    cJSON_AddItemToObject(base_info, PROTOCOL, cJSON_CreateString(protocol_name ?: ""));
 
     char *scheme = NULL;
     curl_easy_getinfo(curl, CURLINFO_SCHEME, &scheme);
@@ -121,7 +123,8 @@ static void base_info(cJSON *root, CURL *curl, gtr_core_data_task *data_task) {
 
     long http_version;
     curl_easy_getinfo(curl, CURLINFO_HTTP_VERSION, &http_version);
-    cJSON_AddItemToObject(base_info, HTTP_VERSION, cJSON_CreateNumber(http_version));
+    const char *http_version_name = gtr_curl_map_http_version(http_version);
+    cJSON_AddItemToObject(base_info, HTTP_VERSION, cJSON_CreateString(http_version_name ?: ""));
 
     long redirect_count;
     curl_easy_getinfo(curl, CURLINFO_REDIRECT_COUNT, &redirect_count);

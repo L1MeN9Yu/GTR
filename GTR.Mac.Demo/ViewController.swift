@@ -147,4 +147,5 @@ extension ViewController: Horn {
 extension ViewController: GearBox {
     //global proxy
 //    public private(set) static var proxy: (String, Int)? = ("http://127.0.0.1", 1087)
+    static let responseInfoOption: Option.ResponseInfo = Option.ResponseInfo(base: true, time: true, size: true, speed: true, ssl: true, socket: true, cookie: true)
 }

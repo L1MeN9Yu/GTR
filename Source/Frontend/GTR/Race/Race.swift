@@ -26,7 +26,7 @@ public protocol DataTask {
     /// default use gearbox's value
     var options: Option.Race { get }
 
-    /// default don't get any info
+    /// default use gearbox's value
     var responseInfoOption: Option.ResponseInfo { get }
 
     /// default use gearbox's value
@@ -48,7 +48,7 @@ extension Race {
 
     public var options: TaskOptions { Option.defaultTask }
 
-    public var responseInfoOption: Option.ResponseInfo { Option.defaultResponseInfo }
+    public var responseInfoOption: Option.ResponseInfo { __gearBox.responseInfoOption }
 
     public var speedLimit: TaskSpeedLimit { Option.defaultSpeedLimit }
 

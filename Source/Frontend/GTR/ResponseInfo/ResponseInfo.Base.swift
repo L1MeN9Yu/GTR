@@ -8,11 +8,11 @@ import Foundation
 public extension ResponseInfo {
     struct Base: Codable {
         public let responseCode: Int
-        public let `protocol`: Int
+        public let `protocol`: String
         public let scheme: String
         public let effectiveURL: String
-        public let connectCode: Double
-        public let httpVersion: Double
+        public let connectCode: Int
+        public let httpVersion: String
         public let redirectCount: Int
         public let redirectURL: String
         public let connectCount: Int

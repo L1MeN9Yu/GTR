@@ -28,20 +28,26 @@ public struct ResponseInfo: Codable {
 extension ResponseInfo: CustomStringConvertible {
     public var description: String {
         """
-        base : 
-            \(base?.description ?? "nil")
-        time : 
-            \(time?.description ?? "nil")
-        size : 
-            \(size?.description ?? "nil")
-        speed :
-            \(speed?.description ?? "nil")
-        ssl :
-            \(ssl?.description ?? "nil")
-        socket :
-            \(socket?.description ?? "nil")
-        cookie :
-            \(cookie?.description ?? "nil")
+        base => : 
+        \(base?.description ?? "nil")
+
+        time => : 
+        \(time?.description ?? "nil")
+
+        size => : 
+        \(size?.description ?? "nil")
+
+        speed => :
+        \(speed?.description ?? "nil")
+
+        ssl => :
+        \(ssl?.description ?? "nil")
+
+        socket => :
+        \(socket?.description ?? "nil")
+
+        cookie => :
+        \(cookie?.description ?? "nil")
         """
     }
 }

@@ -19,6 +19,8 @@ public protocol GearBox {
     static var threadCount: UInt32 { get }
     /// proxy , default is nil
     static var proxy: Option.Proxy? { get }
+    /// response info should fetch , default is don't get any info
+    static var responseInfoOption: Option.ResponseInfo { get }
 }
 
 public extension GearBox {
@@ -27,4 +29,5 @@ public extension GearBox {
     static var debug: Bool { false }
     static var threadCount: UInt32 { UInt32(ProcessInfo.processInfo.activeProcessorCount) }
     static var proxy: Option.Proxy? { nil }
+    static var responseInfoOption: Option.ResponseInfo { Option.defaultResponseInfo }
 }
