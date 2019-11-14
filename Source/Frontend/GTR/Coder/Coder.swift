@@ -31,7 +31,7 @@ extension Coder {
             return nil
         }
         #else
-        try? decoder.decode(T.self, from: data)
+        return try? decoder.decode(T.self, from: data)
         #endif
     }
 
@@ -44,7 +44,7 @@ extension Coder {
             return nil
         }
         #else
-        try? encoder.encode(value)
+        return try? encoder.encode(value)
         #endif
     }
 }
