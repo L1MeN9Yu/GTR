@@ -35,9 +35,11 @@ static const char *global_user_agent;
 
 static const char *temp_directory;
 
-static void gtr_core_config_http_method(CURL *handle, gtr_core_data_task *request);
+static void gtr_core_config_http_method(CURL *handle, gtr_core_data_task *data_task);
 
 static void gtr_core_config_url(CURL *handle, const char *url);
+
+static void gtr_core_config_form_data(CURL *curl, gtr_core_data_task *data_task);
 
 static void gtr_core_config_accept_encoding(CURL *handle);
 
@@ -51,9 +53,9 @@ static void gtr_core_config_signal(CURL *handle, bool is_on);
 
 static void gtr_core_config_time_out(CURL *handle, unsigned int time_out);
 
-static void gtr_core_config_header_call_back(CURL *handle, gtr_core_race_response_header *response_header);
+static void gtr_core_config_header_call_back(CURL *handle, gtr_task_response_header *response_header);
 
-static void gtr_core_config_write_call_back(CURL *handle, gtr_core_race_response_body *response_body);
+static void gtr_core_config_write_call_back(CURL *handle, gtr_data_task_response_body *response_body);
 
 static void gtr_core_config_progress(CURL *handle, gtr_core_data_task *request);
 
@@ -108,7 +110,7 @@ static int debug_func(CURL *__unused handle, curl_infotype type, char *data, siz
  * @return size_t
  */
 static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *userp) {
-    gtr_task_request_body *request_data = (gtr_task_request_body *) userp;
+    gtr_data_task_request_body *request_data = (gtr_data_task_request_body *) userp;
     unsigned long bytes_read = 0;
     if (size * nmemb < 1)
         return (size_t) bytes_read;
@@ -129,7 +131,7 @@ static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *userp) {
 
 static size_t header_callback(char *contents, size_t size, size_t nmemb, void *user_data) {
     size_t real_size = size * nmemb;
-    gtr_core_race_response_header *response_header = (gtr_core_race_response_header *) user_data;
+    gtr_task_response_header *response_header = (gtr_task_response_header *) user_data;
 
     response_header->data = realloc(response_header->data, response_header->size + real_size + 1);
     if (response_header->data == NULL) {
@@ -155,7 +157,7 @@ static size_t header_callback(char *contents, size_t size, size_t nmemb, void *u
  */
 static size_t write_callback(void *contents, size_t size, size_t nmemb, void *user_data) {
     size_t real_size = size * nmemb;
-    gtr_core_race_response_body *response_body = (gtr_core_race_response_body *) user_data;
+    gtr_data_task_response_body *response_body = (gtr_data_task_response_body *) user_data;
 
     response_body->data = realloc(response_body->data, response_body->size + real_size + 1);
     if (response_body->data == NULL) {
@@ -189,64 +191,42 @@ static int progress_callback(
 
 //--- Core
 static void request(gtr_core_data_task *data_task) {
-    CURL *curl;
+    CURL *curl = data_task->curl;
     CURLcode res;
 
-    gtr_core_race_response_header response_header;
+    gtr_task_response_header response_header;
     {
         response_header.data = malloc(1);
         response_header.size = 0;
     }
 
-    gtr_core_race_response_body response_body;
+    gtr_data_task_response_body response_body;
     {
         response_body.data = malloc(1);
         response_body.size = 0;
     }
 
-    curl = curl_easy_init();
+    gtr_core_config_http_method(curl, data_task);
 
-    {
-        gtr_core_config_http_method(curl, data_task);
-    }
+    gtr_core_config_url(curl, data_task->url);
 
-    {
-        gtr_core_config_url(curl, data_task->url);
-    }
+    gtr_core_config_form_data(curl, data_task);
 
-    {
-        gtr_core_config_accept_encoding(curl);
-    }
+    gtr_core_config_accept_encoding(curl);
 
-    {
-        gtr_core_config_keep_alive(curl);
-    }
+    gtr_core_config_keep_alive(curl);
 
-    {
-        gtr_core_config_verify_peer(curl, true);
-    }
+    gtr_core_config_verify_peer(curl, true);
 
-    {
-        gtr_core_config_time_out(curl, data_task->options.time_out);
-    }
+    gtr_core_config_time_out(curl, data_task->options.time_out);
 
-    {
-        //如果不使用threaded resolver或者c-ares,需要no_signal=1,否则在dns解析超时情况下crash
-        //详见:https://curl.haxx.se/libcurl/c/CURLOPT_NOSIGNAL.html https://curl.haxx.se/libcurl/c/threadsafe.html
-        gtr_core_config_signal(curl, true);
-    }
+    gtr_core_config_signal(curl, true);
 
-    {
-        gtr_core_config_header_call_back(curl, &response_header);
-    }
+    gtr_core_config_header_call_back(curl, &response_header);
 
-    {
-        gtr_core_config_write_call_back(curl, &response_body);
-    }
+    gtr_core_config_write_call_back(curl, &response_body);
 
-    {
-        gtr_core_config_progress(curl, data_task);
-    }
+    gtr_core_config_progress(curl, data_task);
 
     gtr_core_config_proxy(curl, data_task);
     gtr_core_config_max_redirects(curl, data_task->options.max_redirects);
@@ -277,7 +257,7 @@ static void request(gtr_core_data_task *data_task) {
             }
         }
 
-        if (response_info){
+        if (response_info) {
             free(response_info);
         }
     }
@@ -289,6 +269,11 @@ static void request(gtr_core_data_task *data_task) {
         if (data_task->proxy && data_task->proxy->url) {
             free(data_task->proxy->url);
             free(data_task->proxy);
+        }
+    }
+    {
+        if (data_task->mime) {
+            curl_mime_free(data_task->mime);
         }
     }
     {
@@ -333,29 +318,29 @@ void gtr_core_data_task_start(gtr_core_data_task *core_data_task) {
 }
 
 //---Private Config
-static void gtr_core_config_http_method(CURL *handle, gtr_core_data_task *request) {
-    assert(request);
-    if (strcmp(request->method, METHOD_GET) == 0) {
+static void gtr_core_config_http_method(CURL *handle, gtr_core_data_task *data_task) {
+    assert(data_task);
+    if (strcmp(data_task->method, METHOD_GET) == 0) {
         curl_easy_setopt(handle, CURLOPT_HTTPGET, 1L);
-    } else if (strcmp(request->method, METHOD_POST) == 0) {
-        if (request->request_data && request->request_data->data) {
-            curl_easy_setopt(handle, CURLOPT_POSTFIELDS, request->request_data->data);
-            curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, request->request_data->size);
-            curl_easy_setopt(handle, CURLOPT_INFILESIZE, request->request_data->size);
+    } else if (strcmp(data_task->method, METHOD_POST) == 0) {
+        if (data_task->request_data && data_task->request_data->data) {
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDS, data_task->request_data->data);
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, data_task->request_data->size);
+            curl_easy_setopt(handle, CURLOPT_INFILESIZE, data_task->request_data->size);
         } else {
             curl_easy_setopt(handle, CURLOPT_POSTFIELDS, "");
             curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, 0);
         }
-    } else if (strcmp(request->method, METHOD_DOWNLOAD) == 0) {
+    } else if (strcmp(data_task->method, METHOD_DOWNLOAD) == 0) {
         curl_easy_setopt(handle, CURLOPT_HTTPGET, 1L);
-    } else if (strcmp(request->method, METHOD_UPLOAD) == 0) {
+    } else if (strcmp(data_task->method, METHOD_UPLOAD) == 0) {
         curl_easy_setopt(handle, CURLOPT_UPLOAD, 1L);
     } else {
-        if (request->method) {curl_easy_setopt(handle, CURLOPT_CUSTOMREQUEST, request->method);}
-        if (request->request_data && request->request_data->data) {
-            curl_easy_setopt(handle, CURLOPT_POSTFIELDS, request->request_data->data);
-            curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, request->request_data->size);
-            curl_easy_setopt(handle, CURLOPT_INFILESIZE, request->request_data->size);
+        if (data_task->method) {curl_easy_setopt(handle, CURLOPT_CUSTOMREQUEST, data_task->method);}
+        if (data_task->request_data && data_task->request_data->data) {
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDS, data_task->request_data->data);
+            curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, data_task->request_data->size);
+            curl_easy_setopt(handle, CURLOPT_INFILESIZE, data_task->request_data->size);
         } else {
             curl_easy_setopt(handle, CURLOPT_POSTFIELDS, "");
             curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, 0);
@@ -365,8 +350,11 @@ static void gtr_core_config_http_method(CURL *handle, gtr_core_data_task *reques
 
 static void gtr_core_config_url(CURL *handle, const char *url) {
     curl_easy_setopt(handle, CURLOPT_URL, url);
-    curl_easy_setopt(handle, CURLOPT_TIMEOUT, 10);
-    curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L);
+}
+
+static void gtr_core_config_form_data(CURL *curl, gtr_core_data_task *data_task) {
+    if (!data_task->mime) {return;}
+    curl_easy_setopt(curl, CURLOPT_MIMEPOST, data_task->mime);
 }
 
 static void gtr_core_config_accept_encoding(CURL *handle) {
@@ -432,6 +420,8 @@ static void gtr_core_config_time_out(CURL *handle, unsigned int time_out) {
 }
 
 static void gtr_core_config_signal(CURL *handle, bool is_on) {
+    //如果不使用threaded resolver或者c-ares,需要no_signal=1,否则在dns解析超时情况下crash
+    //详见:https://curl.haxx.se/libcurl/c/CURLOPT_NOSIGNAL.html https://curl.haxx.se/libcurl/c/threadsafe.html
     long value = is_on ? 1L : 0L;
     curl_easy_setopt(handle, CURLOPT_NOSIGNAL, value);
 }
@@ -444,6 +434,7 @@ static void gtr_core_config_proxy(CURL *handle, gtr_core_data_task *core_data_ta
 }
 
 static void gtr_core_config_max_redirects(CURL *handle, long max_redirects) {
+    curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, max_redirects == 0 ? 0L : 1L);
     curl_easy_setopt(handle, CURLOPT_MAXREDIRS, max_redirects);
 }
 
@@ -459,12 +450,12 @@ static void gtr_core_config_speed(CURL *handle, gtr_task_speed speed) {
     curl_easy_setopt(handle, CURLOPT_LOW_SPEED_TIME, low_speed_time);
 }
 
-static void gtr_core_config_header_call_back(CURL *handle, gtr_core_race_response_header *response_header) {
+static void gtr_core_config_header_call_back(CURL *handle, gtr_task_response_header *response_header) {
     curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, header_callback);
     curl_easy_setopt(handle, CURLOPT_HEADERDATA, response_header);
 }
 
-static void gtr_core_config_write_call_back(CURL *handle, gtr_core_race_response_body *response_body) {
+static void gtr_core_config_write_call_back(CURL *handle, gtr_data_task_response_body *response_body) {
     curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, write_callback);
     curl_easy_setopt(handle, CURLOPT_WRITEDATA, response_body);
 }

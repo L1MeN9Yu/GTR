@@ -16,6 +16,9 @@ func gtr_data_task_create(_ task_id: UnsafeMutablePointer<UInt32>, _ url: Unsafe
 @_silgen_name("gtr_data_task_config_parameters")
 func gtr_data_task_config_parameters(_ core_race: OpaquePointer, _ method: UnsafePointer<Int8>?, _ param_data: UnsafeRawPointer?, _ param_size: UInt)
 
+@_silgen_name("gtr_data_task_add_form_data")
+func gtr_data_task_add_form_data(_ data_task: OpaquePointer, _ type: Int32, _ name: UnsafePointer<Int8>?, _ value: UnsafePointer<Int8>?)
+
 @_silgen_name("gtr_data_task_config_options")
 func gtr_data_task_config_options(_ core_race: OpaquePointer, _ is_debug: Bool, _ time_out: UInt32, _ max_redirects: Int)
 

@@ -15,32 +15,59 @@
 gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char *url, const char *header) {
     assert(url);
 
-    gtr_core_data_task *core_request = (gtr_core_data_task *) malloc(sizeof(gtr_core_data_task));
+    gtr_core_data_task *data_task = (gtr_core_data_task *) malloc(sizeof(gtr_core_data_task));
 
     *task_id = gtr_task_id_init();
-    core_request->task_id = *task_id;
+    data_task->task_id = *task_id;
 
-    core_request->is_cancel = false;
+    data_task->is_cancel = false;
 
-    core_request->url = strdup(url);
+    data_task->url = strdup(url);
 
-    core_request->proxy = NULL;
+    data_task->proxy = NULL;
 
-    if (header) {core_request->header = strdup(header);}
-    return core_request;
+    data_task->mime = NULL;
+
+    if (header) {data_task->header = strdup(header);}
+
+    data_task->curl = curl_easy_init();
+
+    return data_task;
 }
 
 void gtr_core_data_task_config_parameters(gtr_core_data_task *data_task, const char *method, const void *param_data, unsigned long param_size) {
     data_task->method = strdup(method);
 
     if (param_size > 0 && param_data != NULL) {
-        data_task->request_data = (gtr_task_request_body *) calloc(1, sizeof(gtr_task_request_body));
+        data_task->request_data = (gtr_data_task_request_body *) calloc(1, sizeof(gtr_data_task_request_body));
         data_task->request_data->data = malloc((size_t) param_data);
         data_task->request_data->size_left = param_size;
         data_task->request_data->size = param_size;
         memcpy(data_task->request_data->data, param_data, param_size);
     } else {
         data_task->request_data = NULL;
+    }
+}
+
+void gtr_core_data_task_add_form_data(gtr_core_data_task *data_task, int type, const char *name, const char *value) {
+    if (data_task->mime == NULL) {
+        data_task->mime = curl_mime_init(data_task->curl);
+    }
+    switch (type) {
+        case 0: {
+            curl_mimepart *part = curl_mime_addpart(data_task->mime);
+            curl_mime_data(part, value, CURL_ZERO_TERMINATED);
+            curl_mime_name(part, name);
+        }
+            break;
+        case 1: {
+            curl_mimepart *part = curl_mime_addpart(data_task->mime);
+            curl_mime_filedata(part, value);
+            curl_mime_name(part, name);
+        }
+            break;
+        default:
+            break;
     }
 }
 

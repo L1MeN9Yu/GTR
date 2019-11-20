@@ -6,10 +6,11 @@
 import Foundation
 
 // MARK: - Content Type
-public enum ContentType: UInt {
+public enum ContentType {
     case json
     case formURLEncoded
     case propertyList
+    case formData
 
     func toHeader() -> [String: Encodable] {
         switch self {
@@ -19,6 +20,13 @@ public enum ContentType: UInt {
             return ["Content-Type": "application/x-www-form-urlencoded; charset=utf-8"]
         case .propertyList:
             return ["Content-Type": "application/x-plist; charset=utf-8"]
+        case .formData:
+            //let lib curl handle
+            return [:]
         }
     }
+}
+
+public extension ContentType {
+    static let FormDataKey = "FormDataKey"
 }

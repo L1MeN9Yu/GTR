@@ -115,6 +115,18 @@ extension ViewController {
             }
         }
     }
+
+    private func formData() {
+        FormDataDemo().race { destination in
+            switch destination {
+            case .success(let goal):
+                print("\(goal)")
+                break
+            case .failure(_):
+                break
+            }
+        }
+    }
 }
 
 extension ViewController {
@@ -124,8 +136,9 @@ extension ViewController {
 //        self.getCache()
 //        self.post()
 //        self.custom()
-        self.get()
+//        self.get()
 //        self.proxy()
+        self.formData()
     }
 }
 

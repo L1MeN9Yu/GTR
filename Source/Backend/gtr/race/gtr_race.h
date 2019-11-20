@@ -18,37 +18,27 @@
 /**
  *
  */
-typedef struct gtr_core_race_response_header {
+typedef struct gtr_task_response_header {
     char *data;
     unsigned long size;
-} gtr_core_race_response_header;
+} gtr_task_response_header;
 
 /**
  *
  */
-typedef struct gtr_core_race_request_body {
+typedef struct gtr_data_task_request_body {
     char *data;
     unsigned long size;
     unsigned long size_left;
-} gtr_task_request_body;
+} gtr_data_task_request_body;
 
 /**
  *
  */
-typedef struct gtr_core_race_response_body {
+typedef struct gtr_data_task_response_body {
     char *data;
     unsigned long size;
-} gtr_core_race_response_body;
-
-/**
- *
- */
-typedef struct gtr_core_race_download_data {
-    char *file_path;
-    unsigned int task_id;
-
-    void (*on_progress)(unsigned int task_id, unsigned long long now, unsigned long long total);
-} gtr_task_download_data;
+} gtr_data_task_response_body;
 
 typedef struct gtr_task_options {
     bool is_debug;
@@ -82,11 +72,14 @@ typedef struct gtr_task_response_info_options {
  * 请求
  */
 struct gtr_core_data_task {
+    CURL *curl;
     unsigned int task_id;
     bool is_cancel;
     char *method;
     char *url;
     char *header;
+    curl_mime *mime;
+
     gtr_task_options options;
     gtr_task_speed speed;
     gtr_task_proxy *proxy;
@@ -97,7 +90,7 @@ struct gtr_core_data_task {
     /**
      * request body
      */
-    gtr_task_request_body *request_data;
+    gtr_data_task_request_body *request_data;
 
     /**
      * succeed callback
@@ -110,9 +103,25 @@ struct gtr_core_data_task {
     on_data_task_failed on_failed;
 };
 
+struct gtr_core_upload_task {
+    unsigned int task_id;
+    char *url;
+    char *header;
+    gtr_task_options options;
+    gtr_task_speed speed;
+    gtr_task_proxy *proxy;
+    gtr_task_response_info_options response_info_options;
+    on_task_progress on_progress;
+    on_upload_task_succeed on_succeed;
+    on_upload_task_failed on_failed;
+};
+
+//-------------------------------------//
 gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char *url, const char *header);
 
 void gtr_core_data_task_config_parameters(gtr_core_data_task *data_task, const char *method, const void *param_data, unsigned long param_size);
+
+void gtr_core_data_task_add_form_data(gtr_core_data_task *data_task, int type, const char *name, const char *value);
 
 void gtr_core_data_task_config_options(gtr_core_data_task *data_task, bool is_debug, unsigned int time_out, long max_redirects);
 
@@ -123,5 +132,6 @@ void gtr_core_data_task_config_speed(gtr_core_data_task *data_task, long max_rec
 void gtr_core_data_task_config_proxy(gtr_core_data_task *data_task, const char *url, long port);
 
 void gtr_core_data_task_config_callback(gtr_core_data_task *data_task, on_data_task_succeed succeed_callback, on_data_task_failed failure_callback);
+//-------------------------------------//
 
 #endif /* gtr_core_request_h */

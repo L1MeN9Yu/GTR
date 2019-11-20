@@ -25,32 +25,36 @@ static void on_data_task_succeed_callback(unsigned int task_id, const void *resp
 /// on_data_task_failed_callback
 static void on_data_task_failed_callback(unsigned int task_id, const void *response_info_data, long response_info_data_size, int error_code, const char *error_message);
 
-gtr_core_data_task *gtr_data_task_create(unsigned *task_id, const char *url, const char *headers) {
+gtr_core_data_task __used *gtr_data_task_create(unsigned *task_id, const char *url, const char *headers) {
     gtr_core_data_task *core_race = gtr_core_data_task_create(task_id, url, headers);
     return core_race;
 }
 
-void gtr_data_task_config_parameters(gtr_core_data_task *data_task, const char *method, const void *param_data, unsigned long param_size) {
+void __used gtr_data_task_config_parameters(gtr_core_data_task *data_task, const char *method, const void *param_data, unsigned long param_size) {
     gtr_core_data_task_config_parameters(data_task, method, param_data, param_size);
 }
 
-void gtr_data_task_config_options(gtr_core_data_task *data_task, bool is_debug, unsigned int time_out, long max_redirects) {
+void __used gtr_data_task_add_form_data(gtr_core_data_task *data_task, int type, const char *name, const char *value) {
+    gtr_core_data_task_add_form_data(data_task, type, name, value);
+}
+
+void __used gtr_data_task_config_options(gtr_core_data_task *data_task, bool is_debug, unsigned int time_out, long max_redirects) {
     gtr_core_data_task_config_options(data_task, is_debug, time_out, max_redirects);
 }
 
-void gtr_data_task_config_response_info_options(gtr_core_data_task *data_task, bool base, bool time, bool size, bool speed, bool ssl, bool socket, bool cookie) {
+void __used gtr_data_task_config_response_info_options(gtr_core_data_task *data_task, bool base, bool time, bool size, bool speed, bool ssl, bool socket, bool cookie) {
     gtr_core_data_task_config_response_info_options(data_task, base, time, size, speed, ssl, socket, cookie);
 }
 
-void gtr_data_task_config_speed(gtr_core_data_task *data_task, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time) {
+void __used gtr_data_task_config_speed(gtr_core_data_task *data_task, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time) {
     gtr_core_data_task_config_speed(data_task, max_receive_speed, max_send_speed, low_speed_limit, low_speed_time);
 }
 
-void gtr_data_task_config_proxy(gtr_core_data_task *data_task, const char *url, long port) {
+void __used gtr_data_task_config_proxy(gtr_core_data_task *data_task, const char *url, long port) {
     gtr_core_data_task_config_proxy(data_task, url, port);
 }
 
-void gtr_data_task_start(gtr_core_data_task *data_task) {
+void __used gtr_data_task_start(gtr_core_data_task *data_task) {
     gtr_core_data_task_config_callback(data_task, &on_data_task_succeed_callback, &on_data_task_failed_callback);
     gtr_core_data_task_start(data_task);
 }

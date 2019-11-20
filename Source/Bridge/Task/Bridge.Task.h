@@ -14,25 +14,28 @@
 
 typedef struct gtr_core_data_task gtr_core_data_task;
 
-__attribute__((nonnull(1), unused))
+__attribute__((nonnull(1), used))
 extern gtr_core_data_task *gtr_data_task_create(unsigned *task_id, const char *url, const char *headers);
 
-__attribute__((nonnull(1), unused))
+__attribute__((nonnull(1), used))
 extern void gtr_data_task_config_parameters(gtr_core_data_task *data_task, const char *method, const void *param_data, unsigned long param_size);
 
-__attribute__((nonnull(1), unused))
+__attribute__((nonnull(1), used))
+extern void gtr_data_task_add_form_data(gtr_core_data_task *data_task, int type, const char *name, const char *value);
+
+__attribute__((nonnull(1), used))
 extern void gtr_data_task_config_options(gtr_core_data_task *data_task, bool is_debug, unsigned int time_out, long max_redirects);
 
-__attribute__((nonnull(1), unused))
+__attribute__((nonnull(1), used))
 extern void gtr_data_task_config_response_info_options(gtr_core_data_task *data_task, bool base, bool time, bool size, bool speed, bool ssl, bool socket, bool cookie);
 
-__attribute__((nonnull(1), unused))
+__attribute__((nonnull(1), used))
 extern void gtr_data_task_config_speed(gtr_core_data_task *data_task, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time);
 
-__attribute__((nonnull(1), unused))
+__attribute__((nonnull(1), used))
 extern void gtr_data_task_config_proxy(gtr_core_data_task *data_task, const char *url, long port);
 
-__attribute__((nonnull(1), unused))
+__attribute__((nonnull(1), used))
 extern void gtr_data_task_start(gtr_core_data_task *data_task);
 
 /**

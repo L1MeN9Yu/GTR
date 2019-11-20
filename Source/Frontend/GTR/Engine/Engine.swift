@@ -97,9 +97,9 @@ extension Engine {
         var taskID: CUnsignedInt = 0
         let cHeaders = self.generateHeaderString(headers: headers)
 
-        let parameter = cParameter(contentType: contentType, param: param)
-
         let dataTask = gtr_data_task_create(&taskID, url, cHeaders)
+        let parameter = cParameter(dataTask: dataTask, contentType: contentType, param: param)
+
         gtr_data_task_config_parameters(dataTask, method.stringValue, parameter.0, parameter.1)
         gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, options.maxRedirects)
         gtr_data_task_config_response_info_options(
@@ -131,9 +131,9 @@ extension Engine {
         var taskID: CUnsignedInt = 0
         let cHeaders = self.generateHeaderString(headers: headers)
 
-        let parameter = cParameter(contentType: contentType, param: param)
-
         let dataTask = gtr_data_task_create(&taskID, url, cHeaders)
+        let parameter = cParameter(dataTask: dataTask, contentType: contentType, param: param)
+
         gtr_data_task_config_parameters(dataTask, method.stringValue, parameter.0, parameter.1)
         gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, options.maxRedirects)
         gtr_data_task_config_response_info_options(
@@ -182,7 +182,7 @@ extension Engine {
     }
 
     private static
-    func cParameter(contentType: ContentType, param: [String: Any]?) -> (UnsafeRawPointer?, CUnsignedLong) {
+    func cParameter(dataTask: OpaquePointer, contentType: ContentType, param: [String: Any]?) -> (UnsafeRawPointer?, CUnsignedLong) {
         var c_param: UnsafeRawPointer? = nil
         var c_param_size: CUnsignedLong = 0
         switch contentType {
@@ -207,6 +207,19 @@ extension Engine {
                 }
                 c_param_size = CUnsignedLong(data.count)
             }
+        case .formData:
+            if let param = param,
+               let formData = param[ContentType.FormDataKey] as? [Mime] {
+                formData.forEach { (mime: Mime) in
+                    switch mime {
+                    case .text(let name, let value):
+                        gtr_data_task_add_form_data(dataTask, mime.type, name.cString(using: .utf8), value.cString(using: .utf8))
+                    case .file(let name, let fileURL):
+                        gtr_data_task_add_form_data(dataTask, mime.type, name.cString(using: .utf8), fileURL.path.cString(using: .utf8))
+                    }
+                }
+            }
+            break
         }
         return (c_param, c_param_size)
     }

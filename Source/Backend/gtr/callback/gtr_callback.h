@@ -23,4 +23,13 @@ typedef void (*on_data_task_failed)(
         int error_code, const char *error_message
 ) __attribute__((nonnull(2, 5)));
 
+typedef void (*on_task_progress)(
+        unsigned int task_id,
+        unsigned long long now,
+        unsigned long long total
+);
+
+typedef on_data_task_failed on_upload_task_failed;
+typedef on_data_task_succeed on_upload_task_succeed;
+
 #endif /* gtr_callback_h */
