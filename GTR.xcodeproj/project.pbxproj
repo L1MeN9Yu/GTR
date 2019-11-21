@@ -68,6 +68,7 @@
 		45304303CC8A196A6222F89B /* ResponseInfo.Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530435D8BFC3680C9DD34CC /* ResponseInfo.Size.swift */; };
 		4530430557B63729185B978E /* gtr_response.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530442FA9172EF1D3A9FD2A /* gtr_response.c */; };
 		453043079241B1F5857EAB08 /* gtr_response.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530456198C60CC3F6813D95 /* gtr_response.h */; };
+		453043142DA678A524B9E62C /* CacheDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530451433221672413E285C /* CacheDemo.swift */; };
 		453043197794166E2032DB24 /* Bridge.Task.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530460F1160445F37D5FC14 /* Bridge.Task.h */; };
 		45304332ECFBD9732D78BB3E /* ResponseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304127BF97F2A44EC80D2E /* ResponseInfo.swift */; };
 		45304359DB0A1696C4953CAE /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304E0E09D4A48169922F26 /* Race.swift */; };
@@ -159,6 +160,7 @@
 		45304E464EE0E61B9542CE23 /* Mime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453044583425C310F13F28F1 /* Mime.swift */; };
 		45304E73C6F15C7EEDCEA71A /* Dictionary.Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453041E2813151DA95078D9F /* Dictionary.Filter.swift */; };
 		45304E8877B4E41E2C8DFF7A /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453048568496485D627479DE /* Driver.swift */; };
+		45304E8AE4C939AC1EF8865B /* CacheDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530451433221672413E285C /* CacheDemo.swift */; };
 		45304E9D1127AC41E6C0ABB8 /* gtr_method.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530484CF9C4AF29AA0C905C /* gtr_method.c */; };
 		45304EA5E6ED7040D6B44613 /* gtr_curl_map.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304E173EEA2A6427BF1593 /* gtr_curl_map.c */; };
 		45304ECBF5B06332AAAF93EE /* Option.Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453042DFEBE6656C1AEA136C /* Option.Proxy.swift */; };
@@ -277,6 +279,7 @@
 		4530448FAF17E131A285D3CA /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		453044C9CEB3987575E9104C /* gtr_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_thread_pool.h; sourceTree = "<group>"; };
 		453044F2A2359F10494DFB9A /* Bridge.Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.Core.h; sourceTree = "<group>"; };
+		4530451433221672413E285C /* CacheDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheDemo.swift; sourceTree = "<group>"; };
 		4530456198C60CC3F6813D95 /* gtr_response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_response.h; sourceTree = "<group>"; };
 		4530460F1160445F37D5FC14 /* Bridge.Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.Task.h; sourceTree = "<group>"; };
 		45304658050C8401DBCAE0F6 /* gtr_method.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_method.h; sourceTree = "<group>"; };
@@ -435,6 +438,7 @@
 				4530437B47CE4FD6AD68ECA0 /* ProxyDemo.swift */,
 				45304EF7820F0C15F84B295F /* HttpHeader.swift */,
 				453047929B1CBB041FE3D456 /* FormDataDemo.swift */,
+				4530451433221672413E285C /* CacheDemo.swift */,
 			);
 			path = RaceDemo;
 			sourceTree = "<group>";
@@ -1041,6 +1045,7 @@
 				4530494C0F4A1FB2DECBBB98 /* ProxyDemo.swift in Sources */,
 				453041C6853A065A456E6852 /* HttpHeader.swift in Sources */,
 				45304B65F8C62399929F303C /* FormDataDemo.swift in Sources */,
+				453043142DA678A524B9E62C /* CacheDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,6 +1065,7 @@
 				45304DD7A219168AEB55C6BB /* ProxyDemo.swift in Sources */,
 				453046CE9E7468E83F922AC6 /* HttpHeader.swift in Sources */,
 				45304459C64568390EDA5378 /* FormDataDemo.swift in Sources */,
+				45304E8AE4C939AC1EF8865B /* CacheDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1342,7 +1348,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcJSON/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.9.0;
+				MARKETING_VERSION = 0.10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-Mac";
@@ -1386,7 +1392,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcJSON/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.9.0;
+				MARKETING_VERSION = 0.10.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.GTR-Mac";
 				PRODUCT_NAME = GTR;
@@ -1546,7 +1552,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcJSON/lib",
 				);
-				MARKETING_VERSION = 0.9.0;
+				MARKETING_VERSION = 0.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = GTR;
 				SKIP_INSTALL = YES;
@@ -1585,7 +1591,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcJSON/lib",
 				);
-				MARKETING_VERSION = 0.9.0;
+				MARKETING_VERSION = 0.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = GTR;
 				SKIP_INSTALL = YES;
