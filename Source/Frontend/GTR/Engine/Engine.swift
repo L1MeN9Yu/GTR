@@ -51,7 +51,7 @@ extension Engine {
 extension Engine {
     internal static
     func getRequest(url: String,
-                    headers: [String: Encodable]? = nil,
+                    headers: [String: CustomStringConvertible]? = nil,
                     method: Method,
                     contentType: ContentType = .json,
                     options: Option.Race,
@@ -61,11 +61,9 @@ extension Engine {
                     param: [String: Any]? = nil,
                     completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
-        let cHeaders = self.generateHeaderString(headers: headers)
-
         let getURL = urlForGetParameter(url: url, param: param)
-
-        let dataTask = gtr_data_task_create(&taskID, getURL, cHeaders)
+        let dataTask = gtr_data_task_create(&taskID, getURL)
+        config(dataTask: dataTask, headers: headers)
         gtr_data_task_config_parameters(dataTask, method.stringValue, nil, 0)
         gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, options.maxRedirects)
         gtr_data_task_config_response_info_options(
@@ -85,7 +83,7 @@ extension Engine {
 
     internal static
     func postRequest(url: String,
-                     headers: [String: Encodable]? = nil,
+                     headers: [String: CustomStringConvertible]? = nil,
                      method: Method,
                      contentType: ContentType = .json,
                      options: Option.Race,
@@ -95,11 +93,9 @@ extension Engine {
                      param: [String: Any]? = nil,
                      completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
-        let cHeaders = self.generateHeaderString(headers: headers)
-
-        let dataTask = gtr_data_task_create(&taskID, url, cHeaders)
+        let dataTask = gtr_data_task_create(&taskID, url)
         let parameter = cParameter(dataTask: dataTask, contentType: contentType, param: param)
-
+        config(dataTask: dataTask, headers: headers)
         gtr_data_task_config_parameters(dataTask, method.stringValue, parameter.0, parameter.1)
         gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, options.maxRedirects)
         gtr_data_task_config_response_info_options(
@@ -119,7 +115,7 @@ extension Engine {
 
     internal static
     func customRequest(url: String,
-                       headers: [String: Encodable]? = nil,
+                       headers: [String: CustomStringConvertible]? = nil,
                        method: Method,
                        contentType: ContentType = .json,
                        options: Option.Race,
@@ -129,11 +125,9 @@ extension Engine {
                        param: [String: Any]? = nil,
                        completion: GTR.Result?) -> UInt32 {
         var taskID: CUnsignedInt = 0
-        let cHeaders = self.generateHeaderString(headers: headers)
-
-        let dataTask = gtr_data_task_create(&taskID, url, cHeaders)
+        let dataTask = gtr_data_task_create(&taskID, url)
         let parameter = cParameter(dataTask: dataTask, contentType: contentType, param: param)
-
+        config(dataTask: dataTask, headers: headers)
         gtr_data_task_config_parameters(dataTask, method.stringValue, parameter.0, parameter.1)
         gtr_data_task_config_options(dataTask, options.isDebug, options.timeout, options.maxRedirects)
         gtr_data_task_config_response_info_options(
@@ -154,16 +148,13 @@ extension Engine {
     internal static
     func downloadRequest(url: String,
                          filePath: String,
-                         headers: [String: Encodable]? = nil,
+                         headers: [String: CustomStringConvertible]? = nil,
                          contentType: ContentType = .json,
                          timeOut: UInt32,
                          speedLimit: Int,
                          progress: GTRProgressClosure?,
                          completion: GTR.Result?) -> UInt32 {
-        var taskID: CUnsignedInt = 0
-        let cHeaders = self.generateHeaderString(headers: headers)
-        c_gtr_download(&taskID, url.cString(using: .utf8), filePath.cString(using: .utf8), cHeaders, timeOut, speedLimit)
-        return taskID
+        fatalError("not implement")
     }
 }
 
@@ -226,16 +217,14 @@ extension Engine {
 
     ///构建Headers
     private static
-    func generateHeaderString(headers: [String: Encodable]? = nil) -> String? {
-        var allHeaders = self.httpHeaderClosure?() ?? [String: Encodable]()
+    func config(dataTask: OpaquePointer, headers: [String: CustomStringConvertible]? = nil) {
+        var allHeaders = self.httpHeaderClosure?() ?? [String: CustomStringConvertible]()
         if let additionHeader = headers {
-            allHeaders.merge(additionHeader) { (value1: Encodable, value2: Encodable) -> Encodable in
-                value2
-            }
+            allHeaders.merge(additionHeader) { (value1: CustomStringConvertible, value2: CustomStringConvertible) -> CustomStringConvertible in value2 }
         }
-        let headerString = allHeaders.jsonStringEncoded()?.replacingOccurrences(of: "\\/", with: "/")
-
-        return headerString
+        allHeaders.forEach { key, value in
+            gtr_data_task_add_header(dataTask, "\(key): \(value)")
+        }
     }
 
     private static

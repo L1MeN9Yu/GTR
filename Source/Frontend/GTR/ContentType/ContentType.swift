@@ -12,7 +12,7 @@ public enum ContentType {
     case propertyList
     case formData
 
-    func toHeader() -> [String: Encodable] {
+    func toHeader() -> [String: CustomStringConvertible] {
         switch self {
         case .json:
             return ["Content-Type": "application/json; charset=utf-8"]

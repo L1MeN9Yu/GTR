@@ -136,14 +136,14 @@ extension ViewController {
 //        self.getCache()
 //        self.post()
 //        self.custom()
-//        self.get()
+        self.get()
 //        self.proxy()
-        self.formData()
+//        self.formData()
     }
 }
 
 extension ViewController: Driver {
-    public static var identity: [String: Encodable]? {
+    public static var identity: [String: CustomStringConvertible]? {
         ["Access-Token": "000347174c.db8743c66094ff2964a2b4b6791cf5db"]
     }
     public static var userAgent: String? {

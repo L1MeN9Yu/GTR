@@ -12,7 +12,7 @@ public protocol DataTask {
     var url: String { get }
 
     /// default nil , will merge agent's value
-    var headers: [String: Encodable]? { get }
+    var headers: [String: CustomStringConvertible]? { get }
 
     /// default GET
     var method: Method { get }
@@ -38,7 +38,7 @@ public protocol DataTask {
 
 extension Race {
 
-    public var headers: [String: Encodable]? { nil }
+    public var headers: [String: CustomStringConvertible]? { nil }
 
     public var method: Method { .get }
 

@@ -15,7 +15,10 @@
 typedef struct gtr_core_data_task gtr_core_data_task;
 
 __attribute__((nonnull(1), used))
-extern gtr_core_data_task *gtr_data_task_create(unsigned *task_id, const char *url, const char *headers);
+extern gtr_core_data_task *gtr_data_task_create(unsigned *task_id, const char *url);
+
+__attribute__((nonnull(1), used))
+extern void gtr_data_task_add_header(gtr_core_data_task *data_task, const char *value);
 
 __attribute__((nonnull(1), used))
 extern void gtr_data_task_config_parameters(gtr_core_data_task *data_task, const char *method, const void *param_data, unsigned long param_size);

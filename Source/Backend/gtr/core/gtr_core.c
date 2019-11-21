@@ -18,7 +18,6 @@
 #include "gtr_race.h"
 #include "gtr_thread_pool.h"
 #include "gtr_atomic.h"
-#include "gtr_header.h"
 #include "gtr_proxy.h"
 #include "gtr_log.h"
 #include "gtr_file_utilty.h"
@@ -45,9 +44,9 @@ static void gtr_core_config_accept_encoding(CURL *handle);
 
 static void gtr_core_config_keep_alive(CURL *handle);
 
-static void gtr_core_config_headers(CURL *handle, const char *user_agent, struct curl_slist *header);
+static void gtr_core_config_headers(CURL *curl, const char *user_agent, struct curl_slist *header);
 
-static void gtr_core_config_verify_peer(CURL *handle, bool on);
+static void gtr_core_config_verify_peer(CURL *curl, bool on);
 
 static void gtr_core_config_signal(CURL *handle, bool is_on);
 
@@ -206,35 +205,22 @@ static void request(gtr_core_data_task *data_task) {
         response_body.size = 0;
     }
 
-    gtr_core_config_http_method(curl, data_task);
-
     gtr_core_config_url(curl, data_task->url);
-
+    gtr_core_config_headers(curl, global_user_agent, data_task->headers);
+    gtr_core_config_http_method(curl, data_task);
     gtr_core_config_form_data(curl, data_task);
-
     gtr_core_config_accept_encoding(curl);
-
     gtr_core_config_keep_alive(curl);
-
     gtr_core_config_verify_peer(curl, true);
-
     gtr_core_config_time_out(curl, data_task->options.time_out);
-
     gtr_core_config_signal(curl, true);
-
     gtr_core_config_header_call_back(curl, &response_header);
-
     gtr_core_config_write_call_back(curl, &response_body);
-
     gtr_core_config_progress(curl, data_task);
-
     gtr_core_config_proxy(curl, data_task);
     gtr_core_config_max_redirects(curl, data_task->options.max_redirects);
     gtr_core_config_speed(curl, data_task->speed);
     gtr_core_config_debug(curl, data_task->options.is_debug);
-
-    struct curl_slist *header = gtr_core_add_custom_headers(data_task->header);
-    gtr_core_config_headers(curl, global_user_agent, header);
 
     {
         res = curl_easy_perform(curl);
@@ -263,7 +249,7 @@ static void request(gtr_core_data_task *data_task) {
     }
 
     {
-        if (header) {curl_slist_free_all(header);}
+        if (data_task->headers) {curl_slist_free_all(data_task->headers);}
     }
     {
         if (data_task->proxy && data_task->proxy->url) {
@@ -279,7 +265,6 @@ static void request(gtr_core_data_task *data_task) {
     {
         curl_easy_cleanup(curl);
         free(data_task->url);
-        free(data_task->header);
         free(data_task->method);
         free(data_task);
         free(response_header.data);
@@ -318,6 +303,11 @@ void gtr_core_data_task_start(gtr_core_data_task *core_data_task) {
 }
 
 //---Private Config
+
+static void gtr_core_config_url(CURL *handle, const char *url) {
+    curl_easy_setopt(handle, CURLOPT_URL, url);
+}
+
 static void gtr_core_config_http_method(CURL *handle, gtr_core_data_task *data_task) {
     assert(data_task);
     if (strcmp(data_task->method, METHOD_GET) == 0) {
@@ -348,10 +338,6 @@ static void gtr_core_config_http_method(CURL *handle, gtr_core_data_task *data_t
     }
 }
 
-static void gtr_core_config_url(CURL *handle, const char *url) {
-    curl_easy_setopt(handle, CURLOPT_URL, url);
-}
-
 static void gtr_core_config_form_data(CURL *curl, gtr_core_data_task *data_task) {
     if (!data_task->mime) {return;}
     curl_easy_setopt(curl, CURLOPT_MIMEPOST, data_task->mime);
@@ -371,19 +357,19 @@ static void gtr_core_config_keep_alive(CURL *handle) {
     curl_easy_setopt(handle, CURLOPT_TCP_KEEPINTVL, 60L);
 }
 
-static void gtr_core_config_headers(CURL *handle, const char *user_agent, struct curl_slist *header) {
-    curl_easy_setopt(handle, CURLOPT_USERAGENT, user_agent);
+static void gtr_core_config_headers(CURL *curl, const char *user_agent, struct curl_slist *header) {
+    curl_easy_setopt(curl, CURLOPT_USERAGENT, user_agent);
     if (header) {
-        CURLcode res = curl_easy_setopt(handle, CURLOPT_HTTPHEADER, header);
+        CURLcode res = curl_easy_setopt(curl, CURLOPT_HTTPHEADER, header);
         if (res != CURLE_OK) {
             fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
         }
     }
 }
 
-static void gtr_core_config_verify_peer(CURL *handle, bool on) {
-    curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, on ? 1L : 0L);
-    curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, on ? 1L : 0L);
+static void gtr_core_config_verify_peer(CURL *curl, bool on) {
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, on ? 1L : 0L);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, on ? 1L : 0L);
 }
 
 //TODO ETag/If_Modified_since

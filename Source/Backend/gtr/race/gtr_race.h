@@ -68,6 +68,7 @@ typedef struct gtr_task_response_info_options {
     bool cookie;
 } gtr_task_response_info_options;
 
+
 /**
  * 请求
  */
@@ -77,9 +78,8 @@ struct gtr_core_data_task {
     bool is_cancel;
     char *method;
     char *url;
-    char *header;
+    struct curl_slist *headers;
     curl_mime *mime;
-
     gtr_task_options options;
     gtr_task_speed speed;
     gtr_task_proxy *proxy;
@@ -117,7 +117,9 @@ struct gtr_core_upload_task {
 };
 
 //-------------------------------------//
-gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char *url, const char *header);
+gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char *url);
+
+void gtr_core_data_task_add_header(gtr_core_data_task *data_task, const char *value);
 
 void gtr_core_data_task_config_parameters(gtr_core_data_task *data_task, const char *method, const void *param_data, unsigned long param_size);
 

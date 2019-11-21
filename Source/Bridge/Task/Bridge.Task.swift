@@ -11,7 +11,10 @@ func c_gtr_download(
 )
 
 @_silgen_name("gtr_data_task_create")
-func gtr_data_task_create(_ task_id: UnsafeMutablePointer<UInt32>, _ url: UnsafePointer<Int8>?, _ headers: UnsafePointer<Int8>?) -> OpaquePointer
+func gtr_data_task_create(_ task_id: UnsafeMutablePointer<UInt32>, _ url: UnsafePointer<Int8>?) -> OpaquePointer
+
+@_silgen_name("gtr_data_task_add_header")
+func gtr_data_task_add_header(_ data_task: OpaquePointer, _ value: UnsafePointer<Int8>!)
 
 @_silgen_name("gtr_data_task_config_parameters")
 func gtr_data_task_config_parameters(_ core_race: OpaquePointer, _ method: UnsafePointer<Int8>?, _ param_data: UnsafeRawPointer?, _ param_size: UInt)

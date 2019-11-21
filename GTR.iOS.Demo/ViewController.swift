@@ -106,7 +106,7 @@ extension ViewController {
 }
 
 extension ViewController: Driver {
-    public static var identity: [String: Encodable]? {
+    public static var identity: [String: CustomStringConvertible]? {
         [
             "Author": "L1MeN9Yu",
             "email": "baal998.mophisto@gmail.com",

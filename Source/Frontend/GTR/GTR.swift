@@ -22,7 +22,7 @@ private var fired = false
 func dataTask(method: Method,
               url: String,
               contentType: ContentType,
-              headers: [String: Encodable]?,
+              headers: [String: CustomStringConvertible]?,
               options: Option.Race,
               responseInfoOption: Option.ResponseInfo,
               speedLimit: Option.SpeedLimit,
@@ -34,11 +34,11 @@ func dataTask(method: Method,
     var allHeaders = contentType.toHeader()
 
     if let globalHeader = __driver.identity {
-        allHeaders.merge(globalHeader) { (value_old: Encodable, value_new: Encodable) -> Encodable in value_new }
+        allHeaders.merge(globalHeader) { (value_old: CustomStringConvertible, value_new: CustomStringConvertible) -> CustomStringConvertible in value_new }
     }
 
     if let h = headers {
-        allHeaders.merge(h) { (value_old: Encodable, value_new: Encodable) -> Encodable in value_new }
+        allHeaders.merge(h) { (value_old: CustomStringConvertible, value_new: CustomStringConvertible) -> CustomStringConvertible in value_new }
     }
 
     switch method {

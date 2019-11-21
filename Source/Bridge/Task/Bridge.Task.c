@@ -25,9 +25,13 @@ static void on_data_task_succeed_callback(unsigned int task_id, const void *resp
 /// on_data_task_failed_callback
 static void on_data_task_failed_callback(unsigned int task_id, const void *response_info_data, long response_info_data_size, int error_code, const char *error_message);
 
-gtr_core_data_task __used *gtr_data_task_create(unsigned *task_id, const char *url, const char *headers) {
-    gtr_core_data_task *core_race = gtr_core_data_task_create(task_id, url, headers);
+gtr_core_data_task *gtr_data_task_create(unsigned *task_id, const char *url) {
+    gtr_core_data_task *core_race = gtr_core_data_task_create(task_id, url);
     return core_race;
+}
+
+void __used gtr_data_task_add_header(gtr_core_data_task *data_task, const char *value) {
+    gtr_core_data_task_add_header(data_task, value);
 }
 
 void __used gtr_data_task_config_parameters(gtr_core_data_task *data_task, const char *method, const void *param_data, unsigned long param_size) {

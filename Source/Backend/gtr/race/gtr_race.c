@@ -12,7 +12,7 @@
 #include "gtr_race.h"
 #include "gtr_task_id.h"
 
-gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char *url, const char *header) {
+gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char *url) {
     assert(url);
 
     gtr_core_data_task *data_task = (gtr_core_data_task *) malloc(sizeof(gtr_core_data_task));
@@ -28,11 +28,15 @@ gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char 
 
     data_task->mime = NULL;
 
-    if (header) {data_task->header = strdup(header);}
+    data_task->headers = NULL;
 
     data_task->curl = curl_easy_init();
 
     return data_task;
+}
+
+void gtr_core_data_task_add_header(gtr_core_data_task *data_task, const char *value) {
+    data_task->headers = curl_slist_append(data_task->headers, value);
 }
 
 void gtr_core_data_task_config_parameters(gtr_core_data_task *data_task, const char *method, const void *param_data, unsigned long param_size) {

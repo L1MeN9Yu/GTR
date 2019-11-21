@@ -7,7 +7,7 @@ public typealias Agent = Driver.Type
 
 public protocol Driver {
     ///全局Header
-    static var identity: [String: Encodable]? { get }
+    static var identity: [String: CustomStringConvertible]? { get }
 
     ///UserAgent
     static var userAgent: String? { get }
