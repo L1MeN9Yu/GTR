@@ -66,6 +66,8 @@ static void gtr_core_config_speed(CURL *handle, gtr_task_speed speed);
 
 static void gtr_core_config_debug(CURL *handle, bool is_debug);
 
+static void gtr_core_free_data_task(CURL *curl, gtr_core_data_task *data_task, char *response_info, gtr_task_response_header response_header, gtr_data_task_response_body response_body);
+
 //--- Private Utility
 static void gtr_core_create_temp_dir(void);
 
@@ -191,7 +193,6 @@ static int progress_callback(
 //--- Core
 static void request(gtr_core_data_task *data_task) {
     CURL *curl = data_task->curl;
-    CURLcode res;
 
     gtr_task_response_header response_header;
     {
@@ -222,54 +223,24 @@ static void request(gtr_core_data_task *data_task) {
     gtr_core_config_speed(curl, data_task->speed);
     gtr_core_config_debug(curl, data_task->options.is_debug);
 
-    {
-        res = curl_easy_perform(curl);
-    }
+    CURLcode res = curl_easy_perform(curl);
 
-    {
-        char *response_info = NULL;
-        size_t response_info_size = 0;
-        gtr_get_data_task_response_info(curl, data_task, &response_info, &response_info_size);
-        /* check for errors */
-        if (res != CURLE_OK) {
-            gtr_core_log(gtr_log_flag_error, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-            if (data_task->on_failed) {
-                data_task->on_failed(data_task->task_id, response_info, response_info_size, res, curl_easy_strerror(res));
-            }
-        } else {
-            gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_body.size);
-            if (data_task->on_succeed) {
-                data_task->on_succeed(data_task->task_id, response_info, response_info_size, response_header.data, response_header.size, response_body.data, response_body.size);
-            }
+    char *response_info = NULL;
+    size_t response_info_size = 0;
+    gtr_get_data_task_response_info(curl, data_task, &response_info, &response_info_size);
+    /* check for errors */
+    if (res != CURLE_OK) {
+        gtr_core_log(gtr_log_flag_error, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+        if (data_task->on_failed) {
+            data_task->on_failed(data_task->task_id, response_info, response_info_size, res, curl_easy_strerror(res));
         }
-
-        if (response_info) {
-            free(response_info);
+    } else {
+        gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_body.size);
+        if (data_task->on_succeed) {
+            data_task->on_succeed(data_task->task_id, response_info, response_info_size, response_header.data, response_header.size, response_body.data, response_body.size);
         }
     }
-
-    {
-        if (data_task->headers) {curl_slist_free_all(data_task->headers);}
-    }
-    {
-        if (data_task->proxy && data_task->proxy->url) {
-            free(data_task->proxy->url);
-            free(data_task->proxy);
-        }
-    }
-    {
-        if (data_task->mime) {
-            curl_mime_free(data_task->mime);
-        }
-    }
-    {
-        curl_easy_cleanup(curl);
-        free(data_task->url);
-        free(data_task->method);
-        free(data_task);
-        free(response_header.data);
-        free(response_body.data);
-    }
+    gtr_core_free_data_task(curl, data_task, response_info, response_header, response_body);
 }
 
 //--- Public
@@ -449,6 +420,29 @@ static void gtr_core_config_write_call_back(CURL *handle, gtr_data_task_response
 static void gtr_core_config_debug(CURL *handle, bool is_debug) {
     curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, &debug_func);
     curl_easy_setopt(handle, CURLOPT_VERBOSE, is_debug ? 1L : 0L);
+}
+
+static void gtr_core_free_data_task(CURL *curl, gtr_core_data_task *data_task, char *response_info, gtr_task_response_header response_header, gtr_data_task_response_body response_body) {
+    if (response_info) {
+        free(response_info);
+    }
+
+    if (data_task->headers) {curl_slist_free_all(data_task->headers);}
+    if (data_task->proxy && data_task->proxy->url) {
+        free(data_task->proxy->url);
+        free(data_task->proxy);
+    }
+
+    if (data_task->mime) {
+        curl_mime_free(data_task->mime);
+    }
+
+    curl_easy_cleanup(curl);
+    free(data_task->url);
+    free(data_task->method);
+    free(data_task);
+    free(response_header.data);
+    free(response_body.data);
 }
 
 //---Private Utility
