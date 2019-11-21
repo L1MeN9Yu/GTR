@@ -25,9 +25,13 @@ static void on_data_task_succeed_callback(unsigned int task_id, const void *resp
 /// on_data_task_failed_callback
 static void on_data_task_failed_callback(unsigned int task_id, const void *response_info_data, long response_info_data_size, int error_code, const char *error_message);
 
-gtr_core_data_task *gtr_data_task_create(unsigned *task_id, const char *url) {
-    gtr_core_data_task *core_race = gtr_core_data_task_create(task_id, url);
+gtr_core_data_task *__used gtr_data_task_create(unsigned *task_id) {
+    gtr_core_data_task *core_race = gtr_core_data_task_create(task_id);
     return core_race;
+}
+
+void __used gtr_data_task_config_url(gtr_core_data_task *data_task, const char *url) {
+    gtr_core_data_task_config_url(data_task, url);
 }
 
 void __used gtr_data_task_add_header(gtr_core_data_task *data_task, const char *value) {
@@ -52,6 +56,10 @@ void __used gtr_data_task_config_response_info_options(gtr_core_data_task *data_
 
 void __used gtr_data_task_config_speed(gtr_core_data_task *data_task, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time) {
     gtr_core_data_task_config_speed(data_task, max_receive_speed, max_send_speed, low_speed_limit, low_speed_time);
+}
+
+void __used gtr_data_task_config_time_condition(gtr_core_data_task *data_task, long long time, int type) {
+    gtr_core_data_task_config_time_condition(data_task, time, type);
 }
 
 void __used gtr_data_task_config_proxy(gtr_core_data_task *data_task, const char *url, long port) {

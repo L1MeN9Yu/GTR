@@ -68,7 +68,10 @@ typedef struct gtr_task_response_info_options {
     bool cookie;
 } gtr_task_response_info_options;
 
-
+typedef struct gtr_task_time_condition {
+    long long time;
+    int type;
+} gtr_task_time_condition;
 /**
  * 请求
  */
@@ -83,6 +86,7 @@ struct gtr_core_data_task {
     gtr_task_options options;
     gtr_task_speed speed;
     gtr_task_proxy *proxy;
+    gtr_task_time_condition time_condition;
     /**
      * response info options
      */
@@ -117,7 +121,9 @@ struct gtr_core_upload_task {
 };
 
 //-------------------------------------//
-gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char *url);
+gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id);
+
+void gtr_core_data_task_config_url(gtr_core_data_task *data_task, const char *url);
 
 void gtr_core_data_task_add_header(gtr_core_data_task *data_task, const char *value);
 
@@ -128,6 +134,8 @@ void gtr_core_data_task_add_form_data(gtr_core_data_task *data_task, int type, c
 void gtr_core_data_task_config_options(gtr_core_data_task *data_task, bool is_debug, unsigned int time_out, long max_redirects);
 
 void gtr_core_data_task_config_response_info_options(gtr_core_data_task *data_task, bool base, bool time, bool size, bool speed, bool ssl, bool socket, bool cookie);
+
+void gtr_core_data_task_config_time_condition(gtr_core_data_task *data_task, long long time, int type);
 
 void gtr_core_data_task_config_speed(gtr_core_data_task *data_task, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time);
 

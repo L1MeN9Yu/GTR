@@ -34,7 +34,6 @@ extension Engine {
 }
 
 // MARK: - Config
-
 extension Engine {
     internal static
     func config(httpHeaderClosure: GTRHttpHeaderClosure?) {
@@ -50,6 +49,52 @@ extension Engine {
 // MARK: - Request
 extension Engine {
     internal static
+    func race(race: Race, completion: GTR.Result?) -> UInt32 {
+        precondition(__fired, "must setup first")
+
+        var taskID: CUnsignedInt = 0
+        let dataTask = gtr_data_task_create(&taskID)
+
+        var url = race.url
+        var parameter: (UnsafeRawPointer?, CUnsignedLong) = (nil, 0)
+        switch race.method {
+        case .get:
+            url = urlForGetParameter(url: race.url, param: race.parameters)
+        default:
+            parameter = cParameter(dataTask: dataTask, contentType: race.contentType, param: race.parameters)
+        }
+
+        var allHeaders = race.contentType.toHeader()
+        if let globalHeader = __driver.identity {
+            allHeaders.merge(globalHeader) { (value_old: CustomStringConvertible, value_new: CustomStringConvertible) -> CustomStringConvertible in value_new }
+        }
+        if let h = race.headers {
+            allHeaders.merge(h) { (value_old: CustomStringConvertible, value_new: CustomStringConvertible) -> CustomStringConvertible in value_new }
+        }
+
+        gtr_data_task_config_url(dataTask, url.cString(using: .utf8))
+        config(dataTask: dataTask, headers: allHeaders)
+        gtr_data_task_config_parameters(dataTask, race.method.stringValue, parameter.0, parameter.1)
+        gtr_data_task_config_options(dataTask, race.options.isDebug, race.options.timeout, race.options.maxRedirects)
+        gtr_data_task_config_response_info_options(
+                dataTask, race.responseInfoOption.base, race.responseInfoOption.time, race.responseInfoOption.size,
+                race.responseInfoOption.speed, race.responseInfoOption.ssl, race.responseInfoOption.socket, race.responseInfoOption.cookie
+        )
+        gtr_data_task_config_speed(dataTask, race.speedLimit.maxReceiveSpeed, race.speedLimit.maxSendSpeed, race.speedLimit.lowSpeedLimit, race.speedLimit.lowSpeedTime)
+        if let timeCondition = race.timeCondition {
+            gtr_data_task_config_time_condition(dataTask, timeCondition.timeValue, timeCondition.intValue)
+        }
+        config(proxy: race.proxy, to: dataTask)
+        gtr_data_task_start(dataTask)
+
+        self.rwLock.withWriterLock { () -> Void in
+            self.completionContainer[taskID] = completion
+        }
+
+        return taskID
+    }
+
+    /*internal static
     func getRequest(url: String,
                     headers: [String: CustomStringConvertible]? = nil,
                     method: Method,
@@ -143,7 +188,7 @@ extension Engine {
         }
 
         return taskID
-    }
+    }*/
 
     internal static
     func downloadRequest(url: String,

@@ -15,7 +15,10 @@
 typedef struct gtr_core_data_task gtr_core_data_task;
 
 __attribute__((nonnull(1), used))
-extern gtr_core_data_task *gtr_data_task_create(unsigned *task_id, const char *url);
+extern gtr_core_data_task *gtr_data_task_create(unsigned *task_id);
+
+__attribute__((nonnull(1), used))
+extern void gtr_data_task_config_url(gtr_core_data_task *data_task, const char *url);
 
 __attribute__((nonnull(1), used))
 extern void gtr_data_task_add_header(gtr_core_data_task *data_task, const char *value);
@@ -34,6 +37,9 @@ extern void gtr_data_task_config_response_info_options(gtr_core_data_task *data_
 
 __attribute__((nonnull(1), used))
 extern void gtr_data_task_config_speed(gtr_core_data_task *data_task, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time);
+
+__attribute__((nonnull(1), used))
+extern void gtr_data_task_config_time_condition(gtr_core_data_task *data_task, long long time, int type);
 
 __attribute__((nonnull(1), used))
 extern void gtr_data_task_config_proxy(gtr_core_data_task *data_task, const char *url, long port);

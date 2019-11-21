@@ -32,6 +32,9 @@ public protocol DataTask {
     /// default use gearbox's value
     var speedLimit: Option.SpeedLimit { get }
 
+    /// default is nil
+    var timeCondition: Option.TimeCondition? { get }
+
     /// default use gearbox's value
     var proxy: Option.Proxy? { get }
 }
@@ -52,24 +55,27 @@ extension Race {
 
     public var speedLimit: TaskSpeedLimit { Option.defaultSpeedLimit }
 
+    public var timeCondition: Option.TimeCondition? { nil }
+
     public var proxy: Option.Proxy? { __gearBox.proxy }
 }
 
 extension Race {
     @discardableResult
     public func race(completion: @escaping Result) -> CUnsignedInt {
-        dataTask(
-                method: method,
-                url: url,
-                contentType: contentType,
-                headers: headers,
-                options: options,
-                responseInfoOption: responseInfoOption,
-                speedLimit: speedLimit,
-                proxy: proxy,
-                param: parameters,
-                completion: completion
-        )
+        Engine.race(race: self, completion: completion)
+//        dataTask(
+//                method: method,
+//                url: url,
+//                contentType: contentType,
+//                headers: headers,
+//                options: options,
+//                responseInfoOption: responseInfoOption,
+//                speedLimit: speedLimit,
+//                proxy: proxy,
+//                param: parameters,
+//                completion: completion
+//        )
     }
 }
 

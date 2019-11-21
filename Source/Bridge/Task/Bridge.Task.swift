@@ -11,10 +11,13 @@ func c_gtr_download(
 )
 
 @_silgen_name("gtr_data_task_create")
-func gtr_data_task_create(_ task_id: UnsafeMutablePointer<UInt32>, _ url: UnsafePointer<Int8>?) -> OpaquePointer
+func gtr_data_task_create(_ task_id: UnsafeMutablePointer<UInt32>) -> OpaquePointer
+
+@_silgen_name("gtr_data_task_config_url")
+func gtr_data_task_config_url(_ data_task: OpaquePointer, _ url: UnsafePointer<Int8>?)
 
 @_silgen_name("gtr_data_task_add_header")
-func gtr_data_task_add_header(_ data_task: OpaquePointer, _ value: UnsafePointer<Int8>!)
+func gtr_data_task_add_header(_ data_task: OpaquePointer, _ value: UnsafePointer<Int8>?)
 
 @_silgen_name("gtr_data_task_config_parameters")
 func gtr_data_task_config_parameters(_ core_race: OpaquePointer, _ method: UnsafePointer<Int8>?, _ param_data: UnsafeRawPointer?, _ param_size: UInt)
@@ -30,6 +33,9 @@ func gtr_data_task_config_response_info_options(_ data_task: OpaquePointer, _ ba
 
 @_silgen_name("gtr_data_task_config_speed")
 func gtr_data_task_config_speed(_ core_race: OpaquePointer, _ max_receive_speed: Int, _ max_send_speed: Int, _ low_speed_limit: Int, _ low_speed_time: Int)
+
+@_silgen_name("gtr_data_task_config_time_condition")
+func gtr_data_task_config_time_condition(_ data_task: OpaquePointer, _ time: Int64, _ type: Int32)
 
 @_silgen_name("gtr_data_task_config_proxy")
 func gtr_data_task_config_proxy(_ core_race: OpaquePointer, _ url: UnsafePointer<Int8>?, _ port: Int)

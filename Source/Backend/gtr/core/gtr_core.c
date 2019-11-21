@@ -50,6 +50,8 @@ static void gtr_core_config_verify_peer(CURL *curl, bool on);
 
 static void gtr_core_config_signal(CURL *handle, bool is_on);
 
+static void gtr_core_config_time_condition(CURL *handle, gtr_task_time_condition time_condition);
+
 static void gtr_core_config_time_out(CURL *handle, unsigned int time_out);
 
 static void gtr_core_config_header_call_back(CURL *handle, gtr_task_response_header *response_header);
@@ -215,13 +217,14 @@ static void request(gtr_core_data_task *data_task) {
     gtr_core_config_verify_peer(curl, true);
     gtr_core_config_time_out(curl, data_task->options.time_out);
     gtr_core_config_signal(curl, true);
-    gtr_core_config_header_call_back(curl, &response_header);
-    gtr_core_config_write_call_back(curl, &response_body);
+    gtr_core_config_time_condition(curl, data_task->time_condition);
     gtr_core_config_progress(curl, data_task);
     gtr_core_config_proxy(curl, data_task);
     gtr_core_config_max_redirects(curl, data_task->options.max_redirects);
     gtr_core_config_speed(curl, data_task->speed);
     gtr_core_config_debug(curl, data_task->options.is_debug);
+    gtr_core_config_header_call_back(curl, &response_header);
+    gtr_core_config_write_call_back(curl, &response_body);
 
     CURLcode res = curl_easy_perform(curl);
 
@@ -344,12 +347,23 @@ static void gtr_core_config_verify_peer(CURL *curl, bool on) {
 }
 
 //TODO ETag/If_Modified_since
-static void gtr_core_config_time_condition(CURL *handle, unsigned long time) {
-    /* January 1, 2020 is 1577833200 */
-    curl_easy_setopt(handle, CURLOPT_TIMEVALUE, time);
-
-    /* If-Modified-Since the above time stamp */
-    curl_easy_setopt(handle, CURLOPT_TIMECONDITION, CURL_TIMECOND_IFMODSINCE);
+static void gtr_core_config_time_condition(CURL *handle, gtr_task_time_condition time_condition) {
+    switch (time_condition.type) {
+        case 1:
+            curl_easy_setopt(handle, CURLOPT_TIMEVALUE, time_condition.time);
+            curl_easy_setopt(handle, CURLOPT_TIMECONDITION, CURL_TIMECOND_IFMODSINCE);
+            break;
+        case 2:
+            curl_easy_setopt(handle, CURLOPT_TIMEVALUE, time_condition.time);
+            curl_easy_setopt(handle, CURLOPT_TIMECONDITION, CURL_TIMECOND_IFUNMODSINCE);
+            break;
+        case 3:
+            curl_easy_setopt(handle, CURLOPT_TIMEVALUE, time_condition.time);
+            curl_easy_setopt(handle, CURLOPT_TIMECONDITION, CURL_TIMECOND_LASTMOD);
+            break;
+        default:
+            break;
+    }
 }
 
 static void gtr_core_config_progress(CURL *handle, gtr_core_data_task *request) {

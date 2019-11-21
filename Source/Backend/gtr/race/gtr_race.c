@@ -12,17 +12,19 @@
 #include "gtr_race.h"
 #include "gtr_task_id.h"
 
-gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char *url) {
-    assert(url);
+gtr_task_time_condition default_time_condition = {0, 0};
+
+gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id) {
 
     gtr_core_data_task *data_task = (gtr_core_data_task *) malloc(sizeof(gtr_core_data_task));
 
     *task_id = gtr_task_id_init();
+
     data_task->task_id = *task_id;
 
     data_task->is_cancel = false;
 
-    data_task->url = strdup(url);
+    data_task->url = NULL;
 
     data_task->proxy = NULL;
 
@@ -32,7 +34,14 @@ gtr_core_data_task *gtr_core_data_task_create(unsigned int *task_id, const char 
 
     data_task->curl = curl_easy_init();
 
+    data_task->time_condition = default_time_condition;
+
     return data_task;
+}
+
+void gtr_core_data_task_config_url(gtr_core_data_task *data_task, const char *url) {
+    assert(url);
+    data_task->url = strdup(url);
 }
 
 void gtr_core_data_task_add_header(gtr_core_data_task *data_task, const char *value) {
@@ -88,6 +97,11 @@ void gtr_core_data_task_config_response_info_options(gtr_core_data_task *data_ta
 void gtr_core_data_task_config_speed(gtr_core_data_task *data_task, long max_receive_speed, long max_send_speed, long low_speed_limit, long low_speed_time) {
     gtr_task_speed speed = {max_receive_speed, max_send_speed, low_speed_limit, low_speed_time};
     data_task->speed = speed;
+}
+
+void gtr_core_data_task_config_time_condition(gtr_core_data_task *data_task, long long time, int type) {
+    gtr_task_time_condition time_condition = {time, type};
+    data_task->time_condition = time_condition;
 }
 
 void gtr_core_data_task_config_proxy(gtr_core_data_task *data_task, const char *url, long port) {
