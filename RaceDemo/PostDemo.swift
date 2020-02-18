@@ -7,9 +7,10 @@ import Foundation
 import GTR
 
 struct PostDemo: Race {
-    let url: String = "https://httpbin.org/post"
+//    let url: String = "https://httpbin.org/post"
+    let url: String = "http://101.37.133.116/trace_device"
     let method: GTR.Method = .post
-    let parameters: [String: Any]? = ["a": 1, "b": "boy"]
+    let parameters: [String: Any]? = ["beat_gap": 15]
 
-    let options = TaskOptions(isDebug: true, timeout: 10)
+//    let options = TaskOptions(isDebug: true, timeout: 10)
 }

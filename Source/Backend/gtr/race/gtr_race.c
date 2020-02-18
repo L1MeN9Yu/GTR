@@ -53,7 +53,7 @@ void gtr_core_data_task_config_parameters(gtr_core_data_task *data_task, const c
 
     if (param_size > 0 && param_data != NULL) {
         data_task->request_data = (gtr_data_task_request_body *) calloc(1, sizeof(gtr_data_task_request_body));
-        data_task->request_data->data = malloc((size_t) param_data);
+        data_task->request_data->data = malloc((size_t) param_size);
         data_task->request_data->size_left = param_size;
         data_task->request_data->size = param_size;
         memcpy(data_task->request_data->data, param_data, param_size);

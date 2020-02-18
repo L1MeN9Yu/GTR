@@ -146,12 +146,12 @@ extension ViewController {
     private func getAction() {
 //        self.brotli()
 //        self.getCache()
-//        self.post()
+        self.post()
 //        self.custom()
 //        self.get()
 //        self.proxy()
 //        self.formData()
-        self.cache()
+//        self.cache()
     }
 }
 

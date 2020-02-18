@@ -480,6 +480,12 @@ static void update_offset(printbuffer * const buffer)
     buffer->offset += strlen((const char*)buffer_pointer);
 }
 
+/* securely comparison of floating-point variables */
+static cJSON_bool compare_double(double a, double b)
+{
+    return (fabs(a - b) <= CJSON_DOUBLE_PRECISION);
+}
+
 /* Render the number nicely from the given item into a string. */
 static cJSON_bool print_number(const cJSON * const item, printbuffer * const output_buffer)
 {
@@ -507,7 +513,7 @@ static cJSON_bool print_number(const cJSON * const item, printbuffer * const out
         length = sprintf((char*)number_buffer, "%1.15g", d);
 
         /* Check whether the original double can be recovered */
-        if ((sscanf((char*)number_buffer, "%lg", &test) != 1) || ((double)test != d))
+        if ((sscanf((char*)number_buffer, "%lg", &test) != 1) || !compare_double((double)test, d))
         {
             /* If not, print with 17 decimal places of precision */
             length = sprintf((char*)number_buffer, "%1.17g", d);
@@ -1199,20 +1205,20 @@ CJSON_PUBLIC(char *) cJSON_PrintBuffered(const cJSON *item, int prebuffer, cJSON
     return (char*)p.buffer;
 }
 
-CJSON_PUBLIC(cJSON_bool) cJSON_PrintPreallocated(cJSON *item, char *buf, const int len, const cJSON_bool fmt)
+CJSON_PUBLIC(cJSON_bool) cJSON_PrintPreallocated(cJSON *item, char *buffer, const int length, const cJSON_bool format)
 {
     printbuffer p = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
 
-    if ((len < 0) || (buf == NULL))
+    if ((length < 0) || (buffer == NULL))
     {
         return false;
     }
 
-    p.buffer = (unsigned char*)buf;
-    p.length = (size_t)len;
+    p.buffer = (unsigned char*)buffer;
+    p.length = (size_t)length;
     p.offset = 0;
     p.noalloc = true;
-    p.format = fmt;
+    p.format = format;
     p.hooks = global_hooks;
 
     return print_value(item, &p);
@@ -1865,22 +1871,34 @@ static cJSON_bool add_item_to_array(cJSON *array, cJSON *item)
     }
 
     child = array->child;
-
+    /*
+     * To find the last item int array quickly, we use prev in array
+     */
     if (child == NULL)
     {
         /* list is empty, start new one */
         array->child = item;
+        item->prev = item;
+        item->next = NULL;
     }
     else
     {
         /* append to the end */
-        while (child->next)
+        if (child->prev)
         {
-            child = child->next;
+            suffix_object(child->prev, item);
+            array->child->prev = item;
         }
-        suffix_object(child, item);
+        else
+        {
+            while (child->next)
+            {
+                child = child->next;
+            }
+            suffix_object(child, item);
+            array->child->prev = item;
+        }
     }
-
     return true;
 }
 
@@ -2200,13 +2218,20 @@ CJSON_PUBLIC(cJSON_bool) cJSON_ReplaceItemViaPointer(cJSON * const parent, cJSON
     {
         replacement->next->prev = replacement;
     }
-    if (replacement->prev != NULL)
-    {
-        replacement->prev->next = replacement;
-    }
+
     if (parent->child == item)
     {
         parent->child = replacement;
+    }
+    else
+    {   /*
+         * To find the last item int array quickly, we use prev in array.
+         * We can't modify the last item's next pointer where this item was the parent's child
+         */
+        if (replacement->prev != NULL)
+        {
+            replacement->prev->next = replacement;
+        }
     }
 
     item->next = NULL;
@@ -2290,12 +2315,12 @@ CJSON_PUBLIC(cJSON *) cJSON_CreateFalse(void)
     return item;
 }
 
-CJSON_PUBLIC(cJSON *) cJSON_CreateBool(cJSON_bool b)
+CJSON_PUBLIC(cJSON *) cJSON_CreateBool(cJSON_bool boolean)
 {
     cJSON *item = cJSON_New_Item(&global_hooks);
     if(item)
     {
-        item->type = b ? cJSON_True : cJSON_False;
+        item->type = boolean ? cJSON_True : cJSON_False;
     }
 
     return item;
@@ -2876,7 +2901,7 @@ CJSON_PUBLIC(cJSON_bool) cJSON_Compare(const cJSON * const a, const cJSON * cons
             return true;
 
         case cJSON_Number:
-            if (a->valuedouble == b->valuedouble)
+            if (compare_double(a->valuedouble, b->valuedouble))
             {
                 return true;
             }
