@@ -63,7 +63,9 @@ playground.xcworkspace
 # Carthage/Checkouts
 
 Carthage
-GTR.framework.zip
+*.framework.zip
+*.xcframework.zip
+*.xcframework
 
 # fastlane
 #

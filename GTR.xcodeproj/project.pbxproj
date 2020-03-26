@@ -3,11 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		101443F122FA877500275DA2 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 101443F022FA877500275DA2 /* libcurl.a */; };
+		101443F122FA877500275DA2 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 101443F022FA877500275DA2 /* libcurl.a */; platformFilter = ios; };
 		101443F922FA883A00275DA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101443F822FA883A00275DA2 /* AppDelegate.swift */; };
 		101443FB22FA883A00275DA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101443FA22FA883A00275DA2 /* ViewController.swift */; };
 		101443FD22FA883B00275DA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101443FC22FA883B00275DA2 /* Assets.xcassets */; };
@@ -21,13 +21,13 @@
 		1014441D22FA8A5400275DA2 /* GTR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F0B0982119EF8A00D01CC4 /* GTR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1014443222FAA46500275DA2 /* GTR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014442B22FAA46500275DA2 /* GTR.framework */; };
 		1014443322FAA46500275DA2 /* GTR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1014442B22FAA46500275DA2 /* GTR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1014445E22FAAFBF00275DA2 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014445D22FAAFBF00275DA2 /* libbrotli.a */; };
+		1014445E22FAAFBF00275DA2 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014445D22FAAFBF00275DA2 /* libbrotli.a */; platformFilter = ios; };
 		1014446022FAE2F900275DA2 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014445F22FAE2F900275DA2 /* libbrotli.a */; };
 		1014446222FAE31000275DA2 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446122FAE31000275DA2 /* libcurl.a */; };
 		1014446422FAE4B700275DA2 /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446322FAE4B700275DA2 /* LDAP.framework */; };
 		1014446622FAE4D900275DA2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446522FAE4D900275DA2 /* libz.tbd */; };
 		10ACE334233081A1006CFEDD /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1014446322FAE4B700275DA2 /* LDAP.framework */; };
-		4226E54B237AA288001CF4B9 /* libcJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4226E54A237AA27C001CF4B9 /* libcJSON.a */; };
+		4226E54B237AA288001CF4B9 /* libcJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4226E54A237AA27C001CF4B9 /* libcJSON.a */; platformFilter = ios; };
 		4226E54E237AA2EB001CF4B9 /* libcJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4226E54C237AA299001CF4B9 /* libcJSON.a */; };
 		427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 427D2AF32119FCEA00314C23 /* libz.tbd */; };
 		42C2C92D23797335001BC1D7 /* GetDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */; };
@@ -37,6 +37,9 @@
 		42C2C93123797335001BC1D7 /* GetCacheDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2A285D9FB8A0AC436864E /* GetCacheDemo.swift */; };
 		42C2C93223797335001BC1D7 /* PostDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304ACE10FB624A2B547201 /* PostDemo.swift */; };
 		42C2C93323797335001BC1D7 /* CustomDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453043524BBF19360E89D12A /* CustomDemo.swift */; };
+		42D3136C242CC07A0048ADDA /* libbrotli.maccatalyst.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D31369242CC0520048ADDA /* libbrotli.maccatalyst.a */; platformFilter = maccatalyst; };
+		42D3136D242CC0870048ADDA /* libcJSON.maccatalyst.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D3136A242CC0600048ADDA /* libcJSON.maccatalyst.a */; platformFilter = maccatalyst; };
+		42D3136E242CC0950048ADDA /* libcurl.maccatalyst.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D3136B242CC06B0048ADDA /* libcurl.maccatalyst.a */; platformFilter = maccatalyst; };
 		4530400B3558DD1E0BE56B57 /* Option.ResponseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453048DF889D342B8675C662 /* Option.ResponseInfo.swift */; };
 		45304017095F2CE78B14D0E5 /* Option.Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530409AF7B0573A92813AB3 /* Option.Task.swift */; };
 		45304025EB23ABCE782E35E6 /* Option.TimeCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453046BB5B22A78B818E166D /* Option.TimeCondition.swift */; };
@@ -250,6 +253,9 @@
 		4226E54A237AA27C001CF4B9 /* libcJSON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcJSON.a; path = ExternalLibrary/iOS/libcJSON/lib/libcJSON.a; sourceTree = "<group>"; };
 		4226E54C237AA299001CF4B9 /* libcJSON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcJSON.a; path = ExternalLibrary/macOS/libcJSON/lib/libcJSON.a; sourceTree = "<group>"; };
 		427D2AF32119FCEA00314C23 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		42D31369242CC0520048ADDA /* libbrotli.maccatalyst.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.maccatalyst.a; path = ExternalLibrary/maccatalyst/libbrotli/lib/libbrotli.maccatalyst.a; sourceTree = "<group>"; };
+		42D3136A242CC0600048ADDA /* libcJSON.maccatalyst.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcJSON.maccatalyst.a; path = ExternalLibrary/maccatalyst/libcJSON/lib/libcJSON.maccatalyst.a; sourceTree = "<group>"; };
+		42D3136B242CC06B0048ADDA /* libcurl.maccatalyst.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.maccatalyst.a; path = ExternalLibrary/maccatalyst/libcurl/lib/libcurl.maccatalyst.a; sourceTree = "<group>"; };
 		42F0B0982119EF8A00D01CC4 /* GTR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F0B09C2119EF8A00D01CC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4530401E2B4A724983C76373 /* ResponseInfo.Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseInfo.Time.swift; sourceTree = "<group>"; };
@@ -363,8 +369,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1014445E22FAAFBF00275DA2 /* libbrotli.a in Frameworks */,
+				42D3136C242CC07A0048ADDA /* libbrotli.maccatalyst.a in Frameworks */,
 				4226E54B237AA288001CF4B9 /* libcJSON.a in Frameworks */,
+				42D3136D242CC0870048ADDA /* libcJSON.maccatalyst.a in Frameworks */,
 				101443F122FA877500275DA2 /* libcurl.a in Frameworks */,
+				42D3136E242CC0950048ADDA /* libcurl.maccatalyst.a in Frameworks */,
 				427D2AF42119FCEA00314C23 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +421,9 @@
 		427D2AEA2119FA1D00314C23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42D3136B242CC06B0048ADDA /* libcurl.maccatalyst.a */,
+				42D3136A242CC0600048ADDA /* libcJSON.maccatalyst.a */,
+				42D31369242CC0520048ADDA /* libbrotli.maccatalyst.a */,
 				4226E54A237AA27C001CF4B9 /* libcJSON.a */,
 				4226E54C237AA299001CF4B9 /* libcJSON.a */,
 				1014446522FAE4D900275DA2 /* libz.tbd */,
@@ -905,9 +917,9 @@
 			productReference = 1014440A22FA8A0800275DA2 /* GTR.iOS.Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1014442A22FAA46500275DA2 /* GTR.Mac */ = {
+		1014442A22FAA46500275DA2 /* GTR.macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1014443422FAA46500275DA2 /* Build configuration list for PBXNativeTarget "GTR.Mac" */;
+			buildConfigurationList = 1014443422FAA46500275DA2 /* Build configuration list for PBXNativeTarget "GTR.macOS" */;
 			buildPhases = (
 				1014442622FAA46500275DA2 /* Headers */,
 				1014442722FAA46500275DA2 /* Sources */,
@@ -918,7 +930,7 @@
 			);
 			dependencies = (
 			);
-			name = GTR.Mac;
+			name = GTR.macOS;
 			productName = GTR.Mac;
 			productReference = 1014442B22FAA46500275DA2 /* GTR.framework */;
 			productType = "com.apple.product-type.framework";
@@ -985,7 +997,7 @@
 			projectRoot = "";
 			targets = (
 				42F0B0972119EF8A00D01CC4 /* GTR.iOS */,
-				1014442A22FAA46500275DA2 /* GTR.Mac */,
+				1014442A22FAA46500275DA2 /* GTR.macOS */,
 				1014440922FA8A0800275DA2 /* GTR.iOS.Demo */,
 				101443F522FA883A00275DA2 /* GTR.Mac.Demo */,
 			);
@@ -1189,7 +1201,7 @@
 		};
 		1014443122FAA46500275DA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1014442A22FAA46500275DA2 /* GTR.Mac */;
+			target = 1014442A22FAA46500275DA2 /* GTR.macOS */;
 			targetProxy = 1014443022FAA46500275DA2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1538,6 +1550,9 @@
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/include",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/include",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcJSON/include",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcurl/include",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libbrotli/include",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcJSON/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1551,6 +1566,9 @@
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcJSON/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libbrotli/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcurl/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcJSON/lib",
 				);
 				MARKETING_VERSION = 0.11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
@@ -1577,6 +1595,9 @@
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/include",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/include",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcJSON/include",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcurl/include",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libbrotli/include",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcJSON/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1590,6 +1611,9 @@
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libbrotli/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcurl/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/libcJSON/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libbrotli/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcurl/lib",
+					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcJSON/lib",
 				);
 				MARKETING_VERSION = 0.11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
@@ -1622,7 +1646,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1014443422FAA46500275DA2 /* Build configuration list for PBXNativeTarget "GTR.Mac" */ = {
+		1014443422FAA46500275DA2 /* Build configuration list for PBXNativeTarget "GTR.macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1014443522FAA46500275DA2 /* Debug */,
