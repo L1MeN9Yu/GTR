@@ -7,13 +7,13 @@ import Foundation
 
 public extension Option {
     struct ResponseInfo {
-        let base: Bool
-        let time: Bool
-        let size: Bool
-        let speed: Bool
-        let ssl: Bool
-        let socket: Bool
-        let cookie: Bool
+        public let base: Bool
+        public let time: Bool
+        public let size: Bool
+        public let speed: Bool
+        public let ssl: Bool
+        public let socket: Bool
+        public let cookie: Bool
 
         public init(base: Bool, time: Bool, size: Bool, speed: Bool, ssl: Bool, socket: Bool, cookie: Bool) {
             self.base = base

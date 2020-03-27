@@ -3,11 +3,14 @@
 // Copyright (c) 2019 limengyu.top. All rights reserved.
 //
 
-import Foundation
-
 public extension Option {
     struct Proxy {
-        let url: String
-        let port: Int
+        public let url: String
+        public let port: Int
+
+        public init(url: String, port: Int) {
+            self.url = url
+            self.port = port
+        }
     }
 }

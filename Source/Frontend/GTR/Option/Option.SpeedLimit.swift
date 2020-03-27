@@ -9,10 +9,10 @@ public typealias TaskSpeedLimit = Option.SpeedLimit
 
 public extension Option {
     struct SpeedLimit {
-        let maxReceiveSpeed: CLong
-        let maxSendSpeed: CLong
-        let lowSpeedLimit: CLong
-        let lowSpeedTime: CLong
+        public let maxReceiveSpeed: CLong
+        public let maxSendSpeed: CLong
+        public let lowSpeedLimit: CLong
+        public let lowSpeedTime: CLong
 
         public init(maxReceiveSpeed: CLong, maxSendSpeed: CLong, lowSpeedLimit: CLong, lowSpeedTime: CLong) {
             self.maxReceiveSpeed = maxReceiveSpeed

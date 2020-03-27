@@ -9,11 +9,11 @@ public typealias TaskOptions = Option.Race
 
 public extension Option {
     struct Race {
-        let isDebug: Bool
+        public let isDebug: Bool
 
-        let timeout: UInt32
+        public let timeout: UInt32
 
-        let maxRedirects: Int
+        public let maxRedirects: Int
 
         public init(isDebug: Bool, timeout: UInt32, maxRedirects: Int = -1) {
             self.isDebug = isDebug
