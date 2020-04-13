@@ -24,6 +24,7 @@
 #include "gtr_task_id.h"
 #include "gtr_method.h"
 #include "gtr_response.h"
+#include "share.h"
 
 /**
  * 请求的线程池
@@ -33,6 +34,9 @@ static thread_pool gtr_core_thread_pool;
 static const char *global_user_agent;
 
 static const char *temp_directory;
+
+//---Private Config
+static void gtr_core_config_share(CURL *handle);
 
 static void gtr_core_config_http_method(CURL *handle, gtr_core_data_task *data_task);
 
@@ -208,6 +212,7 @@ static void request(gtr_core_data_task *data_task) {
         response_body.size = 0;
     }
 
+    gtr_core_config_share(curl);
     gtr_core_config_url(curl, data_task->url);
     gtr_core_config_headers(curl, global_user_agent, data_task->headers);
     gtr_core_config_http_method(curl, data_task);
@@ -233,12 +238,10 @@ static void request(gtr_core_data_task *data_task) {
     gtr_get_data_task_response_info(curl, data_task, &response_info, &response_info_size);
     /* check for errors */
     if (res != CURLE_OK) {
-        gtr_core_log(gtr_log_flag_error, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
         if (data_task->on_failed) {
             data_task->on_failed(data_task->task_id, response_info, response_info_size, res, curl_easy_strerror(res));
         }
     } else {
-        gtr_core_log(gtr_log_flag_trace, "%lu bytes retrieved\n", response_body.size);
         if (data_task->on_succeed) {
             data_task->on_succeed(data_task->task_id, response_info, response_info_size, response_header.data, response_header.size, response_body.data, response_body.size);
         }
@@ -252,6 +255,7 @@ void gtr_core_init(const char *user_agent, void *log_callback, unsigned int cyli
     global_user_agent = strdup(ua);
     config_log_callback(log_callback);
     curl_global_init(CURL_GLOBAL_ALL);
+    gtr_share_init();
     gtr_core_thread_pool = thread_pool_init(cylinder_count);
     thread_pool_wait(gtr_core_thread_pool);
     gtr_core_create_temp_dir();
@@ -277,6 +281,9 @@ void gtr_core_data_task_start(gtr_core_data_task *core_data_task) {
 }
 
 //---Private Config
+static void gtr_core_config_share(CURL *handle){
+    curl_easy_setopt(handle, CURLOPT_SHARE, share);
+}
 
 static void gtr_core_config_url(CURL *handle, const char *url) {
     curl_easy_setopt(handle, CURLOPT_URL, url);
@@ -346,7 +353,6 @@ static void gtr_core_config_verify_peer(CURL *curl, bool on) {
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, on ? 1L : 0L);
 }
 
-//TODO ETag/If_Modified_since
 static void gtr_core_config_time_condition(CURL *handle, gtr_task_time_condition time_condition) {
     switch (time_condition.type) {
         case 1:

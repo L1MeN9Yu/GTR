@@ -74,6 +74,7 @@
 		453043142DA678A524B9E62C /* CacheDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530451433221672413E285C /* CacheDemo.swift */; };
 		453043197794166E2032DB24 /* Bridge.Task.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530460F1160445F37D5FC14 /* Bridge.Task.h */; };
 		45304332ECFBD9732D78BB3E /* ResponseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304127BF97F2A44EC80D2E /* ResponseInfo.swift */; };
+		4530433D157EEB5105DEC06F /* share.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304AF7E864B511E5D3786A /* share.c */; };
 		45304359DB0A1696C4953CAE /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304E0E09D4A48169922F26 /* Race.swift */; };
 		4530438317E139DA683066AE /* GTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530409BD353035B085B3C43 /* GTR.swift */; };
 		45304393A6F8E0BBA5C4DB46 /* Bridge.Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304FD728BC2AF719ABACF0 /* Bridge.Callback.swift */; };
@@ -157,6 +158,7 @@
 		45304D058F7C21C971AA93FF /* gtr_file_utilty.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530428C99D71BC9C8F67C1D /* gtr_file_utilty.c */; };
 		45304D244AB13486B9C9975A /* Option.Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530409AF7B0573A92813AB3 /* Option.Task.swift */; };
 		45304D89470E92209AE34CF5 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453048568496485D627479DE /* Driver.swift */; };
+		45304DA48DD5985ADF51D0DD /* share.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304F6BC94B094A074E07FA /* share.h */; };
 		45304DD7A219168AEB55C6BB /* ProxyDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530437B47CE4FD6AD68ECA0 /* ProxyDemo.swift */; };
 		45304E0C8B2BB9965DA72053 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530425552CB98343547AD26 /* ContentType.swift */; };
 		45304E13EFA858B91A85EA5A /* gtr_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 453046C71873837E02FBC193 /* gtr_log.c */; };
@@ -168,6 +170,8 @@
 		45304EA5E6ED7040D6B44613 /* gtr_curl_map.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304E173EEA2A6427BF1593 /* gtr_curl_map.c */; };
 		45304ECBF5B06332AAAF93EE /* Option.Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453042DFEBE6656C1AEA136C /* Option.Proxy.swift */; };
 		45304EFF6DB5D9AB04D92234 /* gtr_atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = 453049D9A2FBAAF2D55E3BDB /* gtr_atomic.h */; };
+		45304F0B3DF9A58654B0DD89 /* share.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304F6BC94B094A074E07FA /* share.h */; };
+		45304F323DC2922E5B842144 /* share.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304AF7E864B511E5D3786A /* share.c */; };
 		45304F370D6D92D1660981AB /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304C22145A685B9B217A04 /* Coder.swift */; };
 		45304F406EFF2F8C4BA62732 /* gtr_response.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530442FA9172EF1D3A9FD2A /* gtr_response.c */; };
 		45304F5D7CA7D371A71C4EBD /* gtr_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = 453044C9CEB3987575E9104C /* gtr_thread_pool.h */; };
@@ -312,6 +316,7 @@
 		45304A7788CC2F3DAADEE6F9 /* gtr_race.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtr_race.h; sourceTree = "<group>"; };
 		45304AA86F5A166AC1144AAA /* gtr_atomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gtr_atomic.c; sourceTree = "<group>"; };
 		45304ACE10FB624A2B547201 /* PostDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDemo.swift; sourceTree = "<group>"; };
+		45304AF7E864B511E5D3786A /* share.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = share.c; sourceTree = "<group>"; };
 		45304B07088F57658B0C17A6 /* Data.UnsafePointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.UnsafePointer.swift; sourceTree = "<group>"; };
 		45304B8991FAD9B4989338B1 /* ResponseInfo.Speed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseInfo.Speed.swift; sourceTree = "<group>"; };
 		45304BC7EF220E7A98049088 /* Bridge.Core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Bridge.Core.c; sourceTree = "<group>"; };
@@ -326,6 +331,7 @@
 		45304E8C2150F7FAFA569796 /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
 		45304EB7F646746507502BCA /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		45304EF7820F0C15F84B295F /* HttpHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
+		45304F6BC94B094A074E07FA /* share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = share.h; sourceTree = "<group>"; };
 		45304FD728BC2AF719ABACF0 /* Bridge.Callback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Callback.swift; sourceTree = "<group>"; };
 		B2D2A285D9FB8A0AC436864E /* GetCacheDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCacheDemo.swift; sourceTree = "<group>"; };
 		B2D2A639318A3EBCDDE7F5F4 /* GetDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDemo.swift; sourceTree = "<group>"; };
@@ -523,6 +529,7 @@
 				453047C793222F71325964E9 /* method */,
 				45304AEB073BB83DC6906D1E /* reponse */,
 				45304DDD1BB199A19EEC1C62 /* curl_map */,
+				4530492AB63AA6C5DF7272C7 /* share */,
 			);
 			path = gtr;
 			sourceTree = "<group>";
@@ -631,6 +638,15 @@
 				453048568496485D627479DE /* Driver.swift */,
 			);
 			path = Driver;
+			sourceTree = "<group>";
+		};
+		4530492AB63AA6C5DF7272C7 /* share */ = {
+			isa = PBXGroup;
+			children = (
+				45304F6BC94B094A074E07FA /* share.h */,
+				45304AF7E864B511E5D3786A /* share.c */,
+			);
+			path = share;
 			sourceTree = "<group>";
 		};
 		4530494CC6DDF5518278EE9F /* Mime */ = {
@@ -851,6 +867,7 @@
 				453043197794166E2032DB24 /* Bridge.Task.h in Headers */,
 				4530493157B9652A1797B2A1 /* gtr_response.h in Headers */,
 				453041FD58AFB675B04D1DAB /* gtr_curl_map.h in Headers */,
+				45304F0B3DF9A58654B0DD89 /* share.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,6 +890,7 @@
 				4530408B6B34416E056D8EDD /* Bridge.Task.h in Headers */,
 				453043079241B1F5857EAB08 /* gtr_response.h in Headers */,
 				453046C2F100177DF61C9884 /* gtr_curl_map.h in Headers */,
+				45304DA48DD5985ADF51D0DD /* share.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,6 +1151,7 @@
 				45304033908F7E02292DEF59 /* Mime.swift in Sources */,
 				45304359DB0A1696C4953CAE /* Race.swift in Sources */,
 				45304025EB23ABCE782E35E6 /* Option.TimeCondition.swift in Sources */,
+				4530433D157EEB5105DEC06F /* share.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1188,6 +1207,7 @@
 				45304E464EE0E61B9542CE23 /* Mime.swift in Sources */,
 				45304F80BFE8F3EB1C5347B0 /* Race.swift in Sources */,
 				453048A3E3215AA15C460129 /* Option.TimeCondition.swift in Sources */,
+				45304F323DC2922E5B842144 /* share.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1360,7 +1380,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcJSON/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.12.1;
+				MARKETING_VERSION = 0.12.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
@@ -1404,7 +1424,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/macOS/libcJSON/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.12.1;
+				MARKETING_VERSION = 0.12.2;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = GTR;
@@ -1570,7 +1590,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcurl/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcJSON/lib",
 				);
-				MARKETING_VERSION = 0.12.1;
+				MARKETING_VERSION = 0.12.2;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = GTR;
 				SKIP_INSTALL = YES;
@@ -1615,7 +1635,7 @@
 					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcurl/lib",
 					"$(PROJECT_DIR)/ExternalLibrary/maccatalyst/libcJSON/lib",
 				);
-				MARKETING_VERSION = 0.12.1;
+				MARKETING_VERSION = 0.12.2;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.GTR;
 				PRODUCT_NAME = GTR;
 				SKIP_INSTALL = YES;

@@ -114,7 +114,6 @@ for (( i=0; i<${#ARCHS[@]}; i++ )); do
 			--enable-static \
 			--disable-shared \
 			--enable-threaded-resolver \
-			--disable-verbose \
 			--enable-ipv6
 	EXITCODE=$?
 	if [ $EXITCODE -ne 0 ]; then
@@ -177,7 +176,6 @@ for (( i=0; i<${#ARCHS[@]}; i++ )); do
 			--enable-static \
 			--disable-shared \
 			--enable-threaded-resolver \
-			--disable-verbose \
 			--enable-ipv6
 	EXITCODE=$?
 	if [ $EXITCODE -ne 0 ]; then
@@ -239,7 +237,6 @@ for (( i=0; i<${#ARCHS[@]}; i++ )); do
 			--enable-static \
 			--disable-shared \
 			--enable-threaded-resolver \
-			--disable-verbose \
 			--enable-ipv6 
 	EXITCODE=$?
 	if [ $EXITCODE -ne 0 ]; then

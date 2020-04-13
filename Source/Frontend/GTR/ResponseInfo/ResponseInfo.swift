@@ -27,27 +27,57 @@ public struct ResponseInfo: Codable {
 
 extension ResponseInfo: CustomStringConvertible {
     public var description: String {
-        """
-        base => : 
-        \(base?.description ?? "nil")
+        var ret: String = ""
+        if let base = base?.description {
+            ret.append(contentsOf: """
 
-        time => : 
-        \(time?.description ?? "nil")
+                                   base => :
+                                   \(base)
+                                   """)
+        }
+        if let time = time?.description {
+            ret.append(contentsOf: """
 
-        size => : 
-        \(size?.description ?? "nil")
+                                   time => :
+                                   \(time)
+                                   """)
+        }
+        if let size = size?.description {
+            ret.append(contentsOf: """
 
-        speed => :
-        \(speed?.description ?? "nil")
+                                   size => :
+                                   \(size)
+                                   """)
+        }
+        if let speed = speed?.description {
+            ret.append(contentsOf: """
 
-        ssl => :
-        \(ssl?.description ?? "nil")
+                                   speed => :
+                                   \(speed)
+                                   """)
+        }
+        if let ssl = ssl?.description {
+            ret.append(contentsOf: """
 
-        socket => :
-        \(socket?.description ?? "nil")
+                                   ssl => :
+                                   \(ssl)
+                                   """)
+        }
+        if let socket = socket?.description {
+            ret.append(contentsOf: """
 
-        cookie => :
-        \(cookie?.description ?? "nil")
-        """
+                                   socket => :
+                                   \(socket)
+                                   """)
+        }
+        if let cookie = cookie?.description {
+            ret.append(contentsOf: """
+
+                                   cookie => :
+                                   \(cookie)
+                                   """)
+        }
+
+        return ret
     }
 }
